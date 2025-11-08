@@ -221,7 +221,7 @@
   position: absolute;
   bottom: 50px;
   right: 80px;
-  font-size: 1.3rem;
+  font-size: 2rem;
   color: #ff4500;
   font-weight: 600;
   letter-spacing: 1px;
@@ -565,7 +565,7 @@
     align-self: center;
   }
   .frame-role {
-    left: 20vw;
+    left: 26.5vw;
     top: 65vh;
     align-self: center;
     font-size: 1.5rem;

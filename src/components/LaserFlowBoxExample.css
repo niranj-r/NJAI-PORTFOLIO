@@ -1,0 +1,103 @@
+/* 🔸 Container */
+.laser-container {
+  height: 800px;
+  position: relative;
+  overflow: hidden;
+  background-color: #060010;
+}
+
+/* 🔸 Content Box (center) */
+.laser-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 65%;
+  background-color: rgba(10, 0, 20, 0.7);
+  border-radius: 20px;
+  border: 2px solid #ff4500;
+  box-shadow: 0 0 25px rgba(255, 69, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+}
+
+/* 🔸 Text inside */
+.laser-text {
+  text-align: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  z-index: 7;
+}
+
+.laser-hi {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.laser-name {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ff4500;
+  margin-bottom: 0.7rem;
+  letter-spacing: 2px;
+}
+
+.laser-role {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.8rem;
+}
+
+/* 🔸 Button */
+.laser-btn {
+  background: transparent;
+  color: #ff4500;
+  border: 2px solid #ff4500;
+  border-radius: 30px;
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.laser-btn:hover {
+  background-color: #ff4500;
+  color: #fff;
+  box-shadow: 0 0 18px #ff4500;
+}
+
+/* 🖼️ Reveal Image */
+.laser-reveal-img {
+  position: absolute;
+  width: 100%;
+  top: -50%;
+  z-index: 5;
+  opacity: 1;
+  pointer-events: none;
+  --mx: -9999px;
+  --my: -9999px;
+  -webkit-mask-image: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 1) 0px,
+    rgba(255, 255, 255, 0.95) 60px,
+    rgba(255, 255, 255, 0.6) 120px,
+    rgba(255, 255, 255, 0.25) 180px,
+    rgba(255, 255, 255, 0) 240px
+  );
+  mask-image: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 1) 0px,
+    rgba(255, 255, 255, 0.95) 60px,
+    rgba(255, 255, 255, 0.6) 120px,
+    rgba(255, 255, 255, 0.25) 180px,
+    rgba(255, 255, 255, 0) 240px
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}

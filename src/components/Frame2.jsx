@@ -28,10 +28,11 @@ export default function Frame2() {
           </defs>
           <circle cx="393.75" cy="393.75" r="393.75" fill="url(#f2-grad-1)" />
         </svg>
-        {/* Glowing ellipse */}
+        {/* Glowing ellipse 
         <div className="ellipse">
           <div className="frame-glow-ellipse"></div>
         </div>
+        */}
 
         {/* Orange stroke outer ring */}
         <svg viewBox="0 0 645 645" className="frame-ring-outer">
@@ -118,7 +119,7 @@ export default function Frame2() {
         
 
         <RotatingText
-          texts={['UI/UX Designer', 'UI/UX Developer']}
+          texts={['UI/UX Designer', 'UI/UX Developer', 'Full Stack Developer','SEO Analyst']}
           mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
           staggerFrom={"last"}
           initial={{ y: "100%" }}

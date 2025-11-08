@@ -1,0 +1,67 @@
+/* ===== Header Glassmorphism Style ===== */
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 30px;
+  z-index: 999;
+}
+
+/* Glassmorphic nav bar */
+.header-nav {
+  backdrop-filter: blur(12px);
+  background: rgba(20, 20, 20, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: 50px;
+  padding: 20px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+/* Menu layout */
+.header-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Menu links */
+.header-menu a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.header-menu a:hover {
+  color: #ff4500;
+  transform: scale(1.05);
+}
+
+/* Logo styling */
+.header-logo img {
+  width: 38px;
+  height: auto;
+  filter: drop-shadow(0 0 6px rgba(255, 68, 0, 0.6));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.header-logo img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(255, 68, 0, 0.9));
+}
+
+/* Optional subtle hover glow for links */
+.header-menu li:hover a {
+  text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+}
