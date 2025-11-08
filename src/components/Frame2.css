@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+  background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -22,6 +22,7 @@
   box-shadow: 0 0 250px 100px rgba(255, 69, 0, 0.4);
   z-index: 0;
 }
+
 .frame-orbit-group {
   position: absolute;
   width: 835px;
@@ -82,6 +83,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -91,6 +93,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -112,12 +115,14 @@
 /* Text block positioned to the left side of the glow */
 .frame-text {
   position: absolute;
-  top: 58%;         /* vertical placement */
-  left: 50%;        /* move text inside the glow circle */
+  top: 58%;
+  /* vertical placement */
+  left: 50%;
+  /* move text inside the glow circle */
   transform: translate(-50%, -50%);
   color: white;
   z-index: 4;
-  
+
 }
 
 /* "Hi I am" small and subtle */
@@ -136,7 +141,8 @@
 /* Big bold name like in reference */
 .frame-name {
   font-family: 'Passion One', sans-serif;
-  font-size: 7.65rem;           /* large and bold */
+  font-size: 7.65rem;
+  /* large and bold */
   font-weight: 500;
   line-height: .714;
   letter-spacing: 2px;
@@ -150,9 +156,12 @@
 
 
 @keyframes arrow-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(-40deg) translateY(0);
   }
+
   50% {
     transform: rotate(-40deg) translateY(-8px);
   }
@@ -160,13 +169,14 @@
 
 /* Social icons */
 .frame-socials {
-position: absolute;
+  position: absolute;
   bottom: 30px;
   left: 40px;
   display: flex;
   gap: 20px;
   z-index: 10;
 }
+
 .frame-icon {
   color: white;
   font-size: 18px;
@@ -195,12 +205,14 @@ position: absolute;
 }
 
 .frame-gmail .gmail-svg path {
-  fill: #fff; /* default white (visible immediately) */
+  fill: #fff;
+  /* default white (visible immediately) */
   transition: fill 0.3s ease;
 }
 
 .frame-gmail:hover .gmail-svg path {
-  fill: #cd1f1f; /* red on hover */
+  fill: #cd1f1f;
+  /* red on hover */
 }
 
 
@@ -209,7 +221,7 @@ position: absolute;
   position: absolute;
   bottom: 50px;
   right: 80px;
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: #ff4500;
   font-weight: 600;
   letter-spacing: 1px;
@@ -255,6 +267,7 @@ position: absolute;
   height: 100%;
   display: block;
 }
+
 .frame-ring-outer {
   position: absolute;
   left: 50%;
@@ -264,6 +277,7 @@ position: absolute;
   transform: translate(-50%, -50%);
   display: block;
 }
+
 .frame-ring-stroke {
   fill: none;
   stroke: #FF4800;
@@ -293,7 +307,8 @@ position: absolute;
   background-image: url("../assets/Ellipse27.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain; /* ensures full visibility */
+  background-size: contain;
+  /* ensures full visibility */
   transform: translate(-50%, -50%);
 }
 
@@ -314,13 +329,22 @@ position: absolute;
   mix-blend-mode: overlay;
   z-index: 20;
 }
+
 .frame-arrow-svg {
   width: 183.183px;
   height: 73.497px;
   display: block;
 }
-.frame-arrow-svg.arrow-2 { position: absolute; left: 0; top: 0; }
-.frame-arrow-path { fill: white; }
+
+.frame-arrow-svg.arrow-2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.frame-arrow-path {
+  fill: white;
+}
 
 .ellipse {
   position: absolute;
@@ -340,7 +364,232 @@ position: absolute;
   border-radius: 50%;
   background: radial-gradient(ellipse at center, #ff0000 0%, #ff2200 100%, transparent 10%);
   box-shadow: 0 0 200px 80px rgba(255, 69, 0, 0.3);
-  filter: blur(80px); /* 💫 adds a smooth blur */
-  opacity: 0.8; /* optional: softens glow intensity */
-  z-index: 1; /* ensure correct layer order */
+  filter: blur(80px);
+  /* 💫 adds a smooth blur */
+  opacity: 0.8;
+  /* optional: softens glow intensity */
+  z-index: 1;
+  /* ensure correct layer order */
+}
+
+/* HERO IMAGE RESPONSIVENESS */
+@media screen and (max-width: 1300px) {
+  .frame-profile {
+    top: 20%;
+    left: 21.5%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 26.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .frame-profile {
+    top: 20%;
+    left: 20%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 25.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .frame-profile {
+    top: 20%;
+    left: 18.5%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 24.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .frame-profile {
+    top: 20%;
+    left: 17.5%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 23.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .frame-profile {
+    top: 20%;
+    left: 16%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 22.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .frame-profile {
+    top: 20%;
+    left: 14.5%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 21%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .frame-profile {
+    top: 20%;
+    left: 13.7%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 18.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .frame-profile {
+    top: 20%;
+    left: 11.5%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 17%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .frame-profile {
+    top: 20%;
+    left: 9.8%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 14.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .frame-profile {
+    top: 20%;
+    left: 7.1%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 12.5%;
+    top: 61.5%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .frame-profile {
+    top: 20%;
+    left: 4.35%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    left: 10.5%;
+    top: 61.5%;
+  }
+}
+
+/*Hero Image ends*/
+
+@media screen and (max-width: 430px) {
+  .frame-orbit-group {
+    width: 105vh;
+    height: 105vh;
+  }
+  .frame-orbit-ring {
+    width: 105vh;
+    height: 105vh;
+  }
+  .frame-main-circle {
+    width: 90vh;
+    height: 90vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .frame-main-svg {
+    position: absolute;
+    width: 82.5vh;
+    height: 82.5vh;
+    align-self: center;
+  }
+  .frame-ring-outer {
+    width: 71.5vh;
+    height: 71.5vh;
+  }
+  .frame-ring-exclusion {
+    width: 82vh;
+    height: 82vh;
+  }
+  .frame-inner-circle-wrapper {
+    width: 85vh;
+    height: 85vh;
+  }
+  .frame-profile {
+    width: 70vh;
+    top: 26%;
+    left: -17.5%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    width: 20vh;
+    left: -12.5%;
+    top: 65vh;
+  }
+  .frame-hi {
+    font-size: 1rem;
+  }
+  .frame-name {
+    font-size: 6.3rem;
+  }
+  .frame-socials {
+    position: relative;
+    left: auto;
+    top: 37vh; 
+    align-self: center;
+  }
+  .frame-role {
+    left: 20vw;
+    top: 65vh;
+    align-self: center;
+    font-size: 1.5rem;
+    align-content: center;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .frame-profile {
+    width: 85vh;
+    top: 26%;
+    right: 50%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    width: 20vh;
+    left: -25%;
+    top: 65vh;
+  }
+  .frame-role {
+    left: 25.5vw;
+    top: 65vh;
+    align-self: center;
+    font-size: 1.5rem;
+    align-content: center;
+  }
 }
