@@ -2,6 +2,7 @@ import React from "react";
 import imgProfile from "../assets/frame20.png";
 import svgPaths from "../svg-osuecvsjzq";
 import "./Frame2.css";
+import RotatingText from './RotatingText'
 
 export default function Frame2() {
   return (
@@ -27,11 +28,11 @@ export default function Frame2() {
           </defs>
           <circle cx="393.75" cy="393.75" r="393.75" fill="url(#f2-grad-1)" />
         </svg>
-        {/*
+        {/* Glowing ellipse */}
         <div className="ellipse">
           <div className="frame-glow-ellipse"></div>
         </div>
-*/}
+
         {/* Orange stroke outer ring */}
         <svg viewBox="0 0 645 645" className="frame-ring-outer">
           <circle cx="322.11" cy="322.11" r="321.681" className="frame-ring-stroke" />
@@ -113,7 +114,22 @@ export default function Frame2() {
 
 
       {/* Role bottom right */}
-      <div className="frame-role">UI/UX Designer</div>
+      <div className="frame-role">
+        
+
+        <RotatingText
+          texts={['UI/UX Designer', 'UI/UX Developer']}
+          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+          staggerFrom={"last"}
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "-120%" }}
+          staggerDuration={0.025}
+          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+          transition={{ type: "spring", damping: 30, stiffness: 400 }}
+          rotationInterval={2000}
+        />
+      </div>
     </div>
   );
 }
