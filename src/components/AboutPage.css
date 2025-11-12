@@ -1,5 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/akira-expanded');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@1,2,3,4,5,6,7&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
 
 
 .about-container {
@@ -59,9 +60,10 @@
 
 .about-subtext {
   font-size: 1.3rem;
-  color: #d6d6d6;
+  font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
+  color: #FFE0CF;
   line-height: 1.6;
-  margin-top: -3rem;
+  margin-top: -6.5rem;
 }
 
 .about-scroll-btn {
@@ -78,13 +80,13 @@
 }
 
 .about-scroll-circle {
-  border: 1.5px solid #fff;
+  border: 2px solid #FFE7E1;
   width: 45px;
   height: 45px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   transition: all 0.3s ease;
 }
 
@@ -94,8 +96,11 @@
 }
 
 .about-scroll-text {
+  color: #FFE7E1;
   letter-spacing: 1px;
   font-size: 0.95rem;
+  font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
+  font-weight: 700;
 }
 
 /* ===== ABOUT BIO SECTION ===== */
@@ -114,7 +119,7 @@
   padding: 3rem;
   max-width: 800px;
   box-shadow: 0 0 20px rgba(255, 69, 0, 0.1);
-  border: 1px solid #DAC5A7;  /* Added border */
+  border: 1px solid rgba(218, 197, 167, 0.27);
 }
 
 
@@ -171,19 +176,19 @@
 
 /* === SOCIAL BUTTON STYLE === */
 .about-social-btn {
+  background-color: #171717;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 16px;
   width: 200.2px;
   padding: 0.9rem 1.5rem;
-  border: 1px solid rgba(212, 197, 167, 0.15);
+  border: 1px solid rgba(218, 197, 167, 0.15);
   border-radius: 10px;
-  background: rgba(17, 17, 17, 0.6);
   color: #FFE7E1;
   text-decoration: none;
   font-family: 'Satoshi Variable', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
@@ -191,9 +196,28 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
+.about-social-text {
+  flex: 1;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-align: left;
+  color: #dac5a7;
+  transition: color 0.3s ease;
+}
+
+/* ARROW */
+.about-arrow {
+  font-size: 1.25rem;
+  color: #dac5a7;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+  top: -2.5px;
+}
 /* Icon inside (optional, if you add <i> icons later) */
 .about-social-btn i {
-  font-size: 1rem;
+  font-size: 1.5rem;
+  color: #DAC5A7;
 }
 
 /* === HOVER EFFECT === */
