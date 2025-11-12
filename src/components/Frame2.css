@@ -221,7 +221,7 @@
   position: absolute;
   bottom: 50px;
   right: 80px;
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: #ff4500;
   font-weight: 600;
   letter-spacing: 1px;
@@ -505,8 +505,6 @@
   }
 }
 
-/*Hero Image ends*/
-
 @media screen and (max-width: 430px) {
   .frame-orbit-group {
     width: 105vh;
@@ -525,8 +523,8 @@
   }
   .frame-main-svg {
     position: absolute;
-    width: 82.5vh;
-    height: 82.5vh;
+    width: 93.5vh;
+    height: 93.5vh;
     align-self: center;
   }
   .frame-ring-outer {
@@ -565,7 +563,28 @@
     align-self: center;
   }
   .frame-role {
-    left: 26.5vw;
+    left: 20vw;
+    top: 65vh;
+    align-self: center;
+    font-size: 1.5rem;
+    align-content: center;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .frame-profile {
+    width: 70vh;
+    top: 26%;
+    left: -22%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    width: 20vh;
+    left: -15%;
+    top: 65vh;
+  }
+  .frame-role {
+    left: 20.5vw;
     top: 65vh;
     align-self: center;
     font-size: 1.5rem;
@@ -575,18 +594,39 @@
 
 @media screen and (max-width: 410px) {
   .frame-profile {
-    width: 85vh;
+    width: 70vh;
     top: 26%;
-    right: 50%;
+    left: -24%;
     z-index: 0;
   }
   .frame-arrows {
     width: 20vh;
-    left: -25%;
+    left: -15%;
     top: 65vh;
   }
   .frame-role {
-    left: 25.5vw;
+    left: 19.5vw;
+    top: 65vh;
+    align-self: center;
+    font-size: 1.5rem;
+    align-content: center;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .frame-profile {
+    width: 70vh;
+    top: 26%;
+    left: -38%;
+    z-index: 0;
+  }
+  .frame-arrows {
+    width: 20vh;
+    left: -15%;
+    top: 65vh;
+  }
+  .frame-role {
+    left: 19.5vw;
     top: 65vh;
     align-self: center;
     font-size: 1.5rem;
