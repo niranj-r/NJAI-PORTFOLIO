@@ -2,6 +2,7 @@ import React from "react";
 import "./AboutPage.css";
 import heroImg from "../assets/frame10.png";
 import aboutImg from "../assets/frame30.png";
+import nameImg from "../assets/name.png";
 
 export default function AboutPage() {
   return (
@@ -13,9 +14,12 @@ export default function AboutPage() {
         </div>
 
         <div className="about-right">
-          <h1 className="about-name">
-            NIRANJ<br />R
-          </h1>
+          <img
+            src={nameImg}
+            alt="Niranj R"
+            className="about-name"
+          />
+
           <p className="about-subtext">
             Merging Art and Technology to Craft the Next<br />
             Generation of Web Experiences.
