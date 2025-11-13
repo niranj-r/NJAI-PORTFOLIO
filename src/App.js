@@ -6,7 +6,7 @@ import AboutPage from "./components/AboutPage";
 function App() {
   return (
     <div>
-      
+      <Header />
       <Frame2 />
       <AboutPage />
       <LaserFlowBoxExample />
