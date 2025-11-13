@@ -32,6 +32,7 @@ const RotatingText = forwardRef((props, ref) => {
   } = props;
 
 
+
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
   const splitIntoCharacters = text => {
