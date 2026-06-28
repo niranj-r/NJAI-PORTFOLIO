@@ -1,0 +1,110 @@
+.cta-container {
+  background-color: #0E0E0E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: #ffffff;
+  padding-bottom: 8rem;
+}
+
+/* Marquee Top */
+.cta-marquee-wrapper {
+  width: 100%;
+  border-top: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  padding: 15px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  margin-bottom: 6rem;
+}
+
+.cta-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 20s linear infinite;
+  color: #cda885;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.cta-marquee span {
+  white-space: pre;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Content Area */
+.cta-content {
+  text-align: center;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-small-heading {
+  font-size: 0.75rem;
+  color: #777777;
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+}
+
+.cta-large-heading {
+  font-size: 5.5rem;
+  color: #cda885;
+  font-weight: 300;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+}
+
+.cta-large-heading em {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.cta-subtitle {
+  font-size: 1.1rem;
+  color: #a8a8a8;
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 3.5rem;
+}
+
+.cta-button {
+  background-color: #cda885;
+  color: #0E0E0E;
+  border: none;
+  padding: 15px 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e6c5a5;
+  transform: translateY(-3px);
+}
+
+.cta-btn-icon {
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cta-large-heading {
+    font-size: 3.5rem;
+  }
+}

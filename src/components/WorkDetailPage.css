@@ -1,0 +1,210 @@
+.work-detail-page {
+  background-color: #0E0E0E;
+  color: #ffffff;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.wd-header-controls {
+  padding: 2rem 4rem;
+  padding-top: 4rem;
+}
+
+.wd-back-button {
+  background: transparent;
+  border: 1px solid #333333;
+  color: #cda885;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.wd-back-button:hover {
+  background-color: #cda885;
+  color: #0E0E0E;
+}
+
+.wd-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 2rem 0 2rem;
+}
+
+.wd-hero-title {
+  font-size: 6rem;
+  color: #e3d5c5;
+  font-weight: 300;
+  margin: 0 0 1rem 0;
+}
+
+.wd-hero-subtitle {
+  font-size: 1rem;
+  color: #888888;
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  letter-spacing: 0.05em;
+}
+
+.wd-stats-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wd-stat-box {
+  background-color: #1a1a1a;
+  padding: 1.5rem 2.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+.wd-stat-label {
+  font-size: 0.65rem;
+  color: #888888;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.wd-stat-value {
+  font-size: 0.75rem;
+  color: #e3d5c5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wd-scroll-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 4rem;
+  cursor: pointer;
+}
+
+.wd-scroll-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  color: #cda885;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.wd-scroll-btn span {
+  font-size: 0.7rem;
+  color: #888888;
+  letter-spacing: 0.15em;
+}
+
+.wd-hero-image-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 8rem;
+}
+
+.wd-hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+  filter: sepia(0.2) grayscale(0.8) contrast(1.1) brightness(0.8);
+}
+
+.wd-details-section {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 4rem;
+  padding: 0 2rem;
+}
+
+.wd-details-left {
+  flex: 1;
+}
+
+.wd-about-label {
+  font-size: 0.75rem;
+  color: #888888;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.wd-about-title {
+  font-size: 2.5rem;
+  color: #cda885;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.wd-details-right {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wd-detail-card {
+  background-color: #121212;
+  padding: 3rem;
+  border-radius: 4px;
+}
+
+.wd-card-title {
+  font-size: 1.2rem;
+  color: #e3d5c5;
+  font-weight: 300;
+  margin: 0 0 1.5rem 0;
+}
+
+.wd-card-text {
+  font-size: 0.95rem;
+  color: #888888;
+  line-height: 1.8;
+  font-weight: 300;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .wd-details-section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .wd-hero-title {
+    font-size: 4rem;
+  }
+  .wd-stats-row {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .wd-stat-box {
+    padding: 1rem;
+  }
+  .wd-detail-card {
+    padding: 2rem;
+  }
+}
