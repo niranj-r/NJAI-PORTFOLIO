@@ -70,37 +70,37 @@ export default function AboutPage() {
 
       <div className="about-social-section">
         <div className="about-socials">
-          <a href="#" className="about-social-btn">
+          <a href="#!" className="about-social-btn">
             <i className="fab fa-instagram about-icon"></i>
             <span className="about-social-text">INSTAGRAM</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#" className="about-social-btn">
+          <a href="#!" className="about-social-btn">
             <i className="fab fa-twitter about-icon"></i>
             <span className="about-social-text">TWITTER</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#" className="about-social-btn">
+          <a href="#!" className="about-social-btn">
             <i className="fab fa-facebook-f about-icon"></i>
             <span className="about-social-text">FACEBOOK</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#" className="about-social-btn">
+          <a href="#!" className="about-social-btn">
             <i className="fab fa-github about-icon"></i>
             <span className="about-social-text">GITHUB</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#" className="about-social-btn">
+          <a href="#!" className="about-social-btn">
             <i className="fab fa-linkedin about-icon"></i>
             <span className="about-social-text">LINKEDIN</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#" className="about-social-btn">
+          <a href="#!" className="about-social-btn">
             <i className="fab fa-pinterest about-icon"></i>
             <span className="about-social-text">PINTEREST</span>
             <span className="about-arrow">↗</span>

@@ -99,17 +99,17 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
             </div>
           </div>
           <div className="bd-social-footer">
-            <a href="#" className="bd-social-link">
+            <a href="#!" className="bd-social-link">
               <FaInstagram className="bd-social-icon" />
               <span className="bd-social-text">INSTAGRAM</span>
               <FiArrowUpRight className="bd-social-arrow" />
             </a>
-            <a href="#" className="bd-social-link">
+            <a href="#!" className="bd-social-link">
               <FaTwitter className="bd-social-icon" />
               <span className="bd-social-text">TWITTER</span>
               <FiArrowUpRight className="bd-social-arrow" />
             </a>
-            <a href="#" className="bd-social-link">
+            <a href="#!" className="bd-social-link">
               <FaFacebookF className="bd-social-icon" />
               <span className="bd-social-text">FACEBOOK</span>
               <FiArrowUpRight className="bd-social-arrow" />

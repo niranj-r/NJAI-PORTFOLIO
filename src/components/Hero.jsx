@@ -39,10 +39,10 @@ const Hero = () => {
             Hi, I'm Niranj R - a freelancer specializing in premium web design, development, and SEO services. I'm passionate about creating unique and effective solutions for my clients, and I bring a personal touch to every project. Let's work together to bring your vision to life!
           </p>
           <div className="hero-socials">
-            <a href="#" className="social-circle"><FiTwitter /></a>
-            <a href="#" className="social-circle"><FiInstagram /></a>
-            <a href="#" className="social-circle"><FiGithub /></a>
-            <a href="#" className="social-circle"><FiLinkedin /></a>
+            <a href="#!" className="social-circle"><FiTwitter /></a>
+            <a href="#!" className="social-circle"><FiInstagram /></a>
+            <a href="#!" className="social-circle"><FiGithub /></a>
+            <a href="#!" className="social-circle"><FiLinkedin /></a>
           </div>
         </div>
       </div>

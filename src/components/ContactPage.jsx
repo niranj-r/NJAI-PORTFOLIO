@@ -37,32 +37,32 @@ const ContactPage = ({ onBack }) => {
           </div>
           
           <div className="contact-socials-grid">
-            <a href="#" className="contact-social-item">
+            <a href="#!" className="contact-social-item">
               <FaInstagram className="social-icon" />
               <span className="social-text">INSTAGRAM</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#" className="contact-social-item">
+            <a href="#!" className="contact-social-item">
               <FaTwitter className="social-icon" />
               <span className="social-text">TWITTER</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#" className="contact-social-item">
+            <a href="#!" className="contact-social-item">
               <FaFacebookF className="social-icon" />
               <span className="social-text">FACEBOOK</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#" className="contact-social-item">
+            <a href="#!" className="contact-social-item">
               <FaBehance className="social-icon" />
               <span className="social-text">BEHANCE</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#" className="contact-social-item">
+            <a href="#!" className="contact-social-item">
               <FaDribbble className="social-icon" />
               <span className="social-text">DRIBBBLE</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#" className="contact-social-item">
+            <a href="#!" className="contact-social-item">
               <FaPinterestP className="social-icon" />
               <span className="social-text">PINTEREST</span>
               <FiArrowUpRight className="social-arrow" />
