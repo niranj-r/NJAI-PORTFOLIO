@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import "../styles/BlogPage.css";
 
 const blogPosts = [
@@ -54,7 +55,12 @@ const blogPosts = [
 
 const BlogPage = ({ onBlogClick }) => {
   return (
-    <div className="blog-page-container">
+    <motion.div 
+      className="blog-page-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="blog-page-header">
         <h1 className="blog-page-title">Blog</h1>
         <p className="blog-page-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing<br/>elit, sed do eiusmod tempor lorem.</p>
@@ -85,7 +91,7 @@ const BlogPage = ({ onBlogClick }) => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

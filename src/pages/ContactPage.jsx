@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF, FaBehance, FaDribbble, FaPinterestP } from 'react-icons/fa';
 import "../styles/ContactPage.css";
@@ -8,7 +9,12 @@ import heroImgLight from '../assets/hero-light.png';
 const ContactPage = ({ onBack, theme }) => {
   const heroImage = theme === 'light' ? heroImgLight : heroImgDark;
   return (
-    <div className="contact-page">
+    <motion.div 
+      className="contact-page"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="contact-header-controls">
         <button className="contact-back-button" onClick={onBack}>
           <FiArrowLeft /> Back to Home
@@ -73,7 +79,7 @@ const ContactPage = ({ onBack, theme }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

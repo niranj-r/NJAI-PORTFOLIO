@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FiArrowDown } from 'react-icons/fi';
 import "../styles/SkillsTimeline.css";
 
@@ -92,7 +93,14 @@ const SkillsTimeline = () => {
         <div className="timeline-line"></div>
         
         {skillsData.map((item, index) => (
-          <div className={`timeline-item ${item.alignment}`} key={item.id}>
+          <motion.div 
+            className={`timeline-item ${item.alignment}`} 
+            key={item.id}
+            initial={{ opacity: 0, x: item.alignment === 'left' ? -50 : 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             {/* Left side content or empty space */}
             <div className="timeline-content-half left-half">
               {item.alignment === 'left' && (
@@ -135,7 +143,7 @@ const SkillsTimeline = () => {
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

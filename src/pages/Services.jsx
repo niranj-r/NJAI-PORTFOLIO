@@ -1,12 +1,24 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FiArrowUpRight } from 'react-icons/fi';
 import "../styles/Services.css";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 }
+};
 
 const Services = ({ onServiceClick }) => {
   return (
     <div className="services-container" id="services">
       {/* Logos Section */}
-      <div className="logos-section">
+      <motion.div 
+        className="logos-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="logo-item">
           <svg viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg" width="100">
             <rect x="0" y="5" width="20" height="20" rx="3" stroke="currentColor" strokeWidth="2"/>
@@ -46,11 +58,17 @@ const Services = ({ onServiceClick }) => {
             <path d="M5 25V5L25 25V5" stroke="currentColor" strokeWidth="4" strokeLinecap="square"/>
           </svg>
         </div>
-      </div>
+      </motion.div>
 
       {/* Services Cards */}
-      <div className="services-cards">
-        <div className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
+      <motion.div 
+        className="services-cards"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.15 }}
+      >
+        <motion.div variants={cardVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
           <div className="service-number">01</div>
           <h3 className="service-title">WEB DESIGN</h3>
           <p className="service-description">
@@ -60,9 +78,9 @@ const Services = ({ onServiceClick }) => {
             <span className="icon-circle"><FiArrowUpRight /></span>
             <span className="button-text">ABOUT WEBDESIGN</span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
+        <motion.div variants={cardVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
           <div className="service-number">02</div>
           <h3 className="service-title">DEVELOPMENT</h3>
           <p className="service-description">
@@ -72,9 +90,9 @@ const Services = ({ onServiceClick }) => {
             <span className="icon-circle"><FiArrowUpRight /></span>
             <span className="button-text">ABOUT WEBFLOW</span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
+        <motion.div variants={cardVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
           <div className="service-number">03</div>
           <h3 className="service-title">CONTENT & SEO</h3>
           <p className="service-description">
@@ -84,8 +102,8 @@ const Services = ({ onServiceClick }) => {
             <span className="icon-circle"><FiArrowUpRight /></span>
             <span className="button-text">ABOUT SEO</span>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import "../styles/AboutPage.css";
 import heroImgDark from "../assets/frame10.png";
 import heroImgLight from "../assets/frame10-light.png";
@@ -19,7 +20,12 @@ export default function AboutPage({ theme }) {
   }, []);
 
   return (
-    <div className="about-container">
+    <motion.div 
+      className="about-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       {/* ===== HERO SECTION ===== */}
       <section className="about-hero">
         {!isMobile && (
@@ -123,6 +129,6 @@ export default function AboutPage({ theme }) {
         </div>
       </div>
 
-    </div>
+    </motion.div>
   );
 }

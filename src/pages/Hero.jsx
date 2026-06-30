@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FiTwitter, FiInstagram, FiGithub, FiLinkedin } from 'react-icons/fi';
 import "../styles/Hero.css";
 import heroImgDark from '../assets/hero.png';
@@ -32,9 +33,14 @@ const Hero = ({ theme }) => {
       {/* Bottom Content Area */}
       <div className="hero-content">
         <div className="hero-content-left">
-          <h2>
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ type: "spring", stiffness: 100, damping: 10 }}
+          >
             A website that leaves <br /> <em>a lasting impression!</em>
-          </h2>
+          </motion.h2>
         </div>
 
         <div className="hero-content-right">

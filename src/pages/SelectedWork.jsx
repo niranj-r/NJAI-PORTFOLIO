@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FiArrowUpRight } from 'react-icons/fi';
 import "../styles/SelectedWork.css";
 
@@ -51,10 +52,14 @@ const SelectedWork = ({ onNavClick, onProjectClick }) => {
 
       {/* Projects Grid */}
       <div className="projects-grid">
-        {projects.map((project) => (
-          <div 
+        {projects.map((project, index) => (
+          <motion.div 
             className="project-card" 
             key={project.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
             onClick={() => {
               if (onProjectClick) onProjectClick(project.title);
             }}
@@ -70,7 +75,7 @@ const SelectedWork = ({ onNavClick, onProjectClick }) => {
               <span className="project-name">{project.title}</span>
               <span className="project-category">{project.category}</span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

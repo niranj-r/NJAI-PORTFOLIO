@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import { FiArrowUpRight } from 'react-icons/fi';
 import "../styles/SelectedWork.css";
 import "../styles/WorkPage.css";
@@ -32,7 +33,12 @@ const projects = [
 
 const WorkPage = ({ onProjectClick }) => {
   return (
-    <div className="work-page-container">
+    <motion.div 
+      className="work-page-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="work-page-header">
         <h1 className="work-page-title">Work</h1>
         <p className="work-page-subtitle">My latest web design projects and see how we can<br/>help bring your ideas to life.</p>
@@ -64,7 +70,7 @@ const WorkPage = ({ onProjectClick }) => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

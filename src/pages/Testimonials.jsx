@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import "../styles/Testimonials.css";
 
 const testimonialsData = [
@@ -85,8 +86,15 @@ const Testimonials = () => {
       <div className="testimonials-grid">
         {/* Left Column */}
         <div className="testimonials-column">
-          {leftColumn.map((item) => (
-            <div className={`testimonial-card ${item.theme}`} key={item.id}>
+          {leftColumn.map((item, index) => (
+            <motion.div 
+              className={`testimonial-card ${item.theme}`} 
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+            >
               <div className="card-logo">{item.logo}</div>
               <h3 className="card-title">{item.title}</h3>
               <p className="card-text">{item.text}</p>
@@ -97,14 +105,21 @@ const Testimonials = () => {
                   <span className="author-company">{item.company}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Right Column */}
         <div className="testimonials-column">
-          {rightColumn.map((item) => (
-            <div className={`testimonial-card ${item.theme}`} key={item.id}>
+          {rightColumn.map((item, index) => (
+            <motion.div 
+              className={`testimonial-card ${item.theme}`} 
+              key={item.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 + 0.2 }}
+            >
               <div className="card-logo">{item.logo}</div>
               <h3 className="card-title">{item.title}</h3>
               <p className="card-text">{item.text}</p>
@@ -115,7 +130,7 @@ const Testimonials = () => {
                   <span className="author-company">{item.company}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
