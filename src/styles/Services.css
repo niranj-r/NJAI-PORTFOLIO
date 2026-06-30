@@ -28,6 +28,7 @@
   padding-right: 80px;
   /* To maintain gap at the end */
   animation: scroll-logos 25s linear infinite reverse;
+  will-change: transform;
 }
 
 .logos-section.marquee-track-logos:hover {
