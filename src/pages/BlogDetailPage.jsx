@@ -3,7 +3,6 @@ import { FiArrowDown, FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF } from 'react-icons/fa';
 import "../styles/BlogDetailPage.css";
 import "../styles/BlogPage.css";
-
 const relatedPosts = [
   {
     id: 1,
@@ -40,8 +39,8 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
 
       <div className="bd-hero">
         <h1 className="bd-hero-title">{blogTitle || 'How to Build a Stunning Website with Framer'}</h1>
-        <p className="bd-hero-subtitle">Learn how to create an impressive website using Framer with<br/>our step-by-step guide.</p>
-        
+        <p className="bd-hero-subtitle">Learn how to create an impressive website using Framer with<br />our step-by-step guide.</p>
+
         <div className="bd-scroll-btn">
           <div className="bd-scroll-circle"><FiArrowDown /></div>
           <span>READ MORE</span>
@@ -63,9 +62,9 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
         </div>
 
         <div className="bd-hero-image-wrapper">
-          <img 
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200" 
-            alt="Blog Featured" 
+          <img
+            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200"
+            alt="Blog Featured"
             className="bd-hero-image"
           />
         </div>
@@ -127,7 +126,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
             <span className="button-text">SEE ALL</span>
           </div>
         </div>
-        
+
         <div className="blog-grid" style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '4rem' }}>
           {relatedPosts.map((post) => (
             <div className="blog-card" key={post.id} style={{ cursor: 'pointer' }}>
