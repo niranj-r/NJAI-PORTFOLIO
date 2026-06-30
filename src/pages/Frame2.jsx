@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import imgProfileDark from "../assets/frame20.png";
-import imgProfileLight from "../assets/frame20-light.png";
-import heroImgLight from "../assets/hero-light.png";
+import imgProfileDark from "../assets/frame20.webp";
+import imgProfileLight from "../assets/frame20-light.webp";
+import heroImgLight from "../assets/hero-light.webp";
 import svgPaths from "../svg-osuecvsjzq";
 import "../styles/Frame2.css";
 import "../styles/Hero.css"; // Ensure marquee styles are available

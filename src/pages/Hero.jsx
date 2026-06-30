@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiTwitter, FiInstagram, FiGithub, FiLinkedin } from 'react-icons/fi';
 import "../styles/Hero.css";
-import heroImgDark from '../assets/hero.png';
-import heroImgLight from '../assets/hero-light.png';
+import heroImgDark from '../assets/hero.webp';
+import heroImgLight from '../assets/hero-light.webp';
 
 const Hero = ({ theme }) => {
   const man = theme === 'light' ? heroImgLight : heroImgDark;

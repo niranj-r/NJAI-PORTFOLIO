@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../styles/AboutPage.css";
-import heroImgDark from "../assets/frame10.png";
-import heroImgLight from "../assets/frame10-light.png";
-import aboutImg from "../assets/frame30.png";
-import nameImg from "../assets/name.png";
+import heroImgDark from "../assets/frame10.webp";
+import heroImgLight from "../assets/frame10-light.webp";
+import aboutImg from "../assets/frame30.webp";
+import nameImg from "../assets/name.webp";
 
 export default function AboutPage({ theme }) {
   const heroImg = theme === 'light' ? heroImgLight : heroImgDark;

@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF, FaBehance, FaDribbble, FaPinterestP } from 'react-icons/fa';
 import "../styles/ContactPage.css";
-import heroImgDark from '../assets/hero.png';
-import heroImgLight from '../assets/hero-light.png';
+import heroImgDark from '../assets/hero.webp';
+import heroImgLight from '../assets/hero-light.webp';
 
 const ContactPage = ({ onBack, theme }) => {
   const heroImage = theme === 'light' ? heroImgLight : heroImgDark;
