@@ -1,69 +1,358 @@
-/* ===== Header Glassmorphism Style ===== */
-.header-container  {
+/* ===== Header Inspired Style ===== */
+.header-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 30px;
+  top: 20px;
   z-index: 999;
   pointer-events: none;
+  transition: top 0.3s ease;
 }
 
-/* Glassmorphic nav bar */
-.header-nav  {
-  backdrop-filter: blur(12px);
-  background: rgba(20, 20, 20, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+.header-container.scrolled {
+  top: 10px;
+}
+
+/* Nav bar container */
+.header-nav {
+  background: #111111;
+  border: 1px solid #2a2a2a;
   border-radius: 50px;
-  padding: 20px 80px;
+  padding: 0 12.5px 0 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: fit-content;
+  width: 90%;
+  max-width: 1200px;
+  height: 70px;
   pointer-events: auto;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Menu layout */
-.header-menu  {
-  list-style: none;
+.header-container.scrolled .header-nav {
+  height: 60px;
+  width: 45%;
+  max-width: 1000px;
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* Brand / Logo (Left) */
+.header-brand {
   display: flex;
   align-items: center;
-  gap: 60px;
-  margin: 0;
-  padding: 0;
+  justify-content: space-between;
 }
 
-/* Menu links */
-.header-menu a  {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-decoration: none;
-  text-transform: lowercase;
-  transition: color 0.3s ease, transform 0.3s ease;
+.brand-logo {
+  display: flex;
+  align-items: center;
 }
 
-.header-menu a:hover  {
-  color: #ff4500;
+.brand-logo img {
+  width: 38px;
+  height: auto;
+  /* Optional: filter to make the logo look tan/beige if it's currently white/black */
+  /* filter: brightness(0) invert(1) sepia(100%) saturate(300%) hue-rotate(350deg) brightness(85%) contrast(85%); */
+  transition: transform 0.3s ease;
+}
+
+.brand-logo img:hover {
   transform: scale(1.05);
 }
 
-/* Logo styling */
-.header-logo img  {
-  width: 38px;
-  height: auto;
-  filter: drop-shadow(0 0 6px rgba(255, 68, 0, 0.6));
-  transition: transform 0.3s ease, filter 0.3s ease;
+/* Menu layout (Center) */
+.header-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  transition: gap 0.3s ease;
 }
 
-.header-logo img:hover  {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(255, 68, 0, 0.9));
+/* Menu links */
+.header-menu a {
+  color: #FF4D00;
+  /* Beige from inspo */
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
 }
 
-/* Optional subtle hover glow for links */
-.header-menu li:hover a  {
-  text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
+.header-menu a:hover {
+  opacity: 1;
+  color: #e5d8bf;
+}
+
+/* CTA (Right) */
+.header-cta {
+  display: flex;
+  align-items: center;
+}
+
+.lets-talk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0cca9;
+  border: .5px solid #FF4D00;
+  margin: 0 0;
+  color: #ff4d00;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 6px 6px 22px;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-container.scrolled .lets-talk-btn {
+  padding: 4px 4px 4px 18px;
+  font-size: 0.85rem;
+}
+
+.lets-talk-btn:hover {
+  transform: translateY(-2px);
+}
+
+.lets-talk-btn .btn-text {
+  position: relative;
+  z-index: 2;
+  margin-right: 15px;
+  transition: color 0.4s ease;
+}
+
+.lets-talk-btn .btn-icon {
+  background-color: #ff4d00;
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.header-container.scrolled .lets-talk-btn .btn-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.header-container.scrolled .lets-talk-btn .btn-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.lets-talk-btn::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  background-color: #ff4d00;
+  border-radius: 50%;
+  z-index: 1;
+  transform: scale(1);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s ease, right 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.header-container.scrolled .lets-talk-btn::before {
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+}
+
+.lets-talk-btn:hover::before {
+  transform: scale(12);
+}
+
+.lets-talk-btn:hover .btn-text {
+  color: #ffffff;
+}
+
+.lets-talk-btn:hover .btn-icon {
+  background-color: #ffffff;
+  color: #ff4d00;
+  transform: translateX(-2px);
+}
+
+/* Hamburger Menu Icon */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  width: 24px;
+  height: 20px;
+  position: relative;
+  margin-left: 20px;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #cbbca1;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0px;
+}
+
+.hamburger span:nth-child(2) {
+  top: 9px;
+}
+
+.hamburger span:nth-child(3) {
+  top: 18px;
+}
+
+.hamburger.active span:nth-child(1) {
+  top: 9px;
+  transform: rotate(135deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  left: -20px;
+}
+
+.hamburger.active span:nth-child(3) {
+  top: 9px;
+  transform: rotate(-135deg);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 900px) {
+  .header-nav {
+    padding: 0 15px 0 20px;
+  }
+
+  .header-menu {
+    gap: 20px;
+  }
+
+  .lets-talk-btn {
+    padding: 10px 18px;
+  }
+
+  .header-container.scrolled .header-nav {
+    margin: 2rem 2rem;
+    width: 80%;
+    padding: .65rem 1rem;
+    height: fit-content;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-container {
+    top: 10px;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .header-nav {
+    width: 100%;
+    flex-direction: column;
+    padding: 1.25rem 1.5rem;
+    height: auto;
+    align-items: stretch;
+  }
+
+  .header-brand {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .header-menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    align-items: center;
+  }
+
+  .header-menu.open {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: 20px;
+  }
+
+  .header-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-menu a {
+    display: block;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .header-menu li:last-child a {
+    border-bottom: none;
+  }
+
+  .header-cta {
+    display: flex;
+    justify-content: center;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+  }
+
+  .header-cta.open {
+    max-height: 100px;
+    opacity: 1;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .lets-talk-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-container {
+    margin: 1rem 0rem;
+    height: fit-content;
+  }
+
+  .header-container.scrolled .header-nav {
+    margin: 2rem 2rem;
+    width: 100%;
+    height: fit-content;
+  }
 }

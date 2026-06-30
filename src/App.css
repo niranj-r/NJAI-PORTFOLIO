@@ -28,10 +28,30 @@
   color: #61dafb;
 }
 
+.frame-marquee-wrapper {
+  width: 100%;
+  border-top: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  padding: 15px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+}
+
+.frame-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 20s linear infinite;
+  color: #FF4D00;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

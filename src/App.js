@@ -15,6 +15,7 @@ import WorkPage from "./components/WorkPage";
 import WorkDetailPage from "./components/WorkDetailPage";
 import BlogPage from "./components/BlogPage";
 import BlogDetailPage from "./components/BlogDetailPage";
+import "./App.css";
 
 function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -118,8 +119,8 @@ function App() {
     <div>
       <Header onNavClick={(view) => setCurrentView(view)} />
       <Frame2 />
-      <div className="cta-marquee-wrapper">
-        <div className="cta-marquee">
+      <div className="frame-marquee-wrapper">
+        <div className="frame-marquee">
           <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
           <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
         </div>
