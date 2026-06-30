@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Frame2 from "./components/Frame2";
 import Header from "./components/Header";
 import AboutPage from "./components/AboutPage";
@@ -20,6 +20,10 @@ function App() {
   const [currentView, setCurrentView] = useState('home');
   const [selectedProject, setSelectedProject] = useState('');
   const [selectedBlog, setSelectedBlog] = useState('');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
 
   if (currentView === 'serviceDetail') {
     return (

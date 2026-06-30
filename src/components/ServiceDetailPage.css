@@ -24,6 +24,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: all 0.3s ease;
+  visibility: hidden;
 }
 
 .sd-back-button:hover  {
