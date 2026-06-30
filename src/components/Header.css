@@ -1,5 +1,5 @@
 /* ===== Header Glassmorphism Style ===== */
-.header-container {
+.header-container  {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
 }
 
 /* Glassmorphic nav bar */
-.header-nav {
+.header-nav  {
   backdrop-filter: blur(12px);
   background: rgba(20, 20, 20, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -24,7 +24,7 @@
 }
 
 /* Menu layout */
-.header-menu {
+.header-menu  {
   list-style: none;
   display: flex;
   align-items: center;
@@ -34,34 +34,34 @@
 }
 
 /* Menu links */
-.header-menu a {
+.header-menu a  {
   color: rgba(255, 255, 255, 0.85);
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   text-transform: lowercase;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.header-menu a:hover {
+.header-menu a:hover  {
   color: #ff4500;
   transform: scale(1.05);
 }
 
 /* Logo styling */
-.header-logo img {
+.header-logo img  {
   width: 38px;
   height: auto;
   filter: drop-shadow(0 0 6px rgba(255, 68, 0, 0.6));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.header-logo img:hover {
+.header-logo img:hover  {
   transform: scale(1.1);
   filter: drop-shadow(0 0 12px rgba(255, 68, 0, 0.9));
 }
 
 /* Optional subtle hover glow for links */
-.header-menu li:hover a {
+.header-menu li:hover a  {
   text-shadow: 0 0 8px rgba(255, 68, 0, 0.4);
 }

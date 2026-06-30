@@ -3,7 +3,7 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
 
 
-.about-container {
+.about-container  {
   min-height: 100vh;
   padding: 4rem 2rem;
   background-color: #0E0E0E;
@@ -13,7 +13,7 @@
 }
 
 /* ===== HERO SECTION ===== */
-.about-hero {
+.about-hero  {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,14 +22,14 @@
   min-height: 100vh;
 }
 
-.about-left {
+.about-left  {
   flex: 1;
   display: flex;
   justify-content: flex-end;
   margin-left: -60px;
 }
 
-.about-hero-img {
+.about-hero-img  {
   width: 600px;
   max-width: 100%;
   height: auto;
@@ -39,7 +39,7 @@
   margin-right: 60px;
 }
 
-.about-right {
+.about-right  {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@
 
 
 
-.about-name {
+.about-name  {
   display: block;
   width: 100%;
   max-width: 700px;         
@@ -63,7 +63,7 @@
 }
 
 
-.about-subtext {
+.about-subtext  {
   font-size: 1.3rem;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   color: #FFE0CF;
@@ -71,20 +71,20 @@
   margin-top: -6.5rem;
 }
 
-.about-scroll-btn {
+.about-scroll-btn  {
   display: flex;
   align-items: center;
   gap: 15px;
   background: none;
   border: none;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
   margin-top: 1.8rem;
 }
 
-.about-scroll-circle {
+.about-scroll-circle  {
   border: 2px solid #FFE7E1;
   width: 45px;
   height: 45px;
@@ -95,21 +95,21 @@
   transition: all 0.3s ease;
 }
 
-.about-scroll-btn:hover .about-scroll-circle {
+.about-scroll-btn:hover .about-scroll-circle  {
   border-color: #ff4500;
   color: #ff4500;
 }
 
-.about-scroll-text {
+.about-scroll-text  {
   color: #FFE7E1;
   letter-spacing: 1px;
   font-size: 0.95rem;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /* ===== ABOUT BIO SECTION ===== */
-.about-bio {
+.about-bio  {
   display: flex;
   justify-content: right;
   width: 800px;
@@ -118,7 +118,7 @@
   top: -220px;
 }
 
-.about-card {
+.about-card  {
   background-color: #171717;
   border-radius: 12px;
   padding: 3rem;
@@ -130,31 +130,31 @@
 }
 
 
-.about-card-title {
+.about-card-title  {
   color: #ffffff;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   font-size: 1rem;
   letter-spacing: 1px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 
-.about-card-heading {
+.about-card-heading  {
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 500;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   margin: 1rem 0;
   color: #f5f5f5;
 }
 
-.about-card-text {
+.about-card-text  {
   color: #FFEDE3;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   line-height: 1.8;
   margin-bottom: 1rem;
 }
 
-.about-card-img {
+.about-card-img  {
   width: 100%;
   border-radius: 8px;
   margin-top: 1.5rem;
@@ -163,7 +163,7 @@
 
 /* ===== SOCIAL BUTTONS ===== */
 
-.about-social-section{
+.about-social-section {
   display: flex;
   justify-content: right;
   width: 800px;
@@ -173,7 +173,7 @@
 }
 
 
-.about-socials {
+.about-socials  {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem 1.5rem;
@@ -182,7 +182,7 @@
 }
 
 /* === SOCIAL BUTTON STYLE === */
-.about-social-btn {
+.about-social-btn  {
   background-color: #171717;
   display: flex;
   align-items: center;
@@ -196,17 +196,17 @@
   text-decoration: none;
   font-family: 'Satoshi Variable', sans-serif;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
-.about-social-text {
+.about-social-text  {
   flex: 1;
   font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 1.5px;
   text-align: left;
   color: #dac5a7;
@@ -214,7 +214,7 @@
 }
 
 /* ARROW */
-.about-arrow {
+.about-arrow  {
   font-size: 1.25rem;
   color: #dac5a7;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -222,13 +222,13 @@
   top: -2.5px;
 }
 /* Icon inside (optional, if you add <i> icons later) */
-.about-social-btn i {
+.about-social-btn i  {
   font-size: 1.5rem;
   color: #DAC5A7;
 }
 
 /* === HOVER EFFECT === */
-.about-social-btn:hover {
+.about-social-btn:hover  {
   color: #ff4500;
   border-color: #ff4500;
   box-shadow: 0 0 12px rgba(255, 69, 0, 0.25);
@@ -236,6 +236,6 @@
 }
 
 /* For the arrow (↗) on hover */
-.about-social-btn:hover::after {
+.about-social-btn:hover::after  {
   transform: translate(2px, -2px);
 }

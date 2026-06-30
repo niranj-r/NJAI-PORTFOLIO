@@ -1,7 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
 
-.frame-container {
+.frame-container  {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -13,7 +13,7 @@
 }
 
 /* Glowing background */
-.frame-glow {
+.frame-glow  {
   position: absolute;
   width: 600px;
   height: 600px;
@@ -23,7 +23,7 @@
   z-index: 0;
 }
 
-.frame-orbit-group {
+.frame-orbit-group  {
   position: absolute;
   width: 835px;
   height: 835px;
@@ -35,7 +35,7 @@
 }
 
 /* The orbit ring */
-.frame-orbit-ring {
+.frame-orbit-ring  {
   position: absolute;
   width: 835px;
   height: 835px;
@@ -44,7 +44,7 @@
 }
 
 /* Orbit dots (4 evenly spaced dots) */
-.frame-dot {
+.frame-dot  {
   position: absolute;
   width: 14px;
   height: 14px;
@@ -53,25 +53,25 @@
   box-shadow: 0 0 12px rgba(255, 69, 0, 0.7);
 }
 
-.frame-dot1 {
+.frame-dot1  {
   top: 0%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.frame-dot2 {
+.frame-dot2  {
   top: 50%;
   right: 0%;
   transform: translate(50%, -50%);
 }
 
-.frame-dot3 {
+.frame-dot3  {
   bottom: 0%;
   left: 50%;
   transform: translate(-50%, 50%);
 }
 
-.frame-dot4 {
+.frame-dot4  {
   top: 50%;
   left: 0%;
   transform: translate(-50%, -50%);
@@ -80,27 +80,27 @@
 
 /* Spin animation */
 @keyframes orbit-spin {
-  from {
+  from  {
     transform: rotate(0deg);
   }
 
-  to {
+  to  {
     transform: rotate(360deg);
   }
 }
 
 @keyframes orbit-rotate {
-  from {
+  from  {
     transform: rotate(0deg);
   }
 
-  to {
+  to  {
     transform: rotate(360deg);
   }
 }
 
 /* Profile silhouette */
-.frame-profile {
+.frame-profile  {
   position: absolute;
   width: 640px;
   height: auto;
@@ -113,7 +113,7 @@
 }
 
 /* Text block positioned to the left side of the glow */
-.frame-text {
+.frame-text  {
   position: absolute;
   top: 58%;
   /* vertical placement */
@@ -126,10 +126,10 @@
 }
 
 /* "Hi I am" small and subtle */
-.frame-hi {
+.frame-hi  {
   font-family: 'Lato', sans-serif;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   right: 10px;
   margin: 0;
   padding-left: 3.5px;
@@ -158,17 +158,17 @@
 @keyframes arrow-float {
 
   0%,
-  100% {
+  100%  {
     transform: rotate(-40deg) translateY(0);
   }
 
-  50% {
+  50%  {
     transform: rotate(-40deg) translateY(-8px);
   }
 }
 
 /* Social icons */
-.frame-socials {
+.frame-socials  {
   position: absolute;
   bottom: 30px;
   left: 40px;
@@ -177,7 +177,7 @@
   z-index: 10;
 }
 
-.frame-icon {
+.frame-icon  {
   color: white;
   font-size: 18px;
   width: 18px;
@@ -192,43 +192,43 @@
   transition: all 0.3s ease;
 }
 
-.frame-icon:hover {
+.frame-icon:hover  {
   color: #ff4500;
   border-color: #ff4500;
   cursor: pointer;
 }
 
 /* Gmail icon styling */
-.frame-gmail .gmail-svg {
+.frame-gmail .gmail-svg  {
   width: 22px;
   height: 22px;
 }
 
-.frame-gmail .gmail-svg path {
+.frame-gmail .gmail-svg path  {
   fill: #fff;
   /* default white (visible immediately) */
   transition: fill 0.3s ease;
 }
 
-.frame-gmail:hover .gmail-svg path {
+.frame-gmail:hover .gmail-svg path  {
   fill: #cd1f1f;
   /* red on hover */
 }
 
 
 /* Role text */
-.frame-role {
+.frame-role  {
   position: absolute;
   bottom: 50px;
   right: 80px;
   font-size: 1.3rem;
   color: #ff4500;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1px;
   z-index: 4;
 }
 
-.social-icons {
+.social-icons  {
   position: absolute;
   bottom: 30px;
   left: 40px;
@@ -237,7 +237,7 @@
   z-index: 10;
 }
 
-.icon-link {
+.icon-link  {
   color: white;
   font-size: 18px;
   border: 1px solid gray;
@@ -246,14 +246,14 @@
   transition: all 0.3s ease;
 }
 
-.icon-link:hover {
+.icon-link:hover  {
   color: #ff4500;
   border-color: #ff4500;
   cursor: pointer;
 }
 
 
-.frame-main-circle {
+.frame-main-circle  {
   position: absolute;
   width: 775px;
   height: 775px;
@@ -262,13 +262,13 @@
   transform: translate(-50%, -50%);
 }
 
-.frame-main-svg {
+.frame-main-svg  {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.frame-ring-outer {
+.frame-ring-outer  {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -278,14 +278,14 @@
   display: block;
 }
 
-.frame-ring-stroke {
+.frame-ring-stroke  {
   fill: none;
   stroke: #FF4800;
   stroke-width: 1.2px;
 }
 
 /* Exclusion/mix-blend ring */
-.frame-ring-exclusion {
+.frame-ring-exclusion  {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -298,7 +298,7 @@
 
 /* inner gradient circle */
 /* inner gradient circle */
-.frame-inner-circle-wrapper {
+.frame-inner-circle-wrapper  {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -312,14 +312,14 @@
   transform: translate(-50%, -50%);
 }
 
-.frame-inner-circle {
+.frame-inner-circle  {
   width: 100%;
   height: 100%;
   display: block;
 }
 
 /* arrows (overlay path) */
-.frame-arrows {
+.frame-arrows  {
   position: absolute;
   left: 30.5%;
   top: 62.5%;
@@ -330,23 +330,23 @@
   z-index: 20;
 }
 
-.frame-arrow-svg {
+.frame-arrow-svg  {
   width: 183.183px;
   height: 73.497px;
   display: block;
 }
 
-.frame-arrow-svg.arrow-2 {
+.frame-arrow-svg.arrow-2  {
   position: absolute;
   left: 0;
   top: 0;
 }
 
-.frame-arrow-path {
+.frame-arrow-path  {
   fill: white;
 }
 
-.ellipse {
+.ellipse  {
   position: absolute;
   width: 800px;
   height: 400px;
@@ -357,7 +357,7 @@
   z-index: 2;
 }
 
-.frame-glow-ellipse {
+.frame-glow-ellipse  {
   position: absolute;
   width: 20%;
   height: 20%;
@@ -374,195 +374,195 @@
 
 /* HERO IMAGE RESPONSIVENESS */
 @media screen and (max-width: 1300px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 21.5%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 26.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 1250px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 20%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 25.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 1200px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 18.5%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 24.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 1150px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 17.5%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 23.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 1100px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 16%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 22.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 1050px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 14.5%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 21%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 13.7%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 18.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 950px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 11.5%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 17%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 9.8%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 14.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 850px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 7.1%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 12.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 800px) {
-  .frame-profile {
+  .frame-profile  {
     top: 20%;
     left: 4.35%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     left: 10.5%;
     top: 61.5%;
   }
 }
 
 @media screen and (max-width: 430px) {
-  .frame-orbit-group {
+  .frame-orbit-group  {
     width: 105vh;
     height: 105vh;
   }
-  .frame-orbit-ring {
+  .frame-orbit-ring  {
     width: 105vh;
     height: 105vh;
   }
-  .frame-main-circle {
+  .frame-main-circle  {
     width: 90vh;
     height: 90vh;
     align-items: center;
     display: flex;
     justify-content: center;
   }
-  .frame-main-svg {
+  .frame-main-svg  {
     position: absolute;
     width: 93.5vh;
     height: 93.5vh;
     align-self: center;
   }
-  .frame-ring-outer {
+  .frame-ring-outer  {
     width: 71.5vh;
     height: 71.5vh;
   }
-  .frame-ring-exclusion {
+  .frame-ring-exclusion  {
     width: 82vh;
     height: 82vh;
   }
-  .frame-inner-circle-wrapper {
+  .frame-inner-circle-wrapper  {
     width: 85vh;
     height: 85vh;
   }
-  .frame-profile {
+  .frame-profile  {
     width: 70vh;
     top: 26%;
     left: -17.5%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     width: 20vh;
     left: -12.5%;
     top: 65vh;
   }
-  .frame-hi {
+  .frame-hi  {
     font-size: 1rem;
   }
   .frame-name {
     font-size: 6.3rem;
   }
-  .frame-socials {
+  .frame-socials  {
     position: relative;
     left: auto;
     top: 37vh; 
     align-self: center;
   }
-  .frame-role {
+  .frame-role  {
     left: 20vw;
     top: 65vh;
     align-self: center;
@@ -572,18 +572,18 @@
 }
 
 @media screen and (max-width: 420px) {
-  .frame-profile {
+  .frame-profile  {
     width: 70vh;
     top: 26%;
     left: -22%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     width: 20vh;
     left: -15%;
     top: 65vh;
   }
-  .frame-role {
+  .frame-role  {
     left: 20.5vw;
     top: 65vh;
     align-self: center;
@@ -593,18 +593,18 @@
 }
 
 @media screen and (max-width: 410px) {
-  .frame-profile {
+  .frame-profile  {
     width: 70vh;
     top: 26%;
     left: -24%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     width: 20vh;
     left: -15%;
     top: 65vh;
   }
-  .frame-role {
+  .frame-role  {
     left: 19.5vw;
     top: 65vh;
     align-self: center;
@@ -614,18 +614,18 @@
 }
 
 @media screen and (max-width: 360px) {
-  .frame-profile {
+  .frame-profile  {
     width: 70vh;
     top: 26%;
     left: -38%;
     z-index: 0;
   }
-  .frame-arrows {
+  .frame-arrows  {
     width: 20vh;
     left: -15%;
     top: 65vh;
   }
-  .frame-role {
+  .frame-role  {
     left: 19.5vw;
     top: 65vh;
     align-self: center;

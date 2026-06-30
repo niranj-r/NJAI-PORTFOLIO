@@ -1,4 +1,4 @@
-.work-page-container {
+.work-page-container  {
   background-color: #0E0E0E;
   color: #ffffff;
   min-height: 100vh;
@@ -6,7 +6,7 @@
   padding-bottom: 4rem;
 }
 
-.work-page-header {
+.work-page-header  {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,11 +21,11 @@
   margin: 0 0 1rem 0;
 }
 
-.work-page-subtitle {
+.work-page-subtitle  {
   font-size: 1rem;
-  color: #888888;
+  color: #A1857B;
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
   letter-spacing: 0.05em;
 }
