@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiTwitter, FiInstagram, FiGithub, FiLinkedin } from 'react-icons/fi';
 import './Hero.css';
+import man from '../assets/hero.png';
 
 const Hero = () => {
   return (
@@ -19,10 +20,10 @@ const Hero = () => {
 
       {/* Central Portrait Image */}
       <div className="hero-image-wrapper">
-        <img 
-          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" 
-          alt="Niranj R Portrait" 
-          className="hero-image" 
+        <img
+          src={man}
+          alt="Niranj R Portrait"
+          className="hero-image"
         />
       </div>
 
@@ -30,10 +31,10 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-content-left">
           <h2>
-            A website that leaves <br/> <em>a lasting impression!</em>
+            A website that leaves <br /> <em>a lasting impression!</em>
           </h2>
         </div>
-        
+
         <div className="hero-content-right">
           <p>
             Hi, I'm Niranj R - a freelancer specializing in premium web design, development, and SEO services. I'm passionate about creating unique and effective solutions for my clients, and I bring a personal touch to every project. Let's work together to bring your vision to life!

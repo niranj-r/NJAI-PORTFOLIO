@@ -116,8 +116,8 @@ function App() {
       <Frame2 />
       <div className="cta-marquee-wrapper">
         <div className="cta-marquee">
-          <span>+++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK </span>
-          <span>+++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK </span>
+          <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
+          <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
         </div>
       </div>
       <Services onServiceClick={() => setCurrentView('serviceDetail')} />
