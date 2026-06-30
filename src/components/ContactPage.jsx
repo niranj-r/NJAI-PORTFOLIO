@@ -2,6 +2,7 @@ import React from 'react';
 import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF, FaBehance, FaDribbble, FaPinterestP } from 'react-icons/fa';
 import './ContactPage.css';
+import heroImage from '../assets/hero.png';
 
 const ContactPage = ({ onBack }) => {
   return (
@@ -16,7 +17,7 @@ const ContactPage = ({ onBack }) => {
         {/* Left Side: Image */}
         <div className="contact-left">
           <img 
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" 
+            src={heroImage} 
             alt="Portrait" 
             className="contact-portrait" 
           />
