@@ -3,6 +3,7 @@ import { FiArrowDown, FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF } from 'react-icons/fa';
 import "../styles/BlogDetailPage.css";
 import "../styles/BlogPage.css";
+
 const relatedPosts = [
   {
     id: 1,
