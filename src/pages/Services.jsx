@@ -9,6 +9,7 @@ import logo3 from '../assets/logos/aure.svg';
 import logo4 from '../assets/logos/creatorscup.svg';
 import logo5 from '../assets/logos/gene.svg';
 import logo6 from '../assets/logos/litup.svg';
+import logo7 from '../assets/logos/verdea.svg'
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -20,7 +21,7 @@ const Services = ({ onServiceClick }) => {
     <div className="services-container" id="services">
       {/* Logos Section */}
       <div className="logos-marquee-container">
-        <motion.div 
+        <motion.div
           className="logos-section marquee-track-logos"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -35,13 +36,14 @@ const Services = ({ onServiceClick }) => {
               <div className="logo-item"><img src={logo4} alt="Creators Cup" /></div>
               <div className="logo-item"><img src={logo5} alt="Gene" /></div>
               <div className="logo-item"><img src={logo6} alt="Litup" /></div>
+              <div className="logo-item"><img src={logo7} alt="Verdea" /></div>
             </React.Fragment>
           ))}
         </motion.div>
       </div>
 
       {/* Services Cards */}
-      <motion.div 
+      <motion.div
         className="services-cards"
         initial="hidden"
         whileInView="visible"
