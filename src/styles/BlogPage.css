@@ -55,6 +55,7 @@
 
 .blog-card:hover  {
   background-color: var(--bg-primary); /* Very light warm white */
+  transform: translateY(-5px);
 }
 
 .blog-image-wrapper  {

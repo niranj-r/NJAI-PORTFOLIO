@@ -233,14 +233,19 @@
 
 /* === HOVER EFFECT === */
 .about-social-btn:hover {
-  color: var(--brand-primary);
   border-color: var(--brand-primary);
   box-shadow: 0 0 12px rgba(255, 69, 0, 0.25);
   transform: translateY(-3px);
 }
 
-.about-social-btn:hover::after {
+.about-social-btn:hover .about-social-text,
+.about-social-btn:hover .about-icon {
+  color: var(--brand-primary);
+}
+
+.about-social-btn:hover .about-arrow {
   transform: translate(2px, -2px);
+  color: var(--brand-primary);
 }
 
 @media (max-width: 991px) {

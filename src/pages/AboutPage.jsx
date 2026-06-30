@@ -62,35 +62,80 @@ export default function AboutPage({ theme }) {
       {/* ===== ABOUT BIO SECTION ===== */}
       <section id="about-bio" className="about-bio">
         <div className="about-card">
-          <h3 className="about-card-title">NIRANJ R</h3>
-          <h2 className="about-card-heading">
+          <motion.h3 
+            className="about-card-title"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >NIRANJ R</motion.h3>
+          
+          <motion.h2 
+            className="about-card-heading"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          >
             Your Partner in Bringing Your Web Design Vision to Life
-          </h2>
+          </motion.h2>
 
-          <p className="about-card-text">
+          <motion.p 
+            className="about-card-text"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          >
             I'm a UI/UX Designer and Frontend Developer passionate about creating immersive,
             intuitive digital experiences. My approach blends design thinking and visual
             storytelling, where every interaction feels intentional and every layout flows with
             purpose.
-          </p>
+          </motion.p>
 
-          <p className="about-card-text">
+          <motion.p 
+            className="about-card-text"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          >
             I love transforming ideas into interfaces that connect with people — balancing form,
             function, and emotion. From wireframes to final pixels, I focus on clarity,
             consistency, and that subtle spark that makes a design memorable.
-          </p>
+          </motion.p>
 
-          <p className="about-card-text">
+          <motion.p 
+            className="about-card-text"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+          >
             Driven by curiosity and a love for detail, I’m constantly exploring new tools, trends,
             and technologies to push creative boundaries and craft experiences that truly stand out.
-          </p>
+          </motion.p>
 
-          <img src={aboutImg} alt="Niranj Portrait" className="about-card-img" />
+          <motion.img 
+            src={aboutImg} 
+            alt="Niranj Portrait" 
+            className="about-card-img" 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          />
         </div>
       </section>
 
       <div className="about-social-section">
-        <div className="about-socials">
+        <motion.div 
+          className="about-socials"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <a href="#!" className="about-social-btn">
             <i className="fab fa-instagram about-icon"></i>
             <span className="about-social-text">INSTAGRAM</span>
@@ -126,7 +171,7 @@ export default function AboutPage({ theme }) {
             <span className="about-social-text">PINTEREST</span>
             <span className="about-arrow">↗</span>
           </a>
-        </div>
+        </motion.div>
       </div>
 
     </motion.div>

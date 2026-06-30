@@ -1,96 +1,127 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import imgProfileDark from "../assets/frame20.png";
 import imgProfileLight from "../assets/frame20-light.png";
+import heroImgLight from "../assets/hero-light.png";
 import svgPaths from "../svg-osuecvsjzq";
 import "../styles/Frame2.css";
-import RotatingText from './RotatingText'
+import "../styles/Hero.css"; // Ensure marquee styles are available
 
 export default function Frame2({ theme }) {
   const imgProfile = theme === 'light' ? imgProfileLight : imgProfileDark;
+  
+  const [roleIndex, setRoleIndex] = useState(0);
+  const roles = ['UI/UX Designer', 'UI/UX Developer', 'Full Stack Developer', 'SEO Analyst'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex(prev => (prev + 1) % roles.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="frame-container">
-      {/* Orbit group (outermost rotating ring + dots) */}
-      <div className="frame-orbit-group">
-        <div className="frame-orbit-ring"></div>
-        <div className="frame-dot frame-dot1"></div>
-        <div className="frame-dot frame-dot2"></div>
-        <div className="frame-dot frame-dot3"></div>
-        <div className="frame-dot frame-dot4"></div>
-      </div>
 
-      {/* === Main central layered circle system === */}
-      <div className="frame-main-circle">
-        {/* Dark gradient base circle */}
-        <svg viewBox="0 0 788 788" className="frame-main-svg">
-          <defs>
-            <linearGradient id="f2-grad-1" x1="609.375" x2="320.625" y1="61.125" y2="774">
-              <stop offset="0" stopColor="var(--bg-secondary)" />
-              <stop offset="1" stopColor="var(--bg-primary)" />
-            </linearGradient>
-          </defs>
-          <circle cx="393.75" cy="393.75" r="393.75" fill="url(#f2-grad-1)" />
-        </svg>
-        {/* Glowing ellipse 
+      {theme === 'dark' ? (
+        <>
+          {/* === Main central layered circle system === */}
+          <div className="frame-main-circle">
+            {/* Dark gradient base circle */}
+            <svg viewBox="0 0 788 788" className="frame-main-svg">
+              <defs>
+                <linearGradient id="f2-grad-1" x1="609.375" x2="320.625" y1="61.125" y2="774">
+                  <stop offset="0" stopColor="var(--bg-secondary)" />
+                  <stop offset="1" stopColor="var(--bg-primary)" />
+                </linearGradient>
+              </defs>
+              <circle cx="393.75" cy="393.75" r="393.75" fill="url(#f2-grad-1)" />
+            </svg>
+            {/* Glowing ellipse 
         <div className="ellipse">
           <div className="frame-glow-ellipse"></div>
         </div>
         */}
 
-        {/* Orange stroke outer ring */}
-        <svg viewBox="0 0 645 645" className="frame-ring-outer">
-          <circle cx="322.11" cy="322.11" r="321.681" className="frame-ring-stroke" />
-        </svg>
+            {/* Orange stroke outer ring */}
+            <svg viewBox="0 0 645 645" className="frame-ring-outer">
+              <circle cx="322.11" cy="322.11" r="321.681" className="frame-ring-stroke" />
+            </svg>
 
-        {/* Large exclusion blend circle */}
-        <svg viewBox="0 0 696 696" className="frame-ring-exclusion">
-          <defs>
-            <linearGradient id="f2-grad-2" x1="538.313" x2="283.236" y1="53.9969" y2="683.741">
-              <stop stopColor="var(--f2-ring-1)" />
-              <stop offset="1" stopColor="var(--f2-ring-2)" />
-            </linearGradient>
-          </defs>
-          <circle cx="347.833" cy="347.833" r="347.833" fill="url(#f2-grad-2)" />
-        </svg>
+            {/* Large exclusion blend circle */}
+            <svg viewBox="0 0 696 696" className="frame-ring-exclusion">
+              <defs>
+                <linearGradient id="f2-grad-2" x1="538.313" x2="283.236" y1="53.9969" y2="683.741">
+                  <stop stopColor="var(--f2-ring-1)" />
+                  <stop offset="1" stopColor="var(--f2-ring-2)" />
+                </linearGradient>
+              </defs>
+              <circle cx="347.833" cy="347.833" r="347.833" fill="url(#f2-grad-2)" />
+            </svg>
 
-        {/* Inner orange glowing circle */}
-        <div className="frame-inner-circle-wrapper">
-          <svg viewBox="0 0 894 894" className="frame-inner-circle">
+            {/* Inner orange glowing circle */}
+            <div className="frame-inner-circle-wrapper">
+              <svg viewBox="0 0 894 894" className="frame-inner-circle">
 
-            <circle cx="446.554" cy="446.554" r="298.354" fill="url(#f2-grad-3)" />
-          </svg>
-        </div>
-      </div>
+                <circle cx="446.554" cy="446.554" r="298.354" fill="url(#f2-grad-3)" />
+              </svg>
+            </div>
+          </div>
 
-      {/* Profile image */}
-      <img src={imgProfile} alt="Profile" className="frame-profile" />
+          {/* Profile image */}
+          <img src={imgProfile} alt="Profile" className="frame-profile" />
 
-      {/* Text block */}
-      <div className="frame-text">
-        <p className="frame-hi">Hi I am</p>
-        <h1 className="frame-name">
-          NIRANJ
-          <br />
-          R
-        </h1>
-      </div>
+          {/* Text block */}
+          <div className="frame-text">
+            <p className="frame-hi">Hi I am</p>
+            <h1 className="frame-name">
+              NIRANJ
+              <br />
+              R
+            </h1>
+          </div>
 
-      {/* Animated arrow */}
-      <div className="frame-arrows">
-        <svg viewBox="0 0 184 76" className="frame-arrow-svg">
-          <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
-        </svg>
-        <svg viewBox="0 0 184 76" className="frame-arrow-svg arrow-2">
-          <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
-        </svg>
-      </div>
-      <div className="frame-arrows">
-        <svg viewBox="0 0 184 76" className="frame-arrow-svg">
-          <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
-        </svg>
-        <svg viewBox="0 0 184 76" className="frame-arrow-svg arrow-2">
-          <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
-        </svg>
-      </div>
+          {/* Animated arrow */}
+          <div className="frame-arrows">
+            <svg viewBox="0 0 184 76" className="frame-arrow-svg">
+              <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
+            </svg>
+            <svg viewBox="0 0 184 76" className="frame-arrow-svg arrow-2">
+              <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
+            </svg>
+          </div>
+          <div className="frame-arrows">
+            <svg viewBox="0 0 184 76" className="frame-arrow-svg">
+              <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
+            </svg>
+            <svg viewBox="0 0 184 76" className="frame-arrow-svg arrow-2">
+              <path d={svgPaths.pa8d96f2} className="frame-arrow-path" />
+            </svg>
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Light Mode Specific Central Element (Matches Hero section) */}
+          <div className="hero-marquee" style={{ pointerEvents: 'none', top: '50%' }}>
+            <div className="marquee-track">
+              <span className="marquee-text">Niranj R</span>
+              <span className="marquee-text">Niranj R</span>
+              <span className="marquee-text">Niranj R</span>
+              <span className="marquee-text">Niranj R</span>
+              <span className="marquee-text">Niranj R</span>
+              <span className="marquee-text">Niranj R</span>
+            </div>
+          </div>
+
+          <div className="hero-image-wrapper" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -45%)', width: '100%', maxWidth: '600px', display: 'flex', justifyContent: 'center', marginBottom: 0 }}>
+            <img
+              src={heroImgLight}
+              alt="Niranj R Portrait"
+              className="hero-image"
+              style={{ width: '100%', height: 'auto', maxHeight: '85vh', objectFit: 'contain', mixBlendMode: 'normal' }}
+            />
+          </div>
+        </>
+      )}
 
       {/* Socials bottom left */}
       <div className="frame-socials">
@@ -118,20 +149,7 @@ export default function Frame2({ theme }) {
 
       {/* Role bottom right */}
       <div className="frame-role">
-        
-
-        <RotatingText
-          texts={['UI/UX Designer', 'UI/UX Developer', 'Full Stack Developer','SEO Analyst']}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-          staggerFrom={"last"}
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "-120%" }}
-          staggerDuration={0.025}
-          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-          transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          rotationInterval={2000}
-        />
+        {roles[roleIndex]}
       </div>
     </div>
   );

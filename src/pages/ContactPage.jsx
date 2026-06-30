@@ -23,17 +23,29 @@ const ContactPage = ({ onBack, theme }) => {
 
       <div className="contact-container">
         {/* Left Side: Image */}
-        <div className="contact-left">
+        <motion.div 
+          className="contact-left"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <img 
             src={heroImage} 
             alt="Portrait" 
             className="contact-portrait" 
           />
-        </div>
+        </motion.div>
         
         {/* Right Side: Form & Socials */}
         <div className="contact-right">
-          <div className="contact-form-block">
+          <motion.div 
+            className="contact-form-block"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          >
             <span className="contact-label">CONTACT</span>
             <h2 className="contact-title">Let's get in touch.</h2>
             
@@ -43,9 +55,15 @@ const ContactPage = ({ onBack, theme }) => {
               <textarea placeholder="MESSAGE" className="contact-textarea" rows="4"></textarea>
               <button type="button" className="contact-submit">SEND MESSAGE</button>
             </form>
-          </div>
+          </motion.div>
           
-          <div className="contact-socials-grid">
+          <motion.div 
+            className="contact-socials-grid"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+          >
             <a href="#!" className="contact-social-item">
               <FaInstagram className="social-icon" />
               <span className="social-text">INSTAGRAM</span>
@@ -76,7 +94,7 @@ const ContactPage = ({ onBack, theme }) => {
               <span className="social-text">PINTEREST</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>

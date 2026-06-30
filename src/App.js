@@ -15,6 +15,8 @@ import WorkPage from "./pages/WorkPage";
 import WorkDetailPage from "./pages/WorkDetailPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
+import LoadingScreen from "./pages/LoadingScreen";
+import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
 function App() {
@@ -26,10 +28,21 @@ function App() {
     return localStorage.getItem('theme') || 'dark';
   });
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    // Initial theme set
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    // Loading timer
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
@@ -41,18 +54,30 @@ function App() {
 
   if (currentView === 'serviceDetail') {
     return (
-      <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <ServiceDetailPage onBack={() => setCurrentView('home')} />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
-      </div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+          {!isLoading && (
+            <div key="content">
+              <Header onNavClick={(view) => setCurrentView(view)} />
+              <ServiceDetailPage onBack={() => setCurrentView('home')} />
+              <CTASection onNavClick={(view) => setCurrentView(view)} />
+              <MainFooter theme={theme} toggleTheme={toggleTheme} />
+            </div>
+          )}
+        </AnimatePresence>
+      </>
     );
   }
 
   if (currentView === 'workDetail') {
     return (
-      <div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <WorkDetailPage
           onBack={() => setCurrentView('work')}
@@ -61,33 +86,54 @@ function App() {
         <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
+        )}
+      </>
     );
   }
 
   if (currentView === 'about') {
     return (
-      <div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <AboutPage onBack={() => setCurrentView('home')} theme={theme} />
         <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
+        )}
+      </>
     );
   }
 
   if (currentView === 'contact') {
     return (
-      <div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <ContactPage onBack={() => setCurrentView('home')} theme={theme} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
+        )}
+      </>
     );
   }
 
   if (currentView === 'work') {
     return (
-      <div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <WorkPage onProjectClick={(title) => {
           setSelectedProject(title);
@@ -96,12 +142,19 @@ function App() {
         <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
+        )}
+      </>
     );
   }
 
   if (currentView === 'blog') {
     return (
-      <div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <BlogPage onBlogClick={(title) => {
           setSelectedBlog(title);
@@ -110,12 +163,19 @@ function App() {
         <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
+        )}
+      </>
     );
   }
 
   if (currentView === 'blogDetail') {
     return (
-      <div>
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <BlogDetailPage
           onBack={() => setCurrentView('blog')}
@@ -124,11 +184,18 @@ function App() {
         <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
+        )}
+      </>
     );
   }
 
   return (
-    <div>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen key="loading" theme={theme} />}
+      </AnimatePresence>
+      {!isLoading && (
+        <div>
       <Header onNavClick={(view) => setCurrentView(view)} />
       <Frame2 theme={theme} />
       <div className="frame-marquee-wrapper">
@@ -151,6 +218,8 @@ function App() {
       <CTASection onNavClick={(view) => setCurrentView(view)} />
       <MainFooter theme={theme} toggleTheme={toggleTheme} />
     </div>
+      )}
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-.services-container  {
+.services-container {
   padding: 4rem 2rem;
   background-color: var(--bg-primary);
   display: flex;
@@ -7,32 +7,66 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-.logos-section  {
+.logos-marquee-container {
   width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  overflow: hidden;
   margin-bottom: 6rem;
-  flex-wrap: wrap;
-  gap: 20px;
+  padding: 10px 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-.logo-item  {
+.logos-section.marquee-track-logos {
+  width: fit-content;
+  max-width: none;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0;
+  gap: 80px;
+  padding-right: 80px;
+  /* To maintain gap at the end */
+  animation: scroll-logos 25s linear infinite reverse;
+}
+
+.logos-section.marquee-track-logos:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-item {
   color: var(--brand-primary);
-  /* Muted gold/beige */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 45px;
+  flex-shrink: 0;
 }
 
-.logo-item svg  {
+.logo-item svg,
+.logo-item img {
   height: 100%;
   width: auto;
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
-.services-cards  {
+.logo-item img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.services-cards {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -40,7 +74,7 @@
   max-width: 1200px;
 }
 
-.service-card  {
+.service-card {
   flex: 1;
   background-color: var(--bg-accent);
   /* Slightly lighter than var(--bg-primary) for contrast */
@@ -50,11 +84,11 @@
   transition: transform 0.3s ease;
 }
 
-.service-card:hover  {
+.service-card:hover {
   transform: translateY(-5px);
 }
 
-.service-number  {
+.service-number {
   font-size: 0.85rem;
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
@@ -62,7 +96,7 @@
   font-weight: 500;
 }
 
-.service-title  {
+.service-title {
   font-size: 1.4rem;
   color: var(--brand-primary);
   margin-bottom: 1.5rem;
@@ -72,7 +106,7 @@
   margin-top: 0;
 }
 
-.service-description  {
+.service-description {
   font-size: 0.95rem;
   color: var(--text-secondary);
   /* Very light beige */
@@ -82,7 +116,7 @@
   flex-grow: 1;
 }
 
-.service-button  {
+.service-button {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -90,7 +124,7 @@
   width: fit-content;
 }
 
-.icon-circle  {
+.icon-circle {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -103,17 +137,17 @@
   transition: background-color 0.3s ease;
 }
 
-.service-button:hover .icon-circle  {
+.service-button:hover .icon-circle {
   background-color: var(--brand-primary);
   color: var(--text-primary);
 }
 
-.icon-circle svg  {
+.icon-circle svg {
   width: 16px;
   height: 16px;
 }
 
-.button-text  {
+.button-text {
   font-size: 0.75rem;
   color: var(--brand-primary);
   letter-spacing: 0.1em;
@@ -123,9 +157,7 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-  .services-cards  {
+  .services-cards {
     flex-direction: column;
   }
 }
-
-

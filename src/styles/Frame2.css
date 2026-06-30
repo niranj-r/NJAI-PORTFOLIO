@@ -245,10 +245,10 @@
   position: absolute;
   bottom: 50px;
   right: 80px;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: var(--brand-primary);
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-weight: 800;
+  letter-spacing: 2px;
   z-index: 4;
 }
 
@@ -688,5 +688,31 @@
     align-self: center;
     font-size: 1.5rem;
     align-content: center;
+  }
+}
+
+/* Override chaotic mobile positioning for socials and role */
+@media screen and (max-width: 768px) {
+  .frame-role {
+    position: absolute !important;
+    bottom: 90px !important;
+    right: auto !important;
+    left: 50% !important;
+    top: auto !important;
+    transform: translateX(-50%) !important;
+    font-size: 1.2rem !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  .frame-socials {
+    position: absolute !important;
+    bottom: 30px !important;
+    left: 50% !important;
+    top: auto !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    justify-content: center;
+    width: 100%;
   }
 }
