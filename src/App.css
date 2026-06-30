@@ -30,8 +30,8 @@
 
 .frame-marquee-wrapper {
   width: 100%;
-  border-top: 1px solid #333333;
-  border-bottom: 1px solid #333333;
+  border-top: 1px solid #FF4D00;
+  border-bottom: 1px solid #FF4D00;
   padding: 15px 0;
   overflow: hidden;
   white-space: nowrap;

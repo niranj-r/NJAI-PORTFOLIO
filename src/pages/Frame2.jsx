@@ -1,10 +1,12 @@
 import React from "react";
-import imgProfile from "../assets/frame20.png";
+import imgProfileDark from "../assets/frame20.png";
+import imgProfileLight from "../assets/frame20-light.png";
 import svgPaths from "../svg-osuecvsjzq";
 import "../styles/Frame2.css";
 import RotatingText from './RotatingText'
 
-export default function Frame2() {
+export default function Frame2({ theme }) {
+  const imgProfile = theme === 'light' ? imgProfileLight : imgProfileDark;
   return (
     <div className="frame-container">
       {/* Orbit group (outermost rotating ring + dots) */}
@@ -22,8 +24,8 @@ export default function Frame2() {
         <svg viewBox="0 0 788 788" className="frame-main-svg">
           <defs>
             <linearGradient id="f2-grad-1" x1="609.375" x2="320.625" y1="61.125" y2="774">
-              <stop offset="0" stopColor="#171717" />
-              <stop offset="1" stopColor="#000910" />
+              <stop offset="0" stopColor="var(--bg-secondary)" />
+              <stop offset="1" stopColor="var(--bg-primary)" />
             </linearGradient>
           </defs>
           <circle cx="393.75" cy="393.75" r="393.75" fill="url(#f2-grad-1)" />
@@ -43,8 +45,8 @@ export default function Frame2() {
         <svg viewBox="0 0 696 696" className="frame-ring-exclusion">
           <defs>
             <linearGradient id="f2-grad-2" x1="538.313" x2="283.236" y1="53.9969" y2="683.741">
-              <stop stopColor="#171717" />
-              <stop offset="1" stopColor="#000910" />
+              <stop stopColor="var(--f2-ring-1)" />
+              <stop offset="1" stopColor="var(--f2-ring-2)" />
             </linearGradient>
           </defs>
           <circle cx="347.833" cy="347.833" r="347.833" fill="url(#f2-grad-2)" />

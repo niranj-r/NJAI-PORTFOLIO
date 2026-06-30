@@ -1,6 +1,6 @@
 .work-detail-page  {
-  background-color: #0E0E0E;
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   padding-bottom: 4rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -14,7 +14,7 @@
 .wd-back-button {
   background: transparent;
   border: none;
-  color: #FF4D00;
+  color: var(--brand-primary);
   padding: 0;
   cursor: pointer;
   display: flex;
@@ -27,23 +27,23 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #222222;
+  background-color: var(--bg-accent2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   transition: background-color 0.3s ease;
   font-size: 1rem;
 }
 
 .wd-back-button:hover .icon-circle {
-  background-color: #FF4D00;
-  color: #ffffff;
+  background-color: var(--brand-primary);
+  color: var(--text-primary);
 }
 
 .wd-back-button .button-text {
   font-size: 0.75rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   letter-spacing: 0.1em;
   font-weight: 500;
   text-transform: uppercase;
@@ -59,14 +59,14 @@
 
 .wd-hero-title {
   font-size: 6rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 300;
   margin: 0 0 1rem 0;
 }
 
 .wd-hero-subtitle  {
   font-size: 1rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -82,7 +82,7 @@
 }
 
 .wd-stat-box  {
-  background-color: #1a1a1a;
+  background-color: var(--bg-accent);
   padding: 1.5rem 2.5rem;
   border-radius: 4px;
   display: flex;
@@ -94,14 +94,14 @@
 
 .wd-stat-label  {
   font-size: 0.65rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .wd-stat-value  {
   font-size: 0.75rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -118,8 +118,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #1a1a1a;
-  color: #FF4D00;
+  background-color: var(--bg-accent);
+  color: var(--brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,7 +128,7 @@
 
 .wd-scroll-btn span  {
   font-size: 0.7rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.15em;
 }
 
@@ -160,7 +160,7 @@
 
 .wd-about-label  {
   font-size: 0.75rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: block;
@@ -169,7 +169,7 @@
 
 .wd-about-title  {
   font-size: 2.5rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-weight: 400;
   line-height: 1.2;
   margin: 0;
@@ -183,21 +183,21 @@
 }
 
 .wd-detail-card  {
-  background-color: #121212;
+  background-color: var(--bg-accent5);
   padding: 3rem;
   border-radius: 4px;
 }
 
 .wd-card-title  {
   font-size: 1.2rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 400;
   margin: 0 0 1.5rem 0;
 }
 
 .wd-card-text  {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 400;
   margin: 0;
@@ -225,3 +225,6 @@
     padding: 2rem;
   }
 }
+
+
+

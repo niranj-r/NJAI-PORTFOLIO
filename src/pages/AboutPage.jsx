@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/AboutPage.css";
-import heroImg from "../assets/frame10.png";
+import heroImgDark from "../assets/frame10.png";
+import heroImgLight from "../assets/frame10-light.png";
 import aboutImg from "../assets/frame30.png";
 import nameImg from "../assets/name.png";
 
-export default function AboutPage() {
+export default function AboutPage({ theme }) {
+  const heroImg = theme === 'light' ? heroImgLight : heroImgDark;
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   useEffect(() => {

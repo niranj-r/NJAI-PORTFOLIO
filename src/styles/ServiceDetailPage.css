@@ -1,6 +1,6 @@
 .service-detail-page  {
-  background-color: #0E0E0E;
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   padding-bottom: 4rem;
 }
@@ -12,8 +12,8 @@
 
 .sd-back-button  {
   background: transparent;
-  border: 1px solid #333333;
-  color: #FF4D00;
+  border: 1px solid var(--bg-accent3);
+  color: var(--brand-primary);
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
@@ -28,8 +28,8 @@
 }
 
 .sd-back-button:hover  {
-  background-color: #FF4D00;
-  color: #0E0E0E;
+  background-color: var(--brand-primary);
+  color: var(--bg-primary);
 }
 
 /* Hero Section */
@@ -43,7 +43,7 @@
 
 .sd-hero-title {
   font-size: 6rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-weight: 300;
   line-height: 1;
   margin: 0 0 1.5rem 0;
@@ -57,7 +57,7 @@
 
 .sd-hero-subtitle  {
   font-size: 1.1rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -75,8 +75,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #1a1a1a;
-  color: #FF4D00;
+  background-color: var(--bg-accent);
+  color: var(--brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,7 +85,7 @@
 
 .scroll-text  {
   font-size: 0.75rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.15em;
 }
 
@@ -101,7 +101,7 @@
   border-radius: 10px;
   object-fit: cover;
   filter: brightness(0.8) contrast(1.1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 30px 60px var(--shadow-color);
 }
 
 /* Stats Row */
@@ -122,7 +122,7 @@
 
 .sd-stat p  {
   font-size: 0.75rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.2em;
   margin: 0 0 10px 0;
   font-weight: 500;
@@ -130,7 +130,7 @@
 
 .sd-stat h2 {
   font-size: 4rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 300;
   margin: 0;
   font-family: 'Times New Roman', Times, serif;
@@ -146,7 +146,7 @@
 }
 
 .sd-section-block  {
-  background-color: #121212;
+  background-color: var(--bg-accent5);
   width: 100%;
   max-width: 1200px;
   display: flex;
@@ -161,7 +161,7 @@
 
 .sd-section-category  {
   font-size: 0.75rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: block;
@@ -170,7 +170,7 @@
 
 .sd-section-title {
   font-size: 4rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 300;
   margin: 0;
   line-height: 1.1;
@@ -199,16 +199,16 @@
   display: flex;
   gap: 40px;
   padding: 3rem 0;
-  border-top: 1px solid #222222;
+  border-top: 1px solid var(--bg-accent2);
 }
 
 .sd-feature-row:last-child  {
-  border-bottom: 1px solid #222222;
+  border-bottom: 1px solid var(--bg-accent2);
 }
 
 .sd-feature-label  {
   font-size: 0.75rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   flex: 0 0 250px;
@@ -216,7 +216,7 @@
 
 .sd-feature-text  {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 400;
   margin: 0;
@@ -264,3 +264,6 @@
     flex: none;
   }
 }
+
+
+

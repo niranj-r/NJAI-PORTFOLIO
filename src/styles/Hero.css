@@ -1,5 +1,5 @@
 .hero-container {
-  background-color: #0E0E0E;
+  background-color: var(--bg-primary);
   padding: 8rem 2rem 4rem 2rem;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  color: #ffffff;
+  color: var(--text-primary);
   min-height: 100vh;
   justify-content: center;
 }
@@ -36,7 +36,7 @@
   /* scales with viewport */
   font-weight: 300;
   font-style: italic;
-  color: #FF4D00;
+  color: var(--brand-primary);
   margin-right: 4vw;
   /* spacing between words */
   opacity: 0.9;
@@ -67,7 +67,7 @@
   aspect-ratio: 4/5;
   object-fit: cover;
   /* matches moody dark aesthetic */
-  filter: brightness(0.5) contrast(95%);
+  mix-blend-mode: screen;
 }
 
 /* Bottom Content */
@@ -88,7 +88,7 @@
 
 .hero-content-left h2 {
   font-size: 2.2rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-weight: 300;
   line-height: 1.3;
   margin: 0;
@@ -110,7 +110,7 @@
 
 .hero-content-right p {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   /* slightly lighter than #A1857B for better readability on black */
   line-height: 1.8;
   font-weight: 400;
@@ -126,19 +126,19 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #1a1a1a;
+  background-color: var(--bg-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-size: 1rem;
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .social-circle:hover {
-  background-color: #FF4D00;
-  color: #0E0E0E;
+  background-color: var(--brand-primary);
+  color: var(--bg-primary);
   transform: translateY(-3px);
 }
 

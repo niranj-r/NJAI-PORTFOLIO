@@ -1,9 +1,11 @@
 import React from 'react';
 import { FiTwitter, FiInstagram, FiGithub, FiLinkedin } from 'react-icons/fi';
 import "../styles/Hero.css";
-import man from '../assets/hero.png';
+import heroImgDark from '../assets/hero.png';
+import heroImgLight from '../assets/hero-light.png';
 
-const Hero = () => {
+const Hero = ({ theme }) => {
+  const man = theme === 'light' ? heroImgLight : heroImgDark;
   return (
     <div className="hero-container">
       {/* Background Marquee */}

@@ -1,9 +1,9 @@
 import React from 'react';
-import { FiInstagram, FiTwitter, FiDribbble, FiArrowUpRight, FiArrowUp } from 'react-icons/fi';
+import { FiInstagram, FiTwitter, FiDribbble, FiArrowUpRight, FiArrowUp, FiSun, FiMoon } from 'react-icons/fi';
 import { FaBehance } from 'react-icons/fa';
 import "../styles/MainFooter.css";
 
-const MainFooter = () => {
+const MainFooter = ({ theme, toggleTheme }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -78,10 +78,20 @@ const MainFooter = () => {
         <div className="copyright">
           © 2024 Made by Niranj R. All rights reserved.
         </div>
-        <div className="to-top" onClick={scrollToTop}>
-          <span className="to-top-text">TO TOP</span>
-          <div className="to-top-circle">
-            <FiArrowUp />
+        
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <div className="theme-toggle" onClick={toggleTheme} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span className="to-top-text">{theme === 'light' ? 'DARK MODE' : 'LIGHT MODE'}</span>
+            <div className="to-top-circle">
+              {theme === 'light' ? <FiMoon /> : <FiSun />}
+            </div>
+          </div>
+          
+          <div className="to-top" onClick={scrollToTop}>
+            <span className="to-top-text">TO TOP</span>
+            <div className="to-top-circle">
+              <FiArrowUp />
+            </div>
           </div>
         </div>
       </div>

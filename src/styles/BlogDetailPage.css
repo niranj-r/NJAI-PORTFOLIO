@@ -1,6 +1,6 @@
 .blog-detail-page {
-  background-color: #0E0E0E;
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   padding-bottom: 6rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -14,7 +14,7 @@
 .bd-back-button {
   background: transparent;
   border: none;
-  color: #FF4D00;
+  color: var(--brand-primary);
   padding: 0;
   cursor: pointer;
   display: flex;
@@ -27,23 +27,23 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #222222;
+  background-color: var(--bg-accent2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   transition: background-color 0.3s ease;
   font-size: 1rem;
 }
 
 .bd-back-button:hover .icon-circle {
-  background-color: #FF4D00;
-  color: #ffffff;
+  background-color: var(--brand-primary);
+  color: var(--text-primary);
 }
 
 .bd-back-button .button-text {
   font-size: 0.75rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   letter-spacing: 0.1em;
   font-weight: 500;
   text-transform: uppercase;
@@ -59,7 +59,7 @@
 
 .bd-hero-title {
   font-size: 5rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 300;
   margin: 0 0 1.5rem 0;
   max-width: 1000px;
@@ -68,7 +68,7 @@
 
 .bd-hero-subtitle {
   font-size: 1rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-weight: 400;
   margin-bottom: 2.5rem;
@@ -88,8 +88,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #1a1a1a;
-  color: #FF4D00;
+  background-color: var(--bg-accent);
+  color: var(--brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +98,7 @@
 
 .bd-scroll-btn span {
   font-size: 0.6rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -114,7 +114,7 @@
 }
 
 .bd-stat-box {
-  background-color: #121212;
+  background-color: var(--bg-accent5);
   padding: 1.5rem;
   border-radius: 2px;
   display: flex;
@@ -126,14 +126,14 @@
 
 .bd-stat-label {
   font-size: 0.65rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .bd-stat-value {
   font-size: 0.65rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -160,7 +160,7 @@
 
 .bd-content-heading {
   font-size: 2.5rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 300;
   margin: 4rem 0 1.5rem 0;
   line-height: 1.2;
@@ -168,14 +168,14 @@
 
 .bd-content-paragraph {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 400;
   margin: 0 0 2rem 0;
 }
 
 .bd-conclusion-box {
-  background-color: #121212;
+  background-color: var(--bg-accent5);
   border-radius: 2px;
   padding: 4rem;
   margin-top: 4rem;
@@ -184,14 +184,14 @@
 
 .bd-conclusion-title {
   font-size: 1.5rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 300;
   margin: 0 0 1.5rem 0;
 }
 
 .bd-conclusion-text {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 400;
   margin: 0 0 3rem 0;
@@ -219,14 +219,14 @@
 
 .bd-author-name {
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 500;
   margin-bottom: 4px;
 }
 
 .bd-author-role {
   font-size: 0.65rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -234,42 +234,42 @@
 .bd-social-footer {
   display: flex;
   gap: 1rem;
-  border-top: 1px solid #222222;
+  border-top: 1px solid var(--bg-accent2);
   padding-top: 1rem;
 }
 
 .bd-social-link {
   flex: 1;
-  background-color: #1a1a1a;
+  background-color: var(--bg-accent);
   padding: 1.2rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   transition: background-color 0.3s ease;
 }
 
 .bd-social-link:hover {
-  background-color: #252525;
+  background-color: var(--bg-accent);
 }
 
 .bd-social-icon {
   font-size: 1.2rem;
   margin-right: 15px;
-  color: #FFE0CF;
+  color: var(--text-secondary);
 }
 
 .bd-social-text {
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   flex: 1;
-  color: #FFE0CF;
+  color: var(--text-secondary);
 }
 
 .bd-social-arrow {
   font-size: 1rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
 }
 
 .bd-related-section {
@@ -287,7 +287,7 @@
 
 .bd-related-title {
   font-size: 3.5rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-weight: 400;
   margin: 0;
 }
@@ -316,3 +316,5 @@
     align-items: flex-start;
   }
 }
+
+

@@ -6,8 +6,8 @@
 .about-container {
   min-height: 100vh;
   padding: 0rem 2rem 2rem 0rem;
-  background-color: #0E0E0E;
-  color: #fff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
@@ -57,7 +57,7 @@
   height: auto;
   margin: 0 auto;
   image-rendering: crisp-edges;
-  filter: drop-shadow(0px 0px 25px #ff440066);
+  filter: drop-shadow(0px 0px 25px var(--brand-hover)66);
   /* optional glow */
   transform: translateY(-55%);
   /* move up 15% of its own height */
@@ -68,7 +68,7 @@
 .about-subtext {
   font-size: 1.3rem;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin-top: -6.5rem;
 }
@@ -79,7 +79,7 @@
   gap: 15px;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
@@ -87,7 +87,7 @@
 }
 
 .about-scroll-circle {
-  border: 2px solid #FFE7E1;
+  border: 2px solid var(--border-light);
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -98,12 +98,12 @@
 }
 
 .about-scroll-btn:hover .about-scroll-circle {
-  border-color: #ff4500;
-  color: #ff4500;
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
 }
 
 .about-scroll-text {
-  color: #FFE0CF;
+  color: var(--text-secondary);
   letter-spacing: 1px;
   font-size: 0.95rem;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
@@ -121,12 +121,12 @@
 }
 
 .about-card {
-  background-color: #171717;
+  background-color: var(--bg-secondary);
   border-radius: 12px;
   padding: 3rem;
   max-width: 800px;
   box-shadow: 0 0 20px rgba(255, 69, 0, 0.1);
-  border: 1px solid rgba(218, 197, 167, 0.27);
+  border: 1px solid var(--border-light);
   transform: translateY(-15%);
   /* move up 15% of its own height */
   transition: transform 0.25s ease;
@@ -134,7 +134,7 @@
 
 
 .about-card-title {
-  color: #ffffff;
+  color: var(--text-primary);
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   font-size: 1rem;
   letter-spacing: 1px;
@@ -147,11 +147,11 @@
   font-weight: 500;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   margin: 1rem 0;
-  color: #f5f5f5;
+  color: var(--text-tertiary);
 }
 
 .about-card-text {
-  color: #FFE0CF;
+  color: var(--text-secondary);
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -186,16 +186,16 @@
 
 /* === SOCIAL BUTTON STYLE === */
 .about-social-btn {
-  background-color: #171717;
+  background-color: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
   width: 200.2px;
   padding: 0.9rem 1.5rem;
-  border: 1px solid rgba(218, 197, 167, 0.15);
+  border: 1px solid var(--border-lighter);
   border-radius: 10px;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   text-decoration: none;
   font-family: 'Satoshi Variable', sans-serif;
   font-size: 0.8rem;
@@ -203,7 +203,7 @@
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 10px var(--border-extra-faint);
 }
 
 .about-social-text {
@@ -212,14 +212,14 @@
   font-weight: 500;
   letter-spacing: 1.5px;
   text-align: left;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   transition: color 0.3s ease;
 }
 
 /* ARROW */
 .about-arrow {
   font-size: 1.25rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   transition: transform 0.3s ease, color 0.3s ease;
   position: relative;
   top: -2.5px;
@@ -228,13 +228,13 @@
 /* Icon inside (optional, if you add <i> icons later) */
 .about-social-btn i {
   font-size: 1.5rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
 }
 
 /* === HOVER EFFECT === */
 .about-social-btn:hover {
-  color: #ff4500;
-  border-color: #ff4500;
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
   box-shadow: 0 0 12px rgba(255, 69, 0, 0.25);
   transform: translateY(-3px);
 }
@@ -342,3 +342,5 @@
     grid-template-columns: 1fr;
   }
 }
+
+

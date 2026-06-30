@@ -1,6 +1,6 @@
 .services-container  {
   padding: 4rem 2rem;
-  background-color: #0E0E0E;
+  background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
 }
 
 .logo-item  {
-  color: #FF4D00;
+  color: var(--brand-primary);
   /* Muted gold/beige */
   display: flex;
   align-items: center;
@@ -42,8 +42,8 @@
 
 .service-card  {
   flex: 1;
-  background-color: #141414;
-  /* Slightly lighter than #0E0E0E for contrast */
+  background-color: var(--bg-accent);
+  /* Slightly lighter than var(--bg-primary) for contrast */
   padding: 4rem 3rem;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@
 
 .service-number  {
   font-size: 0.85rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
   letter-spacing: 0.05em;
   font-weight: 500;
@@ -64,7 +64,7 @@
 
 .service-title  {
   font-size: 1.4rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   margin-bottom: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -74,7 +74,7 @@
 
 .service-description  {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   /* Very light beige */
   line-height: 1.8;
   margin-bottom: 3rem;
@@ -94,18 +94,18 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #222222;
+  background-color: var(--bg-accent2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FF4D00;
+  color: var(--brand-primary);
   /* Arrow color matching description text */
   transition: background-color 0.3s ease;
 }
 
 .service-button:hover .icon-circle  {
-  background-color: #FF4D00;
-  color: #ffffff;
+  background-color: var(--brand-primary);
+  color: var(--text-primary);
 }
 
 .icon-circle svg  {
@@ -115,7 +115,7 @@
 
 .button-text  {
   font-size: 0.75rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   letter-spacing: 0.1em;
   font-weight: 500;
   text-transform: uppercase;
@@ -127,3 +127,5 @@
     flex-direction: column;
   }
 }
+
+

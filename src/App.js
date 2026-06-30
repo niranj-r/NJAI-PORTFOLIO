@@ -22,6 +22,19 @@ function App() {
   const [selectedProject, setSelectedProject] = useState('');
   const [selectedBlog, setSelectedBlog] = useState('');
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
@@ -32,7 +45,7 @@ function App() {
         <Header onNavClick={(view) => setCurrentView(view)} />
         <ServiceDetailPage onBack={() => setCurrentView('home')} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -46,7 +59,7 @@ function App() {
           projectTitle={selectedProject}
         />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -55,8 +68,8 @@ function App() {
     return (
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
-        <AboutPage onBack={() => setCurrentView('home')} />
-        <MainFooter />
+        <AboutPage onBack={() => setCurrentView('home')} theme={theme} />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -65,9 +78,9 @@ function App() {
     return (
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
-        <ContactPage onBack={() => setCurrentView('home')} />
+        <ContactPage onBack={() => setCurrentView('home')} theme={theme} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -81,7 +94,7 @@ function App() {
           setCurrentView('workDetail');
         }} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -95,7 +108,7 @@ function App() {
           setCurrentView('blogDetail');
         }} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -109,7 +122,7 @@ function App() {
           blogTitle={selectedBlog}
         />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter />
+        <MainFooter theme={theme} toggleTheme={toggleTheme} />
       </div>
     );
   }
@@ -117,7 +130,7 @@ function App() {
   return (
     <div>
       <Header onNavClick={(view) => setCurrentView(view)} />
-      <Frame2 />
+      <Frame2 theme={theme} />
       <div className="frame-marquee-wrapper">
         <div className="frame-marquee">
           <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
@@ -134,9 +147,9 @@ function App() {
         }}
       />
       <Testimonials />
-      <Hero />
+      <Hero theme={theme} />
       <CTASection onNavClick={(view) => setCurrentView(view)} />
-      <MainFooter />
+      <MainFooter theme={theme} toggleTheme={toggleTheme} />
     </div>
   );
 }

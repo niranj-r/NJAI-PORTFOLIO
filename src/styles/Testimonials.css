@@ -1,12 +1,12 @@
 .testimonials-container {
-  background-color: #0E0E0E;
+  background-color: var(--bg-primary);
   /* Global background */
   padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .testimonials-header {
@@ -17,7 +17,7 @@
 
 .testimonials-title {
   font-size: 4rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   /* Beige title */
   font-weight: 300;
   margin: 0 0 1.5rem 0;
@@ -32,7 +32,7 @@
 
 .testimonials-subtitle {
   font-size: 0.95rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-weight: 400;
 }
@@ -61,11 +61,11 @@
 
 /* Dark Cards */
 .testimonial-card.dark {
-  background-color: #161616;
+  background-color: var(--bg-accent4);
 }
 
 .testimonial-card.dark .card-logo {
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-size: 1.2rem;
   font-weight: 800;
   margin-bottom: 2rem;
@@ -73,7 +73,7 @@
 
 .testimonial-card.dark .card-title {
   font-size: 1.3rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-weight: 400;
   margin: 0 0 1.5rem 0;
   line-height: 1.4;
@@ -81,7 +81,7 @@
 
 .testimonial-card.dark .card-text {
   font-size: 0.9rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -89,21 +89,21 @@
 }
 
 .testimonial-card.dark .author-name {
-  color: #FF4D00;
+  color: var(--brand-primary);
 }
 
 .testimonial-card.dark .author-company {
-  color: #FFE0CF;
+  color: var(--text-secondary);
 }
 
 
 /* Light Cards */
 .testimonial-card.light {
-  background-color: #161616;
+  background-color: var(--bg-accent4);
 }
 
 .testimonial-card.light .card-logo {
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-size: 1.2rem;
   font-weight: 800;
   margin-bottom: 2rem;
@@ -111,7 +111,7 @@
 
 .testimonial-card.light .card-title {
   font-size: 1.3rem;
-  color: #FF4D00;
+  color: var(--brand-primary);
   font-weight: 400;
   margin: 0 0 1.5rem 0;
   line-height: 1.4;
@@ -119,7 +119,7 @@
 
 .testimonial-card.light .card-text {
   font-size: 0.9rem;
-  color: #FFE0CF;
+  color: var(--text-secondary);
   line-height: 1.8;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -127,11 +127,11 @@
 }
 
 .testimonial-card.light .author-name {
-  color: #FF4D00;
+  color: var(--brand-primary);
 }
 
 .testimonial-card.light .author-company {
-  color: #FFE0CF;
+  color: var(--text-secondary);
 }
 
 /* Author Section */
@@ -179,3 +179,5 @@
     font-size: 3rem;
   }
 }
+
+
