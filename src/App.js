@@ -36,9 +36,9 @@ function App() {
     return (
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
-        <WorkDetailPage 
-          onBack={() => setCurrentView('work')} 
-          projectTitle={selectedProject} 
+        <WorkDetailPage
+          onBack={() => setCurrentView('work')}
+          projectTitle={selectedProject}
         />
         <CTASection />
         <MainFooter />
@@ -100,9 +100,9 @@ function App() {
     return (
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
-        <BlogDetailPage 
-          onBack={() => setCurrentView('blog')} 
-          blogTitle={selectedBlog} 
+        <BlogDetailPage
+          onBack={() => setCurrentView('blog')}
+          blogTitle={selectedBlog}
         />
         <CTASection />
         <MainFooter />
@@ -114,9 +114,15 @@ function App() {
     <div>
       <Header onNavClick={(view) => setCurrentView(view)} />
       <Frame2 />
+      <div className="cta-marquee-wrapper">
+        <div className="cta-marquee">
+          <span>+++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK </span>
+          <span>+++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK </span>
+        </div>
+      </div>
       <Services onServiceClick={() => setCurrentView('serviceDetail')} />
       <SkillsTimeline />
-      <SelectedWork 
+      <SelectedWork
         onNavClick={(view) => setCurrentView(view)}
         onProjectClick={(title) => {
           setSelectedProject(title);
