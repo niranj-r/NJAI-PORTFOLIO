@@ -8,7 +8,7 @@ import "../styles/Hero.css"; // Ensure marquee styles are available
 
 export default function Frame2({ theme }) {
   const imgProfile = theme === 'light' ? imgProfileLight : imgProfileDark;
-  
+
   const [roleIndex, setRoleIndex] = useState(0);
   const roles = ['UI/UX Designer', 'UI/UX Developer', 'Full Stack Developer', 'SEO Analyst'];
 
@@ -17,7 +17,7 @@ export default function Frame2({ theme }) {
       setRoleIndex(prev => (prev + 1) % roles.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   return (
     <div className="frame-container">
