@@ -32,9 +32,10 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
   return (
     <div className="blog-detail-page">
       <div className="bd-header-controls">
-        <button className="bd-back-button" onClick={onBack}>
-          <FiArrowLeft /> Back to Blog
-        </button>
+        <div className="bd-back-button" onClick={onBack}>
+          <span className="icon-circle"><FiArrowLeft /></span>
+          <span className="button-text">BACK TO BLOG</span>
+        </div>
       </div>
 
       <div className="bd-hero">

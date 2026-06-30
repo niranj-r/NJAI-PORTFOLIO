@@ -6,9 +6,10 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
   return (
     <div className="work-detail-page">
       <div className="wd-header-controls">
-        <button className="wd-back-button" onClick={onBack}>
-          <FiArrowLeft /> Back to Work
-        </button>
+        <div className="wd-back-button" onClick={onBack}>
+          <span className="icon-circle"><FiArrowLeft /></span>
+          <span className="button-text">BACK TO WORK</span>
+        </div>
       </div>
 
       <div className="wd-hero">

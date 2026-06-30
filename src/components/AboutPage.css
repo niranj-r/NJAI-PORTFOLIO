@@ -239,7 +239,6 @@
   transform: translateY(-3px);
 }
 
-/* For the arrow (↗) on hover */
 .about-social-btn:hover::after {
   transform: translate(2px, -2px);
 }

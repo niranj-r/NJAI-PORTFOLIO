@@ -11,25 +11,42 @@
   padding-top: 4rem;
 }
 
-.bd-back-button  {
+.bd-back-button {
   background: transparent;
-  border: 1px solid #333333;
+  border: none;
   color: #FF4D00;
-  padding: 10px 20px;
-  border-radius: 30px;
+  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+  gap: 15px;
+  visibility: visible;
 }
 
-.bd-back-button:hover  {
+.bd-back-button .icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #222222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFE0CF;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.bd-back-button:hover .icon-circle {
   background-color: #FF4D00;
-  color: #0E0E0E;
+  color: #ffffff;
+}
+
+.bd-back-button .button-text {
+  font-size: 0.75rem;
+  color: #FF4D00;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .bd-hero  {
