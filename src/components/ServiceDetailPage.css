@@ -56,7 +56,7 @@
 
 .sd-hero-subtitle  {
   font-size: 1.1rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.6;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -84,7 +84,7 @@
 
 .scroll-text  {
   font-size: 0.75rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.15em;
 }
 
@@ -121,7 +121,7 @@
 
 .sd-stat p  {
   font-size: 0.75rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.2em;
   margin: 0 0 10px 0;
   font-weight: 500;
@@ -129,7 +129,7 @@
 
 .sd-stat h2 {
   font-size: 4rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 0;
   font-family: 'Times New Roman', Times, serif;
@@ -160,7 +160,7 @@
 
 .sd-section-category  {
   font-size: 0.75rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: block;
@@ -169,7 +169,7 @@
 
 .sd-section-title {
   font-size: 4rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 0;
   line-height: 1.1;
@@ -215,7 +215,7 @@
 
 .sd-feature-text  {
   font-size: 0.95rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.8;
   font-weight: 400;
   margin: 0;

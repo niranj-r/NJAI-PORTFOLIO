@@ -93,7 +93,7 @@
 
 .footer-links a  {
   text-decoration: none;
-  color: #e3d5c5; /* faint beige */
+  color: #FFE0CF; /* faint beige */
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   font-weight: 400;
@@ -137,7 +137,7 @@
 
 .copyright  {
   font-size: 0.75rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.05em;
 }
 

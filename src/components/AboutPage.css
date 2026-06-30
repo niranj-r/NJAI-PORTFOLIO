@@ -103,7 +103,7 @@
 }
 
 .about-scroll-text {
-  color: #FFE7E1;
+  color: #FFE0CF;
   letter-spacing: 1px;
   font-size: 0.95rem;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
@@ -151,7 +151,7 @@
 }
 
 .about-card-text {
-  color: #FFEDE3;
+  color: #FFE0CF;
   font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -195,7 +195,7 @@
   padding: 0.9rem 1.5rem;
   border: 1px solid rgba(218, 197, 167, 0.15);
   border-radius: 10px;
-  color: #FFE7E1;
+  color: #FFE0CF;
   text-decoration: none;
   font-family: 'Satoshi Variable', sans-serif;
   font-size: 0.8rem;
@@ -212,14 +212,14 @@
   font-weight: 500;
   letter-spacing: 1.5px;
   text-align: left;
-  color: #dac5a7;
+  color: #FFE0CF;
   transition: color 0.3s ease;
 }
 
 /* ARROW */
 .about-arrow {
   font-size: 1.25rem;
-  color: #dac5a7;
+  color: #FFE0CF;
   transition: transform 0.3s ease, color 0.3s ease;
   position: relative;
   top: -2.5px;
@@ -228,7 +228,7 @@
 /* Icon inside (optional, if you add <i> icons later) */
 .about-social-btn i {
   font-size: 1.5rem;
-  color: #DAC5A7;
+  color: #FFE0CF;
 }
 
 /* === HOVER EFFECT === */

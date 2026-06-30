@@ -16,14 +16,14 @@
 
 .blog-page-title {
   font-size: 5rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 0 0 1rem 0;
 }
 
 .blog-page-subtitle  {
   font-size: 1rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.6;
   font-weight: 400;
   margin: 0;
@@ -86,7 +86,7 @@
 
 .blog-date  {
   font-size: 0.65rem;
-  color: #666666;
+  color: #FFE0CF;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 1rem;
@@ -99,7 +99,7 @@
 
 .blog-card-title  {
   font-size: 1.2rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 500;
   margin: 0 0 1rem 0;
   line-height: 1.4;
@@ -112,7 +112,7 @@
 
 .blog-card-excerpt  {
   font-size: 0.85rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.6;
   font-weight: 400;
   margin: 0 0 2rem 0;
@@ -121,7 +121,7 @@
 }
 
 .blog-card:hover .blog-card-excerpt  {
-  color: #555555;
+  color: #FFE0CF;
 }
 
 .blog-category  {
@@ -129,7 +129,7 @@
   align-self: flex-start;
   padding: 8px 12px;
   border: 1px solid #2a2a2a;
-  color: #A1857B;
+  color: #FFE0CF;
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;

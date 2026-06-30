@@ -42,7 +42,7 @@
 
 .bd-hero-title {
   font-size: 5rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 0 0 1.5rem 0;
   max-width: 1000px;
@@ -51,7 +51,7 @@
 
 .bd-hero-subtitle  {
   font-size: 1rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.6;
   font-weight: 400;
   margin-bottom: 2.5rem;
@@ -109,14 +109,14 @@
 
 .bd-stat-label  {
   font-size: 0.65rem;
-  color: #555555;
+  color: #FFE0CF;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .bd-stat-value  {
   font-size: 0.65rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -143,7 +143,7 @@
 
 .bd-content-heading {
   font-size: 2.5rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 4rem 0 1.5rem 0;
   line-height: 1.2;
@@ -151,7 +151,7 @@
 
 .bd-content-paragraph  {
   font-size: 0.95rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.8;
   font-weight: 400;
   margin: 0 0 2rem 0;
@@ -167,14 +167,14 @@
 
 .bd-conclusion-title {
   font-size: 1.5rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 0 0 1.5rem 0;
 }
 
 .bd-conclusion-text  {
   font-size: 0.95rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.8;
   font-weight: 400;
   margin: 0 0 3rem 0;
@@ -209,7 +209,7 @@
 
 .bd-author-role  {
   font-size: 0.65rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -229,7 +229,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #e3d5c5;
+  color: #FFE0CF;
   transition: background-color 0.3s ease;
 }
 
@@ -240,19 +240,19 @@
 .bd-social-icon  {
   font-size: 1.2rem;
   margin-right: 15px;
-  color: #666666;
+  color: #FFE0CF;
 }
 
 .bd-social-text  {
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   flex: 1;
-  color: #A1857B;
+  color: #FFE0CF;
 }
 
 .bd-social-arrow  {
   font-size: 1rem;
-  color: #555555;
+  color: #FFE0CF;
 }
 
 .bd-related-section  {
@@ -270,7 +270,7 @@
 
 .bd-related-title  {
   font-size: 3.5rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 400;
   margin: 0;
 }

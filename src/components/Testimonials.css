@@ -30,7 +30,7 @@
 
 .testimonials-subtitle  {
   font-size: 0.95rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.6;
   font-weight: 400;
 }
@@ -79,7 +79,7 @@
 
 .testimonial-card.dark .card-text  {
   font-size: 0.9rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.8;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -91,7 +91,7 @@
 }
 
 .testimonial-card.dark .author-company  {
-  color: #555555;
+  color: #FFE0CF;
 }
 
 
@@ -117,7 +117,7 @@
 
 .testimonial-card.light .card-text  {
   font-size: 0.9rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.8;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -129,7 +129,7 @@
 }
 
 .testimonial-card.light .author-company  {
-  color: #555555;
+  color: #FFE0CF;
 }
 
 /* Author Section */

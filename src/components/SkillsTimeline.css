@@ -42,7 +42,7 @@
 
 .subtitle  {
   font-size: 1rem;
-  color: #A1857B; /* Lighter grey/beige */
+  color: #FFE0CF; /* Lighter grey/beige */
   line-height: 1.6;
   font-weight: 400;
   max-width: 500px;
@@ -149,7 +149,7 @@
 
 .card-category  {
   font-size: 0.75rem;
-  color: #A1857B;
+  color: #FFE0CF;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -174,7 +174,7 @@
 
 .card-description  {
   font-size: 0.9rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.7;
   font-weight: 400;
   margin-bottom: 2rem;

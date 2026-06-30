@@ -56,7 +56,7 @@
 
 .service-number  {
   font-size: 0.85rem;
-  color: #ffede3;
+  color: #FFE0CF;
   margin-bottom: 1.5rem;
   letter-spacing: 0.05em;
   font-weight: 500;
@@ -74,7 +74,7 @@
 
 .service-description  {
   font-size: 0.95rem;
-  color: #ffede3;
+  color: #FFE0CF;
   /* Very light beige */
   line-height: 1.8;
   margin-bottom: 3rem;

@@ -42,14 +42,14 @@
 
 .wd-hero-title {
   font-size: 6rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 300;
   margin: 0 0 1rem 0;
 }
 
 .wd-hero-subtitle  {
   font-size: 1rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.6;
   font-weight: 400;
   margin-bottom: 3rem;
@@ -77,14 +77,14 @@
 
 .wd-stat-label  {
   font-size: 0.65rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .wd-stat-value  {
   font-size: 0.75rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -111,7 +111,7 @@
 
 .wd-scroll-btn span  {
   font-size: 0.7rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.15em;
 }
 
@@ -143,7 +143,7 @@
 
 .wd-about-label  {
   font-size: 0.75rem;
-  color: #A1857B;
+  color: #FFE0CF;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: block;
@@ -173,14 +173,14 @@
 
 .wd-card-title  {
   font-size: 1.2rem;
-  color: #e3d5c5;
+  color: #FFE0CF;
   font-weight: 400;
   margin: 0 0 1.5rem 0;
 }
 
 .wd-card-text  {
   font-size: 0.95rem;
-  color: #A1857B;
+  color: #FFE0CF;
   line-height: 1.8;
   font-weight: 400;
   margin: 0;
