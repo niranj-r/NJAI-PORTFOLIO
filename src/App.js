@@ -31,7 +31,7 @@ function App() {
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <ServiceDetailPage onBack={() => setCurrentView('home')} />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -45,7 +45,7 @@ function App() {
           onBack={() => setCurrentView('work')}
           projectTitle={selectedProject}
         />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -56,7 +56,7 @@ function App() {
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <AboutPage onBack={() => setCurrentView('home')} />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -67,7 +67,7 @@ function App() {
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <ContactPage onBack={() => setCurrentView('home')} />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -81,7 +81,7 @@ function App() {
           setSelectedProject(title);
           setCurrentView('workDetail');
         }} />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -95,7 +95,7 @@ function App() {
           setSelectedBlog(title);
           setCurrentView('blogDetail');
         }} />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -109,7 +109,7 @@ function App() {
           onBack={() => setCurrentView('blog')}
           blogTitle={selectedBlog}
         />
-        <CTASection />
+        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
@@ -136,7 +136,7 @@ function App() {
       />
       <Testimonials />
       <Hero />
-      <CTASection />
+      <CTASection onNavClick={(view) => setCurrentView(view)} />
       <MainFooter />
     </div>
   );

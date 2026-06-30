@@ -2,7 +2,7 @@ import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
 import './CTASection.css';
 
-const CTASection = () => {
+const CTASection = ({ onNavClick }) => {
   return (
     <div className="cta-container">
       {/* Marquee Top */}
@@ -21,7 +21,12 @@ const CTASection = () => {
         <p className="cta-subtitle">
           Premium web design, webflow, and SEO services to <br /> help your business stand out.
         </p>
-        <button className="cta-button">
+        <button 
+          className="cta-button"
+          onClick={() => {
+            if (onNavClick) onNavClick('contact');
+          }}
+        >
           GET IN TOUCH <FiArrowUpRight className="cta-btn-icon"/>
         </button>
       </div>

@@ -50,16 +50,16 @@ export default function Header({ onNavClick }) {
         <ul className={`header-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <li>
             <a 
-              href="#skills"
-              onClick={(e) => handleLinkClick(e, null, true)}
+              href="#services"
+              onClick={(e) => handleLinkClick(e, 'serviceDetail')}
             >
               SERVICES
             </a>
           </li>
           <li>
             <a 
-              href="#projects"
-              onClick={(e) => handleLinkClick(e, null, true)}
+              href="#work"
+              onClick={(e) => handleLinkClick(e, 'work')}
             >
               WORK
             </a>
