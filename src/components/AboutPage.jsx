@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AboutPage.css";
 import heroImg from "../assets/frame10.png";
 import aboutImg from "../assets/frame30.png";
 import nameImg from "../assets/name.png";
 
 export default function AboutPage() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="about-container">
       {/* ===== HERO SECTION ===== */}
       <section className="about-hero">
-        <div className="about-left">
-          <img src={heroImg} alt="Niranj" className="about-hero-img" />
-        </div>
+        {!isMobile && (
+          <div className="about-left">
+            <img src={heroImg} alt="Niranj" className="about-hero-img" />
+          </div>
+        )}
 
         <div className="about-right">
           <img

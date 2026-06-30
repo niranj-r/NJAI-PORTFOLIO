@@ -56,7 +56,6 @@ function App() {
       <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <AboutPage onBack={() => setCurrentView('home')} />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
         <MainFooter />
       </div>
     );
