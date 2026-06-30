@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiArrowDown } from 'react-icons/fi';
-import './SkillsTimeline.css';
+import "../styles/SkillsTimeline.css";
 
 const skillsData = [
   {

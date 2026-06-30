@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiInstagram, FiTwitter, FiDribbble, FiArrowUpRight, FiArrowUp } from 'react-icons/fi';
 import { FaBehance } from 'react-icons/fa';
-import './MainFooter.css';
+import "../styles/MainFooter.css";
 
 const MainFooter = () => {
   const scrollToTop = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import imgProfile from "../assets/frame20.png";
 import svgPaths from "../svg-osuecvsjzq";
-import "./Frame2.css";
+import "../styles/Frame2.css";
 import RotatingText from './RotatingText'
 
 export default function Frame2() {

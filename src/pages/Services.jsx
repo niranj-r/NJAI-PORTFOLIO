@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
-import './Services.css';
+import "../styles/Services.css";
 
 const Services = ({ onServiceClick }) => {
   return (

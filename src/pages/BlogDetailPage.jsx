@@ -1,8 +1,8 @@
 import React from 'react';
 import { FiArrowDown, FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF } from 'react-icons/fa';
-import './BlogDetailPage.css';
-import '../components/BlogPage.css';
+import "../styles/BlogDetailPage.css";
+import "../styles/BlogPage.css";
 
 const relatedPosts = [
   {

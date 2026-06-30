@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiTwitter, FiInstagram, FiGithub, FiLinkedin } from 'react-icons/fi';
-import './Hero.css';
+import "../styles/Hero.css";
 import man from '../assets/hero.png';
 
 const Hero = () => {

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Frame2 from "./components/Frame2";
-import Header from "./components/Header";
-import AboutPage from "./components/AboutPage";
-import Services from "./components/Services";
-import SkillsTimeline from "./components/SkillsTimeline";
-import SelectedWork from "./components/SelectedWork";
-import Testimonials from "./components/Testimonials";
-import Hero from "./components/Hero";
-import CTASection from "./components/CTASection";
-import MainFooter from "./components/MainFooter";
-import ServiceDetailPage from "./components/ServiceDetailPage";
-import ContactPage from "./components/ContactPage";
-import WorkPage from "./components/WorkPage";
-import WorkDetailPage from "./components/WorkDetailPage";
-import BlogPage from "./components/BlogPage";
-import BlogDetailPage from "./components/BlogDetailPage";
+import Frame2 from "./pages/Frame2";
+import Header from "./pages/Header";
+import AboutPage from "./pages/AboutPage";
+import Services from "./pages/Services";
+import SkillsTimeline from "./pages/SkillsTimeline";
+import SelectedWork from "./pages/SelectedWork";
+import Testimonials from "./pages/Testimonials";
+import Hero from "./pages/Hero";
+import CTASection from "./pages/CTASection";
+import MainFooter from "./pages/MainFooter";
+import ServiceDetailPage from "./pages/ServiceDetailPage";
+import ContactPage from "./pages/ContactPage";
+import WorkPage from "./pages/WorkPage";
+import WorkDetailPage from "./pages/WorkDetailPage";
+import BlogPage from "./pages/BlogPage";
+import BlogDetailPage from "./pages/BlogDetailPage";
 import "./App.css";
 
 function App() {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Header.css";
+import "../styles/Header.css";
 import logo from "../assets/logo.png"; // 🔸 replace with your logo path
 
 export default function Header({ onNavClick }) {

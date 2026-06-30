@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./AboutPage.css";
+import "../styles/AboutPage.css";
 import heroImg from "../assets/frame10.png";
 import aboutImg from "../assets/frame30.png";
 import nameImg from "../assets/name.png";

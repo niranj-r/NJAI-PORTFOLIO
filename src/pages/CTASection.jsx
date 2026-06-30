@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
-import './CTASection.css';
+import "../styles/CTASection.css";
 
 const CTASection = () => {
   return (

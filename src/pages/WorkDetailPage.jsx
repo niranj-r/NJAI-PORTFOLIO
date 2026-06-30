@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiArrowDown, FiArrowLeft } from 'react-icons/fi';
-import './WorkDetailPage.css';
+import "../styles/WorkDetailPage.css";
 
 const WorkDetailPage = ({ onBack, projectTitle }) => {
   return (

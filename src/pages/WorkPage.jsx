@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiArrowUpRight } from 'react-icons/fi';
-import './SelectedWork.css';
-import './WorkPage.css';
+import "../styles/SelectedWork.css";
+import "../styles/WorkPage.css";
 
 const projects = [
   {

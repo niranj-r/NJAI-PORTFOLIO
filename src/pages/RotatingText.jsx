@@ -3,7 +3,7 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import './RotatingText.css';
+import "../styles/RotatingText.css";
 
 function cn(...classes) {
   return classes.filter(Boolean).join(' ');

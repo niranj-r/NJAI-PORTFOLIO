@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { FaInstagram, FaTwitter, FaFacebookF, FaBehance, FaDribbble, FaPinterestP } from 'react-icons/fa';
-import './ContactPage.css';
+import "../styles/ContactPage.css";
 import heroImage from '../assets/hero.png';
 
 const ContactPage = ({ onBack }) => {

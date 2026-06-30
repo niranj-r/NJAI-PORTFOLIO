@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiArrowLeft, FiArrowDown } from 'react-icons/fi';
-import './ServiceDetailPage.css';
+import "../styles/ServiceDetailPage.css";
 
 const ServiceDetailPage = ({ onBack }) => {
   return (
