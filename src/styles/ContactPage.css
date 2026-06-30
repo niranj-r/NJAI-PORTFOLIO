@@ -189,6 +189,7 @@
 @media (max-width: 1024px) {
   .contact-container {
     flex-direction: column;
+    padding: 0 4rem;
   }
 
   .contact-left {
@@ -203,5 +204,9 @@
 
   .contact-form-block {
     padding: 3rem 2rem;
+  }
+
+  .contact-container {
+    padding: 0 2rem;
   }
 }
