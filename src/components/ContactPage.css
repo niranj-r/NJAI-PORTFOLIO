@@ -177,9 +177,8 @@
     flex-direction: column;
   }
   
-  .contact-portrait  {
-    aspect-ratio: 16/9;
-    min-height: 400px;
+  .contact-left  {
+    display: none;
   }
 }
 
