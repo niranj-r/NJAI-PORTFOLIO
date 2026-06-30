@@ -4,7 +4,7 @@ import "../styles/Services.css";
 
 const Services = ({ onServiceClick }) => {
   return (
-    <div className="services-container">
+    <div className="services-container" id="services">
       {/* Logos Section */}
       <div className="logos-section">
         <div className="logo-item">
