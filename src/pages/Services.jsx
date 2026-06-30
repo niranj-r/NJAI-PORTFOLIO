@@ -11,6 +11,7 @@ import logo5 from '../assets/logos/gene.svg';
 import logo6 from '../assets/logos/litup.svg';
 import logo7 from '../assets/logos/verdea.svg'
 import logo8 from '../assets/logos/voidzero.svg'
+import logo9 from '../assets/logos/ntrio.svg'
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -26,7 +27,7 @@ const Services = ({ onServiceClick }) => {
           className="logos-section marquee-track-logos"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.8 }}
         >
           {[...Array(2)].map((_, i) => (
@@ -39,6 +40,7 @@ const Services = ({ onServiceClick }) => {
               <div className="logo-item"><img src={logo6} alt="Litup" /></div>
               <div className="logo-item"><img src={logo7} alt="Verdea" /></div>
               <div className="logo-item"><img src={logo8} alt="Voidzero" /></div>
+              <div className="logo-item"><img src={logo9} alt="ntrio" /></div>
             </React.Fragment>
           ))}
         </motion.div>
