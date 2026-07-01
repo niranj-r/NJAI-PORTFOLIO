@@ -1,59 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
+import { client, urlFor } from '../lib/sanity';
 import "../styles/BlogPage.css";
 
-const blogPosts = [
-  {
-    id: 1,
-    date: '23RD AUG 2023',
-    title: 'How to Build a Stunning Website with Framer',
-    excerpt: 'Learn how to create an impressive website using Framer with our step-by-step guide.',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 2,
-    date: '23RD AUG 2023',
-    title: '10 website elements for maximum user engagement',
-    excerpt: '10 website elements to engage users, from intuitive navigation to compelling visuals.',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 3,
-    date: '23RD AUG 2023',
-    title: 'The importance of content in driving website traffic',
-    excerpt: 'Quality content is king. Learn how to create valuable, SEO-optimized content.',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 4,
-    date: '23RD AUG 2023',
-    title: '10 common web development mistakes to avoid',
-    excerpt: '10 common web development mistakes and improve your site\'s functionality and user experience.',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 5,
-    date: '23RD AUG 2023',
-    title: 'Why responsive web design is critical for your business',
-    excerpt: 'Responsive web design ensures your site looks great and performs well on all devices.',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 6,
-    date: '23RD AUG 2023',
-    title: 'The art of SEO writing: How to write content that ranks on Google',
-    excerpt: 'Optimize your website with expert tips on writing content that ranks high on Google.',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=800'
-  }
-];
-
 const BlogPage = ({ onBlogClick }) => {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const query = '*[_type == "blog"] | order(date desc)';
+        const data = await client.fetch(query);
+        setBlogPosts(data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
   return (
     <motion.div 
       className="blog-page-container"
@@ -67,33 +35,44 @@ const BlogPage = ({ onBlogClick }) => {
       </div>
 
       <div className="blog-grid-container">
-        <div className="blog-grid">
-          {blogPosts.map((post, index) => (
-            <motion.div 
-              className="blog-card" 
-              key={post.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
-              onClick={() => {
-                if (onBlogClick) onBlogClick(post.title);
-              }}
-            >
-              <div className="blog-image-wrapper">
-                <img src={post.image} alt={post.title} className="blog-image" />
-              </div>
-              <div className="blog-content">
-                <span className="blog-date">{post.date}</span>
-                <h3 className="blog-card-title">{post.title}</h3>
-                <p className="blog-card-excerpt">{post.excerpt}</p>
-                <div className="blog-category">
-                  {post.category}
+        {loading ? (
+          <div style={{ color: '#fff', padding: '2rem', textAlign: 'center' }}>Loading blogs...</div>
+        ) : (
+          <div className="blog-grid">
+            {blogPosts.map((post, index) => (
+              <motion.div 
+                className="blog-card" 
+                key={post._id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+                onClick={() => {
+                  if (onBlogClick) onBlogClick(post.title);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <div className="blog-image-wrapper">
+                  {post.image && (
+                    <img 
+                      src={urlFor(post.image).url()} 
+                      alt={post.title} 
+                      className="blog-image" 
+                    />
+                  )}
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                <div className="blog-content">
+                  <span className="blog-date">{post.date || 'RECENT'}</span>
+                  <h3 className="blog-card-title">{post.title}</h3>
+                  <p className="blog-card-excerpt">{post.subheading}</p>
+                  <div className="blog-category">
+                    {post.category}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </motion.div>
   );

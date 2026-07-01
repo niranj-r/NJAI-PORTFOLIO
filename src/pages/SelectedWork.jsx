@@ -1,38 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowUpRight } from 'react-icons/fi';
+import { client, urlFor } from '../lib/sanity';
 import "../styles/SelectedWork.css";
 
-const projects = [
-  {
-    id: 1,
-    title: 'Space',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=1000'
-  },
-  {
-    id: 2,
-    title: 'Nova',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1611791485440-24e8fc1d116f?auto=format&fit=crop&q=80&w=1000'
-  },
-  {
-    id: 3,
-    title: 'Sonic',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1605236453806-6ff3685e219e?auto=format&fit=crop&q=80&w=1000'
-  },
-  {
-    id: 4,
-    title: 'Solar',
-    category: 'WEBDESIGN',
-    image: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=1000'
-  }
-];
-
 const SelectedWork = ({ onNavClick, onProjectClick }) => {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const query = '*[_type == "work"] | order(_createdAt desc)[0...4]';
+        const data = await client.fetch(query);
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching works:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
   return (
-    <div className="selected-work-container">
+    <div className="selected-work-container" id="projects">
       {/* Header */}
       <div className="selected-work-header">
         <h2 className="selected-work-title">
@@ -52,31 +44,41 @@ const SelectedWork = ({ onNavClick, onProjectClick }) => {
 
       {/* Projects Grid */}
       <div className="projects-grid">
-        {projects.map((project, index) => (
-          <motion.div 
-            className="project-card" 
-            key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
-            onClick={() => {
-              if (onProjectClick) onProjectClick(project.title);
-            }}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="project-image-wrapper">
-              <img src={project.image} alt={project.title} className="project-image" />
-              <div className="hover-overlay">
-                <div className="hover-icon"><FiArrowUpRight /></div>
+        {loading ? (
+          <div style={{ color: '#fff', padding: '2rem' }}>Loading works...</div>
+        ) : (
+          projects.map((project, index) => (
+            <motion.div 
+              className="project-card" 
+              key={project._id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+              onClick={() => {
+                if (onProjectClick) onProjectClick(project.title);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className="project-image-wrapper">
+                {project.image && (
+                  <img 
+                    src={urlFor(project.image).url()} 
+                    alt={project.title} 
+                    className="project-image" 
+                  />
+                )}
+                <div className="hover-overlay">
+                  <div className="hover-icon"><FiArrowUpRight /></div>
+                </div>
               </div>
-            </div>
-            <div className="project-info">
-              <span className="project-name">{project.title}</span>
-              <span className="project-category">{project.category}</span>
-            </div>
-          </motion.div>
-        ))}
+              <div className="project-info">
+                <span className="project-name">{project.title}</span>
+                <span className="project-category">{project.category}</span>
+              </div>
+            </motion.div>
+          ))
+        )}
       </div>
     </div>
   );

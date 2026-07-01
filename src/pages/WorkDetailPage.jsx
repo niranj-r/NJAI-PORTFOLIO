@@ -1,8 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiArrowDown, FiArrowLeft } from 'react-icons/fi';
+import { client, urlFor } from '../lib/sanity';
 import "../styles/WorkDetailPage.css";
 
 const WorkDetailPage = ({ onBack, projectTitle }) => {
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const query = '*[_type == "work" && title == $title][0]';
+        const data = await client.fetch(query, { title: projectTitle });
+        setProject(data);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (projectTitle) fetchProject();
+  }, [projectTitle]);
+
+  if (loading) {
+    return <div style={{ color: '#fff', padding: '5rem', textAlign: 'center' }}>Loading project...</div>;
+  }
+
+  if (!project) {
+    return <div style={{ color: '#fff', padding: '5rem', textAlign: 'center' }}>Project not found.</div>;
+  }
+
   return (
     <div className="work-detail-page">
       <div className="wd-header-controls">
@@ -13,26 +40,30 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
       </div>
 
       <div className="wd-hero">
-        <h1 className="wd-hero-title">{projectTitle || 'Space'}</h1>
-        <p className="wd-hero-subtitle">Modern and visually appealing website that<br/>reflected the client's brand.</p>
+        <h1 className="wd-hero-title">{project.title}</h1>
+        <p className="wd-hero-subtitle">{project.category || 'Website Project'}</p>
         
         <div className="wd-stats-row">
           <div className="wd-stat-box">
             <span className="wd-stat-label">CLIENT</span>
-            <span className="wd-stat-value">PAWEL GOLA</span>
+            <span className="wd-stat-value">{project.client || 'N/A'}</span>
           </div>
           <div className="wd-stat-box">
             <span className="wd-stat-label">TIMELINE</span>
-            <span className="wd-stat-value">3 WEEKS</span>
+            <span className="wd-stat-value">{project.timeline || 'N/A'}</span>
           </div>
           <div className="wd-stat-box">
             <span className="wd-stat-label">SERVICES</span>
-            <span className="wd-stat-value">TEMPLATE</span>
+            <span className="wd-stat-value">{project.services || 'N/A'}</span>
           </div>
-          <div className="wd-stat-box">
-            <span className="wd-stat-label">WEBSITE</span>
-            <span className="wd-stat-value">GOLA.IO</span>
-          </div>
+          {project.websiteUrl && (
+            <div className="wd-stat-box">
+              <span className="wd-stat-label">WEBSITE</span>
+              <a href={project.websiteUrl} target="_blank" rel="noreferrer" className="wd-stat-value" style={{ color: '#FF4D00', textDecoration: 'none' }}>
+                VISIT SITE
+              </a>
+            </div>
+          )}
         </div>
 
         <div className="wd-scroll-btn">
@@ -41,40 +72,44 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
         </div>
 
         <div className="wd-hero-image-wrapper">
-          <img 
-            src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=1200" 
-            alt="Project Laptop" 
-            className="wd-hero-image"
-          />
+          {project.image && (
+            <img 
+              src={urlFor(project.image).url()} 
+              alt={project.title} 
+              className="wd-hero-image"
+            />
+          )}
         </div>
       </div>
 
-      <div className="wd-details-section">
-        <div className="wd-details-left">
-          <span className="wd-about-label">ABOUT</span>
-          <h2 className="wd-about-title">Concept, Design, and<br/>Development. All-in-one.</h2>
+      {(project.challenge || project.goal || project.result) && (
+        <div className="wd-details-section">
+          <div className="wd-details-left">
+            <span className="wd-about-label">ABOUT</span>
+            <h2 className="wd-about-title">Concept, Design, and<br/>Development. All-in-one.</h2>
+          </div>
+          <div className="wd-details-right">
+            {project.challenge && (
+              <div className="wd-detail-card">
+                <h3 className="wd-card-title">Challenge</h3>
+                <p className="wd-card-text">{project.challenge}</p>
+              </div>
+            )}
+            {project.goal && (
+              <div className="wd-detail-card">
+                <h3 className="wd-card-title">Goal</h3>
+                <p className="wd-card-text">{project.goal}</p>
+              </div>
+            )}
+            {project.result && (
+              <div className="wd-detail-card">
+                <h3 className="wd-card-title">Result</h3>
+                <p className="wd-card-text">{project.result}</p>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="wd-details-right">
-          <div className="wd-detail-card">
-            <h3 className="wd-card-title">Challenge</h3>
-            <p className="wd-card-text">
-              Our client was struggling to attract and retain customers due to an outdated and non-responsive website that didn't align with their brand identity.
-            </p>
-          </div>
-          <div className="wd-detail-card">
-            <h3 className="wd-card-title">Goal</h3>
-            <p className="wd-card-text">
-              Our goal was to create a modern and visually appealing website that reflected the client's brand and delivered a seamless user experience. The website needed to be responsive, easy to navigate, and optimized for search engines to improve their online visibility.
-            </p>
-          </div>
-          <div className="wd-detail-card">
-            <h3 className="wd-card-title">Result</h3>
-            <p className="wd-card-text">
-              Our team developed a custom website design that was not only visually stunning but also user-friendly and optimized for search engines. The client's website now showcases their products and services in a professional and engaging manner, and has seen a significant increase in organic traffic and customer engagement. The client is thrilled with the final result and has received positive feedback from their customers.
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
