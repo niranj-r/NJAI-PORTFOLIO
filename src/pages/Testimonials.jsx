@@ -1,17 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import "../styles/Testimonials.css";
+import srLogo from '../assets/sr-logo.png';
+import srPhoto from '../assets/sr-photo.png';
 
 const testimonialsData = [
   {
     id: 1,
     theme: 'dark',
-    logo: 'LOGO',
-    title: "Amazing Results with Arik's Premium Web Design Services.",
-    text: "Arik is a top-notch web designer who created a stunning website for my business. He was attentive to my needs and provided excellent customer service throughout the entire process. I highly recommend his services.",
-    author: "JOHN SMITH",
-    company: "ABC Company",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+    logo: srLogo,
+    isImageLogo: true,
+    title: "CREATIVITY THAT SPEAKS FOR ITSELF",
+    text: "Working with Niranj R was a seamless experience. He transformed my ideas into a portfolio that truly represents me and designed a custom T-shirt that perfectly matched my vision. His creativity, professionalism, and eye for detail are exceptional. I would gladly recommend him to anyone looking for quality design work.",
+    author: "SRADHYA RENISH",
+    company: "Ur Flow",
+    avatar: srPhoto
   },
   {
     id: 2,
@@ -75,10 +78,10 @@ const Testimonials = () => {
       {/* Header */}
       <div className="testimonials-header">
         <h2 className="testimonials-title">
-          What my <br/> <em>clients say</em>
+          What my <br /> <em>clients say</em>
         </h2>
         <p className="testimonials-subtitle">
-          See what my clients have to say about working with me and the <br/> results I helped them achieve.
+          See what my clients have to say about working with me and the <br /> results I helped them achieve.
         </p>
       </div>
 
@@ -87,15 +90,17 @@ const Testimonials = () => {
         {/* Left Column */}
         <div className="testimonials-column">
           {leftColumn.map((item, index) => (
-            <motion.div 
-              className={`testimonial-card ${item.theme}`} 
+            <motion.div
+              className={`testimonial-card ${item.theme}`}
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
             >
-              <div className="card-logo">{item.logo}</div>
+              <div className="card-logo">
+                {item.isImageLogo ? <img src={item.logo} alt="logo" style={{ maxHeight: '30px' }} /> : item.logo}
+              </div>
               <h3 className="card-title">{item.title}</h3>
               <p className="card-text">{item.text}</p>
               <div className="card-author-section">
@@ -112,15 +117,17 @@ const Testimonials = () => {
         {/* Right Column */}
         <div className="testimonials-column">
           {rightColumn.map((item, index) => (
-            <motion.div 
-              className={`testimonial-card ${item.theme}`} 
+            <motion.div
+              className={`testimonial-card ${item.theme}`}
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 + 0.2 }}
             >
-              <div className="card-logo">{item.logo}</div>
+              <div className="card-logo">
+                {item.isImageLogo ? <img src={item.logo} alt="logo" style={{ maxHeight: '30px' }} /> : item.logo}
+              </div>
               <h3 className="card-title">{item.title}</h3>
               <p className="card-text">{item.text}</p>
               <div className="card-author-section">
