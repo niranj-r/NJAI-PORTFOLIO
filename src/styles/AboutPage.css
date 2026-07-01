@@ -2,7 +2,6 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@1,2,3,4,5,6,7&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
 
-
 .about-container {
   min-height: 100vh;
   padding: 0rem 2rem 2rem 0rem;
@@ -347,5 +346,3 @@
     grid-template-columns: 1fr;
   }
 }
-
-
