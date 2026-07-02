@@ -5,6 +5,7 @@ import heroImgLight from "../assets/hero-light.webp";
 import svgPaths from "../svg-osuecvsjzq";
 import "../styles/Frame2.css";
 import "../styles/Hero.css"; // Ensure marquee styles are available
+import FluidBlobScene from "../components/FluidBlob";
 
 export default function Frame2({ theme }) {
   const imgProfile = theme === 'light' ? imgProfileLight : imgProfileDark;
@@ -21,6 +22,8 @@ export default function Frame2({ theme }) {
 
   return (
     <div className="frame-container">
+      {/* Cursor Spotlight Layer (Only Light Theme) */}
+      {theme === 'light' && <FluidBlobScene />}
 
       {theme === 'dark' ? (
         <>
