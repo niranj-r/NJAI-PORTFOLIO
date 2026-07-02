@@ -1,7 +1,7 @@
 'use client';
 import React, { useMemo, useRef } from 'react';
 import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
-import { MathUtils, Vector3, Color } from 'three';
+import { MathUtils, Vector3 } from 'three';
 import * as THREE from 'three';
 import { Environment, Lightformer, Text } from '@react-three/drei';
 
