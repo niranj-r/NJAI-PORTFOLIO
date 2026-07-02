@@ -13,6 +13,7 @@ import logo7 from '../assets/logos/verdea.svg'
 import logo8 from '../assets/logos/voidzero.svg'
 import logo9 from '../assets/logos/ntrio.svg'
 import logo10 from '../assets/logos/urflow.svg'
+import logo11 from '../assets/logos/theSixCustoms.svg'
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -43,6 +44,7 @@ const Services = ({ onServiceClick }) => {
               <div className="logo-item"><img src={logo8} alt="Voidzero" /></div>
               <div className="logo-item"><img src={logo9} alt="ntrio" /></div>
               <div className="logo-item"><img src={logo10} alt="Urflow" /></div>
+              <div className="logo-item"><img src={logo11} alt="theSixCustoms" /></div>
             </React.Fragment>
           ))}
         </motion.div>
