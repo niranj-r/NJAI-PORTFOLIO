@@ -3,7 +3,7 @@ import { FiInstagram, FiTwitter, FiDribbble, FiArrowUpRight, FiArrowUp, FiSun, F
 import { FaBehance } from 'react-icons/fa';
 import "../styles/MainFooter.css";
 
-const MainFooter = ({ theme, toggleTheme }) => {
+const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -64,11 +64,11 @@ const MainFooter = ({ theme, toggleTheme }) => {
         <div className="footer-column links-column">
           <h3 className="column-title">Utility Pages</h3>
           <ul className="footer-links">
-            <li><a href="#!">404 ERROR PAGE</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('404'); }}>404 ERROR PAGE</a></li>
             <li><a href="#!">PASSWORD PROTECTED</a></li>
             <li><a href="#!">STYLEGUIDE</a></li>
-            <li><a href="#!">LICENSING</a></li>
-            <li><a href="#!">CHANGELOG</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onOpenPrivacy?.(); }}>PRIVACY POLICY</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onOpenTerms?.(); }}>TERMS & CONDITIONS</a></li>
           </ul>
         </div>
       </div>

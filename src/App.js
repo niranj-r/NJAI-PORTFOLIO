@@ -16,6 +16,10 @@ import WorkDetailPage from "./pages/WorkDetailPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import LoadingScreen from "./pages/LoadingScreen";
+import CookieConsent from "./components/CookieConsent";
+import PrivacyModal from "./components/PrivacyModal";
+import TermsModal from "./components/TermsModal";
+import NotFoundPage from "./pages/NotFoundPage";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
@@ -23,6 +27,8 @@ function App() {
   const [currentView, setCurrentView] = useState('home');
   const [selectedProject, setSelectedProject] = useState('');
   const [selectedBlog, setSelectedBlog] = useState('');
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
@@ -52,6 +58,40 @@ function App() {
     window.scrollTo(0, 0);
   }, [currentView]);
 
+  const renderModals = () => (
+    <>
+      <CookieConsent />
+      <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+      <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
+    </>
+  );
+
+  const footerProps = {
+    theme,
+    toggleTheme,
+    onOpenPrivacy: () => setIsPrivacyOpen(true),
+    onOpenTerms: () => setIsTermsOpen(true),
+    onNavClick: (view) => setCurrentView(view)
+  };
+
+  if (currentView === '404') {
+    return (
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <NotFoundPage theme={theme} onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
+        )}
+      </>
+    );
+  }
+
   if (currentView === 'serviceDetail') {
     return (
       <>
@@ -62,7 +102,8 @@ function App() {
               <Header onNavClick={(view) => setCurrentView(view)} />
               <ServiceDetailPage onBack={() => setCurrentView('home')} />
               <CTASection onNavClick={(view) => setCurrentView(view)} />
-              <MainFooter theme={theme} toggleTheme={toggleTheme} />
+              <MainFooter {...footerProps} />
+        {renderModals()}
             </div>
           )}
         </AnimatePresence>
@@ -84,7 +125,8 @@ function App() {
           projectTitle={selectedProject}
         />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
+        <MainFooter {...footerProps} />
+        {renderModals()}
       </div>
         )}
       </>
@@ -101,7 +143,8 @@ function App() {
           <div>
         <Header onNavClick={(view) => setCurrentView(view)} />
         <AboutPage onBack={() => setCurrentView('home')} theme={theme} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
+        <MainFooter {...footerProps} />
+        {renderModals()}
       </div>
         )}
       </>
@@ -119,7 +162,8 @@ function App() {
         <Header onNavClick={(view) => setCurrentView(view)} />
         <ContactPage onBack={() => setCurrentView('home')} theme={theme} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
+        <MainFooter {...footerProps} />
+        {renderModals()}
       </div>
         )}
       </>
@@ -140,7 +184,8 @@ function App() {
           setCurrentView('workDetail');
         }} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
+        <MainFooter {...footerProps} />
+        {renderModals()}
       </div>
         )}
       </>
@@ -161,7 +206,8 @@ function App() {
           setCurrentView('blogDetail');
         }} />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
+        <MainFooter {...footerProps} />
+        {renderModals()}
       </div>
         )}
       </>
@@ -182,7 +228,8 @@ function App() {
           blogTitle={selectedBlog}
         />
         <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter theme={theme} toggleTheme={toggleTheme} />
+        <MainFooter {...footerProps} />
+        {renderModals()}
       </div>
         )}
       </>
@@ -216,7 +263,8 @@ function App() {
       <Testimonials />
       <Hero theme={theme} />
       <CTASection onNavClick={(view) => setCurrentView(view)} />
-      <MainFooter theme={theme} toggleTheme={toggleTheme} />
+      <MainFooter {...footerProps} />
+        {renderModals()}
     </div>
       )}
     </>
