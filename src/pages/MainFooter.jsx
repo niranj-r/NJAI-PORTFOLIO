@@ -11,7 +11,7 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
   return (
     <footer className="main-footer">
       <div className="footer-content-grid">
-        
+
         {/* Logo and Socials Column */}
         <div className="footer-column logo-column">
           <h2 className="footer-logo">niranj.</h2>
@@ -45,7 +45,7 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
             <li><a href="#!">CONTACT</a></li>
           </ul>
           <button className="footer-btn">
-            MORE TEMPLATES <FiArrowUpRight className="footer-btn-icon"/>
+            MORE TEMPLATES <FiArrowUpRight className="footer-btn-icon" />
           </button>
         </div>
 
@@ -62,10 +62,10 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
 
         {/* Utility Pages Column */}
         <div className="footer-column links-column">
-          <h3 className="column-title">Utility Pages</h3>
+          <h3 className="column-title">Miscellaneos</h3>
           <ul className="footer-links">
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('404'); }}>404 ERROR PAGE</a></li>
-            <li><a href="#!">PASSWORD PROTECTED</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('specialMentions'); }}>SPECIAL MENTIONS</a></li>
             <li><a href="#!">STYLEGUIDE</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onOpenPrivacy?.(); }}>PRIVACY POLICY</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onOpenTerms?.(); }}>TERMS & CONDITIONS</a></li>
@@ -76,9 +76,9 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
       {/* Footer Bottom Line */}
       <div className="footer-bottom">
         <div className="copyright">
-          © 2024 Made by Niranj R. All rights reserved.
+          © 2026 Made by Niranj R. All rights reserved.
         </div>
-        
+
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <div className="theme-toggle" onClick={toggleTheme} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span className="to-top-text">{theme === 'light' ? 'DARK MODE' : 'LIGHT MODE'}</span>
@@ -86,7 +86,7 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
               {theme === 'light' ? <FiMoon /> : <FiSun />}
             </div>
           </div>
-          
+
           <div className="to-top" onClick={scrollToTop}>
             <span className="to-top-text">TO TOP</span>
             <div className="to-top-circle">

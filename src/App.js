@@ -20,6 +20,7 @@ import CookieConsent from "./components/CookieConsent";
 import PrivacyModal from "./components/PrivacyModal";
 import TermsModal from "./components/TermsModal";
 import NotFoundPage from "./pages/NotFoundPage";
+import SpecialMentions from "./pages/SpecialMentions";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
@@ -231,6 +232,24 @@ function App() {
         <MainFooter {...footerProps} />
         {renderModals()}
       </div>
+        )}
+      </>
+    );
+  }
+
+  if (currentView === 'specialMentions') {
+    return (
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <SpecialMentions onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
