@@ -1,4 +1,4 @@
-.work-detail-page  {
+.work-detail-page {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -6,7 +6,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-.wd-header-controls  {
+.wd-header-controls {
   padding: 2rem 4rem;
   padding-top: 4rem;
 }
@@ -49,7 +49,7 @@
   text-transform: uppercase;
 }
 
-.wd-hero  {
+.wd-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,12 +59,12 @@
 
 .wd-hero-title {
   font-size: 6rem;
-  color: var(--text-secondary);
+  color: var(--brand-primary);
   font-weight: 300;
   margin: 0 0 1rem 0;
 }
 
-.wd-hero-subtitle  {
+.wd-hero-subtitle {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -73,7 +73,7 @@
   letter-spacing: 0.05em;
 }
 
-.wd-stats-row  {
+.wd-stats-row {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 4rem;
@@ -81,7 +81,7 @@
   justify-content: center;
 }
 
-.wd-stat-box  {
+.wd-stat-box {
   background-color: var(--bg-accent);
   padding: 1.5rem 2.5rem;
   border-radius: 4px;
@@ -92,21 +92,21 @@
   min-width: 150px;
 }
 
-.wd-stat-label  {
+.wd-stat-label {
   font-size: 0.65rem;
   color: var(--text-secondary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
-.wd-stat-value  {
+.wd-stat-value {
   font-size: 0.75rem;
   color: var(--text-secondary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.wd-scroll-btn  {
+.wd-scroll-btn {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -114,7 +114,7 @@
   cursor: pointer;
 }
 
-.wd-scroll-circle  {
+.wd-scroll-circle {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -126,19 +126,19 @@
   font-size: 1rem;
 }
 
-.wd-scroll-btn span  {
+.wd-scroll-btn span {
   font-size: 0.7rem;
   color: var(--text-secondary);
   letter-spacing: 0.15em;
 }
 
-.wd-hero-image-wrapper  {
+.wd-hero-image-wrapper {
   width: 100%;
   max-width: 1000px;
   margin-bottom: 8rem;
 }
 
-.wd-hero-image  {
+.wd-hero-image {
   width: 100%;
   height: auto;
   border-radius: 4px;
@@ -146,7 +146,7 @@
   filter: sepia(0.2) grayscale(0.8) contrast(1.1) brightness(0.8);
 }
 
-.wd-details-section  {
+.wd-details-section {
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
@@ -154,11 +154,11 @@
   padding: 0 2rem;
 }
 
-.wd-details-left  {
+.wd-details-left {
   flex: 1;
 }
 
-.wd-about-label  {
+.wd-about-label {
   font-size: 0.75rem;
   color: var(--text-secondary);
   letter-spacing: 0.15em;
@@ -167,7 +167,7 @@
   margin-bottom: 1.5rem;
 }
 
-.wd-about-title  {
+.wd-about-title {
   font-size: 2.5rem;
   color: var(--brand-primary);
   font-weight: 400;
@@ -175,27 +175,27 @@
   margin: 0;
 }
 
-.wd-details-right  {
+.wd-details-right {
   flex: 1.5;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.wd-detail-card  {
+.wd-detail-card {
   background-color: var(--bg-accent5);
   padding: 3rem;
   border-radius: 4px;
 }
 
-.wd-card-title  {
+.wd-card-title {
   font-size: 1.2rem;
   color: var(--text-secondary);
   font-weight: 400;
   margin: 0 0 1.5rem 0;
 }
 
-.wd-card-text  {
+.wd-card-text {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.8;
@@ -204,7 +204,7 @@
 }
 
 @media (max-width: 1024px) {
-  .wd-details-section  {
+  .wd-details-section {
     flex-direction: column;
   }
 }
@@ -213,18 +213,18 @@
   .wd-hero-title {
     font-size: 4rem;
   }
-  .wd-stats-row  {
+
+  .wd-stats-row {
     flex-direction: column;
     width: 100%;
     align-items: stretch;
   }
-  .wd-stat-box  {
+
+  .wd-stat-box {
     padding: 1rem;
   }
-  .wd-detail-card  {
+
+  .wd-detail-card {
     padding: 2rem;
   }
 }
-
-
-

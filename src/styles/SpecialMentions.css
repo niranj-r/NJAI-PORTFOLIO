@@ -3,7 +3,7 @@
 .sm-page {
   background-color: #FCFBF7;
   color: #2D2A26;
-  font-family: 'Lato', -apple-system, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -34,8 +34,7 @@
 
 /* Typography Overrides */
 .sm-heading {
-  font-family: 'Arial Black', 'Impact', sans-serif;
-  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   line-height: 0.95;
   letter-spacing: 0.01em;
 }
@@ -46,8 +45,14 @@
 
 .sm-script {
   font-family: 'Brush Script MT', 'Caveat', 'Dancing Script', cursive;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   color: #D67A55;
+  align-self: flex-end;
+  text-align: right;
+  line-height: 0.85;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .sm-orange {
@@ -92,7 +97,7 @@
   max-width: 500px;
   margin-bottom: 4rem;
   font-weight: 400;
-  font-family: 'Lato', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .sm-hero-scroll {
@@ -125,7 +130,7 @@
 /* Intro Quote */
 .sm-intro {
   text-align: center;
-  padding: 4rem 0 8rem 0;
+  padding: 4rem 1rem 8rem 1rem;
   max-width: 700px;
   margin: 0 auto;
 }
@@ -139,7 +144,7 @@
 
 .sm-intro-quote {
   font-size: clamp(1.8rem, 4vw, 2.2rem);
-  color: #333;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   font-weight: 400;
 }
@@ -158,12 +163,14 @@
 /* Featured People */
 .sm-people-section {
   padding-bottom: 6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .sm-person {
   display: flex;
   gap: 4rem;
-  margin-bottom: 12rem;
+  margin-bottom: 6rem;
   align-items: stretch;
 }
 
@@ -223,7 +230,7 @@
 .sm-person-number {
   font-size: 1.5rem;
   color: #D67A55;
-  font-family: 'Lato', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   margin-bottom: 15px;
 }
 
@@ -246,7 +253,7 @@
 }
 
 .sm-person-right-panel {
-  width: 160px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -257,9 +264,9 @@
 
 .sm-bg-quote {
   position: absolute;
-  top: -20px;
-  left: -40px;
-  font-size: 12rem;
+  top: -30px;
+  left: -20px;
+  font-size: 10rem;
   font-family: 'Times New Roman', serif;
   color: #E65526;
   opacity: 0.08;
@@ -335,66 +342,83 @@
 
 /* Lessons Section */
 .sm-lessons {
-  background-color: #F8F3ED;
-  border-radius: 12px;
-  padding: 3rem;
+  background-color: #FAF5F0;
+  border-radius: 4px;
+  padding: 4rem;
   margin-bottom: 6rem;
   display: flex;
-  gap: 3rem;
+  flex-direction: column;
 }
 
 .sm-lessons-header {
-  flex-shrink: 0;
-  width: 120px;
+  width: 100%;
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 .sm-lessons-title {
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
-  color: #D67A55;
-  font-weight: 700;
-  line-height: 1.4;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--brand-primary);
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  letter-spacing: 0;
+  margin: 0;
 }
 
 .sm-lessons-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  flex-grow: 1;
+  gap: 1.5rem;
+  border-top: 2.5px solid rgba(0, 0, 0, 0.05);
+  padding-top: 3rem;
 }
 
 .sm-lesson-card {
+  background-color: var(--bg-primary);
+  padding: 1.8rem 1.5rem;
   display: flex;
   flex-direction: column;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease;
+}
+
+.sm-lesson-card:hover {
+  transform: translateY(-2px);
 }
 
 .sm-lesson-header-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-bottom: 1rem;
 }
 
 .sm-lesson-icon {
   font-size: 1.1rem;
-  color: #E65526;
+  color: #333;
 }
 
 .sm-lesson-name {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #222;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
 }
 
 .sm-lesson-desc {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: #666;
   line-height: 1.6;
+  margin: 0;
 }
 
 /* Memories Section */
 .sm-memories {
-  margin-bottom: 8rem;
+  margin: 0 1rem 8rem 1rem;
   position: relative;
 }
 
@@ -466,19 +490,26 @@
 .sm-final {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 4rem 0;
-  background-color: #F6F1EA;
-  padding: 4rem;
-  border-radius: 12px;
+  align-items: center;
+  background-color: #FAF5F0;
+  padding: 4rem 5rem;
+  border-radius: 4px;
+  margin: 0 1rem;
 }
 
 .sm-final-quote {
   flex: 1;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  line-height: 1.2;
+  font-size: 2.8rem;
+  line-height: 1.3;
   color: #222;
-  font-weight: 800;
+  font-weight: 100;
+  margin: 0;
+}
+
+.sm-final-quote .sm-orange {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .sm-final-message {
@@ -492,27 +523,25 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .sm-hero {
-    flex-direction: column;
-    text-align: center;
+  .sm-hero-centered {
+    padding-top: 8vh;
+    padding-bottom: 4rem;
   }
 
-  .sm-hero-left {
-    padding-right: 0;
+  .sm-hero-title-new {
+    font-size: clamp(3.5rem, 10vw, 5rem);
   }
 
-  .sm-hero-line {
-    margin: 2rem auto;
-  }
-
-  .sm-hero-desc,
-  .sm-hero-caption {
-    margin: 0 auto 2rem auto;
+  .sm-hero-desc-new {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
 
   .sm-person {
     flex-direction: column !important;
-    gap: 3rem;
+    gap: 2rem;
+    margin-bottom: 6rem;
   }
 
   .sm-person-content {
@@ -528,15 +557,42 @@
   }
 
   .sm-bg-quote {
-    left: 0;
+    left: -10px;
+    top: -20px;
+    font-size: 8rem;
+  }
+
+  .sm-script {
+    margin-top: -3.5rem;
+    margin-right: 2rem;
+  }
+
+  .sm-person.reverse .sm-person-number-container {
+    margin-left: 0;
+  }
+
+  .sm-person-number-container {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sm-person-number-line {
+    width: 100px;
+    height: 1px;
   }
 
   .sm-lessons {
     flex-direction: column;
+    padding: 2rem;
+    margin: 0 1rem 1rem 1rem;
   }
 
   .sm-lessons-header {
     width: 100%;
+    margin: 1rem;
   }
 
   .sm-lessons-grid {
@@ -548,17 +604,55 @@
     text-align: center;
     gap: 2rem;
     align-items: center;
-    padding: 3rem 2rem;
+    padding: 3rem 1.5rem;
   }
 }
 
 @media (max-width: 600px) {
+  .sm-container {
+    padding: 0 1.2rem;
+  }
+
+  .sm-intro {
+    padding: 2rem 1rem 4rem 1rem;
+  }
+
+  .sm-intro-quote {
+    font-size: 1.5rem;
+  }
+
   .sm-lessons-grid {
     grid-template-columns: 1fr;
   }
 
   .sm-person-number-container {
     display: none;
+  }
+
+  .sm-hero-title-new {
+    font-size: 3.2rem;
+  }
+
+  .sm-person {
+    margin-bottom: 4rem;
+  }
+
+  .sm-person-img-wrapper::before,
+  .sm-person.reverse .sm-person-img-wrapper::before {
+    display: none;
+  }
+
+  .sm-memories-strip {
+    gap: 0.5rem;
+  }
+
+  .sm-memory-img {
+    height: 100px;
+    min-width: 140px;
+  }
+
+  .sm-final-quote {
+    font-size: 1.5rem;
   }
 }
 
@@ -647,4 +741,25 @@
 
 [data-theme="dark"] .sm-person-number {
   color: var(--brand-primary);
+}
+
+[data-theme="dark"] .sm-final {
+  background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .sm-final-quote {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .sm-lesson-card {
+  background-color: var(--bg-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .sm-lesson-icon {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .sm-lessons-grid {
+  border-top-color: rgba(255, 255, 255, 0.05);
 }

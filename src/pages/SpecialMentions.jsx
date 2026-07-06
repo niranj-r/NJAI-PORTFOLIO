@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import '../styles/SpecialMentions.css';
 import sradhyaImg from '../assets/specialmentions/sradhyarenish.png'
 
@@ -8,6 +8,52 @@ const SpecialMentions = ({ onNavClick }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const memoriesRef = useRef(null);
+
+  const getHalfWidth = () => {
+    if (!memoriesRef.current) return 0;
+    const firstSet = memoriesRef.current.children[0];
+    return firstSet ? firstSet.offsetWidth + 16 : 0; // 16px is 1rem gap
+  };
+
+  const scrollMemoriesRight = () => {
+    if (memoriesRef.current) {
+      const halfWidth = getHalfWidth();
+      if (memoriesRef.current.scrollLeft >= halfWidth) {
+        memoriesRef.current.scrollBy({ left: -halfWidth, behavior: 'instant' });
+      }
+      setTimeout(() => {
+        if(memoriesRef.current) memoriesRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+      }, 20);
+    }
+  };
+
+  const scrollMemoriesLeft = () => {
+    if (memoriesRef.current) {
+      const halfWidth = getHalfWidth();
+      if (memoriesRef.current.scrollLeft <= 0) {
+        memoriesRef.current.scrollBy({ left: halfWidth, behavior: 'instant' });
+      }
+      setTimeout(() => {
+        if(memoriesRef.current) memoriesRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+      }, 20);
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(scrollMemoriesRight, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const memoryImages = [
+    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1529156069898-49953eb1b5ce?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80"
+  ];
 
   return (
     <div className="sm-page">
@@ -98,7 +144,7 @@ const SpecialMentions = ({ onNavClick }) => {
                   <div>The courage</div>
                   <div>to start.</div>
                 </div>
-                <div className="sm-script">Forever grateful.</div>
+                <div className="sm-script">Forever<br />grateful.</div>
               </div>
             </div>
           </motion.div>
@@ -148,7 +194,7 @@ const SpecialMentions = ({ onNavClick }) => {
                   <div>Better taste.</div>
                   <div>A lifelong friend.</div>
                 </div>
-                <div className="sm-script">Thank you always.</div>
+                <div className="sm-script">Thank you<br />always.</div>
               </div>
             </div>
           </motion.div>
@@ -164,7 +210,7 @@ const SpecialMentions = ({ onNavClick }) => {
           transition={{ duration: 0.8 }}
         >
           <div className="sm-lessons-header">
-            <h2 className="sm-heading sm-lessons-title">LESSONS<br />I LEARNT</h2>
+            <h2 className="sm-lessons-title">Lessons I learnt</h2>
           </div>
           <div className="sm-lessons-grid">
             <div className="sm-lesson-card">
@@ -209,15 +255,18 @@ const SpecialMentions = ({ onNavClick }) => {
           <div className="sm-memories-header">
             <h3 className="sm-memories-title">MEMORIES THAT MEAN EVERYTHING</h3>
             <div className="sm-memories-strip-container">
-              <div className="sm-memories-strip">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80" alt="Memory" className="sm-memory-img" />
-                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=400&q=80" alt="Memory" className="sm-memory-img" />
-                <img src="https://images.unsplash.com/photo-1529156069898-49953eb1b5ce?auto=format&fit=crop&w=400&q=80" alt="Memory" className="sm-memory-img" />
-                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80" alt="Memory" className="sm-memory-img" />
-                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80" alt="Memory" className="sm-memory-img" />
-                <img src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=400&q=80" alt="Memory" className="sm-memory-img" />
+              <div className="sm-memories-next" onClick={scrollMemoriesLeft}>
+                <FiArrowLeft />
               </div>
-              <div className="sm-memories-next">
+              <div className="sm-memories-strip" ref={memoriesRef}>
+                <div style={{ display: 'flex', gap: '1rem', flexShrink: 0 }}>
+                  {memoryImages.map((src, idx) => <img key={`a-${idx}`} src={src} alt="Memory" className="sm-memory-img" />)}
+                </div>
+                <div style={{ display: 'flex', gap: '1rem', flexShrink: 0 }}>
+                  {memoryImages.map((src, idx) => <img key={`b-${idx}`} src={src} alt="Memory" className="sm-memory-img" />)}
+                </div>
+              </div>
+              <div className="sm-memories-next" onClick={scrollMemoriesRight}>
                 <FiArrowRight />
               </div>
             </div>
@@ -233,7 +282,7 @@ const SpecialMentions = ({ onNavClick }) => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="sm-heading sm-final-quote">
-            BEHIND EVERY DREAM<br />STANDS SOMEONE<br />WHO QUIETLY <span className="sm-orange">BELIEVED FIRST.</span>
+            Behind every dream<br />Stands someone<br />Who quietly <span className="sm-orange">believed first.</span>
           </h2>
           <p className="sm-final-message">
             I MAY HAVE WRITTEN THE CODE, BUT THESE PEOPLE HELPED WRITE THE PERSON BEHIND IT.

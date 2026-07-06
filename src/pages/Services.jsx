@@ -60,13 +60,13 @@ const Services = ({ onServiceClick }) => {
       >
         <motion.div variants={cardVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
           <div className="service-number">01</div>
-          <h3 className="service-title">WEB DESIGN</h3>
+          <h3 className="service-title">DESIGN & EXPERIENCE</h3>
           <p className="service-description">
-            Visually stunning web designs that captivate your audience by blending your brand voice and customer needs.
+            Thoughtfully designed digital experiences that prioritize usability, visual consistency, and intuitive interactions. Every interface is crafted to create seamless user journeys across devices.
           </p>
           <div className="service-button">
             <span className="icon-circle"><FiArrowUpRight /></span>
-            <span className="button-text">ABOUT WEBDESIGN</span>
+            <span className="button-text">ABOUT DESIGN</span>
           </div>
         </motion.div>
 
@@ -74,7 +74,7 @@ const Services = ({ onServiceClick }) => {
           <div className="service-number">02</div>
           <h3 className="service-title">DEVELOPMENT</h3>
           <p className="service-description">
-            Get custom web development solutions that are tailored to your specifications, designed to deliver a flawless user experience.
+            Modern websites and applications built with performance, scalability, and clean architecture at their core. Responsive, accessible, and optimized for long-term growth.
           </p>
           <div className="service-button">
             <span className="icon-circle"><FiArrowUpRight /></span>
@@ -84,13 +84,13 @@ const Services = ({ onServiceClick }) => {
 
         <motion.div variants={cardVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="service-card" onClick={onServiceClick} style={{ cursor: 'pointer' }}>
           <div className="service-number">03</div>
-          <h3 className="service-title">CONTENT & SEO</h3>
+          <h3 className="service-title">BRAND IDENTITY</h3>
           <p className="service-description">
-            Proven SEO strategies that enhance your online performance, bringing you to the forefront of organic search results.
+            Distinct visual identities that communicate purpose and personality. From logos and design systems to digital assets, every element is designed to create a lasting impression.
           </p>
           <div className="service-button">
             <span className="icon-circle"><FiArrowUpRight /></span>
-            <span className="button-text">ABOUT SEO</span>
+            <span className="button-text">ABOUT BRANDING</span>
           </div>
         </motion.div>
       </motion.div>

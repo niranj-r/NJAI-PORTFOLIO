@@ -59,7 +59,7 @@
 
 .bd-hero-title {
   font-size: 5rem;
-  color: var(--text-secondary);
+  color: var(--brand-primary);
   font-weight: 300;
   margin: 0 0 1.5rem 0;
   max-width: 1000px;
@@ -316,5 +316,3 @@
     align-items: flex-start;
   }
 }
-
-

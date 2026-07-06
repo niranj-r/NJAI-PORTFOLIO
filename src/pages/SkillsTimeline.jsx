@@ -6,66 +6,76 @@ import "../styles/SkillsTimeline.css";
 const skillsData = [
   {
     id: '01',
-    category: 'FRONTEND',
-    title: 'REACT & VUE',
+    category: 'DESIGN',
+    title: 'UI/UX DESIGN',
     level: 'EXPERT',
-    description: 'Building interactive and responsive user interfaces with modern JavaScript frameworks. I create scalable components and manage complex state efficiently.',
+    description: 'Designing intuitive digital experiences through thoughtful layouts, seamless interactions, and user-centered design principles. Every interface is built to balance functionality with visual clarity.',
     bullets: [
-      'React.js & Redux',
-      'Vue.js & Vuex',
-      'Next.js / Nuxt.js'
+      'User Interface Design',
+      'User Experience Design',
+      'Wireframing & Prototyping',
+      'Design Systems',
+      'Responsive Design'
     ],
     alignment: 'right'
   },
   {
     id: '02',
-    category: 'STYLING',
-    title: 'CSS & TAILWIND',
+    category: 'DEVELOPMENT',
+    title: 'FRONT-END DEVELOPMENT',
     level: 'ADVANCED',
-    description: 'Crafting beautiful, pixel-perfect designs that work flawlessly across all devices. Deep understanding of modern CSS and utility-first frameworks.',
+    description: 'Building responsive, interactive, and high-performance web applications using modern technologies and scalable development practices for seamless user experiences.',
     bullets: [
-      'Tailwind CSS',
-      'SASS / SCSS',
-      'Framer Motion'
+      'React.js',
+      'HTML5 & CSS3',
+      'JavaScript (ES6+)',
+      'Responsive Development',
+      'Performance Optimization'
     ],
     alignment: 'left'
   },
   {
     id: '03',
-    category: 'BACKEND',
-    title: 'NODE & EXPRESS',
+    category: 'CREATIVE',
+    title: 'BRAND IDENTITY',
     level: 'ADVANCED',
-    description: 'Developing robust and scalable server-side applications and RESTful APIs with strong focus on security and performance optimization.',
+    description: 'Creating cohesive visual identities that communicate purpose and personality across digital platforms, from logos to complete brand systems.',
     bullets: [
-      'Node.js & Express.js',
-      'RESTful APIs & GraphQL',
-      'Authentication (JWT)'
+      'Logo Design',
+      'Visual Identity',
+      'Brand Guidelines',
+      'Marketing Assets',
+      'Social Media Creatives'
     ],
     alignment: 'right'
   },
   {
     id: '04',
-    category: 'DATABASE',
-    title: 'MONGO & SQL',
+    category: 'PRODUCT',
+    title: 'PRODUCT DESIGN',
     level: 'PROFICIENT',
-    description: 'Designing efficient database schemas and managing complex data relationships to ensure fast and reliable data retrieval.',
+    description: 'Transforming concepts into functional digital products through research, strategy, user flows, and iterative design focused on solving real-world problems.',
     bullets: [
-      'MongoDB & Mongoose',
-      'PostgreSQL / MySQL',
-      'Redis Caching'
+      'Product Strategy',
+      'Information Architecture',
+      'User Flows',
+      'Design Thinking',
+      'Usability Testing'
     ],
     alignment: 'left'
   },
   {
     id: '05',
-    category: 'TOOLS',
-    title: 'GIT & DEPLOYMENT',
-    level: 'EXPERT',
-    description: 'Utilizing modern development workflows, version control, and streamlined CI/CD pipelines for reliable software delivery.',
+    category: 'INNOVATION',
+    title: 'CREATIVE TECHNOLOGY',
+    level: 'EXPLORING',
+    description: 'Combining design and development to build immersive digital experiences with modern interactions, animations, and emerging web technologies.',
     bullets: [
-      'Git / GitHub / GitLab',
-      'Docker & Containers',
-      'Vercel / AWS / Netlify'
+      'Motion Design',
+      'Interactive Experiences',
+      '3D Web Experiences',
+      'Creative Coding',
+      'AI-Powered Solutions'
     ],
     alignment: 'right'
   }
@@ -81,7 +91,7 @@ const SkillsTimeline = () => {
           Expertise <em>in 5 areas</em>
         </h2>
         <p className="subtitle">
-          A comprehensive overview of my technical skills and professional capabilities tailored for modern web development.
+          A curated collection of the core skills that drive thoughtful design, modern development, and innovative digital experiences.
         </p>
         <div className="scroll-arrow">
           <FiArrowDown />
@@ -91,10 +101,10 @@ const SkillsTimeline = () => {
       {/* Timeline Section */}
       <div className="timeline-wrapper">
         <div className="timeline-line"></div>
-        
+
         {skillsData.map((item, index) => (
-          <motion.div 
-            className={`timeline-item ${item.alignment}`} 
+          <motion.div
+            className={`timeline-item ${item.alignment}`}
             key={item.id}
             initial={{ opacity: 0, x: item.alignment === 'left' ? -50 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}

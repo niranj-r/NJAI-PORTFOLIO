@@ -1,4 +1,4 @@
-.work-page-container  {
+.work-page-container {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -6,7 +6,7 @@
   padding-bottom: 4rem;
 }
 
-.work-page-header  {
+.work-page-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,12 +16,12 @@
 
 .work-page-title {
   font-size: 5rem;
-  color: var(--text-secondary);
+  color: var(--brand-primary);
   font-weight: 300;
   margin: 0 0 1rem 0;
 }
 
-.work-page-subtitle  {
+.work-page-subtitle {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -35,6 +35,3 @@
     font-size: 4rem;
   }
 }
-
-
-

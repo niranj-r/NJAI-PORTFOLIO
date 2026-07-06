@@ -33,7 +33,7 @@
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  filter: grayscale(100%);
+  filter: sepia(15%) contrast(90%);
   object-fit: cover;
   margin-right: 60px;
 }
@@ -124,7 +124,6 @@
   border-radius: 12px;
   padding: 3rem;
   max-width: 800px;
-  box-shadow: 0 0 20px rgba(255, 69, 0, 0.1);
   border: 1px solid var(--border-light);
   transform: translateY(-15%);
   /* move up 15% of its own height */

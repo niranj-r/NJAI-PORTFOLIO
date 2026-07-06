@@ -39,13 +39,13 @@ const Hero = ({ theme }) => {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ type: "spring", stiffness: 100, damping: 10 }}
           >
-            A website that leaves <br /> <em>a lasting impression!</em>
+            Built with intention. <br /> <em>Designed to be remembered.</em>
           </motion.h2>
         </div>
 
         <div className="hero-content-right">
           <p>
-            Hi, I'm Niranj R - a freelancer specializing in premium web design, development, and SEO services. I'm passionate about creating unique and effective solutions for my clients, and I bring a personal touch to every project. Let's work together to bring your vision to life!
+            Every project is shaped through the intersection of design, development, and strategic thinking. From intuitive interfaces and scalable web applications to cohesive brand identities, the goal is to create digital experiences that are purposeful, memorable, and built to stand the test of time.
           </p>
           <div className="hero-socials">
             <a href="#!" className="social-circle"><FiTwitter /></a>

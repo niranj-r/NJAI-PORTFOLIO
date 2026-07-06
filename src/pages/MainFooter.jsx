@@ -45,7 +45,7 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
             <li><a href="#!">CONTACT</a></li>
           </ul>
           <button className="footer-btn">
-            MORE TEMPLATES <FiArrowUpRight className="footer-btn-icon" />
+            CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" />
           </button>
         </div>
 
