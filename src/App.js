@@ -19,6 +19,7 @@ import LoadingScreen from "./pages/LoadingScreen";
 import CookieConsent from "./components/CookieConsent";
 import PrivacyModal from "./components/PrivacyModal";
 import TermsModal from "./components/TermsModal";
+//import Chatbot from "./components/Chatbot";
 import NotFoundPage from "./pages/NotFoundPage";
 import SpecialMentions from "./pages/SpecialMentions";
 import { AnimatePresence } from "framer-motion";
@@ -64,6 +65,7 @@ function App() {
       <CookieConsent />
       <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
+      {/* <Chatbot /> */}
     </>
   );
 
@@ -104,7 +106,7 @@ function App() {
               <ServiceDetailPage onBack={() => setCurrentView('home')} />
               <CTASection onNavClick={(view) => setCurrentView(view)} />
               <MainFooter {...footerProps} />
-        {renderModals()}
+              {renderModals()}
             </div>
           )}
         </AnimatePresence>
@@ -120,15 +122,15 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <WorkDetailPage
-          onBack={() => setCurrentView('work')}
-          projectTitle={selectedProject}
-        />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter {...footerProps} />
-        {renderModals()}
-      </div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <WorkDetailPage
+              onBack={() => setCurrentView('work')}
+              projectTitle={selectedProject}
+            />
+            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
@@ -142,11 +144,11 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <AboutPage onBack={() => setCurrentView('home')} theme={theme} />
-        <MainFooter {...footerProps} />
-        {renderModals()}
-      </div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <AboutPage onBack={() => setCurrentView('home')} theme={theme} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
@@ -160,12 +162,12 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <ContactPage onBack={() => setCurrentView('home')} theme={theme} />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter {...footerProps} />
-        {renderModals()}
-      </div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <ContactPage onBack={() => setCurrentView('home')} theme={theme} />
+            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
@@ -179,15 +181,15 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <WorkPage onProjectClick={(title) => {
-          setSelectedProject(title);
-          setCurrentView('workDetail');
-        }} />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter {...footerProps} />
-        {renderModals()}
-      </div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <WorkPage onProjectClick={(title) => {
+              setSelectedProject(title);
+              setCurrentView('workDetail');
+            }} />
+            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
@@ -201,15 +203,15 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <BlogPage onBlogClick={(title) => {
-          setSelectedBlog(title);
-          setCurrentView('blogDetail');
-        }} />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter {...footerProps} />
-        {renderModals()}
-      </div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <BlogPage onBlogClick={(title) => {
+              setSelectedBlog(title);
+              setCurrentView('blogDetail');
+            }} />
+            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
@@ -223,15 +225,15 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-        <Header onNavClick={(view) => setCurrentView(view)} />
-        <BlogDetailPage
-          onBack={() => setCurrentView('blog')}
-          blogTitle={selectedBlog}
-        />
-        <CTASection onNavClick={(view) => setCurrentView(view)} />
-        <MainFooter {...footerProps} />
-        {renderModals()}
-      </div>
+            <Header onNavClick={(view) => setCurrentView(view)} />
+            <BlogDetailPage
+              onBack={() => setCurrentView('blog')}
+              blogTitle={selectedBlog}
+            />
+            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
         )}
       </>
     );
@@ -262,29 +264,29 @@ function App() {
       </AnimatePresence>
       {!isLoading && (
         <div>
-      <Header onNavClick={(view) => setCurrentView(view)} />
-      <Frame2 theme={theme} />
-      <div className="frame-marquee-wrapper">
-        <div className="frame-marquee">
-          <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
-          <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
+          <Header onNavClick={(view) => setCurrentView(view)} />
+          <Frame2 theme={theme} />
+          <div className="frame-marquee-wrapper">
+            <div className="frame-marquee">
+              <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
+              <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
+            </div>
+          </div>
+          <Services onServiceClick={() => setCurrentView('serviceDetail')} />
+          <SkillsTimeline />
+          <SelectedWork
+            onNavClick={(view) => setCurrentView(view)}
+            onProjectClick={(title) => {
+              setSelectedProject(title);
+              setCurrentView('workDetail');
+            }}
+          />
+          <Testimonials />
+          <Hero theme={theme} />
+          <CTASection onNavClick={(view) => setCurrentView(view)} />
+          <MainFooter {...footerProps} />
+          {renderModals()}
         </div>
-      </div>
-      <Services onServiceClick={() => setCurrentView('serviceDetail')} />
-      <SkillsTimeline />
-      <SelectedWork
-        onNavClick={(view) => setCurrentView(view)}
-        onProjectClick={(title) => {
-          setSelectedProject(title);
-          setCurrentView('workDetail');
-        }}
-      />
-      <Testimonials />
-      <Hero theme={theme} />
-      <CTASection onNavClick={(view) => setCurrentView(view)} />
-      <MainFooter {...footerProps} />
-        {renderModals()}
-    </div>
       )}
     </>
   );

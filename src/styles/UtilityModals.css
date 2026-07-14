@@ -311,29 +311,68 @@
   }
 
   .utility-modal {
-    padding: 30px 25px;
+    padding: 40px 30px;
+  }
+
+  .modal-close-btn {
+    top: 25px;
+    right: 25px;
   }
 
   .modal-header h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 
 @media screen and (max-width: 500px) {
+  .utility-modal {
+    padding: 30px 20px;
+  }
+
+  .modal-header {
+    margin-bottom: 25px;
+    margin-top: 10px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-close-btn {
+    top: 15px;
+    right: 15px;
+  }
+
+  .modal-card {
+    padding: 25px 20px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
   .cookie-banner-overlay {
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
   }
 
   .cookie-banner {
     width: 100%;
-    border-radius: 12px 12px 0 0;
-    padding: 30px 25px;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-sizing: border-box;
   }
 
   .cookie-actions {
     flex-direction: column;
     gap: 15px;
+  }
+  
+  .cookie-actions .modal-action-btn {
+    width: 100%;
+    justify-content: space-between;
   }
 }

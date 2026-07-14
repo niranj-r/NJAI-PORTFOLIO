@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import '../styles/SpecialMentions.css';
-import sradhyaImg from '../assets/specialmentions/sradhyarenish.png'
+import sradhyaImg from '../assets/specialmentions/sradhyarenish.webp'
+import agniveshImg from '../assets/specialmentions/agnivesh.webp'
 
 const SpecialMentions = ({ onNavClick }) => {
   useEffect(() => {
@@ -24,7 +25,7 @@ const SpecialMentions = ({ onNavClick }) => {
         memoriesRef.current.scrollBy({ left: -halfWidth, behavior: 'instant' });
       }
       setTimeout(() => {
-        if(memoriesRef.current) memoriesRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+        if (memoriesRef.current) memoriesRef.current.scrollBy({ left: 300, behavior: 'smooth' });
       }, 20);
     }
   };
@@ -36,7 +37,7 @@ const SpecialMentions = ({ onNavClick }) => {
         memoriesRef.current.scrollBy({ left: halfWidth, behavior: 'instant' });
       }
       setTimeout(() => {
-        if(memoriesRef.current) memoriesRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+        if (memoriesRef.current) memoriesRef.current.scrollBy({ left: -300, behavior: 'smooth' });
       }, 20);
     }
   };
@@ -173,26 +174,25 @@ const SpecialMentions = ({ onNavClick }) => {
               <div className="sm-person-number-line"></div>
             </div>
             <div className="sm-person-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Ananya Krishnan" className="sm-person-img" />
+              <img src={agniveshImg} alt="Agnivesh P S" className="sm-person-img" />
             </div>
             <div className="sm-person-content">
               <div className="sm-person-content-inner">
-                <h3 className="sm-person-name">Ananya Krishnan</h3>
-                <p className="sm-serif sm-person-role">Friend • Creative Partner</p>
+                <h3 className="sm-person-name">Agnivesh P S</h3>
+                <p className="sm-serif sm-person-role">Schoolmate • Collegemate • Mentor</p>
                 <div className="sm-small-line"></div>
                 <div className="sm-section-title">ABOUT THEM</div>
                 <p className="sm-person-desc">
-                  Ananya has been my creative compass. She sees ideas before they make sense. Her honesty, eye for detail and fearless feedback have shaped many of my projects in ways I can't even explain.
-                </p>
+                  Agnivesh has been one of the biggest influences on my creative journey. From being my schoolmate to my collegemate, he became the mentor who introduced me to the world of design and helped me build the fundamentals that continue to shape my work today. Beyond every lesson and critique, he's always been the brother I never had someone who's believed in me, challenged me, and celebrated every milestone along the way.                </p>
               </div>
               <div className="sm-person-right-panel">
                 <div className="sm-bg-quote">“</div>
-                <div className="sm-section-title" style={{ color: '#D67A55' }}>WHAT THEY GAVE ME</div>
+                <div className="sm-section-title" style={{ color: '#D67A55' }}>WHAT HE GAVE ME</div>
                 <div className="sm-serif sm-keywords">
-                  <div>Clarity.</div>
-                  <div>Inspiration.</div>
-                  <div>Better taste.</div>
-                  <div>A lifelong friend.</div>
+                  <div>Direction.</div>
+                  <div>Patience.</div>
+                  <div>The courage to create.</div>
+                  <div>A brother for life.</div>
                 </div>
                 <div className="sm-script">Thank you<br />always.</div>
               </div>

@@ -4,7 +4,7 @@ import imgProfileLight from "../assets/frame20-light.webp";
 import heroImgLight from "../assets/hero-light.webp";
 import svgPaths from "../svg-osuecvsjzq";
 import "../styles/Frame2.css";
-import "../styles/Hero.css"; // Ensure marquee styles are available
+import "../styles/Hero.css";
 import FluidBlobScene from "../components/FluidBlob";
 
 export default function Frame2({ theme }) {

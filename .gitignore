@@ -24,3 +24,5 @@ yarn-error.log*
 
 #CMS Site
 /njport
+.vercel
+.env*.local
