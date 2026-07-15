@@ -25,17 +25,17 @@ const WorkPage = ({ onProjectClick }) => {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       className="work-page-container"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="work-page-header">
-        <h1 className="work-page-title">Work</h1>
-        <p className="work-page-subtitle">My latest web design projects and see how we can<br/>help bring your ideas to life.</p>
+        <h1 className="work-page-title">Work<br /><em>& Projects</em></h1>
+        <p className="work-page-subtitle">Some of my latest projects & works, see how I can<br />help bring your ideas to life.</p>
       </div>
-      
+
       <div className="selected-work-container" style={{ paddingTop: '2rem', backgroundColor: 'transparent' }}>
         {/* Projects Grid reused from SelectedWork */}
         <div className="projects-grid">
@@ -43,8 +43,8 @@ const WorkPage = ({ onProjectClick }) => {
             <div style={{ color: '#fff', padding: '2rem' }}>Loading works...</div>
           ) : (
             projects.map((project, index) => (
-              <motion.div 
-                className="project-card" 
+              <motion.div
+                className="project-card"
                 key={project._id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -57,10 +57,10 @@ const WorkPage = ({ onProjectClick }) => {
               >
                 <div className="project-image-wrapper">
                   {project.image && (
-                    <img 
-                      src={urlFor(project.image).url()} 
-                      alt={project.title} 
-                      className="project-image" 
+                    <img
+                      src={urlFor(project.image).url()}
+                      alt={project.title}
+                      className="project-image"
                     />
                   )}
                   <div className="hover-overlay">

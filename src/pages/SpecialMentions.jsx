@@ -137,7 +137,7 @@ const SpecialMentions = ({ onNavClick }) => {
               </div>
               <div className="sm-person-right-panel">
                 <div className="sm-bg-quote">“</div>
-                <div className="sm-section-title sm-orange-text">WHAT THEY GAVE ME</div>
+                <div className="sm-section-title sm-orange-text">WHAT SHE GAVE ME</div>
                 <div className="sm-serif sm-keywords">
                   <div>Patience.</div>
                   <div>Perspective.</div>
@@ -194,7 +194,7 @@ const SpecialMentions = ({ onNavClick }) => {
                   <div>The courage to create.</div>
                   <div>A brother for life.</div>
                 </div>
-                <div className="sm-script">Thank you<br />always.</div>
+                <div className="sm-script">Thank you<br />brother.</div>
               </div>
             </div>
           </motion.div>
