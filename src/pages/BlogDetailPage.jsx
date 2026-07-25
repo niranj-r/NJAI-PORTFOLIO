@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FiArrowDown, FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
-import { FaInstagram, FaTwitter, FaFacebookF } from 'react-icons/fa';
+import { FiArrowDown, FiArrowLeft, FiArrowUpRight, FiMail } from 'react-icons/fi';
+import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
 import { PortableText } from '@portabletext/react';
 import { client, urlFor } from '../lib/sanity';
 import "../styles/BlogDetailPage.css";
@@ -107,19 +108,34 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
               </div>
             </div>
             <div className="bd-social-footer">
-              <a href="#!" className="bd-social-link">
+              <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="bd-social-link">
                 <FaInstagram className="bd-social-icon" />
                 <span className="bd-social-text">INSTAGRAM</span>
                 <FiArrowUpRight className="bd-social-arrow" />
               </a>
-              <a href="#!" className="bd-social-link">
-                <FaTwitter className="bd-social-icon" />
-                <span className="bd-social-text">TWITTER</span>
+              <a href="https://www.linkedin.com/in/niranj-r/" target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                <FaLinkedinIn className="bd-social-icon" />
+                <span className="bd-social-text">LINKEDIN</span>
                 <FiArrowUpRight className="bd-social-arrow" />
               </a>
-              <a href="#!" className="bd-social-link">
-                <FaFacebookF className="bd-social-icon" />
-                <span className="bd-social-text">FACEBOOK</span>
+              <a href="https://github.com/niranj-r" target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                <FaGithub className="bd-social-icon" />
+                <span className="bd-social-text">GITHUB</span>
+                <FiArrowUpRight className="bd-social-arrow" />
+              </a>
+              <a href="mailto:niranj.njai@gmail.com" className="bd-social-link">
+                <FiMail className="bd-social-icon" />
+                <span className="bd-social-text">EMAIL</span>
+                <FiArrowUpRight className="bd-social-arrow" />
+              </a>
+              <a href="https://wa.me/919567655760" target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                <FaWhatsapp className="bd-social-icon" />
+                <span className="bd-social-text">WHATSAPP</span>
+                <FiArrowUpRight className="bd-social-arrow" />
+              </a>
+              <a href="https://www.threads.com/@cre.a.tor_nj" target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                <FaThreads className="bd-social-icon" />
+                <span className="bd-social-text">THREADS</span>
                 <FiArrowUpRight className="bd-social-arrow" />
               </a>
             </div>

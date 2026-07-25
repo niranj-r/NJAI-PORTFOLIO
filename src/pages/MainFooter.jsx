@@ -1,9 +1,10 @@
 import React from 'react';
-import { FiInstagram, FiTwitter, FiDribbble, FiArrowUpRight, FiArrowUp, FiSun, FiMoon } from 'react-icons/fi';
-import { FaBehance } from 'react-icons/fa';
+import { FiArrowUpRight, FiArrowUp, FiSun, FiMoon, FiMail } from 'react-icons/fi';
+import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
 import "../styles/MainFooter.css";
 
-const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick }) => {
+const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpenPrivacy, onOpenTerms, onNavClick }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -16,21 +17,25 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
         <div className="footer-column logo-column">
           <h2 className="footer-logo">niranj.</h2>
           <div className="footer-socials-list">
-            <a href="#!" className="social-list-item">
-              <span className="social-icon-circle"><FiInstagram /></span>
+            <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="social-list-item">
+              <span className="social-icon-circle"><FaInstagram /></span>
               <span className="social-label">INSTAGRAM</span>
             </a>
-            <a href="#!" className="social-list-item">
-              <span className="social-icon-circle"><FiTwitter /></span>
-              <span className="social-label">TWITTER</span>
+            <a href="https://www.linkedin.com/in/niranj-r/" target="_blank" rel="noopener noreferrer" className="social-list-item">
+              <span className="social-icon-circle"><FaLinkedinIn /></span>
+              <span className="social-label">LINKEDIN</span>
             </a>
-            <a href="#!" className="social-list-item">
-              <span className="social-icon-circle"><FiDribbble /></span>
-              <span className="social-label">DRIBBBLE</span>
+            <a href="https://github.com/niranj-r" target="_blank" rel="noopener noreferrer" className="social-list-item">
+              <span className="social-icon-circle"><FaGithub /></span>
+              <span className="social-label">GITHUB</span>
             </a>
-            <a href="#!" className="social-list-item">
-              <span className="social-icon-circle"><FaBehance /></span>
-              <span className="social-label">BEHANCE</span>
+            <a href="mailto:niranj.njai@gmail.com" className="social-list-item">
+              <span className="social-icon-circle"><FiMail /></span>
+              <span className="social-label">EMAIL</span>
+            </a>
+            <a href="https://wa.me/919567655760" target="_blank" rel="noopener noreferrer" className="social-list-item">
+              <span className="social-icon-circle"><FaWhatsapp /></span>
+              <span className="social-label">WHATSAPP</span>
             </a>
           </div>
         </div>
@@ -39,10 +44,10 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
         <div className="footer-column links-column">
           <h3 className="column-title">Pages</h3>
           <ul className="footer-links">
-            <li><a href="#!">HOME</a></li>
-            <li><a href="#!">SERVICES</a></li>
-            <li><a href="#!">ABOUT</a></li>
-            <li><a href="#!">CONTACT</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('home'); }}>HOME</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('home'); }}>SERVICES</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('about'); }}>ABOUT</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('contact'); }}>CONTACT</a></li>
           </ul>
           <button className="footer-btn">
             CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" />
@@ -53,20 +58,17 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
         <div className="footer-column links-column">
           <h3 className="column-title">CMS</h3>
           <ul className="footer-links">
-            <li><a href="#!">WORK</a></li>
-            <li><a href="#!">WORK SINGLE</a></li>
-            <li><a href="#!">BLOG</a></li>
-            <li><a href="#!">BLOG POST</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('work'); }}>WORK</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('blog'); }}>BLOG</a></li>
           </ul>
         </div>
 
         {/* Utility Pages Column */}
         <div className="footer-column links-column">
-          <h3 className="column-title">Miscellaneos</h3>
+          <h3 className="column-title">Miscellaneous</h3>
           <ul className="footer-links">
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('404'); }}>404 ERROR PAGE</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('specialMentions'); }}>SPECIAL MENTIONS</a></li>
-            <li><a href="#!">STYLEGUIDE</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onOpenPrivacy?.(); }}>PRIVACY POLICY</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onOpenTerms?.(); }}>TERMS & CONDITIONS</a></li>
           </ul>
@@ -80,6 +82,28 @@ const MainFooter = ({ theme, toggleTheme, onOpenPrivacy, onOpenTerms, onNavClick
         </div>
 
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          {/*<div className="theme-toggle" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span className="to-top-text">CHOOSE COLOR</span>
+            <div className="to-top-circle" style={{ position: 'relative' }}>
+              <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: theme === 'dark' ? '#FF4D00' : customColor }}></div>
+              <input 
+                type="color" 
+                value={theme === 'dark' ? '#FF4D00' : customColor} 
+                onChange={handleColorChange}
+                style={{
+                  position: 'absolute',
+                  opacity: 0,
+                  width: '100%',
+                  height: '100%',
+                  cursor: 'pointer',
+                  padding: 0,
+                  border: 'none'
+                }}
+                title="Choose Color for Light Mode"
+              />
+            </div>
+          </div>*/}
+
           <div className="theme-toggle" onClick={toggleTheme} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span className="to-top-text">{theme === 'light' ? 'DARK MODE' : 'LIGHT MODE'}</span>
             <div className="to-top-circle">

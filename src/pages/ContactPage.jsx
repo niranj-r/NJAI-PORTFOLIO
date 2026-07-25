@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
-import { FaInstagram, FaTwitter, FaFacebookF, FaBehance, FaDribbble, FaPinterestP } from 'react-icons/fa';
+import { FiArrowLeft, FiArrowUpRight, FiMail } from 'react-icons/fi';
+import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
 import "../styles/ContactPage.css";
 import heroImgDark from '../assets/hero.webp';
 import heroImgLight from '../assets/hero-light.webp';
@@ -64,34 +65,34 @@ const ContactPage = ({ onBack, theme }) => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
           >
-            <a href="#!" className="contact-social-item">
+            <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="contact-social-item">
               <FaInstagram className="social-icon" />
               <span className="social-text">INSTAGRAM</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#!" className="contact-social-item">
-              <FaTwitter className="social-icon" />
-              <span className="social-text">TWITTER</span>
+            <a href="https://www.linkedin.com/in/niranj-r/" target="_blank" rel="noopener noreferrer" className="contact-social-item">
+              <FaLinkedinIn className="social-icon" />
+              <span className="social-text">LINKEDIN</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#!" className="contact-social-item">
-              <FaFacebookF className="social-icon" />
-              <span className="social-text">FACEBOOK</span>
+            <a href="https://github.com/niranj-r" target="_blank" rel="noopener noreferrer" className="contact-social-item">
+              <FaGithub className="social-icon" />
+              <span className="social-text">GITHUB</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#!" className="contact-social-item">
-              <FaBehance className="social-icon" />
-              <span className="social-text">BEHANCE</span>
+            <a href="mailto:niranj.njai@gmail.com" className="contact-social-item">
+              <FiMail className="social-icon" />
+              <span className="social-text">EMAIL</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#!" className="contact-social-item">
-              <FaDribbble className="social-icon" />
-              <span className="social-text">DRIBBBLE</span>
+            <a href="https://wa.me/919567655760" target="_blank" rel="noopener noreferrer" className="contact-social-item">
+              <FaWhatsapp className="social-icon" />
+              <span className="social-text">WHATSAPP</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="#!" className="contact-social-item">
-              <FaPinterestP className="social-icon" />
-              <span className="social-text">PINTEREST</span>
+            <a href="https://www.threads.com/@cre.a.tor_nj" target="_blank" rel="noopener noreferrer" className="contact-social-item">
+              <FaThreads className="social-icon" />
+              <span className="social-text">THREADS</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
           </motion.div>

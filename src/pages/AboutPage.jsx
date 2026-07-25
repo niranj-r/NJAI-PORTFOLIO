@@ -5,6 +5,9 @@ import heroImgDark from "../assets/frame10.webp";
 import heroImgLight from "../assets/frame10-light.webp";
 import aboutImg from "../assets/frame30.webp";
 import nameImg from "../assets/name.webp";
+import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
+import { FiMail } from 'react-icons/fi';
 
 export default function AboutPage({ theme }) {
   const heroImg = theme === 'light' ? heroImgLight : heroImgDark;
@@ -136,39 +139,39 @@ export default function AboutPage({ theme }) {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <a href="#!" className="about-social-btn">
-            <i className="fab fa-instagram about-icon"></i>
+          <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="about-social-btn">
+            <FaInstagram className="about-icon" />
             <span className="about-social-text">INSTAGRAM</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#!" className="about-social-btn">
-            <i className="fab fa-twitter about-icon"></i>
-            <span className="about-social-text">TWITTER</span>
-            <span className="about-arrow">↗</span>
-          </a>
-
-          <a href="#!" className="about-social-btn">
-            <i className="fab fa-facebook-f about-icon"></i>
-            <span className="about-social-text">FACEBOOK</span>
-            <span className="about-arrow">↗</span>
-          </a>
-
-          <a href="#!" className="about-social-btn">
-            <i className="fab fa-github about-icon"></i>
-            <span className="about-social-text">GITHUB</span>
-            <span className="about-arrow">↗</span>
-          </a>
-
-          <a href="#!" className="about-social-btn">
-            <i className="fab fa-linkedin about-icon"></i>
+          <a href="https://www.linkedin.com/in/niranj-r/" target="_blank" rel="noopener noreferrer" className="about-social-btn">
+            <FaLinkedinIn className="about-icon" />
             <span className="about-social-text">LINKEDIN</span>
             <span className="about-arrow">↗</span>
           </a>
 
-          <a href="#!" className="about-social-btn">
-            <i className="fab fa-pinterest about-icon"></i>
-            <span className="about-social-text">PINTEREST</span>
+          <a href="https://github.com/niranj-r" target="_blank" rel="noopener noreferrer" className="about-social-btn">
+            <FaGithub className="about-icon" />
+            <span className="about-social-text">GITHUB</span>
+            <span className="about-arrow">↗</span>
+          </a>
+
+          <a href="mailto:niranj.njai@gmail.com" className="about-social-btn">
+            <FiMail className="about-icon" />
+            <span className="about-social-text">EMAIL</span>
+            <span className="about-arrow">↗</span>
+          </a>
+
+          <a href="https://wa.me/919567655760" target="_blank" rel="noopener noreferrer" className="about-social-btn">
+            <FaWhatsapp className="about-icon" />
+            <span className="about-social-text">WHATSAPP</span>
+            <span className="about-arrow">↗</span>
+          </a>
+
+          <a href="https://www.threads.com/@cre.a.tor_nj" target="_blank" rel="noopener noreferrer" className="about-social-btn">
+            <FaThreads className="about-icon" />
+            <span className="about-social-text">THREADS</span>
             <span className="about-arrow">↗</span>
           </a>
         </motion.div>

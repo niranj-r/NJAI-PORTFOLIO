@@ -36,6 +36,8 @@ function App() {
     return localStorage.getItem('theme') || 'dark';
   });
 
+  const [customColor, setCustomColor] = useState('#FF4D00');
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -43,6 +45,14 @@ function App() {
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (theme === 'light') {
+      document.documentElement.style.setProperty('--user-color', customColor);
+    } else {
+      document.documentElement.style.removeProperty('--user-color');
+    }
+  }, [theme, customColor]);
 
   useEffect(() => {
     // Loading timer
@@ -54,6 +64,13 @@ function App() {
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  const handleColorChange = (e) => {
+    setCustomColor(e.target.value);
+    if (theme === 'dark') {
+      setTheme('light');
+    }
   };
 
   useEffect(() => {
@@ -72,6 +89,8 @@ function App() {
   const footerProps = {
     theme,
     toggleTheme,
+    customColor,
+    handleColorChange,
     onOpenPrivacy: () => setIsPrivacyOpen(true),
     onOpenTerms: () => setIsTermsOpen(true),
     onNavClick: (view) => setCurrentView(view)

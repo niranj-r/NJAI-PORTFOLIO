@@ -1,6 +1,9 @@
 import React from 'react';
 import { FiArrowLeft, FiArrowDown } from 'react-icons/fi';
 import "../styles/ServiceDetailPage.css";
+import imgDesignExperience from '../assets/Services/DESIGN&EXPERIENCE.webp';
+import imgDevelopment from '../assets/Services/DEVELOPMENT.webp';
+import imgBrandIdentity from '../assets/Services/BRANDING.webp';
 
 const ServiceDetailPage = ({ onBack }) => {
   return (
@@ -35,20 +38,20 @@ const ServiceDetailPage = ({ onBack }) => {
       {/* Stats Row */}
       <div className="sd-stats-row">
         <div className="sd-stat">
-          <p>CLIENTS</p>
-          <h2>150+</h2>
-        </div>
-        <div className="sd-stat">
           <p>PROJECTS</p>
-          <h2>300+</h2>
+          <h2>30+</h2>
         </div>
         <div className="sd-stat">
-          <p>HAPPY CLIENTS</p>
-          <h2>100%</h2>
+          <p>YEARS OF CREATING</p>
+          <h2>3+</h2>
         </div>
         <div className="sd-stat">
-          <p>FOLLOWERS</p>
-          <h2>100K</h2>
+          <p>DESIGN HOURS</p>
+          <h2>2200+</h2>
+        </div>
+        <div className="sd-stat">
+          <p>LINES OF CODE</p>
+          <h2>250K+</h2>
         </div>
       </div>
 
@@ -58,28 +61,28 @@ const ServiceDetailPage = ({ onBack }) => {
         {/* Section 1 */}
         <div className="sd-section-block">
           <div className="sd-section-header">
-            <span className="sd-section-category">WEBDESIGN</span>
-            <h2 className="sd-section-title">Transforming Your Ideas into Reality</h2>
+            <span className="sd-section-category">DESIGN & EXPERIENCE</span>
+            <h2 className="sd-section-title">Designing Experiences That<br />People Remember</h2>
           </div>
           <div className="sd-section-image-wrapper">
             <img
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000"
+              src={imgDesignExperience}
               alt="Idea to Reality"
               className="sd-section-image"
             />
           </div>
           <div className="sd-features-list">
             <div className="sd-feature-row">
-              <div className="sd-feature-label">CONCEPT</div>
-              <p className="sd-feature-text">I take time to understand your business needs and audience to develop a unique concept for your website. I'll create wireframes that serve as the foundation for your site's design and functionality.</p>
+              <div className="sd-feature-label">DISCOVERY</div>
+              <p className="sd-feature-text">Every project starts with understanding the goals, audience, and challenges behind the idea. Research, planning, and information architecture create a strong foundation before design begins.</p>
             </div>
             <div className="sd-feature-row">
               <div className="sd-feature-label">UX / UI DESIGN</div>
-              <p className="sd-feature-text">I'll design a user-friendly interface that is visually appealing and engages your target audience. Your website will be created to meet your brand's needs and goals while ensuring a seamless user experience.</p>
+              <p className="sd-feature-text">Great design puts clarity, accessibility, and usability front and center. Every screen is crafted to look beautiful and work flawlessly, making the entire experience feel completely natural.</p>
             </div>
             <div className="sd-feature-row">
               <div className="sd-feature-label">PROTOTYPE</div>
-              <p className="sd-feature-text">With an interactive prototype, you'll have the ability to test your website's functionality before it goes live. This will ensure that your website's design and user experience are optimized for your audience's needs and preferences.</p>
+              <p className="sd-feature-text">Prototypes turn ideas into reality before the coding even starts. They are the perfect way to test, tweak, and perfect the experience so that every detail hits the mark.</p>
             </div>
           </div>
         </div>
@@ -88,27 +91,27 @@ const ServiceDetailPage = ({ onBack }) => {
         <div className="sd-section-block">
           <div className="sd-section-header">
             <span className="sd-section-category">DEVELOPMENT</span>
-            <h2 className="sd-section-title">Developing High-Performance<br />Websites and Web Applications</h2>
+            <h2 className="sd-section-title">Building Fast, Scalable<br />Digital Products</h2>
           </div>
           <div className="sd-section-image-wrapper">
             <img
-              src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=1000"
+              src={imgDevelopment}
               alt="High Performance"
               className="sd-section-image"
             />
           </div>
           <div className="sd-features-list">
             <div className="sd-feature-row">
-              <div className="sd-feature-label">FRAMER</div>
-              <p className="sd-feature-text">I specialize in developing web applications using Framer. From custom animations to complex interactions, I bring your web app to life.</p>
+              <div className="sd-feature-label">PERFORMANCE MEETS PRECISION</div>
+              <p className="sd-feature-text">Building great digital products takes more than just writing clean code. Every solution needs to be accessible, easy to scale, and built to last, ensuring a flawless experience on any device.</p>
             </div>
             <div className="sd-feature-row">
-              <div className="sd-feature-label">CMS INTEGRATION</div>
-              <p className="sd-feature-text">I can help you streamline your content management process by integrating a CMS into your website. Say goodbye to manual updates and hello to efficiency.</p>
+              <div className="sd-feature-label">FRONT-END DEVELOPMENT</div>
+              <p className="sd-feature-text">I build responsive interfaces using a modern, component-driven approach to ensure they load fast, feel smooth, and perform consistently.</p>
             </div>
             <div className="sd-feature-row">
-              <div className="sd-feature-label">WEB DESIGN SYSTEM</div>
-              <p className="sd-feature-text">I use a modular design approach to create a web design system that ensures consistency throughout your website. This results in a professional and cohesive online presence.</p>
+              <div className="sd-feature-label">OPTIMIZATION</div>
+              <p className="sd-feature-text">True optimization is about removing the friction. It means fine-tuning every asset and streamlining the code so the final product loads instantly, runs smoothly, and feels completely effortless.</p>
             </div>
           </div>
         </div>
@@ -116,34 +119,38 @@ const ServiceDetailPage = ({ onBack }) => {
         {/* Section 3 */}
         <div className="sd-section-block">
           <div className="sd-section-header">
-            <span className="sd-section-category">SEO & CONTENT</span>
-            <h2 className="sd-section-title">Boosting Your Website's Organic<br />Search Traffic</h2>
+            <span className="sd-section-category">BRAND IDENTITY</span>
+            <h2 className="sd-section-title">Building Brands That Leave an<br />Impression</h2>
           </div>
           <div className="sd-section-image-wrapper">
             <img
-              src="https://images.unsplash.com/photo-1605236453806-6ff3685e219e?auto=format&fit=crop&q=80&w=1000"
+              src={imgBrandIdentity}
               alt="Search Traffic Phone"
               className="sd-section-image"
             />
           </div>
           <div className="sd-features-list">
             <div className="sd-feature-row">
-              <div className="sd-feature-label">RESEARCH</div>
-              <p className="sd-feature-text">I conduct thorough research to identify the best keywords and strategies to improve your website's search engine ranking.</p>
+              <div className="sd-feature-label">MORE THAN JUST A LOGO</div>
+              <p className="sd-feature-text">A strong brand communicates personality, values, and purpose. Every visual element is thoughtfully designed to create recognition, consistency, and meaningful connections across every touchpoint.</p>
             </div>
             <div className="sd-feature-row">
-              <div className="sd-feature-label">SEO RANKING</div>
-              <p className="sd-feature-text">My SEO services are designed to improve your website's visibility on search engines, increasing your organic traffic and driving more leads and sales.</p>
+              <div className="sd-feature-label">BRAND STRATEGY</div>
+              <p className="sd-feature-text">A clear creative direction is established by understanding the brand's vision, audience, positioning, and personality before visual exploration begins.</p>
             </div>
             <div className="sd-feature-row">
-              <div className="sd-feature-label">SEO SUPPORT</div>
-              <p className="sd-feature-text">With ongoing SEO support, I ensure that your website stays up-to-date with the latest SEO best practices, keeping you ahead of the competition.</p>
+              <div className="sd-feature-label">VISUAL IDENTITY</div>
+              <p className="sd-feature-text">Logos, typography, color systems, and supporting graphic elements come together to create a distinctive identity that remains consistent across digital and print experiences.</p>
+            </div>
+            <div className="sd-feature-row">
+              <div className="sd-feature-label">BRAND SYSTEMS</div>
+              <p className="sd-feature-text">Comprehensive design systems and brand guidelines ensure consistency across websites, social media, presentations, marketing materials, and every future brand interaction.</p>
             </div>
           </div>
         </div>
 
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -45,22 +45,52 @@
   --text-tertiary: #3A231D;
   --text-muted: #73584F;
 
-  --brand-primary: #FF4D00;
-  --brand-hover: #ff4400;
-  --brand-active: #a93401;
+  --brand-primary: var(--user-color, #FF4D00);
+  --brand-hover: color-mix(in srgb, var(--brand-primary) 85%, black);
+  --brand-active: color-mix(in srgb, var(--brand-primary) 65%, black);
 
   --border-color: #E6D0C4;
-  --border-light: rgba(255, 77, 0, 0.15);
-  --border-lighter: rgba(255, 77, 0, 0.1);
-  --border-faint: rgba(255, 77, 0, 0.05);
-  --border-extra-faint: rgba(255, 77, 0, 0.02);
+  --border-light: color-mix(in srgb, var(--brand-primary) 15%, transparent);
+  --border-lighter: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+  --border-faint: color-mix(in srgb, var(--brand-primary) 5%, transparent);
+  --border-extra-faint: color-mix(in srgb, var(--brand-primary) 2%, transparent);
 
   --shadow-color: rgba(60, 20, 10, 0.08);
-  --shadow-light: rgba(255, 69, 0, 0.15);
+  --shadow-light: color-mix(in srgb, var(--brand-primary) 15%, transparent);
 
   --f2-ring-1: #FFFFFF;
   --f2-ring-2: #FFFFFF;
 }
+
+[data-theme="light"][data-color="blue"] {
+  --bg-primary: #FAFCFF;
+  --bg-secondary: #F0F5FF;
+  --bg-tertiary: #FAFCFF;
+  --bg-accent: #F5F8FF;
+  --bg-accent2: #C9DBFF;
+  --bg-accent3: #BCCFFF;
+  --bg-accent4: #F5F8FF;
+  --bg-accent5: #E8F0FF;
+
+  --text-primary: #141C2C;
+  --text-secondary: #2C384A;
+  --text-tertiary: #1D283A;
+  --text-muted: #4F5E73;
+
+  --brand-primary: #0066FF;
+  --brand-hover: #0052cc;
+  --brand-active: #003d99;
+
+  --border-color: #C4D0E6;
+  --border-light: rgba(0, 102, 255, 0.15);
+  --border-lighter: rgba(0, 102, 255, 0.1);
+  --border-faint: rgba(0, 102, 255, 0.05);
+  --border-extra-faint: rgba(0, 102, 255, 0.02);
+
+  --shadow-color: rgba(10, 20, 60, 0.08);
+  --shadow-light: rgba(0, 102, 255, 0.15);
+}
+
 
 body {
   margin: 0;
