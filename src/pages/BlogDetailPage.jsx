@@ -5,6 +5,7 @@ import { FaThreads } from 'react-icons/fa6';
 import { PortableText } from '@portabletext/react';
 // import { client, urlFor } from '../lib/sanity';
 import mockBlogs from '../data/blogs.json';
+import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/BlogDetailPage.css";
 import "../styles/BlogPage.css";
 import authorImage from '../assets/frame30.webp';
@@ -50,12 +51,12 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
 
   return (
     <div className="blog-detail-page">
-      {/*<div className="bd-header-controls">
+      <div className="bd-header-controls">
         <div className="bd-back-button" onClick={onBack}>
-          <span className="icon-circle"><FiArrowLeft /></span>
-          <span className="button-text">BACK TO BLOG</span>
+          {/*<span className="icon-circle"><FiArrowLeft /></span>
+          <span className="button-text">BACK TO BLOG</span>*/}
         </div>
-      </div>*/}
+      </div>
 
       <div className="bd-hero">
         <h1 className="bd-hero-title">{blog.title}</h1>
@@ -84,7 +85,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
         <div className="bd-hero-image-wrapper">
           {blog.image && (
             <img
-              src={blog.image}
+              src={getImageUrl(blog.image)}
               alt={blog.title}
               className="bd-hero-image"
             />
@@ -114,7 +115,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
               {blog.conclusion}
             </p>
             <div className="bd-author">
-              <img src={blog.author?.image || authorImage} alt="Author" className="bd-author-avatar" />
+              <img src={blog.author?.image ? getImageUrl(blog.author.image) : authorImage} alt="Author" className="bd-author-avatar" />
               <div className="bd-author-info">
                 <span className="bd-author-name">{blog.author?.name || 'NIRANJ R'}</span>
                 <span className="bd-author-role">{blog.author?.role || 'CEO'}</span>
@@ -181,7 +182,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
           {relatedPosts.map((post) => (
             <div className="blog-card" key={post._id} style={{ cursor: 'pointer' }}>
               <div className="blog-image-wrapper">
-                {post.image && <img src={post.image} alt={post.title} className="blog-image" />}
+                {post.image && <img src={getImageUrl(post.image)} alt={post.title} className="blog-image" />}
               </div>
               <div className="blog-content">
                 <span className="blog-date">{post.date}</span>

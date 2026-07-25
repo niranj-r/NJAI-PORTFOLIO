@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiArrowDown, FiArrowLeft } from 'react-icons/fi';
 // import { client, urlFor } from '../lib/sanity';
 import mockWorks from '../data/works.json';
+import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/WorkDetailPage.css";
 
 const WorkDetailPage = ({ onBack, projectTitle }) => {
@@ -13,7 +14,7 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
       try {
         // const query = '*[_type == "work" && title == $title][0]';
         // const data = await client.fetch(query, { title: projectTitle });
-        const data = await new Promise(resolve => 
+        const data = await new Promise(resolve =>
           setTimeout(() => resolve(mockWorks.find(w => w.title === projectTitle)), 400)
         );
         setProject(data);
@@ -38,15 +39,15 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
     <div className="work-detail-page">
       <div className="wd-header-controls">
         <div className="wd-back-button" onClick={onBack}>
-          <span className="icon-circle"><FiArrowLeft /></span>
-          <span className="button-text">BACK TO WORK</span>
+          {/*<span className="icon-circle"><FiArrowLeft /></span>
+          <span className="button-text">BACK TO WORK</span>*/}
         </div>
       </div>
 
       <div className="wd-hero">
         <h1 className="wd-hero-title">{project.title}</h1>
         <p className="wd-hero-subtitle">{project.category || 'Website Project'}</p>
-        
+
         <div className="wd-stats-row">
           <div className="wd-stat-box">
             <span className="wd-stat-label">CLIENT</span>
@@ -77,9 +78,9 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
 
         <div className="wd-hero-image-wrapper">
           {project.image && (
-            <img 
-              src={project.image} 
-              alt={project.title} 
+            <img
+              src={getImageUrl(project.image)}
+              alt={project.title}
               className="wd-hero-image"
             />
           )}
@@ -90,7 +91,7 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
         <div className="wd-details-section">
           <div className="wd-details-left">
             <span className="wd-about-label">ABOUT</span>
-            <h2 className="wd-about-title">Concept, Design, and<br/>Development. All-in-one.</h2>
+            <h2 className="wd-about-title">Concept, Design, and<br />Development. All-in-one.</h2>
           </div>
           <div className="wd-details-right">
             {project.challenge && (

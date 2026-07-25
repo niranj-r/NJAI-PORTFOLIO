@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiArrowUpRight } from 'react-icons/fi';
 // import { client, urlFor } from '../lib/sanity';
 import mockWorks from '../data/works.json';
+import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/SelectedWork.css";
 import "../styles/WorkPage.css";
 
@@ -60,7 +61,7 @@ const WorkPage = ({ onProjectClick }) => {
                 <div className="project-image-wrapper">
                   {project.image && (
                     <img
-                      src={project.image}
+                      src={getImageUrl(project.image)}
                       alt={project.title}
                       className="project-image"
                     />
@@ -69,9 +70,13 @@ const WorkPage = ({ onProjectClick }) => {
                     <div className="hover-icon"><FiArrowUpRight /></div>
                   </div>
                 </div>
-                <div className="project-info">
-                  <span className="project-name">{project.title}</span>
-                  <span className="project-category">{project.category}</span>
+                <div className="project-info wp-project-info">
+                  <h3 className="wp-project-name">
+                    {project.title}
+                  </h3>
+                  <p className="wp-project-desc">
+                    {project.challenge || project.category}
+                  </p>
                 </div>
               </motion.div>
             ))

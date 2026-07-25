@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 // import { client, urlFor } from '../lib/sanity';
 import mockBlogs from '../data/blogs.json';
+import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/BlogPage.css";
 
 const BlogPage = ({ onBlogClick }) => {
@@ -57,7 +58,7 @@ const BlogPage = ({ onBlogClick }) => {
                 <div className="blog-image-wrapper">
                   {post.image && (
                     <img 
-                      src={post.image} 
+                      src={getImageUrl(post.image)} 
                       alt={post.title} 
                       className="blog-image" 
                     />

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FiArrowUpRight } from 'react-icons/fi';
 // import { client, urlFor } from '../lib/sanity';
 import mockWorks from '../data/works.json';
+import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/SelectedWork.css";
 
 const SelectedWork = ({ onNavClick, onProjectClick }) => {
@@ -65,7 +66,7 @@ const SelectedWork = ({ onNavClick, onProjectClick }) => {
               <div className="project-image-wrapper">
                 {project.image && (
                   <img 
-                    src={project.image} 
+                    src={getImageUrl(project.image)} 
                     alt={project.title} 
                     className="project-image" 
                   />

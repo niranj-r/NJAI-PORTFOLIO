@@ -26,7 +26,7 @@ const testimonialsData = [
     company: "Design Inc.",
     avatar: "https://randomuser.me/api/portraits/men/44.jpg"
   },
-  {
+  /*{
     id: 3,
     theme: 'dark',
     logo: 'logoipsum',
@@ -65,7 +65,7 @@ const testimonialsData = [
     author: "RYAN CHEN",
     company: "Golden Gate Solutions",
     avatar: "https://randomuser.me/api/portraits/men/62.jpg"
-  }
+  }*/
 ];
 
 const Testimonials = () => {
