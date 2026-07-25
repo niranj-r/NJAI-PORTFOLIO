@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiArrowDown, FiArrowLeft } from 'react-icons/fi';
-import { client, urlFor } from '../lib/sanity';
+// import { client, urlFor } from '../lib/sanity';
+import mockWorks from '../data/works.json';
 import "../styles/WorkDetailPage.css";
 
 const WorkDetailPage = ({ onBack, projectTitle }) => {
@@ -10,8 +11,11 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const query = '*[_type == "work" && title == $title][0]';
-        const data = await client.fetch(query, { title: projectTitle });
+        // const query = '*[_type == "work" && title == $title][0]';
+        // const data = await client.fetch(query, { title: projectTitle });
+        const data = await new Promise(resolve => 
+          setTimeout(() => resolve(mockWorks.find(w => w.title === projectTitle)), 400)
+        );
         setProject(data);
       } catch (error) {
         console.error("Error fetching project:", error);
@@ -74,7 +78,7 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
         <div className="wd-hero-image-wrapper">
           {project.image && (
             <img 
-              src={urlFor(project.image).url()} 
+              src={project.image} 
               alt={project.title} 
               className="wd-hero-image"
             />

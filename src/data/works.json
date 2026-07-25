@@ -1,0 +1,28 @@
+[
+  {
+    "_id": "work-1",
+    "title": "Sample Project One",
+    "category": "Web Design",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
+    "client": "Acme Corp",
+    "timeline": "2 Weeks",
+    "services": "UI/UX, Frontend",
+    "websiteUrl": "https://example.com",
+    "challenge": "The client needed a modern, responsive website to replace their outdated 90s-era design.",
+    "goal": "Create a fast, accessible, and visually appealing site to drive user engagement and sales.",
+    "result": "Increased user retention by 40% and doubled the conversion rate within the first month."
+  },
+  {
+    "_id": "work-2",
+    "title": "Sample Project Two",
+    "category": "E-commerce",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+    "client": "Global Tech",
+    "timeline": "1 Month",
+    "services": "Full-stack, Branding",
+    "websiteUrl": "https://example.com",
+    "challenge": "Building a scalable e-commerce platform that handles high traffic spikes.",
+    "goal": "Implement a robust frontend using React and optimize the user flow from product to checkout.",
+    "result": "Achieved sub-second load times and a seamless checkout experience."
+  }
+]

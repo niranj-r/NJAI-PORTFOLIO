@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { client, urlFor } from '../lib/sanity';
+// import { client, urlFor } from '../lib/sanity';
+import mockBlogs from '../data/blogs.json';
 import "../styles/BlogPage.css";
 
 const BlogPage = ({ onBlogClick }) => {
@@ -10,8 +11,9 @@ const BlogPage = ({ onBlogClick }) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const query = '*[_type == "blog"] | order(date desc)';
-        const data = await client.fetch(query);
+        // const query = '*[_type == "blog"] | order(date desc)';
+        // const data = await client.fetch(query);
+        const data = await new Promise(resolve => setTimeout(() => resolve(mockBlogs), 400));
         setBlogPosts(data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -55,7 +57,7 @@ const BlogPage = ({ onBlogClick }) => {
                 <div className="blog-image-wrapper">
                   {post.image && (
                     <img 
-                      src={urlFor(post.image).url()} 
+                      src={post.image} 
                       alt={post.title} 
                       className="blog-image" 
                     />

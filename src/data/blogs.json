@@ -1,0 +1,68 @@
+[
+  {
+    "_id": "blog-1",
+    "title": "AI in Web Development: Smarter Ways to Build the Web",
+    "subheading": "Discover how artificial intelligence is transforming modern web development by accelerating coding, enhancing design workflows, and improving developer productivity.",
+    "category": "Artificial Intelligence",
+    "date": "2026-07-25",
+    "readingTime": "4 MIN",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+    "content": "Artificial Intelligence (AI) is transforming the world of software development, and web development is no exception. Tasks that once required hours of coding, debugging, or designing can now be completed much faster with AI-powered tools. Rather than replacing developers, AI serves as an intelligent assistant that automates repetitive tasks, generates code, and provides valuable recommendations throughout the development process.\n\nOne of the greatest advantages of AI in web development is the significant boost in productivity. Tools like ChatGPT and GitHub Copilot help developers generate code snippets, explain complex programming concepts, identify bugs, and even suggest improvements. Beyond coding, AI also supports UI/UX design, content generation, SEO optimization, and the creation of intelligent chatbots, allowing teams to deliver better user experiences while reducing development time.\n\nDespite its capabilities, AI is not a complete replacement for human expertise. AI-generated code should always be reviewed, tested, and validated before deployment. Models can occasionally produce inaccurate solutions, introduce security vulnerabilities, or recommend inefficient implementations. Critical thinking, problem-solving, and technical knowledge remain essential for building reliable and secure web applications. The most effective approach is to use AI as a productivity tool that complements, rather than replaces, human developers.\n\nAs AI technology continues to evolve, it is becoming an integral part of the modern web development workflow. From rapid prototyping and automated testing to personalized user experiences and intelligent development assistants, AI is reshaping how digital products are designed and built. Developers who combine strong technical skills with the effective use of AI tools will be better positioned to create innovative, efficient, and future-ready web applications.",
+    "conclusion": "AI is not here to replace developers—it's here to empower them. The future belongs to those who can combine human creativity, critical thinking, and technical expertise with the speed and intelligence of AI.",
+    "author": {
+      "name": "NIRANJ R",
+      "role": "CEO",
+      "image": "frame30.webp",
+      "socials": {
+        "instagram": "https://www.instagram.com/cre.a.tor_nj/",
+        "linkedin": "https://www.linkedin.com/in/niranj-r/",
+        "github": "https://github.com/niranj-r",
+        "email": "mailto:niranj.njai@gmail.com",
+        "whatsapp": "https://wa.me/919567655760",
+        "threads": "https://www.threads.com/@cre.a.tor_nj"
+      }
+    }
+  },
+  {
+    "_id": "blog-2",
+    "title": "The Future of Frontend Development",
+    "subheading": "How React, server components, and edge computing are changing the way we build the web.",
+    "category": "Technology",
+    "date": "2026-07-20",
+    "readingTime": "5 MIN",
+    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&q=80&w=1000",
+    "content": "Frontend development is evolving rapidly. With the rise of AI tools, modern frameworks, and better user experience practices, building scalable applications has never been more exciting. In this post, we explore how React and its ecosystem continue to dominate and push the boundaries of performance and developer experience.",
+    "conclusion": "The tools we use are just the beginning; what truly matters is the experience we craft for the user.",
+    "author": {
+      "name": "ALEX CHEN",
+      "role": "LEAD DEVELOPER",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/",
+        "github": "https://github.com/",
+        "email": "mailto:alex@example.com"
+      }
+    }
+  },
+  {
+    "_id": "blog-3",
+    "title": "Design Systems in 2026",
+    "subheading": "Why every growing team needs a single source of truth.",
+    "category": "Design",
+    "date": "2026-06-15",
+    "readingTime": "4 MIN",
+    "image": "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000",
+    "content": "A design system bridges the gap between design and development. By defining tokens, components, and patterns, organizations can maintain consistency across various platforms and scale their design efforts effortlessly. We dive into the essentials of creating and maintaining a modern design system.",
+    "conclusion": "Start small, document everything, and ensure both designers and developers speak the same language.",
+    "author": {
+      "name": "SARAH JENNINGS",
+      "role": "PRODUCT DESIGNER",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+      "socials": {
+        "instagram": "https://instagram.com/",
+        "linkedin": "https://www.linkedin.com/",
+        "email": "mailto:sarah@example.com"
+      }
+    }
+  }
+]

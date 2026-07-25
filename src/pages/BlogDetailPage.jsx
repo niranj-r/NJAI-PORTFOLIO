@@ -3,7 +3,8 @@ import { FiArrowDown, FiArrowLeft, FiArrowUpRight, FiMail } from 'react-icons/fi
 import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
 import { PortableText } from '@portabletext/react';
-import { client, urlFor } from '../lib/sanity';
+// import { client, urlFor } from '../lib/sanity';
+import mockBlogs from '../data/blogs.json';
 import "../styles/BlogDetailPage.css";
 import "../styles/BlogPage.css";
 import authorImage from '../assets/frame30.webp';
@@ -16,13 +17,19 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
-        const query = '*[_type == "blog" && title == $title][0]';
-        const data = await client.fetch(query, { title: blogTitle });
+        // const query = '*[_type == "blog" && title == $title][0]';
+        // const data = await client.fetch(query, { title: blogTitle });
+        const data = await new Promise(resolve =>
+          setTimeout(() => resolve(mockBlogs.find(b => b.title === blogTitle)), 400)
+        );
         setBlog(data);
 
         // Fetch related blogs
-        const relatedQuery = '*[_type == "blog" && title != $title] | order(date desc)[0...3]';
-        const relatedData = await client.fetch(relatedQuery, { title: blogTitle });
+        // const relatedQuery = '*[_type == "blog" && title != $title] | order(date desc)[0...3]';
+        // const relatedData = await client.fetch(relatedQuery, { title: blogTitle });
+        const relatedData = await new Promise(resolve =>
+          setTimeout(() => resolve(mockBlogs.filter(b => b.title !== blogTitle).slice(0, 3)), 400)
+        );
         setRelatedPosts(relatedData);
       } catch (error) {
         console.error("Error fetching blog:", error);
@@ -43,12 +50,12 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
 
   return (
     <div className="blog-detail-page">
-      <div className="bd-header-controls">
+      {/*<div className="bd-header-controls">
         <div className="bd-back-button" onClick={onBack}>
           <span className="icon-circle"><FiArrowLeft /></span>
           <span className="button-text">BACK TO BLOG</span>
         </div>
-      </div>
+      </div>*/}
 
       <div className="bd-hero">
         <h1 className="bd-hero-title">{blog.title}</h1>
@@ -77,7 +84,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
         <div className="bd-hero-image-wrapper">
           {blog.image && (
             <img
-              src={urlFor(blog.image).url()}
+              src={blog.image}
               alt={blog.title}
               className="bd-hero-image"
             />
@@ -88,7 +95,13 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
       <div className="bd-content-container">
         {blog.content ? (
           <div className="portable-text-content">
-            <PortableText value={blog.content} />
+            {typeof blog.content === 'string' ? (
+              blog.content.split('\n\n').map((paragraph, idx) => (
+                <p key={idx} className="bd-content-paragraph">{paragraph}</p>
+              ))
+            ) : (
+              <PortableText value={blog.content} />
+            )}
           </div>
         ) : (
           <p className="bd-content-paragraph">No content available for this post.</p>
@@ -101,43 +114,55 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
               {blog.conclusion}
             </p>
             <div className="bd-author">
-              <img src={authorImage} alt="Author" className="bd-author-avatar" />
+              <img src={blog.author?.image || authorImage} alt="Author" className="bd-author-avatar" />
               <div className="bd-author-info">
-                <span className="bd-author-name">NIRANJ R</span>
-                <span className="bd-author-role">CEO</span>
+                <span className="bd-author-name">{blog.author?.name || 'NIRANJ R'}</span>
+                <span className="bd-author-role">{blog.author?.role || 'CEO'}</span>
               </div>
             </div>
             <div className="bd-social-footer">
-              <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="bd-social-link">
-                <FaInstagram className="bd-social-icon" />
-                <span className="bd-social-text">INSTAGRAM</span>
-                <FiArrowUpRight className="bd-social-arrow" />
-              </a>
-              <a href="https://www.linkedin.com/in/niranj-r/" target="_blank" rel="noopener noreferrer" className="bd-social-link">
-                <FaLinkedinIn className="bd-social-icon" />
-                <span className="bd-social-text">LINKEDIN</span>
-                <FiArrowUpRight className="bd-social-arrow" />
-              </a>
-              <a href="https://github.com/niranj-r" target="_blank" rel="noopener noreferrer" className="bd-social-link">
-                <FaGithub className="bd-social-icon" />
-                <span className="bd-social-text">GITHUB</span>
-                <FiArrowUpRight className="bd-social-arrow" />
-              </a>
-              <a href="mailto:niranj.njai@gmail.com" className="bd-social-link">
-                <FiMail className="bd-social-icon" />
-                <span className="bd-social-text">EMAIL</span>
-                <FiArrowUpRight className="bd-social-arrow" />
-              </a>
-              <a href="https://wa.me/919567655760" target="_blank" rel="noopener noreferrer" className="bd-social-link">
-                <FaWhatsapp className="bd-social-icon" />
-                <span className="bd-social-text">WHATSAPP</span>
-                <FiArrowUpRight className="bd-social-arrow" />
-              </a>
-              <a href="https://www.threads.com/@cre.a.tor_nj" target="_blank" rel="noopener noreferrer" className="bd-social-link">
-                <FaThreads className="bd-social-icon" />
-                <span className="bd-social-text">THREADS</span>
-                <FiArrowUpRight className="bd-social-arrow" />
-              </a>
+              {blog.author?.socials?.instagram && (
+                <a href={blog.author.socials.instagram} target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                  <FaInstagram className="bd-social-icon" />
+                  <span className="bd-social-text">INSTAGRAM</span>
+                  <FiArrowUpRight className="bd-social-arrow" />
+                </a>
+              )}
+              {blog.author?.socials?.linkedin && (
+                <a href={blog.author.socials.linkedin} target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                  <FaLinkedinIn className="bd-social-icon" />
+                  <span className="bd-social-text">LINKEDIN</span>
+                  <FiArrowUpRight className="bd-social-arrow" />
+                </a>
+              )}
+              {blog.author?.socials?.github && (
+                <a href={blog.author.socials.github} target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                  <FaGithub className="bd-social-icon" />
+                  <span className="bd-social-text">GITHUB</span>
+                  <FiArrowUpRight className="bd-social-arrow" />
+                </a>
+              )}
+              {blog.author?.socials?.email && (
+                <a href={blog.author.socials.email} className="bd-social-link">
+                  <FiMail className="bd-social-icon" />
+                  <span className="bd-social-text">EMAIL</span>
+                  <FiArrowUpRight className="bd-social-arrow" />
+                </a>
+              )}
+              {blog.author?.socials?.whatsapp && (
+                <a href={blog.author.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                  <FaWhatsapp className="bd-social-icon" />
+                  <span className="bd-social-text">WHATSAPP</span>
+                  <FiArrowUpRight className="bd-social-arrow" />
+                </a>
+              )}
+              {blog.author?.socials?.threads && (
+                <a href={blog.author.socials.threads} target="_blank" rel="noopener noreferrer" className="bd-social-link">
+                  <FaThreads className="bd-social-icon" />
+                  <span className="bd-social-text">THREADS</span>
+                  <FiArrowUpRight className="bd-social-arrow" />
+                </a>
+              )}
             </div>
           </div>
         )}
@@ -156,7 +181,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
           {relatedPosts.map((post) => (
             <div className="blog-card" key={post._id} style={{ cursor: 'pointer' }}>
               <div className="blog-image-wrapper">
-                {post.image && <img src={urlFor(post.image).url()} alt={post.title} className="blog-image" />}
+                {post.image && <img src={post.image} alt={post.title} className="blog-image" />}
               </div>
               <div className="blog-content">
                 <span className="blog-date">{post.date}</span>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowUpRight } from 'react-icons/fi';
-import { client, urlFor } from '../lib/sanity';
+// import { client, urlFor } from '../lib/sanity';
+import mockWorks from '../data/works.json';
 import "../styles/SelectedWork.css";
 
 const SelectedWork = ({ onNavClick, onProjectClick }) => {
@@ -11,8 +12,9 @@ const SelectedWork = ({ onNavClick, onProjectClick }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const query = '*[_type == "work"] | order(_createdAt desc)[0...4]';
-        const data = await client.fetch(query);
+        // const query = '*[_type == "work"] | order(_createdAt desc)[0...4]';
+        // const data = await client.fetch(query);
+        const data = await new Promise(resolve => setTimeout(() => resolve(mockWorks.slice(0, 4)), 400));
         setProjects(data);
       } catch (error) {
         console.error("Error fetching works:", error);
@@ -63,7 +65,7 @@ const SelectedWork = ({ onNavClick, onProjectClick }) => {
               <div className="project-image-wrapper">
                 {project.image && (
                   <img 
-                    src={urlFor(project.image).url()} 
+                    src={project.image} 
                     alt={project.title} 
                     className="project-image" 
                   />

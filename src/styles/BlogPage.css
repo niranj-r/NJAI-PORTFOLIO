@@ -110,7 +110,7 @@
 }
 
 .blog-card:hover .blog-card-title {
-  color: var(--bg-accent5);
+  color: var(--brand-primary);
 }
 
 .blog-card-excerpt {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from 'react-icons/fi';
-import { client, urlFor } from '../lib/sanity';
+// import { client, urlFor } from '../lib/sanity';
+import mockWorks from '../data/works.json';
 import "../styles/SelectedWork.css";
 import "../styles/WorkPage.css";
 
@@ -12,8 +13,9 @@ const WorkPage = ({ onProjectClick }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const query = '*[_type == "work"] | order(_createdAt desc)';
-        const data = await client.fetch(query);
+        // const query = '*[_type == "work"] | order(_createdAt desc)';
+        // const data = await client.fetch(query);
+        const data = await new Promise(resolve => setTimeout(() => resolve(mockWorks), 400));
         setProjects(data);
       } catch (error) {
         console.error("Error fetching works:", error);
@@ -58,7 +60,7 @@ const WorkPage = ({ onProjectClick }) => {
                 <div className="project-image-wrapper">
                   {project.image && (
                     <img
-                      src={urlFor(project.image).url()}
+                      src={project.image}
                       alt={project.title}
                       className="project-image"
                     />
