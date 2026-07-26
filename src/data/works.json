@@ -1,54 +1,272 @@
 [
   {
     "_id": "work-1",
-    "title": "Sample Project One",
-    "category": "Web Design",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-    "client": "Acme Corp",
-    "timeline": "2 Weeks",
-    "services": "UI/UX, Frontend",
+    "title": "Sample Project Two",
+    "slug": "sample-project-two",
+    "category": "E-commerce",
+    "industry": "Retail",
+    "projectType": "Web Application",
+    "featured": true,
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
+    ],
+    "client": "Global Tech",
+    "location": "India",
+    "timeline": "1 Month",
+    "completionDate": "2026-07",
+    "teamSize": 3,
+    "role": "UI/UX Designer & Frontend Developer",
+    "services": [
+      "UI/UX Design",
+      "Frontend Development",
+      "Branding"
+    ],
     "websiteUrl": "https://example.com",
-    "challenge": "The client needed a modern, responsive website to replace their outdated 90s-era design.",
-    "goal": "Create a fast, accessible, and visually appealing site to drive user engagement and sales.",
-    "result": "Increased user retention by 40% and doubled the conversion rate within the first month."
+    "githubUrl": "https://github.com/example",
+    "dribbbleUrl": "",
+    "behanceUrl": "",
+    "figmaUrl": "",
+    "shortDescription": "A modern e-commerce platform designed for speed, scalability, and a frictionless shopping experience.",
+    "overview": "This project focused on building a premium shopping experience with intuitive navigation, responsive design, and optimized performance. The application was designed to handle large product catalogs while maintaining excellent loading speeds.",
+    "challenge": "Building a scalable e-commerce platform capable of handling high traffic while ensuring a seamless shopping experience across all devices.",
+    "goal": "Design and develop an intuitive shopping experience that improves user engagement, simplifies checkout, and increases conversion rates.",
+    "solution": "Developed a responsive React application with optimized routing, lazy loading, reusable components, and modern UI patterns. Implemented clean information architecture and streamlined checkout flow.",
+    "research": "Conducted competitor analysis, user journey mapping, and usability reviews to identify common friction points in online shopping.",
+    "designProcess": [
+      "Requirement Analysis",
+      "Wireframing",
+      "UI Design",
+      "Prototype Testing",
+      "Development",
+      "Deployment"
+    ],
+    "features": [
+      "Responsive Design",
+      "Advanced Product Search",
+      "Category Filters",
+      "Wishlist",
+      "Shopping Cart",
+      "Secure Checkout",
+      "Order Tracking",
+      "User Authentication",
+      "Admin Dashboard",
+      "Payment Gateway Integration"
+    ],
+    "techStack": {
+      "frontend": [
+        "React",
+        "JavaScript",
+        "HTML5",
+        "CSS3"
+      ],
+      "backend": [
+        "Node.js",
+        "Express"
+      ],
+      "database": [
+        "MongoDB"
+      ],
+      "tools": [
+        "Figma",
+        "Git",
+        "Postman"
+      ]
+    },
+    "deliverables": [
+      "Responsive Website",
+      "Design System",
+      "Admin Dashboard",
+      "Brand Assets"
+    ],
+    "responsibilities": [
+      "UI Design",
+      "Frontend Development",
+      "Component Architecture",
+      "Performance Optimization",
+      "API Integration"
+    ],
+    "performance": {
+      "pageSpeed": "96/100",
+      "lighthouse": "98",
+      "seo": "95",
+      "accessibility": "97"
+    },
+    "metrics": [
+      {
+        "label": "Load Time",
+        "value": "<1s"
+      },
+      {
+        "label": "Conversion Increase",
+        "value": "+28%"
+      },
+      {
+        "label": "Bounce Rate",
+        "value": "-18%"
+      },
+      {
+        "label": "Mobile Performance",
+        "value": "98%"
+      }
+    ],
+    "result": "The final platform delivered exceptional performance, improved user engagement, and significantly streamlined the purchasing experience across desktop and mobile devices.",
+    "testimonial": {
+      "quote": "The platform exceeded our expectations in both performance and usability.",
+      "author": "John Doe",
+      "position": "Product Manager"
+    },
+    "lessonsLearned": [
+      "Importance of performance optimization",
+      "Reusable component architecture",
+      "User-centered design decisions"
+    ],
+    "tags": [
+      "React",
+      "E-commerce",
+      "UI/UX",
+      "Frontend",
+      "Responsive",
+      "Performance"
+    ],
+    "themeColor": "#4F46E5"
   },
   {
     "_id": "work-2",
     "title": "Sample Project Two",
+    "slug": "sample-project-two",
     "category": "E-commerce",
+    "industry": "Retail",
+    "projectType": "Web Application",
+    "featured": true,
     "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
+    ],
     "client": "Global Tech",
+    "location": "India",
     "timeline": "1 Month",
-    "services": "Full-stack, Branding",
+    "completionDate": "2026-07",
+    "teamSize": 3,
+    "role": "UI/UX Designer & Frontend Developer",
+    "services": [
+      "UI/UX Design",
+      "Frontend Development",
+      "Branding"
+    ],
     "websiteUrl": "https://example.com",
-    "challenge": "Building a scalable e-commerce platform that handles high traffic spikes.",
-    "goal": "Implement a robust frontend using React and optimize the user flow from product to checkout.",
-    "result": "Achieved sub-second load times and a seamless checkout experience."
-  },
-  {
-    "_id": "work-1",
-    "title": "Sample Project One",
-    "category": "Web Design",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-    "client": "Acme Corp",
-    "timeline": "2 Weeks",
-    "services": "UI/UX, Frontend",
-    "websiteUrl": "https://example.com",
-    "challenge": "The client needed a modern, responsive website to replace their outdated 90s-era design.",
-    "goal": "Create a fast, accessible, and visually appealing site to drive user engagement and sales.",
-    "result": "Increased user retention by 40% and doubled the conversion rate within the first month."
-  },
-  {
-    "_id": "work-2",
-    "title": "Sample Project Two",
-    "category": "E-commerce",
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-    "client": "Global Tech",
-    "timeline": "1 Month",
-    "services": "Full-stack, Branding",
-    "websiteUrl": "https://example.com",
-    "challenge": "Building a scalable e-commerce platform that handles high traffic spikes.",
-    "goal": "Implement a robust frontend using React and optimize the user flow from product to checkout.",
-    "result": "Achieved sub-second load times and a seamless checkout experience."
+    "githubUrl": "https://github.com/example",
+    "dribbbleUrl": "",
+    "behanceUrl": "",
+    "figmaUrl": "",
+    "shortDescription": "A modern e-commerce platform designed for speed, scalability, and a frictionless shopping experience.",
+    "overview": "This project focused on building a premium shopping experience with intuitive navigation, responsive design, and optimized performance. The application was designed to handle large product catalogs while maintaining excellent loading speeds.",
+    "challenge": "Building a scalable e-commerce platform capable of handling high traffic while ensuring a seamless shopping experience across all devices.",
+    "goal": "Design and develop an intuitive shopping experience that improves user engagement, simplifies checkout, and increases conversion rates.",
+    "solution": "Developed a responsive React application with optimized routing, lazy loading, reusable components, and modern UI patterns. Implemented clean information architecture and streamlined checkout flow.",
+    "research": "Conducted competitor analysis, user journey mapping, and usability reviews to identify common friction points in online shopping.",
+    "designProcess": [
+      "Requirement Analysis",
+      "Wireframing",
+      "UI Design",
+      "Prototype Testing",
+      "Development",
+      "Deployment"
+    ],
+    "features": [
+      "Responsive Design",
+      "Advanced Product Search",
+      "Category Filters",
+      "Wishlist",
+      "Shopping Cart",
+      "Secure Checkout",
+      "Order Tracking",
+      "User Authentication",
+      "Admin Dashboard",
+      "Payment Gateway Integration"
+    ],
+    "techStack": {
+      "frontend": [
+        "React",
+        "JavaScript",
+        "HTML5",
+        "CSS3"
+      ],
+      "backend": [
+        "Node.js",
+        "Express"
+      ],
+      "database": [
+        "MongoDB"
+      ],
+      "tools": [
+        "Figma",
+        "Git",
+        "Postman"
+      ]
+    },
+    "deliverables": [
+      "Responsive Website",
+      "Design System",
+      "Admin Dashboard",
+      "Brand Assets"
+    ],
+    "responsibilities": [
+      "UI Design",
+      "Frontend Development",
+      "Component Architecture",
+      "Performance Optimization",
+      "API Integration"
+    ],
+    "performance": {
+      "pageSpeed": "96/100",
+      "lighthouse": "98",
+      "seo": "95",
+      "accessibility": "97"
+    },
+    "metrics": [
+      {
+        "label": "Load Time",
+        "value": "<1s"
+      },
+      {
+        "label": "Conversion Increase",
+        "value": "+28%"
+      },
+      {
+        "label": "Bounce Rate",
+        "value": "-18%"
+      },
+      {
+        "label": "Mobile Performance",
+        "value": "98%"
+      }
+    ],
+    "result": "The final platform delivered exceptional performance, improved user engagement, and significantly streamlined the purchasing experience across desktop and mobile devices.",
+    "testimonial": {
+      "quote": "The platform exceeded our expectations in both performance and usability.",
+      "author": "John Doe",
+      "position": "Product Manager"
+    },
+    "lessonsLearned": [
+      "Importance of performance optimization",
+      "Reusable component architecture",
+      "User-centered design decisions"
+    ],
+    "tags": [
+      "React",
+      "E-commerce",
+      "UI/UX",
+      "Frontend",
+      "Responsive",
+      "Performance"
+    ],
+    "themeColor": "#4F46E5"
   }
 ]
