@@ -10,6 +10,7 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProject = async () => {
       try {
         // const query = '*[_type == "work" && title == $title][0]';

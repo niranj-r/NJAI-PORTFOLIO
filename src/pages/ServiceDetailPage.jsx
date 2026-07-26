@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FiArrowLeft, FiArrowDown } from 'react-icons/fi';
 import "../styles/ServiceDetailPage.css";
 import imgDesignExperience from '../assets/Services/DESIGN&EXPERIENCE.webp';
@@ -6,6 +6,10 @@ import imgDevelopment from '../assets/Services/DEVELOPMENT.webp';
 import imgBrandIdentity from '../assets/Services/BRANDING.webp';
 
 const ServiceDetailPage = ({ onBack }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="service-detail-page">
       <div className="sd-header-controls">

@@ -16,6 +16,7 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchBlogData = async () => {
       try {
         // const query = '*[_type == "blog" && title == $title][0]';
