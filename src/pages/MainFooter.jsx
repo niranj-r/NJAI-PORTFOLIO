@@ -82,7 +82,7 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
         </div>
 
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          {/*<div className="theme-toggle" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="theme-toggle" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span className="to-top-text">CHOOSE COLOR</span>
             <div className="to-top-circle" style={{ position: 'relative' }}>
               <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: theme === 'dark' ? '#FF4D00' : customColor }}></div>
@@ -102,7 +102,7 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
                 title="Choose Color for Light Mode"
               />
             </div>
-          </div>*/}
+          </div>
 
           <div className="theme-toggle" onClick={toggleTheme} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span className="to-top-text">{theme === 'light' ? 'DARK MODE' : 'LIGHT MODE'}</span>
