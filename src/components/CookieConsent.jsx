@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiArrowUpRight, FiArrowRight } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 import '../styles/UtilityModals.css';
 
-const CookieConsent = () => {
+const CookieConsent = ({ onAccept }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ const CookieConsent = () => {
   const handleAccept = () => {
     localStorage.setItem('cookie_consent', 'accepted');
     setIsVisible(false);
+    if (onAccept) onAccept();
   };
 
   const handleDecline = () => {

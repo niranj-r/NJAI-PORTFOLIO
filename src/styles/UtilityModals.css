@@ -221,7 +221,7 @@
 }
 
 .modal-action-btn:hover::before {
-  transform: scale(12);
+  transform: scale(35);
 }
 
 .modal-action-btn:hover .btn-text {
@@ -370,9 +370,118 @@
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .cookie-actions .modal-action-btn {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+/* Construction Popup Styles */
+.construction-modal {
+  max-width: 550px;
+  text-align: center;
+  padding: 50px 40px;
+}
+
+.construction-modal .modal-header {
+  margin-bottom: 25px;
+}
+
+.construction-modal .modal-header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.construction-modal .modal-header p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 auto;
+}
+
+.construction-body {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 35px;
+}
+
+.construction-body>p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.construction-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.construction-actions .modal-action-btn {
+  flex: 1;
+  min-width: 200px;
+}
+
+.construction-footer {
+  justify-content: center;
+  border-top: none;
+  padding-top: 0;
+}
+
+.construction-footer .modal-action-btn {
+  width: 100%;
+}
+
+/* Responsive adjustments for Construction Popup */
+@media screen and (max-width: 600px) {
+  .construction-modal {
+    padding: 30px 20px;
+  }
+
+  .construction-modal .modal-header {
+    margin-bottom: 20px;
+  }
+
+  .construction-modal .modal-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .construction-modal .modal-header p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .construction-body {
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .construction-body>p {
+    font-size: 0.9rem;
+  }
+
+  .construction-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .construction-actions .modal-action-btn {
+    width: 100%;
+    min-width: 100%;
+    padding: 5px 5px 5px 18px;
+    /* Slightly smaller button padding */
+  }
+
+  .construction-actions .modal-action-btn .btn-text {
+    font-size: 0.8rem;
+    /* Slightly smaller text for mobile */
+  }
+
+  .construction-footer {
+    padding-top: 10px;
   }
 }

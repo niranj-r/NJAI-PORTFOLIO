@@ -1,195 +1,116 @@
 [
   {
-    "_id": "work-1",
-    "title": "Sample Project Two",
-    "slug": "sample-project-two",
-    "category": "E-commerce",
-    "industry": "Retail",
-    "projectType": "Web Application",
+    "_id": "meatup",
+    "title": "MeatUp",
+    "slug": "meatup",
+    "category": "Mobile Application",
+    "industry": "Food Delivery",
+    "projectType": "Cross-platform Mobile App",
     "featured": true,
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-    "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
-    ],
-    "client": "Global Tech",
-    "location": "India",
-    "timeline": "1 Month",
-    "completionDate": "2026-07",
-    "teamSize": 3,
-    "role": "UI/UX Designer & Frontend Developer",
+    "client": "MeatUp",
+    "mentor": "Sravya Renish (Federal Bank)",
+    "teamSize": 2,
+    "timeline": "Dec 2025 – May 2026",
+    "role": "Full Stack Mobile Developer",
+    "websiteUrl": "https://play.google.com/store/apps/details?id=app.rork.meatup.delivery",
     "services": [
-      "UI/UX Design",
-      "Frontend Development",
-      "Branding"
+      "Mobile Development",
+      "Backend Development",
+      "Firebase Integration",
+      "UI Development"
     ],
-    "websiteUrl": "https://example.com",
-    "githubUrl": "https://github.com/example",
-    "dribbbleUrl": "",
-    "behanceUrl": "",
-    "figmaUrl": "",
-    "shortDescription": "A modern e-commerce platform designed for speed, scalability, and a frictionless shopping experience.",
-    "overview": "This project focused on building a premium shopping experience with intuitive navigation, responsive design, and optimized performance. The application was designed to handle large product catalogs while maintaining excellent loading speeds.",
-    "challenge": "Building a scalable e-commerce platform capable of handling high traffic while ensuring a seamless shopping experience across all devices.",
-    "goal": "Design and develop an intuitive shopping experience that improves user engagement, simplifies checkout, and increases conversion rates.",
-    "solution": "Developed a responsive React application with optimized routing, lazy loading, reusable components, and modern UI patterns. Implemented clean information architecture and streamlined checkout flow.",
-    "research": "Conducted competitor analysis, user journey mapping, and usability reviews to identify common friction points in online shopping.",
-    "designProcess": [
-      "Requirement Analysis",
-      "Wireframing",
-      "UI Design",
-      "Prototype Testing",
-      "Development",
-      "Deployment"
-    ],
+    "overview": "MeatUp is a cross-platform mobile commerce application designed to simplify online meat ordering with a seamless customer experience. The application combines intuitive mobile interfaces with scalable backend services, enabling users to browse products, place orders, and track purchases efficiently.",
+    "challenge": "Traditional meat ordering relies heavily on phone calls and local vendors, making inventory management and order tracking inefficient. The challenge was to digitize this workflow into a responsive mobile experience.",
+    "goal": "Build a scalable mobile application capable of handling authentication, product management, cart operations, and real-time order synchronization while maintaining a smooth user experience.",
+    "solution": "Developed a React Native application powered by Node.js APIs and Firebase services. Designed reusable UI components, integrated authentication, optimized backend communication, and implemented responsive mobile screens for Android devices.",
     "features": [
-      "Responsive Design",
-      "Advanced Product Search",
-      "Category Filters",
-      "Wishlist",
+      "Secure Authentication",
+      "Product Catalog",
       "Shopping Cart",
-      "Secure Checkout",
-      "Order Tracking",
-      "User Authentication",
-      "Admin Dashboard",
-      "Payment Gateway Integration"
+      "Order Management",
+      "Profile Management",
+      "Real-time Data Synchronization",
+      "Responsive Mobile UI",
+      "Backend API Integration"
     ],
     "techStack": {
       "frontend": [
-        "React",
-        "JavaScript",
-        "HTML5",
-        "CSS3"
+        "React Native",
+        "Expo"
       ],
       "backend": [
         "Node.js",
         "Express"
       ],
       "database": [
-        "MongoDB"
+        "Firebase Firestore",
+        "Cloudinary"
       ],
-      "tools": [
-        "Figma",
-        "Git",
-        "Postman"
+      "authentication": [
+        "Firebase Authentication"
       ]
     },
-    "deliverables": [
-      "Responsive Website",
-      "Design System",
-      "Admin Dashboard",
-      "Brand Assets"
-    ],
     "responsibilities": [
-      "UI Design",
-      "Frontend Development",
-      "Component Architecture",
-      "Performance Optimization",
-      "API Integration"
+      "Developed frontend application",
+      "Designed reusable UI components",
+      "Integrated REST APIs",
+      "Implemented authentication",
+      "Connected Firebase services",
+      "Optimized mobile UX"
     ],
-    "performance": {
-      "pageSpeed": "96/100",
-      "lighthouse": "98",
-      "seo": "95",
-      "accessibility": "97"
-    },
-    "metrics": [
-      {
-        "label": "Load Time",
-        "value": "<1s"
-      },
-      {
-        "label": "Conversion Increase",
-        "value": "+28%"
-      },
-      {
-        "label": "Bounce Rate",
-        "value": "-18%"
-      },
-      {
-        "label": "Mobile Performance",
-        "value": "98%"
-      }
-    ],
-    "result": "The final platform delivered exceptional performance, improved user engagement, and significantly streamlined the purchasing experience across desktop and mobile devices.",
-    "testimonial": {
-      "quote": "The platform exceeded our expectations in both performance and usability.",
-      "author": "John Doe",
-      "position": "Product Manager"
-    },
-    "lessonsLearned": [
-      "Importance of performance optimization",
-      "Reusable component architecture",
-      "User-centered design decisions"
-    ],
+    "result": "Delivered a production-ready Android application with a scalable architecture, seamless authentication flow, and responsive shopping experience.",
     "tags": [
-      "React",
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Firebase",
       "E-commerce",
-      "UI/UX",
-      "Frontend",
-      "Responsive",
-      "Performance"
-    ],
-    "themeColor": "#4F46E5"
+      "Mobile"
+    ]
   },
   {
-    "_id": "work-2",
-    "title": "Sample Project Two",
-    "slug": "sample-project-two",
-    "category": "E-commerce",
-    "industry": "Retail",
-    "projectType": "Web Application",
+    "_id": "meatup-web",
+    "title": "MeatUp",
+    "slug": "meatup-web",
+    "category": "E-Commerce",
+    "industry": "Food & Grocery",
+    "projectType": "Full Stack Web Application",
     "featured": true,
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
-    "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000"
-    ],
-    "client": "Global Tech",
-    "location": "India",
-    "timeline": "1 Month",
-    "completionDate": "2026-07",
-    "teamSize": 3,
-    "role": "UI/UX Designer & Frontend Developer",
+    "client": "MeatUp",
+    "mentor": "Sravya Renish, Officer at Federal Bank",
+    "teamSize": 2,
+    "timeline": "December 2025 – May 2026",
+    "role": "Full Stack Web Developer",
+    "websiteUrl": "",
+    "githubUrl": "",
     "services": [
       "UI/UX Design",
       "Frontend Development",
-      "Branding"
+      "Backend Development",
+      "Database Design",
+      "Authentication",
+      "API Integration"
     ],
-    "websiteUrl": "https://example.com",
-    "githubUrl": "https://github.com/example",
-    "dribbbleUrl": "",
-    "behanceUrl": "",
-    "figmaUrl": "",
-    "shortDescription": "A modern e-commerce platform designed for speed, scalability, and a frictionless shopping experience.",
-    "overview": "This project focused on building a premium shopping experience with intuitive navigation, responsive design, and optimized performance. The application was designed to handle large product catalogs while maintaining excellent loading speeds.",
-    "challenge": "Building a scalable e-commerce platform capable of handling high traffic while ensuring a seamless shopping experience across all devices.",
-    "goal": "Design and develop an intuitive shopping experience that improves user engagement, simplifies checkout, and increases conversion rates.",
-    "solution": "Developed a responsive React application with optimized routing, lazy loading, reusable components, and modern UI patterns. Implemented clean information architecture and streamlined checkout flow.",
-    "research": "Conducted competitor analysis, user journey mapping, and usability reviews to identify common friction points in online shopping.",
-    "designProcess": [
-      "Requirement Analysis",
-      "Wireframing",
-      "UI Design",
-      "Prototype Testing",
-      "Development",
-      "Deployment"
-    ],
+    "overview": "MeatUp is a modern e-commerce platform designed to simplify the online purchase of fresh meat and related products. The platform enables customers to browse products, place orders, securely manage their accounts, and track purchases through an intuitive and responsive web experience.",
+    "challenge": "Traditional meat vendors often rely on manual ordering methods, resulting in poor inventory visibility, inefficient order management, and limited customer convenience. The objective was to digitize the complete ordering workflow while ensuring scalability and ease of use.",
+    "goal": "Build a fast, responsive, and scalable web application that streamlines online meat ordering, improves customer experience, and provides efficient order and product management.",
+    "solution": "Designed and developed a complete full-stack web application with a modern React frontend, RESTful Node.js backend, and Firebase-powered authentication and database services. The application focuses on responsive design, optimized user journeys, and efficient data synchronization.",
     "features": [
-      "Responsive Design",
+      "User Registration & Login",
+      "Firebase Authentication",
+      "Product Catalogue",
+      "Category Filtering",
       "Advanced Product Search",
-      "Category Filters",
-      "Wishlist",
       "Shopping Cart",
-      "Secure Checkout",
-      "Order Tracking",
-      "User Authentication",
-      "Admin Dashboard",
-      "Payment Gateway Integration"
+      "Wishlist",
+      "Order Placement",
+      "Order History",
+      "Address Management",
+      "Profile Management",
+      "Responsive Design",
+      "Real-time Data Synchronization",
+      "Admin Product Management",
+      "Inventory Management"
     ],
     "techStack": {
       "frontend": [
@@ -200,73 +121,80 @@
       ],
       "backend": [
         "Node.js",
-        "Express"
+        "Express.js"
       ],
       "database": [
-        "MongoDB"
+        "Firebase Firestore"
+      ],
+      "authentication": [
+        "Firebase Authentication"
       ],
       "tools": [
-        "Figma",
         "Git",
+        "Figma",
         "Postman"
       ]
     },
-    "deliverables": [
-      "Responsive Website",
-      "Design System",
-      "Admin Dashboard",
-      "Brand Assets"
-    ],
     "responsibilities": [
+      "Designed responsive user interfaces",
+      "Developed reusable React components",
+      "Built RESTful backend APIs",
+      "Integrated Firebase Authentication",
+      "Implemented product catalogue and shopping cart",
+      "Connected frontend with backend services",
+      "Managed database integration",
+      "Optimized application performance",
+      "Tested and debugged application workflows"
+    ],
+    "developmentProcess": [
+      "Requirement Analysis",
+      "Wireframing",
       "UI Design",
       "Frontend Development",
-      "Component Architecture",
-      "Performance Optimization",
-      "API Integration"
+      "Backend Development",
+      "API Integration",
+      "Testing",
+      "Deployment"
     ],
-    "performance": {
-      "pageSpeed": "96/100",
-      "lighthouse": "98",
-      "seo": "95",
-      "accessibility": "97"
-    },
-    "metrics": [
+    "deliverables": [
+      "Responsive Web Application",
+      "Authentication System",
+      "Admin Dashboard",
+      "Order Management System",
+      "Product Management Module"
+    ],
+    "statistics": [
       {
-        "label": "Load Time",
-        "value": "<1s"
+        "label": "Duration",
+        "value": "5 Months"
       },
       {
-        "label": "Conversion Increase",
-        "value": "+28%"
+        "label": "Team",
+        "value": "2 Members"
       },
       {
-        "label": "Bounce Rate",
-        "value": "-18%"
-      },
-      {
-        "label": "Mobile Performance",
-        "value": "98%"
+        "label": "Platform",
+        "value": "Web"
       }
     ],
-    "result": "The final platform delivered exceptional performance, improved user engagement, and significantly streamlined the purchasing experience across desktop and mobile devices.",
-    "testimonial": {
-      "quote": "The platform exceeded our expectations in both performance and usability.",
-      "author": "John Doe",
-      "position": "Product Manager"
-    },
+    "result": "Successfully delivered a scalable e-commerce platform that digitizes the complete online meat ordering process. The application provides an intuitive shopping experience, efficient backend management, secure authentication, and a responsive interface across desktop and mobile devices.",
     "lessonsLearned": [
-      "Importance of performance optimization",
-      "Reusable component architecture",
-      "User-centered design decisions"
+      "Designing scalable e-commerce architectures",
+      "Building reusable React component systems",
+      "Optimizing REST API performance",
+      "Implementing secure authentication flows",
+      "Managing real-time cloud databases"
     ],
     "tags": [
       "React",
-      "E-commerce",
-      "UI/UX",
-      "Frontend",
-      "Responsive",
-      "Performance"
+      "Node.js",
+      "Firebase",
+      "Express",
+      "E-Commerce",
+      "Food Delivery",
+      "Full Stack",
+      "Responsive Design"
     ],
-    "themeColor": "#4F46E5"
+    "themeColor": "#D32F2F"
   }
 ]

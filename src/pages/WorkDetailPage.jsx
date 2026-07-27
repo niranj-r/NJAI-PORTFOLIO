@@ -78,9 +78,11 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
           )}
           {project.websiteUrl && (
             <div className="wd-stat-box">
-              <span className="wd-stat-label">WEBSITE</span>
+              <span className="wd-stat-label">
+                {project.projectType && project.projectType.toLowerCase().includes('mobile') ? 'APP STORE' : 'WEBSITE'}
+              </span>
               <a href={project.websiteUrl} target="_blank" rel="noreferrer" className="wd-stat-value" style={{ color: 'var(--brand-primary)', textDecoration: 'none' }}>
-                VISIT SITE
+                VIEW
               </a>
             </div>
           )}

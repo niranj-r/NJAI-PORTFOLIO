@@ -19,6 +19,7 @@ import LoadingScreen from "./pages/LoadingScreen";
 import CookieConsent from "./components/CookieConsent";
 import PrivacyModal from "./components/PrivacyModal";
 import TermsModal from "./components/TermsModal";
+import ConstructionPopup from "./components/ConstructionPopup";
 //import Chatbot from "./components/Chatbot";
 import NotFoundPage from "./pages/NotFoundPage";
 import SpecialMentions from "./pages/SpecialMentions";
@@ -26,11 +27,20 @@ import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
 function App() {
-  const [currentView, setCurrentView] = useState('home');
+  const [currentView, _setCurrentView] = useState('home');
   const [selectedProject, setSelectedProject] = useState('');
   const [selectedBlog, setSelectedBlog] = useState('');
+
+  const setCurrentView = (view) => {
+    if (view === 'work' || view === 'workDetail') {
+      setIsConstructionPopupOpen(true);
+      return;
+    }
+    _setCurrentView(view);
+  };
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isConstructionPopupOpen, setIsConstructionPopupOpen] = useState(false);
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
@@ -79,9 +89,14 @@ function App() {
 
   const renderModals = () => (
     <>
-      <CookieConsent />
+      <CookieConsent onAccept={() => setIsConstructionPopupOpen(true)} />
       <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
+      <ConstructionPopup 
+        isOpen={isConstructionPopupOpen} 
+        onClose={() => setIsConstructionPopupOpen(false)} 
+        onContinue={() => setIsConstructionPopupOpen(false)} 
+      />
       {/* <Chatbot /> */}
     </>
   );
