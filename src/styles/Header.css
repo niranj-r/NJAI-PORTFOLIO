@@ -103,7 +103,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--text-muted);
+  background-color: var(--bg-accent2);
   border: .5px solid var(--brand-primary);
   margin: 0 0;
   color: var(--brand-primary);
