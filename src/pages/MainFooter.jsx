@@ -49,8 +49,11 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('about'); }}>ABOUT</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('contact'); }}>CONTACT</a></li>
           </ul>
-          <button className="footer-btn">
-            <a href="https://sradhyarenish.urflow.in" target="_blank" rel="noopener noreferrer">CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" /></a>
+          <button 
+            className="footer-btn" 
+            onClick={() => window.open("https://sradhyarenish.urflow.in", "_blank", "noopener,noreferrer")}
+          >
+            CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" />
           </button>
         </div>
 
