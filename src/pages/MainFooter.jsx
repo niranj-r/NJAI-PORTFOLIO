@@ -50,7 +50,7 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('contact'); }}>CONTACT</a></li>
           </ul>
           <button className="footer-btn">
-            CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" />
+            <a href="https://sradhyarenish.urflow.in" target="_blank" rel="noopener noreferrer">CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" /></a>
           </button>
         </div>
 
@@ -86,9 +86,9 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
             <span className="to-top-text">CHOOSE COLOR</span>
             <div className="to-top-circle" style={{ position: 'relative' }}>
               <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: theme === 'dark' ? '#FF4D00' : customColor }}></div>
-              <input 
-                type="color" 
-                value={theme === 'dark' ? '#FF4D00' : customColor} 
+              <input
+                type="color"
+                value={theme === 'dark' ? '#FF4D00' : customColor}
                 onChange={handleColorChange}
                 style={{
                   position: 'absolute',
