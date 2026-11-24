@@ -28,7 +28,7 @@ const ContactPage = ({ onBack, theme }) => {
           className="contact-left"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <img 
@@ -44,7 +44,7 @@ const ContactPage = ({ onBack, theme }) => {
             className="contact-form-block"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
           >
             <span className="contact-label">CONTACT</span>
@@ -62,7 +62,7 @@ const ContactPage = ({ onBack, theme }) => {
             className="contact-socials-grid"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
           >
             <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="contact-social-item">

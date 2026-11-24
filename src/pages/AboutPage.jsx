@@ -69,7 +69,7 @@ export default function AboutPage({ theme }) {
             className="about-card-title"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >NIRANJ R</motion.h3>
           
@@ -77,7 +77,7 @@ export default function AboutPage({ theme }) {
             className="about-card-heading"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           >
             Your Partner in Bringing Your Web Design Vision to Life
@@ -87,7 +87,7 @@ export default function AboutPage({ theme }) {
             className="about-card-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
           >
             I'm a UI/UX Designer and Frontend Developer passionate about creating immersive,
@@ -100,7 +100,7 @@ export default function AboutPage({ theme }) {
             className="about-card-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
           >
             I love transforming ideas into interfaces that connect with people — balancing form,
@@ -112,7 +112,7 @@ export default function AboutPage({ theme }) {
             className="about-card-text"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
           >
             Driven by curiosity and a love for detail, I’m constantly exploring new tools, trends,
@@ -125,7 +125,7 @@ export default function AboutPage({ theme }) {
             className="about-card-img" 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           />
         </div>
@@ -136,7 +136,7 @@ export default function AboutPage({ theme }) {
           className="about-socials"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="about-social-btn">

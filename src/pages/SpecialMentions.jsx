@@ -65,7 +65,7 @@ const SpecialMentions = ({ onNavClick }) => {
           className="sm-hero-centered"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
         >
           <h1 className="sm-hero-title-new">
@@ -88,7 +88,7 @@ const SpecialMentions = ({ onNavClick }) => {
           className="sm-intro"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: false, margin: "-50px" }}
           transition={{ duration: 1 }}
         >
           <div className="sm-intro-marks">“</div>
@@ -115,7 +115,7 @@ const SpecialMentions = ({ onNavClick }) => {
             className="sm-person"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
             <div className="sm-person-number-container">
@@ -155,7 +155,7 @@ const SpecialMentions = ({ onNavClick }) => {
             className="sm-intermission"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
             The right people change your direction without changing who you are.
@@ -166,7 +166,7 @@ const SpecialMentions = ({ onNavClick }) => {
             className="sm-person reverse"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
             <div className="sm-person-number-container">
@@ -206,7 +206,7 @@ const SpecialMentions = ({ onNavClick }) => {
           className="sm-lessons"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
           <div className="sm-lessons-header">
@@ -249,7 +249,7 @@ const SpecialMentions = ({ onNavClick }) => {
           className="sm-memories"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
           <div className="sm-memories-header">
@@ -278,7 +278,7 @@ const SpecialMentions = ({ onNavClick }) => {
           className="sm-final"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
           <h2 className="sm-heading sm-final-quote">

@@ -38,7 +38,7 @@ const Hero = ({ theme }) => {
           <motion.h2
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ type: "spring", stiffness: 100, damping: 10 }}
           >
             Built with intention. <br /> <em>Designed to be remembered.</em>
