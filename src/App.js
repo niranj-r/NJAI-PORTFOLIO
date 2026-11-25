@@ -55,7 +55,6 @@ function App() {
   }, [theme, customColor]);
 
   useEffect(() => {
-    // Loading timer
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);
