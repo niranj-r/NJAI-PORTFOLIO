@@ -65,3 +65,67 @@
   margin: 0;
   font-family: 'Satoshi Variable', sans-serif;
 }
+
+.wp-project-badge {
+  font-size: 0.65rem;
+  color: var(--brand-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  display: inline-block;
+}
+
+.wp-filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.wp-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.wp-filter-btn {
+  background-color: var(--bg-accent);
+  color: var(--text-secondary);
+  border: 1px solid var(--bg-accent2);
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.wp-filter-btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--text-primary);
+}
+
+.wp-filter-btn.active {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+}
+
+.wp-subfilter-btn {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.7rem;
+}
+
+.wp-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-accent5);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}

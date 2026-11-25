@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-// import { client, urlFor } from '../lib/sanity';
+import { client } from '../lib/sanity';
+import { ALL_BLOGS_QUERY } from '../lib/queries';
 import mockBlogs from '../data/blogs.json';
 import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/BlogPage.css";
@@ -12,12 +13,11 @@ const BlogPage = ({ onBlogClick }) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        // const query = '*[_type == "blog"] | order(date desc)';
-        // const data = await client.fetch(query);
-        const data = await new Promise(resolve => setTimeout(() => resolve(mockBlogs), 400));
-        setBlogPosts(data);
+        const data = await client.fetch(ALL_BLOGS_QUERY);
+        setBlogPosts(Array.isArray(data) && data.length > 0 ? data : mockBlogs);
       } catch (error) {
-        console.error("Error fetching blogs:", error);
+        console.error("Error fetching blogs from Sanity, falling back to local data:", error);
+        setBlogPosts(mockBlogs);
       } finally {
         setLoading(false);
       }

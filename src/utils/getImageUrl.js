@@ -1,17 +1,29 @@
-export const getImageUrl = (imagePath) => {
-  if (!imagePath) return '';
-  
-  // If it's already an external URL, return it directly
-  if (imagePath.startsWith('http') || imagePath.startsWith('data:') || imagePath.startsWith('/')) {
-    return imagePath;
+import { urlFor } from '../lib/sanity';
+
+export const getImageUrl = (imageSource) => {
+  if (!imageSource) return '';
+
+  if (typeof imageSource === 'object') {
+    const resolved = imageSource.image || imageSource;
+    if (resolved.asset?.url) {
+      return resolved.asset.url;
+    }
+    if (resolved.asset?._ref || resolved._type === 'image') {
+      return urlFor(resolved).auto('format').url();
+    }
+    return '';
   }
-  
+
+  // If it's already an external URL, data URI, or public path
+  if (imageSource.startsWith('http') || imageSource.startsWith('data:') || imageSource.startsWith('/')) {
+    return imageSource;
+  }
+
   // Otherwise, try to resolve it from the src/assets directory
   try {
-    // This require context tells Webpack to resolve paths dynamically from src/assets
-    return require(`../assets/${imagePath}`);
+    return require(`../assets/${imageSource}`);
   } catch (error) {
-    console.warn(`Image not found in assets: ${imagePath}`);
-    return imagePath; // Fallback to raw string just in case
+    console.warn(`Image not found in assets: ${imageSource}`);
+    return imageSource;
   }
 };

@@ -3,7 +3,8 @@ import { FiArrowDown, FiArrowLeft, FiArrowUpRight, FiMail } from 'react-icons/fi
 import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
 import { PortableText } from '@portabletext/react';
-// import { client, urlFor } from '../lib/sanity';
+import { client } from '../lib/sanity';
+import { BLOG_DETAIL_QUERY, RELATED_BLOGS_QUERY } from '../lib/queries';
 import mockBlogs from '../data/blogs.json';
 import { getImageUrl } from '../utils/getImageUrl';
 import "../styles/BlogDetailPage.css";
@@ -19,22 +20,28 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
     window.scrollTo(0, 0);
     const fetchBlogData = async () => {
       try {
-        // const query = '*[_type == "blog" && title == $title][0]';
-        // const data = await client.fetch(query, { title: blogTitle });
-        const data = await new Promise(resolve =>
-          setTimeout(() => resolve(mockBlogs.find(b => b.title === blogTitle)), 400)
-        );
-        setBlog(data);
-
-        // Fetch related blogs
-        // const relatedQuery = '*[_type == "blog" && title != $title] | order(date desc)[0...3]';
-        // const relatedData = await client.fetch(relatedQuery, { title: blogTitle });
-        const relatedData = await new Promise(resolve =>
-          setTimeout(() => resolve(mockBlogs.filter(b => b.title !== blogTitle).slice(0, 3)), 400)
-        );
-        setRelatedPosts(relatedData);
+        const data = await client.fetch(BLOG_DETAIL_QUERY, { identifier: blogTitle });
+        if (data) {
+          setBlog(data);
+          const relatedData = await client.fetch(RELATED_BLOGS_QUERY, {
+            currentId: data._id || '',
+            identifier: blogTitle
+          });
+          setRelatedPosts(Array.isArray(relatedData) ? relatedData : []);
+        } else {
+          const fallbackBlog = mockBlogs.find(
+            b => b.slug === blogTitle || b._id === blogTitle || b.title === blogTitle
+          );
+          setBlog(fallbackBlog || null);
+          setRelatedPosts(mockBlogs.filter(b => b.title !== fallbackBlog?.title).slice(0, 3));
+        }
       } catch (error) {
-        console.error("Error fetching blog:", error);
+        console.error("Error fetching blog from Sanity, falling back to local data:", error);
+        const fallbackBlog = mockBlogs.find(
+          b => b.slug === blogTitle || b._id === blogTitle || b.title === blogTitle
+        );
+        setBlog(fallbackBlog || null);
+        setRelatedPosts(mockBlogs.filter(b => b.title !== fallbackBlog?.title).slice(0, 3));
       } finally {
         setLoading(false);
       }

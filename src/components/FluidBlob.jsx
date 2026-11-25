@@ -276,13 +276,9 @@ export default function FluidBlobScene() {
   return (
     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}>
       <Canvas camera={{ position: [0.0, 0.0, 8.0] }} gl={{ stencil: true }}>
-        <Environment preset='studio' environmentIntensity={0.5} />
         <Blob />
         <MaskedText />
-        <Environment
-          files='https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/dancing_hall_1k.hdr'
-          resolution={1024}
-        >
+        <Environment resolution={1024}>
           <group rotation={[-Math.PI / 3, 0, 0]}>
             <Lightformer
               intensity={4}

@@ -1,16 +1,15 @@
-// import { createClient } from '@sanity/client';
-// import imageUrlBuilder from '@sanity/image-url';
+import { createClient } from '@sanity/client';
+import { createImageUrlBuilder } from '@sanity/image-url';
 
-// export const client = createClient({
-//   projectId: 'tyvi5iez',
-//   dataset: 'production',
-//   useCdn: true, // Use CDN for fast edge caching
-//   apiVersion: '2023-05-03', // Use current date
-// });
+export const client = createClient({
+  projectId: process.env.REACT_APP_SANITY_PROJECT_ID || 'vnqw1o04',
+  dataset: process.env.REACT_APP_SANITY_DATASET || 'production',
+  useCdn: process.env.NODE_ENV === 'production',
+  apiVersion: '2025-02-19',
+});
 
-// // Helper function to build image URLs from Sanity image objects
-// const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
-// export const urlFor = (source) => {
-//   return builder.image(source);
-// };
+export const urlFor = (source) => {
+  return builder.image(source);
+};
