@@ -1,58 +1,51 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import heroDark from '../assets/404hero.webp';
-import heroLight from '../assets/404heroLight.webp';
-import heroDarkMobile from '../assets/404heroMobile.webp';
-import heroLightMobile from '../assets/404heroLightMobile.webp';
+import MuseumScene from '../components/museum/MuseumScene';
 import '../styles/NotFoundPage.css';
 
-const NotFoundPage = ({ theme, onNavClick }) => {
-  const heroImgDesktop = theme === 'light' ? heroLight : heroDark;
-  const heroImgMobile = theme === 'light' ? heroLightMobile : heroDarkMobile;
+const NotFoundPage = ({ onNavClick }) => {
+  const [zone, setZone] = useState('ENTRANCE HALL');
+  const [activeTerminalRoom, setActiveTerminalRoom] = useState(null);
+  const [isPointerLocked, setIsPointerLocked] = useState(false);
 
   return (
-    <motion.div 
-      className="not-found-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      {/* Background Image Anchored to Right/Bottom */}
-      <div className="not-found-hero-bg">
-        <picture>
-          <source media="(max-width: 992px)" srcSet={heroImgMobile} />
-          <motion.img 
-            src={heroImgDesktop} 
-            alt="404 Graphic" 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          />
-        </picture>
+    <div className="not-found-container">
+      <div className="not-found-canvas-wrapper">
+        <MuseumScene
+          activeTerminalRoom={activeTerminalRoom}
+          onZoneChange={setZone}
+          onTerminalRoomChange={setActiveTerminalRoom}
+          onPointerLockChange={setIsPointerLocked}
+        />
       </div>
 
-      {/* Foreground Content */}
-      <div className="not-found-content">
-        <h1 className="not-found-404">404</h1>
-        
-        <h2 className="not-found-title">PAGE NOT FOUND</h2>
-        
-        <p className="not-found-subtitle">
-          Looks like you've taken a wrong turn.<br/>
-          Let's get you back on track.
-        </p>
-        
-        <button 
-          className="not-found-btn-outline" 
+      {/* Subtle Center Crosshair */}
+      <div className="not-found-crosshair" aria-hidden="true" />
+
+      {/* Top HUD */}
+      <div className="not-found-top-hud">
+        <span className="not-found-badge">
+          {activeTerminalRoom ? `404 — ${zone}` : zone}
+        </span>
+        <span className="not-found-hint">
+          {isPointerLocked
+            ? 'WASD / Arrows to Walk • Mouse to Look • ESC to Release Cursor'
+            : 'Click or Drag Canvas to Look • WASD / Arrows to Walk'}
+        </span>
+      </div>
+
+      {/* Bottom Return Button */}
+      <div className="not-found-overlay">
+        <button
+          type="button"
+          className="not-found-btn-outline"
           onClick={() => onNavClick('home')}
         >
           <FiArrowLeft className="btn-icon-left" />
-          <span>GO HOME</span>
+          <span>Return to Homepage</span>
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

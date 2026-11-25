@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FiArrowDown, FiArrowLeft, FiArrowUpRight, FiMail } from 'react-icons/fi';
 import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
@@ -11,10 +11,12 @@ import "../styles/BlogDetailPage.css";
 import "../styles/BlogPage.css";
 import authorImage from '../assets/frame30.webp';
 
-const BlogDetailPage = ({ onBack, blogTitle }) => {
+const BlogDetailPage = ({ onBack, onNotFound, blogTitle }) => {
   const [blog, setBlog] = useState(null);
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const onNotFoundRef = useRef(onNotFound);
+  onNotFoundRef.current = onNotFound;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,6 +34,10 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
           const fallbackBlog = mockBlogs.find(
             b => b.slug === blogTitle || b._id === blogTitle || b.title === blogTitle
           );
+          if (!fallbackBlog && onNotFoundRef.current) {
+            onNotFoundRef.current();
+            return;
+          }
           setBlog(fallbackBlog || null);
           setRelatedPosts(mockBlogs.filter(b => b.title !== fallbackBlog?.title).slice(0, 3));
         }
@@ -40,13 +46,22 @@ const BlogDetailPage = ({ onBack, blogTitle }) => {
         const fallbackBlog = mockBlogs.find(
           b => b.slug === blogTitle || b._id === blogTitle || b.title === blogTitle
         );
+        if (!fallbackBlog && onNotFoundRef.current) {
+          onNotFoundRef.current();
+          return;
+        }
         setBlog(fallbackBlog || null);
         setRelatedPosts(mockBlogs.filter(b => b.title !== fallbackBlog?.title).slice(0, 3));
       } finally {
         setLoading(false);
       }
     };
-    if (blogTitle) fetchBlogData();
+    if (blogTitle) {
+      fetchBlogData();
+    } else {
+      setLoading(false);
+      onNotFoundRef.current?.();
+    }
   }, [blogTitle]);
 
   if (loading) {

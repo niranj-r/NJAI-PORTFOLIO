@@ -23,10 +23,12 @@ import UiUxShowcase from '../components/work/UiUxShowcase';
 import BrandingShowcase from '../components/work/BrandingShowcase';
 import "../styles/WorkDetailPage.css";
 
-const WorkDetailPage = ({ onBack, projectTitle }) => {
+const WorkDetailPage = ({ onBack, onNotFound, projectTitle }) => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const detailsRef = useRef(null);
+  const onNotFoundRef = useRef(onNotFound);
+  onNotFoundRef.current = onNotFound;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,6 +41,10 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
           const fallback = mockWorks.find(
             (w) => w.slug === projectTitle || w._id === projectTitle || w.title === projectTitle
           );
+          if (!fallback && onNotFoundRef.current) {
+            onNotFoundRef.current();
+            return;
+          }
           setProject(fallback || null);
         }
       } catch (error) {
@@ -46,12 +52,21 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
         const fallback = mockWorks.find(
           (w) => w.slug === projectTitle || w._id === projectTitle || w.title === projectTitle
         );
+        if (!fallback && onNotFoundRef.current) {
+          onNotFoundRef.current();
+          return;
+        }
         setProject(fallback || null);
       } finally {
         setLoading(false);
       }
     };
-    if (projectTitle) fetchProject();
+    if (projectTitle) {
+      fetchProject();
+    } else {
+      setLoading(false);
+      onNotFoundRef.current?.();
+    }
   }, [projectTitle]);
 
   useEffect(() => {

@@ -25,12 +25,91 @@ import SpecialMentions from "./pages/SpecialMentions";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
 
+const parseRoute = (pathname) => {
+  const clean = (pathname || '/').replace(/\/+$/, '') || '/';
+  if (clean === '/' || clean === '/home') return { view: 'home' };
+  if (clean === '/services') return { view: 'serviceDetail' };
+  if (clean === '/about') return { view: 'about' };
+  if (clean === '/contact') return { view: 'contact' };
+  if (clean === '/work') return { view: 'work' };
+  if (clean.startsWith('/work/')) {
+    const slug = decodeURIComponent(clean.slice('/work/'.length));
+    if (slug && !slug.includes('/')) return { view: 'workDetail', project: slug };
+    return { view: '404' };
+  }
+  if (clean === '/blog') return { view: 'blog' };
+  if (clean.startsWith('/blog/')) {
+    const slug = decodeURIComponent(clean.slice('/blog/'.length));
+    if (slug && !slug.includes('/')) return { view: 'blogDetail', blog: slug };
+    return { view: '404' };
+  }
+  if (clean === '/special-mentions') return { view: 'specialMentions' };
+  return { view: '404' };
+};
+
+const getPathForView = (view, slug = '') => {
+  switch (view) {
+    case 'home':
+      return '/';
+    case 'serviceDetail':
+      return '/services';
+    case 'about':
+      return '/about';
+    case 'contact':
+      return '/contact';
+    case 'work':
+      return '/work';
+    case 'workDetail':
+      return `/work/${encodeURIComponent(slug)}`;
+    case 'blog':
+      return '/blog';
+    case 'blogDetail':
+      return `/blog/${encodeURIComponent(slug)}`;
+    case 'specialMentions':
+      return '/special-mentions';
+    case '404':
+      return '/404';
+    default:
+      return '/404';
+  }
+};
+
 function App() {
-  const [currentView, setCurrentView] = useState('home');
-  const [selectedProject, setSelectedProject] = useState('');
-  const [selectedBlog, setSelectedBlog] = useState('');
+  const initialRoute = parseRoute(window.location.pathname);
+  const [currentView, setCurrentView] = useState(initialRoute.view);
+  const [selectedProject, setSelectedProject] = useState(initialRoute.project || '');
+  const [selectedBlog, setSelectedBlog] = useState(initialRoute.blog || '');
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+
+  const navigateTo = (view, slug = '', pushUrl = true) => {
+    if (view === 'workDetail' && slug) setSelectedProject(slug);
+    if (view === 'blogDetail' && slug) setSelectedBlog(slug);
+
+    if (view === currentView && !slug) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    setCurrentView(view);
+    if (pushUrl) {
+      const nextPath = getPathForView(view, slug);
+      if (window.location.pathname !== nextPath) {
+        window.history.pushState({ view, slug }, '', nextPath);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const next = parseRoute(window.location.pathname);
+      setSelectedProject(next.project || '');
+      setSelectedBlog(next.blog || '');
+      setCurrentView(next.view);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
@@ -86,11 +165,7 @@ function App() {
   );
 
   const handleFooterNav = (view) => {
-    if (view === currentView) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      setCurrentView(view);
-    }
+    navigateTo(view);
   };
 
   const footerProps = {
@@ -103,24 +178,6 @@ function App() {
     onNavClick: handleFooterNav
   };
 
-  if (currentView === '404') {
-    return (
-      <>
-        <AnimatePresence mode="wait">
-          {isLoading && <LoadingScreen key="loading" theme={theme} />}
-        </AnimatePresence>
-        {!isLoading && (
-          <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
-            <NotFoundPage theme={theme} onNavClick={(view) => setCurrentView(view)} />
-            <MainFooter {...footerProps} />
-            {renderModals()}
-          </div>
-        )}
-      </>
-    );
-  }
-
   if (currentView === 'serviceDetail') {
     return (
       <>
@@ -128,9 +185,9 @@ function App() {
           {isLoading && <LoadingScreen key="loading" theme={theme} />}
           {!isLoading && (
             <div key="content">
-              <Header onNavClick={(view) => setCurrentView(view)} />
-              <ServiceDetailPage onBack={() => setCurrentView('home')} />
-              <CTASection onNavClick={(view) => setCurrentView(view)} />
+              <Header onNavClick={(view) => navigateTo(view)} />
+              <ServiceDetailPage onBack={() => navigateTo('home')} />
+              <CTASection onNavClick={(view) => navigateTo(view)} />
               <MainFooter {...footerProps} />
               {renderModals()}
             </div>
@@ -148,12 +205,13 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
+            <Header onNavClick={(view) => navigateTo(view)} />
             <WorkDetailPage
-              onBack={() => setCurrentView('work')}
+              onBack={() => navigateTo('work')}
+              onNotFound={() => navigateTo('404', '', false)}
               projectTitle={selectedProject}
             />
-            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -170,8 +228,8 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
-            <AboutPage onBack={() => setCurrentView('home')} theme={theme} />
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <AboutPage onBack={() => navigateTo('home')} theme={theme} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -188,9 +246,9 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
-            <ContactPage onBack={() => setCurrentView('home')} theme={theme} />
-            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <ContactPage onBack={() => navigateTo('home')} theme={theme} />
+            <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -207,12 +265,9 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
-            <WorkPage onProjectClick={(title) => {
-              setSelectedProject(title);
-              setCurrentView('workDetail');
-            }} />
-            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <WorkPage onProjectClick={(title) => navigateTo('workDetail', title)} />
+            <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -229,12 +284,9 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
-            <BlogPage onBlogClick={(title) => {
-              setSelectedBlog(title);
-              setCurrentView('blogDetail');
-            }} />
-            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <BlogPage onBlogClick={(title) => navigateTo('blogDetail', title)} />
+            <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -251,12 +303,13 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
+            <Header onNavClick={(view) => navigateTo(view)} />
             <BlogDetailPage
-              onBack={() => setCurrentView('blog')}
+              onBack={() => navigateTo('blog')}
+              onNotFound={() => navigateTo('404', '', false)}
               blogTitle={selectedBlog}
             />
-            <CTASection onNavClick={(view) => setCurrentView(view)} />
+            <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -273,8 +326,41 @@ function App() {
         </AnimatePresence>
         {!isLoading && (
           <div>
-            <Header onNavClick={(view) => setCurrentView(view)} />
-            <SpecialMentions onNavClick={(view) => setCurrentView(view)} />
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <SpecialMentions onNavClick={(view) => navigateTo(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
+        )}
+      </>
+    );
+  }
+
+  if (currentView === 'home') {
+    return (
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <Frame2 theme={theme} />
+            <div className="frame-marquee-wrapper">
+              <div className="frame-marquee">
+                <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
+                <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
+              </div>
+            </div>
+            <Services onServiceClick={() => navigateTo('serviceDetail')} />
+            <SkillsTimeline />
+            <SelectedWork
+              onNavClick={(view) => navigateTo(view)}
+              onProjectClick={(title) => navigateTo('workDetail', title)}
+            />
+            <Testimonials />
+            <Hero theme={theme} />
+            <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -290,26 +376,8 @@ function App() {
       </AnimatePresence>
       {!isLoading && (
         <div>
-          <Header onNavClick={(view) => setCurrentView(view)} />
-          <Frame2 theme={theme} />
-          <div className="frame-marquee-wrapper">
-            <div className="frame-marquee">
-              <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜</span>
-              <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
-            </div>
-          </div>
-          <Services onServiceClick={() => setCurrentView('serviceDetail')} />
-          <SkillsTimeline />
-          <SelectedWork
-            onNavClick={(view) => setCurrentView(view)}
-            onProjectClick={(title) => {
-              setSelectedProject(title);
-              setCurrentView('workDetail');
-            }}
-          />
-          <Testimonials />
-          <Hero theme={theme} />
-          <CTASection onNavClick={(view) => setCurrentView(view)} />
+          <Header onNavClick={(view) => navigateTo(view)} />
+          <NotFoundPage theme={theme} onNavClick={(view) => navigateTo(view)} />
           <MainFooter {...footerProps} />
           {renderModals()}
         </div>
