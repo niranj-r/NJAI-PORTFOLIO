@@ -20,7 +20,17 @@ const collidesWithWalls = (x, z, radius, colliders) => {
   return false;
 };
 
-const PlayerController = ({ colliders, onZoneChange, onTerminalRoomChange, onPointerLockChange }) => {
+const NPC_INTERACT_RADIUS = 4.2;
+
+const PlayerController = ({
+  colliders,
+  npcPosition,
+  isChatOpen = false,
+  onZoneChange,
+  onTerminalRoomChange,
+  onPointerLockChange,
+  onNearNpcChange,
+}) => {
   const { camera, gl } = useThree();
   const keysRef = useRef({});
   const yawRef = useRef(0);
@@ -28,10 +38,23 @@ const PlayerController = ({ colliders, onZoneChange, onTerminalRoomChange, onPoi
   const draggingRef = useRef(false);
   const lastZoneRef = useRef('');
   const lastRoomRef = useRef(null);
+  const lastNearNpcRef = useRef(null);
+  const isChatOpenRef = useRef(isChatOpen);
 
   const forwardVec = useRef(new THREE.Vector3());
   const rightVec = useRef(new THREE.Vector3());
   const moveVec = useRef(new THREE.Vector3());
+
+  useEffect(() => {
+    isChatOpenRef.current = isChatOpen;
+    if (isChatOpen) {
+      keysRef.current = {};
+      draggingRef.current = false;
+      if (document.pointerLockElement === gl.domElement && document.exitPointerLock) {
+        document.exitPointerLock();
+      }
+    }
+  }, [isChatOpen, gl]);
 
   useEffect(() => {
     camera.position.set(0, PLAYER_EYE_HEIGHT, 3.0);
@@ -43,6 +66,7 @@ const PlayerController = ({ colliders, onZoneChange, onTerminalRoomChange, onPoi
     const dom = gl.domElement;
 
     const handleKeyDown = (e) => {
+      if (isChatOpenRef.current) return;
       keysRef.current[e.code] = true;
     };
 
@@ -51,6 +75,7 @@ const PlayerController = ({ colliders, onZoneChange, onTerminalRoomChange, onPoi
     };
 
     const handleMouseDown = () => {
+      if (isChatOpenRef.current) return;
       draggingRef.current = true;
       if (document.pointerLockElement !== dom && dom.requestPointerLock) {
         try {
@@ -66,6 +91,7 @@ const PlayerController = ({ colliders, onZoneChange, onTerminalRoomChange, onPoi
     };
 
     const handleMouseMove = (e) => {
+      if (isChatOpenRef.current) return;
       const isLocked = document.pointerLockElement === dom;
       if (!isLocked && !draggingRef.current) return;
 
@@ -106,6 +132,18 @@ const PlayerController = ({ colliders, onZoneChange, onTerminalRoomChange, onPoi
     // Apply camera look rotation
     camera.rotation.y = yawRef.current;
     camera.rotation.x = pitchRef.current;
+
+    if (npcPosition) {
+      const dx = camera.position.x - npcPosition.x;
+      const dz = camera.position.z - npcPosition.z;
+      const isNear = dx * dx + dz * dz <= NPC_INTERACT_RADIUS * NPC_INTERACT_RADIUS;
+      if (isNear !== lastNearNpcRef.current) {
+        lastNearNpcRef.current = isNear;
+        onNearNpcChange?.(isNear);
+      }
+    }
+
+    if (isChatOpenRef.current) return;
 
     const keys = keysRef.current;
     const forwardInput = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0);

@@ -15,12 +15,20 @@ import {
   WallInscription,
 } from './ArchitecturalParts';
 import PlayerController from './PlayerController';
+import { MinecraftNpc } from './MinecraftNpc';
 
 const MuseumWorld = ({
   activeTerminalRoom,
+  isChatOpen,
+  isNearNpc,
+  isNpcTalking,
+  customNpcSkinUrl,
+  customNpcGlbUrl,
   onZoneChange,
   onTerminalRoomChange,
   onPointerLockChange,
+  onNearNpcChange,
+  onInteractNpc,
 }) => {
   const layout = useMemo(() => buildMuseumLayout(), []);
   const materials = useMuseumMaterials();
@@ -157,12 +165,27 @@ const MuseumWorld = ({
         />
       ))}
 
+      {/* Interactive Minecraft-Skinned / GLB Museum Guide NPC */}
+      {layout.npc && (
+        <MinecraftNpc
+          {...layout.npc}
+          skinUrl={customNpcSkinUrl || layout.npc.skinUrl}
+          glbUrl={customNpcGlbUrl || layout.npc.glbUrl}
+          isNear={isNearNpc}
+          isTalking={isNpcTalking}
+          onInteract={onInteractNpc}
+        />
+      )}
+
       {/* First-Person Movement & Collision (Preserved) */}
       <PlayerController
         colliders={layout.colliders}
+        npcPosition={layout.npc}
+        isChatOpen={isChatOpen}
         onZoneChange={onZoneChange}
         onTerminalRoomChange={onTerminalRoomChange}
         onPointerLockChange={onPointerLockChange}
+        onNearNpcChange={onNearNpcChange}
       />
     </>
   );
@@ -170,9 +193,16 @@ const MuseumWorld = ({
 
 const MuseumScene = ({
   activeTerminalRoom,
+  isChatOpen,
+  isNearNpc,
+  isNpcTalking,
+  customNpcSkinUrl,
+  customNpcGlbUrl,
   onZoneChange,
   onTerminalRoomChange,
   onPointerLockChange,
+  onNearNpcChange,
+  onInteractNpc,
 }) => (
   <Canvas
     shadows="soft"
@@ -186,9 +216,16 @@ const MuseumScene = ({
   >
     <MuseumWorld
       activeTerminalRoom={activeTerminalRoom}
+      isChatOpen={isChatOpen}
+      isNearNpc={isNearNpc}
+      isNpcTalking={isNpcTalking}
+      customNpcSkinUrl={customNpcSkinUrl}
+      customNpcGlbUrl={customNpcGlbUrl}
       onZoneChange={onZoneChange}
       onTerminalRoomChange={onTerminalRoomChange}
       onPointerLockChange={onPointerLockChange}
+      onNearNpcChange={onNearNpcChange}
+      onInteractNpc={onInteractNpc}
     />
   </Canvas>
 );

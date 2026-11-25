@@ -1,4 +1,4 @@
-import { FRAME_IMAGES, ENDING_WALL_IMAGES, TABLE_TEXTURES } from './frameImages';
+import { FRAME_IMAGES, ENDING_WALL_IMAGES, TABLE_TEXTURES, NPC_SKIN_TEXTURE, NPC_MODEL_GLB } from './frameImages';
 
 export const WALL_HEIGHT = 4.6;
 export const WALL_THICKNESS = 0.4;
@@ -372,6 +372,16 @@ export const buildMuseumLayout = () => {
     imageUrl: ENDING_WALL_IMAGES.east,
   });
 
+  // Entrance Guide NPC (Minecraft-skinned or custom GLB interactive RAG guide)
+  const npc = {
+    x: 2.6,
+    z: -1.6,
+    rotY: -0.45,
+    skinUrl: NPC_SKIN_TEXTURE,
+    glbUrl: NPC_MODEL_GLB,
+  };
+  colliders.push({ minX: 2.15, maxX: 3.05, minZ: -2.05, maxZ: -1.15 });
+
   return {
     slabs,
     walls,
@@ -385,6 +395,7 @@ export const buildMuseumLayout = () => {
     conduits,
     doorwaySpots,
     lights,
+    npc,
   };
 };
 
