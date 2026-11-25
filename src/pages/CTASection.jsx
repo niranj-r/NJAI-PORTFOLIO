@@ -5,7 +5,6 @@ import "../styles/CTASection.css";
 const CTASection = ({ onNavClick }) => {
   return (
     <div className="cta-container">
-      {/* Marquee Top */}
       <div className="cta-marquee-wrapper">
         <div className="cta-marquee">
           <span>+++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK +++ LET'S TALK </span>
