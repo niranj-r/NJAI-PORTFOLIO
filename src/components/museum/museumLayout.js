@@ -1,4 +1,4 @@
-import { FRAME_IMAGES, ENDING_WALL_IMAGES } from './frameImages';
+import { FRAME_IMAGES, ENDING_WALL_IMAGES, TABLE_TEXTURES } from './frameImages';
 
 export const WALL_HEIGHT = 4.6;
 export const WALL_THICKNESS = 0.4;
@@ -164,7 +164,17 @@ export const buildMuseumLayout = () => {
     { x: -35, y: 2.2, z: -4.74, rotY: 0, w: 2.6, h: 1.8, imageUrl: FRAME_IMAGES.westChamberNorth },
     { x: -35, y: 2.2, z: 4.74, rotY: Math.PI, w: 2.6, h: 1.8, imageUrl: FRAME_IMAGES.westChamberSouth }
   );
-  pedestals.push({ x: -36, z: 0, w: 1.6, h: 1.1, d: 1.6 });
+  pedestals.push({
+    x: -36,
+    z: 0,
+    w: 1.6,
+    h: 1.1,
+    d: 1.6,
+    rotY: Math.PI / 2,
+    variant: 'altar',
+    topImageUrl: TABLE_TEXTURES.top,
+    sideImageUrl: TABLE_TEXTURES.side,
+  });
   colliders.push({ minX: -36.8, maxX: -35.2, minZ: -0.8, maxZ: 0.8 });
   inscriptions.push({
     roomId: 'west',
@@ -223,8 +233,16 @@ export const buildMuseumLayout = () => {
     { x: 5.8, y: 2.2, z: -27.76, rotY: 0, w: 2.8, h: 1.9, imageUrl: FRAME_IMAGES.galleryNorthRight }
   );
 
-  [-14, -22].forEach((pz) => {
-    pedestals.push({ x: 0, z: pz, w: 3.2, h: 0.65, d: 1.2 });
+  [-14, -22].forEach((pz, i) => {
+    pedestals.push({
+      x: 0,
+      z: pz,
+      w: 3.2,
+      h: 0.65,
+      d: 1.2,
+      rotY: i % 2 === 0 ? 0 : Math.PI,
+      variant: 'coffin',
+    });
     colliders.push({ minX: -1.6, maxX: 1.6, minZ: pz - 0.6, maxZ: pz + 0.6 });
   });
 
@@ -241,7 +259,17 @@ export const buildMuseumLayout = () => {
     { x: -4.74, y: 2.2, z: -33, rotY: Math.PI / 2, w: 2.6, h: 1.8, imageUrl: FRAME_IMAGES.northChamberWest },
     { x: 4.74, y: 2.2, z: -33, rotY: -Math.PI / 2, w: 2.6, h: 1.8, imageUrl: FRAME_IMAGES.northChamberEast }
   );
-  pedestals.push({ x: 0, z: -34, w: 1.6, h: 1.1, d: 1.6 });
+  pedestals.push({
+    x: 0,
+    z: -34,
+    w: 1.6,
+    h: 1.1,
+    d: 1.6,
+    rotY: 0,
+    variant: 'altar',
+    topImageUrl: TABLE_TEXTURES.top,
+    sideImageUrl: TABLE_TEXTURES.side,
+  });
   colliders.push({ minX: -0.8, maxX: 0.8, minZ: -34.8, maxZ: -33.2 });
   inscriptions.push({
     roomId: 'north',
@@ -321,7 +349,17 @@ export const buildMuseumLayout = () => {
     { x: 37, y: 2.2, z: -0.74, rotY: 0, w: 2.6, h: 1.8, imageUrl: FRAME_IMAGES.eastChamberNorth },
     { x: 37, y: 2.2, z: 8.74, rotY: Math.PI, w: 2.6, h: 1.8, imageUrl: FRAME_IMAGES.eastChamberSouth }
   );
-  pedestals.push({ x: 38, z: 4, w: 1.6, h: 1.1, d: 1.6 });
+  pedestals.push({
+    x: 38,
+    z: 4,
+    w: 1.6,
+    h: 1.1,
+    d: 1.6,
+    rotY: -Math.PI / 2,
+    variant: 'altar',
+    topImageUrl: TABLE_TEXTURES.top,
+    sideImageUrl: TABLE_TEXTURES.side,
+  });
   colliders.push({ minX: 37.2, maxX: 38.8, minZ: 3.2, maxZ: 4.8 });
   inscriptions.push({
     roomId: 'east',

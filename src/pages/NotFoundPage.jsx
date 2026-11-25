@@ -24,9 +24,6 @@ const NotFoundPage = ({ onNavClick }) => {
 
       {/* Top HUD */}
       <div className="not-found-top-hud">
-        <span className="not-found-badge">
-          {activeTerminalRoom ? `404 — ${zone}` : zone}
-        </span>
         <span className="not-found-hint">
           {isPointerLocked
             ? 'WASD / Arrows to Walk • Mouse to Look • ESC to Release Cursor'

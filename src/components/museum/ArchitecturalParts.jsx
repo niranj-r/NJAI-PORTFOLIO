@@ -277,11 +277,354 @@ export const PictureFrame = ({
   );
 };
 
-export const Pedestal = ({ x, z, w, h, d, material }) => (
-  <mesh position={[x, h / 2, z]} material={material} castShadow receiveShadow>
-    <boxGeometry args={[w, h, d]} />
-  </mesh>
-);
+const createEnchantmentTopTexture = () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 16;
+  canvas.height = 16;
+  const ctx = canvas.getContext('2d');
+
+  // Obsidian outer rim
+  const obsidianShades = ['#120E18', '#1A1424', '#0C0910', '#231B2F'];
+  for (let y = 0; y < 16; y += 1) {
+    for (let x = 0; x < 16; x += 1) {
+      ctx.fillStyle = obsidianShades[(x * 7 + y * 13) % obsidianShades.length];
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+
+  // Crimson velvet cloth inset (1..14)
+  for (let y = 1; y < 15; y += 1) {
+    for (let x = 1; x < 15; x += 1) {
+      ctx.fillStyle = (x + y) % 3 === 0 ? '#681918' : '#7D201E';
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+
+  // Gold filigree border & inner square trim
+  ctx.fillStyle = '#C9A45C';
+  for (let i = 1; i < 15; i += 1) {
+    if (i % 2 === 1) {
+      ctx.fillRect(i, 1, 1, 1);
+      ctx.fillRect(i, 14, 1, 1);
+      ctx.fillRect(1, i, 1, 1);
+      ctx.fillRect(14, i, 1, 1);
+    }
+  }
+
+  // Cyan diamond corner inlays + dark rune center emblem
+  const corners = [
+    [2, 2],
+    [12, 2],
+    [2, 12],
+    [12, 12],
+  ];
+  corners.forEach(([cx, cy]) => {
+    ctx.fillStyle = '#248D9E';
+    ctx.fillRect(cx, cy, 2, 2);
+    ctx.fillStyle = '#58EAEE';
+    ctx.fillRect(cx, cy, 1, 1);
+  });
+
+  ctx.fillStyle = '#4B1212';
+  ctx.fillRect(6, 6, 4, 4);
+  ctx.fillStyle = '#C9A45C';
+  ctx.fillRect(7, 7, 2, 2);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.magFilter = THREE.NearestFilter;
+  tex.minFilter = THREE.NearestFilter;
+  tex.needsUpdate = true;
+  return tex;
+};
+
+const createEnchantmentSideTexture = () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 16;
+  canvas.height = 16;
+  const ctx = canvas.getContext('2d');
+
+  // Obsidian lower block (rows 4..15)
+  const obsidianShades = ['#100D16', '#181322', '#211A2E', '#0A080E'];
+  for (let y = 0; y < 16; y += 1) {
+    for (let x = 0; x < 16; x += 1) {
+      ctx.fillStyle = obsidianShades[(x * 5 + y * 11) % obsidianShades.length];
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+
+  // Draped crimson cloth top lip (rows 0..3)
+  for (let y = 0; y < 4; y += 1) {
+    for (let x = 0; x < 16; x += 1) {
+      ctx.fillStyle = y === 3 ? '#521313' : (x + y) % 2 === 0 ? '#7D201E' : '#6A1A19';
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+
+  // Gold tassels & corner clasps
+  ctx.fillStyle = '#C9A45C';
+  ctx.fillRect(0, 3, 2, 1);
+  ctx.fillRect(14, 3, 2, 1);
+  ctx.fillRect(7, 3, 2, 1);
+
+  // Side diamond gems embedded in obsidian lip (rows 4..5)
+  [3, 11].forEach((gx) => {
+    ctx.fillStyle = '#248D9E';
+    ctx.fillRect(gx, 4, 2, 2);
+    ctx.fillStyle = '#58EAEE';
+    ctx.fillRect(gx, 4, 1, 1);
+  });
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.magFilter = THREE.NearestFilter;
+  tex.minFilter = THREE.NearestFilter;
+  tex.needsUpdate = true;
+  return tex;
+};
+
+const createCoffinWoodTexture = () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#231A17';
+  ctx.fillRect(0, 0, 256, 256);
+
+  // Aged timber planks & grain streaks
+  for (let p = 0; p < 8; p += 1) {
+    const py = p * 32;
+    ctx.fillStyle = p % 2 === 0 ? '#271D19' : '#1E1613';
+    ctx.fillRect(0, py, 256, 31);
+    ctx.fillStyle = '#120D0B';
+    ctx.fillRect(0, py + 31, 256, 1);
+
+    for (let g = 0; g < 22; g += 1) {
+      const gy = py + ((g * 13) % 29);
+      const gx = (g * 47 + p * 29) % 210;
+      ctx.fillStyle = g % 2 === 0 ? 'rgba(0,0,0,0.22)' : 'rgba(110,82,66,0.08)';
+      ctx.fillRect(gx, gy, 42, 2);
+    }
+  }
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(0.6, 0.6);
+  tex.anisotropy = 4;
+  tex.needsUpdate = true;
+  return tex;
+};
+
+const EnchantmentTable = ({ x, z, w, h, d, rotY = 0, topImageUrl = null, sideImageUrl = null }) => {
+  const bookRef = useRef(null);
+  const bodyH = h * 0.78;
+  const defaultTopTex = useMemo(() => createEnchantmentTopTexture(), []);
+  const defaultSideTex = useMemo(() => createEnchantmentSideTexture(), []);
+  const { texture: customTopTex } = useAspectTexture(topImageUrl, 'table top texture');
+  const { texture: customSideTex } = useAspectTexture(sideImageUrl, 'table side texture');
+
+  const topMap = customTopTex || defaultTopTex;
+  const sideMap = customSideTex || defaultSideTex;
+
+  const materials = useMemo(() => {
+    const sideMat = new THREE.MeshStandardMaterial({
+      map: sideMap,
+      roughness: 0.72,
+      metalness: 0.14,
+    });
+    const topMat = new THREE.MeshStandardMaterial({
+      map: topMap,
+      roughness: 0.78,
+      metalness: 0.08,
+    });
+    const bottomMat = new THREE.MeshStandardMaterial({
+      color: '#120E16',
+      roughness: 0.9,
+      metalness: 0.1,
+    });
+    return [sideMat, sideMat, topMat, bottomMat, sideMat, sideMat];
+  }, [topMap, sideMap]);
+
+  useEffect(() => {
+    return () => {
+      defaultTopTex.dispose();
+      defaultSideTex.dispose();
+    };
+  }, [defaultTopTex, defaultSideTex]);
+
+  useEffect(() => {
+    return () => {
+      const unique = new Set(materials);
+      unique.forEach((m) => m.dispose());
+    };
+  }, [materials]);
+
+  useFrame(({ clock }) => {
+    if (!bookRef.current) return;
+    const t = clock.getElapsedTime();
+    bookRef.current.position.y = bodyH + 0.34 + Math.sin(t * 1.8) * 0.04;
+    bookRef.current.rotation.y = rotY + Math.sin(t * 0.55) * 0.35;
+  });
+
+  return (
+    <group position={[x, 0, z]}>
+      {/* Obsidian + Crimson Cloth Table Base */}
+      <mesh position={[0, bodyH / 2, 0]} material={materials} castShadow receiveShadow>
+        <boxGeometry args={[w, bodyH, d]} />
+      </mesh>
+
+      {/* Hovering Open Spellbook */}
+      <group ref={bookRef} position={[0, bodyH + 0.34, 0]} rotation={[0, rotY, 0]}>
+        <group rotation={[0.42, 0, 0]}>
+          {/* Spine */}
+          <mesh castShadow>
+            <boxGeometry args={[0.07, 0.05, 0.42]} />
+            <meshStandardMaterial color="#4A2118" roughness={0.8} />
+          </mesh>
+          {/* Left Cover + Pages */}
+          <group position={[-0.14, 0.05, 0]} rotation={[0, 0, -0.34]}>
+            <mesh position={[0, -0.02, 0]} castShadow>
+              <boxGeometry args={[0.26, 0.025, 0.42]} />
+              <meshStandardMaterial color="#4A2118" roughness={0.82} />
+            </mesh>
+            <mesh position={[0, 0.015, 0]} castShadow>
+              <boxGeometry args={[0.23, 0.045, 0.38]} />
+              <meshStandardMaterial
+                color="#D6CBB4"
+                emissive="#4A4236"
+                emissiveIntensity={0.25}
+                roughness={0.9}
+              />
+            </mesh>
+          </group>
+          {/* Right Cover + Pages */}
+          <group position={[0.14, 0.05, 0]} rotation={[0, 0, 0.34]}>
+            <mesh position={[0, -0.02, 0]} castShadow>
+              <boxGeometry args={[0.26, 0.025, 0.42]} />
+              <meshStandardMaterial color="#4A2118" roughness={0.82} />
+            </mesh>
+            <mesh position={[0, 0.015, 0]} castShadow>
+              <boxGeometry args={[0.23, 0.045, 0.38]} />
+              <meshStandardMaterial
+                color="#D6CBB4"
+                emissive="#4A4236"
+                emissiveIntensity={0.25}
+                roughness={0.9}
+              />
+            </mesh>
+          </group>
+        </group>
+      </group>
+    </group>
+  );
+};
+
+const createCoffinShape = (length, width) => {
+  const halfL = length / 2;
+  const shoulderX = length * 0.16;
+  const footHalfW = width * 0.24;
+  const shoulderHalfW = width * 0.48;
+  const headHalfW = width * 0.28;
+
+  const shape = new THREE.Shape();
+  shape.moveTo(-halfL, -footHalfW);
+  shape.lineTo(shoulderX, -shoulderHalfW);
+  shape.lineTo(halfL, -headHalfW);
+  shape.lineTo(halfL, headHalfW);
+  shape.lineTo(shoulderX, shoulderHalfW);
+  shape.lineTo(-halfL, footHalfW);
+  shape.closePath();
+  return shape;
+};
+
+const MuseumCoffin = ({ x, z, w, h, d, rotY = 0, trimMaterial }) => {
+  const woodTex = useMemo(() => createCoffinWoodTexture(), []);
+
+  const geometries = useMemo(() => {
+    const baseShape = createCoffinShape(w * 0.98, d * 0.98);
+    const bodyShape = createCoffinShape(w * 0.94, d * 0.94);
+    const lidShape = createCoffinShape(w * 0.97, d * 0.97);
+
+    const baseGeo = new THREE.ExtrudeGeometry(baseShape, {
+      depth: h * 0.16,
+      bevelEnabled: false,
+    });
+    const bodyGeo = new THREE.ExtrudeGeometry(bodyShape, {
+      depth: h * 0.62,
+      bevelEnabled: false,
+    });
+    const lidGeo = new THREE.ExtrudeGeometry(lidShape, {
+      depth: h * 0.18,
+      bevelEnabled: true,
+      bevelThickness: 0.025,
+      bevelSize: 0.025,
+      bevelSegments: 2,
+    });
+    baseGeo.rotateX(-Math.PI / 2);
+    bodyGeo.rotateX(-Math.PI / 2);
+    lidGeo.rotateX(-Math.PI / 2);
+    return { baseGeo, bodyGeo, lidGeo };
+  }, [w, h, d]);
+
+  useEffect(() => {
+    return () => {
+      woodTex.dispose();
+      geometries.baseGeo.dispose();
+      geometries.bodyGeo.dispose();
+      geometries.lidGeo.dispose();
+    };
+  }, [woodTex, geometries]);
+
+  const baseH = h * 0.16;
+  const bodyH = h * 0.62;
+  const lidY = baseH + bodyH;
+  const lidTopY = lidY + h * 0.18 + 0.025;
+
+  return (
+    <group position={[x, 0, z]} rotation={[0, rotY, 0]}>
+      {/* Stone Plinth Base */}
+      <mesh geometry={geometries.baseGeo} material={trimMaterial} castShadow receiveShadow />
+
+      {/* Tapered Aged Timber Coffin Body */}
+      <mesh position={[0, baseH, 0]} geometry={geometries.bodyGeo} castShadow receiveShadow>
+        <meshStandardMaterial map={woodTex} roughness={0.88} metalness={0.08} />
+      </mesh>
+
+      {/* Beveled Coffin Lid */}
+      <mesh position={[0, lidY, 0]} geometry={geometries.lidGeo} castShadow receiveShadow>
+        <meshStandardMaterial map={woodTex} color="#8D857E" roughness={0.82} metalness={0.12} />
+      </mesh>
+
+      {/* Sunken Crimson & Iron Seal on Lid */}
+      <mesh position={[w * 0.04, lidTopY + 0.01, 0]} castShadow>
+        <boxGeometry args={[w * 0.56, 0.02, 0.07]} />
+        <meshStandardMaterial color="#5E1D19" roughness={0.85} metalness={0.1} />
+      </mesh>
+      <mesh position={[w * 0.14, lidTopY + 0.01, 0]} castShadow>
+        <boxGeometry args={[0.07, 0.02, d * 0.5]} />
+        <meshStandardMaterial color="#5E1D19" roughness={0.85} metalness={0.1} />
+      </mesh>
+    </group>
+  );
+};
+
+export const Pedestal = ({ variant = 'pedestal', material, ...props }) => {
+  if (variant === 'altar') {
+    return <EnchantmentTable {...props} />;
+  }
+  if (variant === 'coffin') {
+    return <MuseumCoffin {...props} trimMaterial={material} />;
+  }
+  const { x, z, w, h, d } = props;
+  return (
+    <mesh position={[x, h / 2, z]} material={material} castShadow receiveShadow>
+      <boxGeometry args={[w, h, d]} />
+    </mesh>
+  );
+};
 
 export const CeilingFluorescent = ({
   x,
