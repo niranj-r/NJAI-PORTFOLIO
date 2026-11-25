@@ -6,10 +6,26 @@ import { getImageUrl } from '../../utils/getImageUrl';
 export const hasContent = (val) => {
   if (val === null || val === undefined || val === false) return false;
   if (typeof val === 'string') return val.trim().length > 0;
-  if (Array.isArray(val)) return val.length > 0;
+  if (Array.isArray(val)) {
+    return val.length > 0 && val.some((item) => hasContent(item));
+  }
   if (typeof val === 'object') {
-    if (val.image || val.asset || val._ref) return true;
-    return Object.values(val).some((v) => hasContent(v));
+    if (val._type === 'block') {
+      return (
+        Array.isArray(val.children) &&
+        val.children.some((c) => typeof c?.text === 'string' && c.text.trim().length > 0)
+      );
+    }
+    if (val._type === 'galleryImage') {
+      return Boolean(getImageUrl(val));
+    }
+    if (val._type === 'image') {
+      return Boolean(getImageUrl(val));
+    }
+    if (val.asset || val._ref) return true;
+    return Object.entries(val)
+      .filter(([key]) => !key.startsWith('_'))
+      .some(([, v]) => hasContent(v));
   }
   return Boolean(val);
 };
@@ -18,9 +34,11 @@ export const RichContent = ({ value }) => {
   if (!hasContent(value)) return null;
 
   if (typeof value === 'string') {
+    const paragraphs = value.split('\n\n').filter((p) => p.trim().length > 0);
+    if (paragraphs.length === 0) return null;
     return (
       <>
-        {value.split('\n\n').map((paragraph, idx) => (
+        {paragraphs.map((paragraph, idx) => (
           <p className="wd-card-text" key={idx} style={idx > 0 ? { marginTop: '1rem' } : undefined}>
             {paragraph}
           </p>
@@ -31,17 +49,21 @@ export const RichContent = ({ value }) => {
 
   if (Array.isArray(value)) {
     if (typeof value[0] === 'string') {
+      const items = value.filter((item) => typeof item === 'string' && item.trim().length > 0);
+      if (items.length === 0) return null;
       return (
         <ul className="wd-list">
-          {value.map((item, idx) => (
+          {items.map((item, idx) => (
             <li key={idx}>{item}</li>
           ))}
         </ul>
       );
     }
+    const nonEmptyBlocks = value.filter((block) => hasContent(block));
+    if (nonEmptyBlocks.length === 0) return null;
     return (
       <div className="wd-portable-text">
-        <PortableText value={value} />
+        <PortableText value={nonEmptyBlocks} />
       </div>
     );
   }
@@ -65,23 +87,26 @@ export const DetailSection = ({ label, title, children, style }) => {
 };
 
 export const DetailCard = ({ title, children }) => {
-  if (!children) return null;
+  const validChildren = React.Children.toArray(children).filter(Boolean);
+  if (validChildren.length === 0) return null;
   return (
     <div className="wd-detail-card">
       {title && <h3 className="wd-card-title">{title}</h3>}
-      {children}
+      {validChildren}
     </div>
   );
 };
 
-export const TextOrRichCard = ({ title, value }) => {
+export const renderTextCard = (title, value, key) => {
   if (!hasContent(value)) return null;
   return (
-    <DetailCard title={title}>
+    <DetailCard key={key} title={title}>
       <RichContent value={value} />
     </DetailCard>
   );
 };
+
+export const TextOrRichCard = ({ title, value }) => renderTextCard(title, value);
 
 export const ImageItemGrid = ({ items, altPrefix = 'Showcase', columns = 2, standalone = true }) => {
   if (!items || items.length === 0) return null;
@@ -120,7 +145,10 @@ export const ImageItemGrid = ({ items, altPrefix = 'Showcase', columns = 2, stan
 export const RichMediaSection = ({ label, title, block, defaultCardTitle, altPrefix }) => {
   if (!hasContent(block)) return null;
   const description = block?.description;
-  const images = block?.images || (block?.image ? [block.image] : []);
+  const rawImages = block?.images || (block?.image ? [block.image] : []);
+  const validImages = rawImages.filter((item) => Boolean(getImageUrl(item?.image || item)));
+
+  if (!hasContent(description) && validImages.length === 0) return null;
 
   return (
     <>
@@ -131,17 +159,18 @@ export const RichMediaSection = ({ label, title, block, defaultCardTitle, altPre
           </DetailCard>
         </DetailSection>
       )}
-      {images.length > 0 && <ImageItemGrid items={images} altPrefix={altPrefix} />}
+      {validImages.length > 0 && <ImageItemGrid items={validImages} altPrefix={altPrefix} />}
     </>
   );
 };
 
 export const MetricsRow = ({ metrics }) => {
-  if (!metrics || metrics.length === 0) return null;
+  const validMetrics = (metrics || []).filter((m) => m && (m.value || m.metricName || m.label));
+  if (validMetrics.length === 0) return null;
   return (
     <div className="wd-details-section" style={{ marginTop: '2.5rem' }}>
       <div className="wd-metrics-container">
-        {metrics.map((metric, idx) => {
+        {validMetrics.map((metric, idx) => {
           const name = metric.metricName || metric.label;
           const displayVal = [metric.value, metric.unit].filter(Boolean).join(' ');
           return (
@@ -157,12 +186,13 @@ export const MetricsRow = ({ metrics }) => {
   );
 };
 
-export const ColorSwatchGrid = ({ colors, title }) => {
-  if (!colors || colors.length === 0) return null;
+export const renderColorSwatches = (colors, title, key) => {
+  const validColors = (colors || []).filter((c) => c && (c.hex || c.colorName || c.name));
+  if (validColors.length === 0) return null;
   return (
-    <DetailCard title={title || 'Color Palette'}>
+    <DetailCard key={key} title={title || 'Color Palette'}>
       <div className="wd-swatches-grid">
-        {colors.map((swatch, idx) => {
+        {validColors.map((swatch, idx) => {
           const name = swatch.colorName || swatch.name || 'Color';
           const role = swatch.colorRole || swatch.role;
           const usage = swatch.usageGuidelines || swatch.usage;
@@ -191,15 +221,30 @@ export const ColorSwatchGrid = ({ colors, title }) => {
   );
 };
 
-export const TypographyShowcase = ({ items }) => {
-  const validItems = (items || []).filter((item) => hasContent(item));
+export const ColorSwatchGrid = ({ colors, title }) => renderColorSwatches(colors, title);
+
+export const renderTypography = (items) => {
+  const validItems = (items || []).filter(
+    (item) =>
+      item &&
+      (item.fontFamily ||
+        item.name ||
+        item.fontPreview ||
+        item.sampleText ||
+        item.usageGuidelines ||
+        item.selectionRationale ||
+        item.rationale)
+  );
   if (validItems.length === 0) return null;
 
   return validItems.map((typeItem, idx) => {
     const fontFamily = typeItem.fontFamily || typeItem.name || `Typeface ${idx + 1}`;
     const role = typeItem.typefaceRole || typeItem.role || fontFamily;
     const weights = typeItem.fontWeight || typeItem.weights;
-    const preview = typeItem.fontPreview || typeItem.sampleText || 'Aa Bb Cc — The quick brown fox jumps over the lazy dog.';
+    const preview =
+      typeItem.fontPreview ||
+      typeItem.sampleText ||
+      'Aa Bb Cc — The quick brown fox jumps over the lazy dog.';
     const usage = typeItem.usageGuidelines;
     const rationale = typeItem.selectionRationale || typeItem.rationale;
 
@@ -221,28 +266,29 @@ export const TypographyShowcase = ({ items }) => {
   });
 };
 
-export const DeliverablesList = ({ items, title = 'Final Deliverables' }) => {
+export const TypographyShowcase = ({ items }) => renderTypography(items);
+
+export const renderDeliverables = (items, title = 'Final Deliverables', key) => {
   if (!items || items.length === 0) return null;
 
   if (typeof items[0] === 'string') {
-    return (
-      <DetailCard title={title}>
-        <RichContent value={items} />
-      </DetailCard>
-    );
+    return renderTextCard(title, items, key);
   }
 
+  const validItems = items.filter((item) => item && (item.title || item.description || item.file?.asset?.url || item.url));
+  if (validItems.length === 0) return null;
+
   return (
-    <DetailCard title={title}>
+    <DetailCard key={key} title={title}>
       <div className="wd-deliverables-list">
-        {items.map((item, idx) => {
+        {validItems.map((item, idx) => {
           const fileUrl = item.file?.asset?.url;
           const externalUrl = item.url;
           const linkUrl = fileUrl || externalUrl;
           return (
             <div className="wd-deliverable-item" key={item._key || idx}>
               <div>
-                <h4 className="wd-deliverable-title">{item.title}</h4>
+                {item.title && <h4 className="wd-deliverable-title">{item.title}</h4>}
                 {item.description && <p className="wd-card-text">{item.description}</p>}
               </div>
               {linkUrl && (
@@ -264,10 +310,19 @@ export const DeliverablesList = ({ items, title = 'Final Deliverables' }) => {
   );
 };
 
-export const BeforeAfterGrid = ({ items }) => {
-  if (!items || items.length === 0) return null;
+export const DeliverablesList = ({ items, title = 'Final Deliverables' }) =>
+  renderDeliverables(items, title);
 
-  return items.map((item, idx) => {
+export const renderBeforeAfter = (items) => {
+  const validItems = (items || []).filter((item) => {
+    if (!item) return false;
+    const beforeImg = getImageUrl(item.beforeImage?.image || item.beforeImage);
+    const afterImg = getImageUrl(item.afterImage?.image || item.afterImage);
+    return Boolean(beforeImg || afterImg || item.before || item.after || item.descriptionOfChanges || item.reasonForChanges || item.impact);
+  });
+  if (validItems.length === 0) return null;
+
+  return validItems.map((item, idx) => {
     const beforeImg = getImageUrl(item.beforeImage?.image || item.beforeImage);
     const afterImg = getImageUrl(item.afterImage?.image || item.afterImage);
     const changes = item.descriptionOfChanges || item.after || item.changesMade;
@@ -275,26 +330,28 @@ export const BeforeAfterGrid = ({ items }) => {
 
     return (
       <DetailCard key={item._key || idx} title={item.area || `Before & After ${idx + 1}`}>
-        <div className="wd-before-after-grid">
-          {(beforeImg || item.before) && (
-            <div className="wd-ba-box wd-ba-before">
-              <span className="wd-stat-label">BEFORE</span>
-              {beforeImg && (
-                <img src={beforeImg} alt={item.beforeImage?.alt || 'Before design'} className="wd-ba-image" />
-              )}
-              {item.before && <p className="wd-card-text">{item.before}</p>}
-            </div>
-          )}
-          {(afterImg || item.after) && (
-            <div className="wd-ba-box wd-ba-after">
-              <span className="wd-stat-label">AFTER</span>
-              {afterImg && (
-                <img src={afterImg} alt={item.afterImage?.alt || 'After design'} className="wd-ba-image" />
-              )}
-              {item.after && <p className="wd-card-text">{item.after}</p>}
-            </div>
-          )}
-        </div>
+        {(beforeImg || item.before || afterImg || item.after) && (
+          <div className="wd-before-after-grid">
+            {(beforeImg || item.before) && (
+              <div className="wd-ba-box wd-ba-before">
+                <span className="wd-stat-label">BEFORE</span>
+                {beforeImg && (
+                  <img src={beforeImg} alt={item.beforeImage?.alt || 'Before design'} className="wd-ba-image" />
+                )}
+                {item.before && <p className="wd-card-text">{item.before}</p>}
+              </div>
+            )}
+            {(afterImg || item.after) && (
+              <div className="wd-ba-box wd-ba-after">
+                <span className="wd-stat-label">AFTER</span>
+                {afterImg && (
+                  <img src={afterImg} alt={item.afterImage?.alt || 'After design'} className="wd-ba-image" />
+                )}
+                {item.after && <p className="wd-card-text">{item.after}</p>}
+              </div>
+            )}
+          </div>
+        )}
         {changes && (
           <p className="wd-card-text" style={{ marginTop: '1rem' }}>
             <strong>Changes:</strong> {changes}
@@ -310,6 +367,8 @@ export const BeforeAfterGrid = ({ items }) => {
   });
 };
 
+export const BeforeAfterGrid = ({ items }) => renderBeforeAfter(items);
+
 const getEmbedUrl = (url) => {
   if (!url) return null;
   const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
@@ -319,7 +378,7 @@ const getEmbedUrl = (url) => {
   return null;
 };
 
-export const VideoBlock = ({ video }) => {
+export const renderVideoBlock = (video, key) => {
   if (!video) return null;
   const fileUrl = video.videoFile?.asset?.url;
   const url = video.videoUrl;
@@ -328,7 +387,7 @@ export const VideoBlock = ({ video }) => {
   const embedUrl = getEmbedUrl(url);
 
   return (
-    <DetailCard title={video.title || 'Video Demonstration'}>
+    <DetailCard key={key} title={video.title || 'Video Demonstration'}>
       <div className="wd-video-wrapper">
         {fileUrl ? (
           <video controls src={fileUrl} className="wd-video-element" />
@@ -348,6 +407,8 @@ export const VideoBlock = ({ video }) => {
     </DetailCard>
   );
 };
+
+export const VideoBlock = ({ video }) => renderVideoBlock(video);
 
 export const TestimonialBlock = ({ testimonial }) => {
   if (!testimonial) return null;
@@ -379,13 +440,14 @@ export const TestimonialBlock = ({ testimonial }) => {
 };
 
 export const TeamMembersRow = ({ members }) => {
-  if (!members || members.length === 0) return null;
+  const validMembers = (members || []).filter((m) => m && m.name);
+  if (validMembers.length === 0) return null;
   return (
     <div className="wd-details-section" style={{ marginTop: '2.5rem' }}>
       <div className="wd-team-strip">
         <span className="wd-about-label" style={{ marginBottom: '1rem' }}>TEAM MEMBERS</span>
         <div className="wd-team-grid">
-          {members.map((member, idx) => {
+          {validMembers.map((member, idx) => {
             const avatar = getImageUrl(member.photo);
             return (
               <div className="wd-team-card" key={member._key || idx}>
@@ -412,11 +474,12 @@ export const CustomSectionsRenderer = ({ sections }) => {
         const key = block._key || idx;
         switch (block._type) {
           case 'sectionHeadingBlock':
+            if (!block.heading && !block.subheading && !block.eyebrow) return null;
             return (
               <div className="wd-details-section" style={{ marginTop: '4rem' }} key={key}>
                 <div style={{ width: '100%' }}>
                   {block.eyebrow && <span className="wd-about-label">{block.eyebrow}</span>}
-                  <h2 className="wd-about-title">{block.heading}</h2>
+                  {block.heading && <h2 className="wd-about-title">{block.heading}</h2>}
                   {block.subheading && <p className="wd-card-text" style={{ marginTop: '1rem' }}>{block.subheading}</p>}
                 </div>
               </div>
@@ -424,14 +487,14 @@ export const CustomSectionsRenderer = ({ sections }) => {
           case 'richTextSectionBlock':
             return (
               <DetailSection key={key} label="DETAILS" title={block.heading || ''} style={{ marginTop: '3rem' }}>
-                <DetailCard>
-                  <RichContent value={block.body} />
-                </DetailCard>
+                {renderTextCard(null, block.body)}
               </DetailSection>
             );
           case 'fullWidthImageBlock':
             return <ImageItemGrid key={key} items={block.image ? [block.image] : []} columns={1} />;
-          case 'imageGridBlock':
+          case 'imageGridBlock': {
+            const validImages = (block.images || []).filter((img) => Boolean(getImageUrl(img?.image || img)));
+            if (validImages.length === 0) return null;
             return (
               <React.Fragment key={key}>
                 {block.heading && (
@@ -440,19 +503,19 @@ export const CustomSectionsRenderer = ({ sections }) => {
                   </div>
                 )}
                 <ImageItemGrid
-                  items={block.images}
+                  items={validImages}
                   columns={block.columns === '3' ? 3 : 2}
                 />
               </React.Fragment>
             );
+          }
           case 'imageTextBlock': {
             const imgUrl = getImageUrl(block.image?.image || block.image);
+            if (!hasContent(block.body) && !imgUrl) return null;
             return (
               <div className="wd-details-section" style={{ marginTop: '4rem' }} key={key}>
                 <div className={`wd-image-text-grid ${block.imagePosition === 'left' ? 'wd-image-text-grid--reverse' : ''}`}>
-                  <DetailCard title={block.heading}>
-                    <RichContent value={block.body} />
-                  </DetailCard>
+                  {renderTextCard(block.heading, block.body)}
                   {imgUrl && (
                     <div className="wd-gallery-item">
                       <img src={imgUrl} alt={block.image?.alt || block.heading || 'Section'} className="wd-gallery-image" />
@@ -463,15 +526,18 @@ export const CustomSectionsRenderer = ({ sections }) => {
               </div>
             );
           }
-          case 'videoSectionBlock':
+          case 'videoSectionBlock': {
+            const vid = renderVideoBlock(block);
+            if (!vid) return null;
             return (
               <div className="wd-details-section" style={{ marginTop: '4rem' }} key={key}>
-                <div style={{ width: '100%' }}>
-                  <VideoBlock video={block} />
-                </div>
+                <div style={{ width: '100%' }}>{vid}</div>
               </div>
             );
-          case 'metricsSectionBlock':
+          }
+          case 'metricsSectionBlock': {
+            const validMetrics = (block.metrics || []).filter((m) => m && (m.value || m.metricName || m.label));
+            if (validMetrics.length === 0) return null;
             return (
               <React.Fragment key={key}>
                 {block.heading && (
@@ -479,24 +545,23 @@ export const CustomSectionsRenderer = ({ sections }) => {
                     <h3 className="wd-section-header" style={{ margin: 0 }}>{block.heading}</h3>
                   </div>
                 )}
-                <MetricsRow metrics={block.metrics} />
+                <MetricsRow metrics={validMetrics} />
               </React.Fragment>
             );
+          }
           case 'quoteSectionBlock':
             return <TestimonialBlock key={key} testimonial={block.testimonial} />;
           case 'beforeAfterSectionBlock':
             return (
               <DetailSection key={key} label="COMPARISON" title={block.heading || 'Before & After'} style={{ marginTop: '4rem' }}>
-                <BeforeAfterGrid items={block.items} />
+                {renderBeforeAfter(block.items)}
               </DetailSection>
             );
           case 'customContentBlock':
             return (
               <React.Fragment key={key}>
                 <DetailSection label={block.label || 'SECTION'} title={block.heading || ''} style={{ marginTop: '4rem' }}>
-                  <DetailCard>
-                    <RichContent value={block.body} />
-                  </DetailCard>
+                  {renderTextCard(null, block.body)}
                 </DetailSection>
                 <ImageItemGrid items={block.images} />
               </React.Fragment>
@@ -508,4 +573,3 @@ export const CustomSectionsRenderer = ({ sections }) => {
     </div>
   );
 };
-

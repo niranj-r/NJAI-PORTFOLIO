@@ -6,13 +6,13 @@ import {
   RichContent,
   DetailSection,
   DetailCard,
-  TextOrRichCard,
+  renderTextCard,
+  renderColorSwatches,
+  renderTypography,
+  renderDeliverables,
+  renderBeforeAfter,
   ImageItemGrid,
   RichMediaSection,
-  ColorSwatchGrid,
-  TypographyShowcase,
-  DeliverablesList,
-  BeforeAfterGrid,
   MetricsRow,
 } from './WorkSharedBlocks';
 
@@ -25,10 +25,24 @@ const UiUxShowcase = ({ project }) => {
   const designGoals = ui.designGoals || project.goal;
   const targetAudience = ui.targetAudience;
 
-  const hasResponsiveScreens =
-    hasContent(ui.responsiveScreens?.desktop) ||
-    hasContent(ui.responsiveScreens?.tablet) ||
-    hasContent(ui.responsiveScreens?.mobile);
+  const validSurveys = (ui.userSurveys || []).filter(
+    (s) => s && (s.title || s.methodology || s.participantCount || hasContent(s.findings) || hasContent(s.supportingVisuals))
+  );
+  const validPersonas = (ui.userPersonas || []).filter(
+    (p) => p && (p.name || p.description || hasContent(p.goals) || hasContent(p.needs) || hasContent(p.painPoints) || getImageUrl(p.image))
+  );
+  const validFindings = (ui.researchFindings || []).filter(
+    (f) => f && (f.researchMethod || f.finding || f.insight || getImageUrl(f.supportingImage))
+  );
+  const validIterations = (ui.designIterations || []).filter(
+    (it) =>
+      it &&
+      (getImageUrl(it.previousDesign) || getImageUrl(it.revisedDesign) || it.feedback || it.changesMade)
+  );
+
+  const desktopScreens = (ui.responsiveScreens?.desktop || []).filter((i) => Boolean(getImageUrl(i?.image || i)));
+  const tabletScreens = (ui.responsiveScreens?.tablet || []).filter((i) => Boolean(getImageUrl(i?.image || i)));
+  const mobileScreens = (ui.responsiveScreens?.mobile || []).filter((i) => Boolean(getImageUrl(i?.image || i)));
 
   return (
     <>
@@ -38,11 +52,11 @@ const UiUxShowcase = ({ project }) => {
         title={<>Problem Framing<br />&amp; Design Goals.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Design Brief" value={designBrief} />
-        <TextOrRichCard title="Problem Statement" value={problemStatement} />
-        <TextOrRichCard title="Client Requirements" value={clientRequirements} />
-        <TextOrRichCard title="Design Goals" value={designGoals} />
-        <TextOrRichCard title="Target Audience" value={targetAudience} />
+        {renderTextCard('Design Brief', designBrief, 'brief')}
+        {renderTextCard('Problem Statement', problemStatement, 'prob')}
+        {renderTextCard('Client Requirements', clientRequirements, 'req')}
+        {renderTextCard('Design Goals', designGoals, 'goals')}
+        {renderTextCard('Target Audience', targetAudience, 'aud')}
       </DetailSection>
 
       {/* 2. UX Research */}
@@ -51,8 +65,8 @@ const UiUxShowcase = ({ project }) => {
         title={<>User Surveys, Personas<br />&amp; Insights.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Research Methodology" value={ui.researchMethodology} />
-        {hasContent(ui.userSurveys) && ui.userSurveys.map((survey, idx) => (
+        {renderTextCard('Research Methodology', ui.researchMethodology, 'rmeth')}
+        {validSurveys.map((survey, idx) => (
           <DetailCard key={survey._key || idx} title={survey.title || `User Survey ${idx + 1}`}>
             {(survey.methodology || survey.participantCount) && (
               <div className="wd-inline-meta" style={{ marginBottom: '1rem' }}>
@@ -74,19 +88,19 @@ const UiUxShowcase = ({ project }) => {
             <ImageItemGrid items={survey.supportingVisuals} standalone={false} altPrefix="Survey Visual" />
           </DetailCard>
         ))}
-        <TextOrRichCard title="User Interviews" value={ui.userInterviews} />
-        <TextOrRichCard title="Competitor Analysis" value={ui.competitorAnalysis} />
-        <TextOrRichCard title="User Pain Points" value={ui.userPainPoints} />
-        {hasContent(ui.userPersonas) && (
-          <DetailCard title="User Personas">
+        {renderTextCard('User Interviews', ui.userInterviews, 'interviews')}
+        {renderTextCard('Competitor Analysis', ui.competitorAnalysis, 'comp')}
+        {renderTextCard('User Pain Points', ui.userPainPoints, 'pain')}
+        {validPersonas.length > 0 && (
+          <DetailCard key="personas" title="User Personas">
             <div className="wd-personas-grid">
-              {ui.userPersonas.map((persona, idx) => {
+              {validPersonas.map((persona, idx) => {
                 const avatar = getImageUrl(persona.image?.image || persona.image);
                 return (
                   <div className="wd-persona-card" key={persona._key || idx}>
                     <div className="wd-persona-header">
-                      {avatar && <img src={avatar} alt={persona.name} className="wd-persona-avatar" />}
-                      <h4 className="wd-feature-title">{persona.name}</h4>
+                      {avatar && <img src={avatar} alt={persona.name || 'Persona'} className="wd-persona-avatar" />}
+                      {persona.name && <h4 className="wd-feature-title">{persona.name}</h4>}
                     </div>
                     {persona.description && <p className="wd-card-text">{persona.description}</p>}
                     {hasContent(persona.goals) && (
@@ -113,10 +127,10 @@ const UiUxShowcase = ({ project }) => {
             </div>
           </DetailCard>
         )}
-        {hasContent(ui.researchFindings) && (
-          <DetailCard title="Key Research Findings &amp; Insights">
+        {validFindings.length > 0 && (
+          <DetailCard key="findings" title="Key Research Findings &amp; Insights">
             <div className="wd-stacked-list">
-              {ui.researchFindings.map((finding, idx) => {
+              {validFindings.map((finding, idx) => {
                 const imgUrl = getImageUrl(finding.supportingImage?.image || finding.supportingImage);
                 return (
                   <div className="wd-cs-card" key={finding._key || idx}>
@@ -143,9 +157,9 @@ const UiUxShowcase = ({ project }) => {
         title={<>Exploration, Flows<br />&amp; Design Rationale.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Design Approach" value={ui.designApproach} />
-        <TextOrRichCard title="Visual Design Direction" value={ui.visualDesignDirection} />
-        <TextOrRichCard title="Design Decision Rationale" value={ui.designRationale} />
+        {renderTextCard('Design Approach', ui.designApproach, 'approach')}
+        {renderTextCard('Visual Design Direction', ui.visualDesignDirection, 'vdir')}
+        {renderTextCard('Design Decision Rationale', ui.designRationale, 'rat')}
       </DetailSection>
 
       <ImageItemGrid items={ui.initialSketches} altPrefix="Initial Sketch" />
@@ -158,12 +172,12 @@ const UiUxShowcase = ({ project }) => {
         title={<>Colors, Type, Components<br />&amp; Screens.</>}
         style={{ marginTop: '4rem' }}
       >
-        <ColorSwatchGrid colors={ui.colorPalette} title="Color Palette" />
-        <TextOrRichCard title="Color Selection Rationale" value={ui.colorSelectionRationale} />
-        <TypographyShowcase items={ui.typography} />
-        <TextOrRichCard title="Typography Selection Rationale" value={ui.typographySelectionRationale} />
+        {renderColorSwatches(ui.colorPalette, 'Color Palette', 'colors')}
+        {renderTextCard('Color Selection Rationale', ui.colorSelectionRationale, 'colrat')}
+        {renderTypography(ui.typography)}
+        {renderTextCard('Typography Selection Rationale', ui.typographySelectionRationale, 'typrat')}
         {ui.prototypeUrl && (
-          <DetailCard title="Interactive Prototype">
+          <DetailCard key="proto" title="Interactive Prototype">
             <a href={ui.prototypeUrl} target="_blank" rel="noreferrer" className="wd-external-link-btn">
               <span>Open Prototype / Figma</span>
               <FiExternalLink />
@@ -177,29 +191,27 @@ const UiUxShowcase = ({ project }) => {
       <RichMediaSection label="DESIGN SYSTEM" title="Unified Design Tokens &amp; Guidelines." block={ui.designSystem} defaultCardTitle="Design System" altPrefix="Design System" />
       <ImageItemGrid items={ui.highFidelityDesigns} altPrefix="High-Fidelity Design" />
 
-      {hasResponsiveScreens && (
-        <DetailSection
-          label="RESPONSIVE DESIGN"
-          title={<>Desktop, Tablet<br />&amp; Mobile.</>}
-          style={{ marginTop: '4rem' }}
-        >
-          {hasContent(ui.responsiveScreens?.desktop) && (
-            <DetailCard title="Desktop Screens">
-              <ImageItemGrid items={ui.responsiveScreens.desktop} standalone={false} altPrefix="Desktop Screen" />
-            </DetailCard>
-          )}
-          {hasContent(ui.responsiveScreens?.tablet) && (
-            <DetailCard title="Tablet Screens">
-              <ImageItemGrid items={ui.responsiveScreens.tablet} standalone={false} altPrefix="Tablet Screen" />
-            </DetailCard>
-          )}
-          {hasContent(ui.responsiveScreens?.mobile) && (
-            <DetailCard title="Mobile Screens">
-              <ImageItemGrid items={ui.responsiveScreens.mobile} standalone={false} columns={3} altPrefix="Mobile Screen" />
-            </DetailCard>
-          )}
-        </DetailSection>
-      )}
+      <DetailSection
+        label="RESPONSIVE DESIGN"
+        title={<>Desktop, Tablet<br />&amp; Mobile.</>}
+        style={{ marginTop: '4rem' }}
+      >
+        {desktopScreens.length > 0 && (
+          <DetailCard key="desk" title="Desktop Screens">
+            <ImageItemGrid items={desktopScreens} standalone={false} altPrefix="Desktop Screen" />
+          </DetailCard>
+        )}
+        {tabletScreens.length > 0 && (
+          <DetailCard key="tab" title="Tablet Screens">
+            <ImageItemGrid items={tabletScreens} standalone={false} altPrefix="Tablet Screen" />
+          </DetailCard>
+        )}
+        {mobileScreens.length > 0 && (
+          <DetailCard key="mob" title="Mobile Screens">
+            <ImageItemGrid items={mobileScreens} standalone={false} columns={3} altPrefix="Mobile Screen" />
+          </DetailCard>
+        )}
+      </DetailSection>
 
       {/* 5. Testing & Improvements */}
       <DetailSection
@@ -207,36 +219,38 @@ const UiUxShowcase = ({ project }) => {
         title={<>Usability Testing<br />&amp; What Changed.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Usability Testing" value={ui.usabilityTesting} />
-        <TextOrRichCard title="User Feedback" value={ui.userFeedback} />
-        {hasContent(ui.designIterations) && ui.designIterations.map((iter, idx) => {
+        {renderTextCard('Usability Testing', ui.usabilityTesting, 'utest')}
+        {renderTextCard('User Feedback', ui.userFeedback, 'ufeedback')}
+        {validIterations.map((iter, idx) => {
           const prevImg = getImageUrl(iter.previousDesign?.image || iter.previousDesign);
           const revImg = getImageUrl(iter.revisedDesign?.image || iter.revisedDesign);
           return (
             <DetailCard key={iter._key || idx} title={`Design Iteration ${idx + 1}`}>
-              <div className="wd-before-after-grid">
-                {prevImg && (
-                  <div className="wd-ba-box wd-ba-before">
-                    <span className="wd-stat-label">PREVIOUS DESIGN</span>
-                    <img src={prevImg} alt={iter.previousDesign?.alt || 'Previous design'} className="wd-ba-image" />
-                  </div>
-                )}
-                {revImg && (
-                  <div className="wd-ba-box wd-ba-after">
-                    <span className="wd-stat-label">REVISED DESIGN</span>
-                    <img src={revImg} alt={iter.revisedDesign?.alt || 'Revised design'} className="wd-ba-image" />
-                  </div>
-                )}
-              </div>
+              {(prevImg || revImg) && (
+                <div className="wd-before-after-grid">
+                  {prevImg && (
+                    <div className="wd-ba-box wd-ba-before">
+                      <span className="wd-stat-label">PREVIOUS DESIGN</span>
+                      <img src={prevImg} alt={iter.previousDesign?.alt || 'Previous design'} className="wd-ba-image" />
+                    </div>
+                  )}
+                  {revImg && (
+                    <div className="wd-ba-box wd-ba-after">
+                      <span className="wd-stat-label">REVISED DESIGN</span>
+                      <img src={revImg} alt={iter.revisedDesign?.alt || 'Revised design'} className="wd-ba-image" />
+                    </div>
+                  )}
+                </div>
+              )}
               {iter.feedback && <p className="wd-card-text" style={{ marginTop: '1rem' }}><strong>Feedback:</strong> {iter.feedback}</p>}
               {iter.changesMade && <p className="wd-card-text" style={{ marginTop: '0.5rem' }}><strong>Changes Made:</strong> {iter.changesMade}</p>}
             </DetailCard>
           );
         })}
-        <BeforeAfterGrid items={ui.beforeAfterComparisons} />
-        <TextOrRichCard title="Changes Made" value={ui.changesMade} />
-        <TextOrRichCard title="Reasons for Changes" value={ui.reasonsForChanges} />
-        <TextOrRichCard title="Accessibility Considerations" value={ui.accessibilityConsiderations} />
+        {renderBeforeAfter(ui.beforeAfterComparisons)}
+        {renderTextCard('Changes Made', ui.changesMade, 'changes')}
+        {renderTextCard('Reasons for Changes', ui.reasonsForChanges, 'reasons')}
+        {renderTextCard('Accessibility Considerations', ui.accessibilityConsiderations, 'a11y')}
       </DetailSection>
 
       {/* 6. Final Outcome */}
@@ -248,9 +262,9 @@ const UiUxShowcase = ({ project }) => {
         title={<>Final Designs<br />&amp; Usability Impact.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Final Design Outcome" value={ui.finalOutcome || project.result} />
-        <TextOrRichCard title="Results and Impact" value={ui.resultsAndImpact} />
-        <DeliverablesList items={ui.finalDeliverables || project.deliverables} />
+        {renderTextCard('Final Design Outcome', ui.finalOutcome || project.result, 'final')}
+        {renderTextCard('Results and Impact', ui.resultsAndImpact, 'impact')}
+        {renderDeliverables(ui.finalDeliverables || project.deliverables, 'Final Deliverables', 'deliv')}
       </DetailSection>
 
       <MetricsRow metrics={ui.usabilityMetrics} />
@@ -259,4 +273,3 @@ const UiUxShowcase = ({ project }) => {
 };
 
 export default UiUxShowcase;
-

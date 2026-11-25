@@ -6,12 +6,12 @@ import {
   RichContent,
   DetailSection,
   DetailCard,
-  TextOrRichCard,
+  renderTextCard,
+  renderColorSwatches,
+  renderTypography,
+  renderDeliverables,
   ImageItemGrid,
   RichMediaSection,
-  ColorSwatchGrid,
-  TypographyShowcase,
-  DeliverablesList,
 } from './WorkSharedBlocks';
 
 const LogoAssetCard = ({ label, asset }) => {
@@ -37,7 +37,34 @@ const BrandingShowcase = ({ project }) => {
     Boolean(getImageUrl(b.brandMark)) ||
     Boolean(getImageUrl(b.wordmark));
 
+  const validLogoVariations = (b.logoVariations || []).filter(
+    (v) => v && (v.variationName || getImageUrl(v.logoImage?.image || v.logoImage) || v.description || v.usageGuidelines)
+  );
+
+  const validBrandValues = (b.brandValues || []).filter((v) => typeof v === 'string' && v.trim().length > 0);
+
+  const validApplications = (b.brandApplications || []).filter(
+    (app) => app && (app.applicationName || app.description || hasContent(app.images))
+  );
+
   const guidelinesPdfUrl = b.brandGuidelinesPdf?.asset?.url;
+
+  const hasLogoGrid =
+    hasContent(b.logoConstructionAndGrid?.description) ||
+    (b.logoConstructionAndGrid?.images || []).some((i) => Boolean(getImageUrl(i?.image || i)));
+
+  const hasClearSpace =
+    hasContent(b.logoClearSpace?.description) ||
+    Boolean(getImageUrl(b.logoClearSpace?.image));
+
+  const correctImgs = (b.correctIncorrectUsage?.correct || []).filter((i) => Boolean(getImageUrl(i?.image || i)));
+  const incorrectImgs = (b.correctIncorrectUsage?.incorrect || []).filter((i) => Boolean(getImageUrl(i?.image || i)));
+  const hasCorrectIncorrect =
+    hasContent(b.correctIncorrectUsage?.notes) || correctImgs.length > 0 || incorrectImgs.length > 0;
+
+  const hasHierarchy =
+    hasContent(b.typographicHierarchy?.description) ||
+    Boolean(getImageUrl(b.typographicHierarchy?.image));
 
   return (
     <>
@@ -47,12 +74,12 @@ const BrandingShowcase = ({ project }) => {
         title={<>Brand Story, Purpose<br />&amp; Research.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Brand Overview" value={b.brandOverview} />
-        <TextOrRichCard title="Branding Brief" value={b.brandingBrief} />
-        <TextOrRichCard title="Client Requirements" value={b.clientRequirements} />
-        <TextOrRichCard title="Branding Objectives" value={b.brandingObjectives} />
+        {renderTextCard('Brand Overview', b.brandOverview, 'overview')}
+        {renderTextCard('Branding Brief', b.brandingBrief, 'brief')}
+        {renderTextCard('Client Requirements', b.clientRequirements, 'req')}
+        {renderTextCard('Branding Objectives', b.brandingObjectives, 'obj')}
         {(b.brandMission || b.brandVision) && (
-          <DetailCard title="Mission &amp; Vision">
+          <DetailCard key="mv" title="Mission &amp; Vision">
             {b.brandMission && <p className="wd-card-text"><strong>Mission:</strong> {b.brandMission}</p>}
             {b.brandVision && (
               <p className="wd-card-text" style={b.brandMission ? { marginTop: '0.75rem' } : undefined}>
@@ -61,18 +88,18 @@ const BrandingShowcase = ({ project }) => {
             )}
           </DetailCard>
         )}
-        {hasContent(b.brandValues) && (
-          <DetailCard title="Brand Values">
+        {validBrandValues.length > 0 && (
+          <DetailCard key="values" title="Brand Values">
             <div className="wd-tags-list">
-              {b.brandValues.map((val, i) => (
+              {validBrandValues.map((val, i) => (
                 <span className="wd-tag" key={i}>{val}</span>
               ))}
             </div>
           </DetailCard>
         )}
-        <TextOrRichCard title="Target Audience" value={b.targetAudience} />
-        <TextOrRichCard title="Market Research" value={b.marketResearch} />
-        <TextOrRichCard title="Competitor Analysis" value={b.competitorAnalysis} />
+        {renderTextCard('Target Audience', b.targetAudience, 'aud')}
+        {renderTextCard('Market Research', b.marketResearch, 'market')}
+        {renderTextCard('Competitor Analysis', b.competitorAnalysis, 'comp')}
       </DetailSection>
 
       {/* 2. Brand Strategy */}
@@ -81,11 +108,11 @@ const BrandingShowcase = ({ project }) => {
         title={<>Positioning, Voice<br />&amp; Creative Direction.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Brand Positioning" value={b.brandPositioning} />
-        <TextOrRichCard title="Brand Personality" value={b.brandPersonality} />
-        <TextOrRichCard title="Brand Voice and Tone" value={b.brandVoiceAndTone} />
-        <TextOrRichCard title="Brand Messaging" value={b.brandMessaging} />
-        <TextOrRichCard title="Creative Direction" value={b.creativeDirection} />
+        {renderTextCard('Brand Positioning', b.brandPositioning, 'pos')}
+        {renderTextCard('Brand Personality', b.brandPersonality, 'pers')}
+        {renderTextCard('Brand Voice and Tone', b.brandVoiceAndTone, 'voice')}
+        {renderTextCard('Brand Messaging', b.brandMessaging, 'msg')}
+        {renderTextCard('Creative Direction', b.creativeDirection, 'cdir')}
       </DetailSection>
 
       <ImageItemGrid items={b.moodboard} altPrefix="Brand Moodboard" />
@@ -97,10 +124,10 @@ const BrandingShowcase = ({ project }) => {
         title={<>Sketches, Exploration<br />&amp; Concept Selection.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Concept Exploration" value={b.conceptExploration} />
-        <TextOrRichCard title="Concept Development Process" value={b.conceptDevelopmentProcess} />
-        <TextOrRichCard title="Final Concept Selection" value={b.finalConceptSelection} />
-        <TextOrRichCard title="Concept Selection Rationale" value={b.conceptSelectionRationale} />
+        {renderTextCard('Concept Exploration', b.conceptExploration, 'cexp')}
+        {renderTextCard('Concept Development Process', b.conceptDevelopmentProcess, 'cproc')}
+        {renderTextCard('Final Concept Selection', b.finalConceptSelection, 'fcsel')}
+        {renderTextCard('Concept Selection Rationale', b.conceptSelectionRationale, 'crat')}
       </DetailSection>
 
       <ImageItemGrid items={b.initialSketches} altPrefix="Initial Sketch" />
@@ -112,26 +139,26 @@ const BrandingShowcase = ({ project }) => {
         title={<>Marks, Construction<br />&amp; Usage Rules.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Logo Concept and Rationale" value={b.logoConceptAndRationale} />
+        {renderTextCard('Logo Concept and Rationale', b.logoConceptAndRationale, 'lrat')}
         {hasCoreLogos && (
-          <div className="wd-brand-marks-grid">
+          <div key="core-logos" className="wd-brand-marks-grid">
             <LogoAssetCard label="PRIMARY LOGO" asset={b.primaryLogo} />
             <LogoAssetCard label="SECONDARY LOGO" asset={b.secondaryLogo} />
             <LogoAssetCard label="BRAND MARK / SYMBOL" asset={b.brandMark} />
             <LogoAssetCard label="WORDMARK" asset={b.wordmark} />
           </div>
         )}
-        {hasContent(b.logoVariations) && (
-          <DetailCard title="Logo Variations">
+        {validLogoVariations.length > 0 && (
+          <DetailCard key="logo-vars" title="Logo Variations">
             <div className="wd-brand-marks-grid">
-              {b.logoVariations.map((variation, idx) => {
+              {validLogoVariations.map((variation, idx) => {
                 const imgUrl = getImageUrl(variation.logoImage?.image || variation.logoImage);
                 return (
                   <div className="wd-brand-asset-card" key={variation._key || idx}>
-                    <span className="wd-stat-label">{variation.variationName}</span>
+                    {variation.variationName && <span className="wd-stat-label">{variation.variationName}</span>}
                     {imgUrl && (
                       <div className="wd-brand-asset-preview">
-                        <img src={imgUrl} alt={variation.logoImage?.alt || variation.variationName} />
+                        <img src={imgUrl} alt={variation.logoImage?.alt || variation.variationName || 'Logo variation'} />
                       </div>
                     )}
                     {variation.description && <p className="wd-card-text">{variation.description}</p>}
@@ -144,44 +171,46 @@ const BrandingShowcase = ({ project }) => {
             </div>
           </DetailCard>
         )}
-        {hasContent(b.logoConstructionAndGrid) && (
-          <DetailCard title="Logo Construction and Grid">
+        {hasLogoGrid && (
+          <DetailCard key="logo-grid" title="Logo Construction and Grid">
             <RichContent value={b.logoConstructionAndGrid.description} />
             <ImageItemGrid items={b.logoConstructionAndGrid.images} standalone={false} altPrefix="Logo Grid" />
           </DetailCard>
         )}
-        <TextOrRichCard title="Logo Geometry and Proportions" value={b.logoGeometryAndProportions} />
-        {hasContent(b.logoClearSpace) && (
-          <DetailCard title="Logo Clear Space">
+        {renderTextCard('Logo Geometry and Proportions', b.logoGeometryAndProportions, 'geom')}
+        {hasClearSpace && (
+          <DetailCard key="clear-space" title="Logo Clear Space">
             <RichContent value={b.logoClearSpace.description} />
             {b.logoClearSpace.image && (
               <ImageItemGrid items={[b.logoClearSpace.image]} standalone={false} columns={1} altPrefix="Logo Clear Space" />
             )}
           </DetailCard>
         )}
-        {b.minimumLogoSize && (
-          <DetailCard title="Minimum Logo Size">
+        {hasContent(b.minimumLogoSize) && (
+          <DetailCard key="min-size" title="Minimum Logo Size">
             <p className="wd-card-text">{b.minimumLogoSize}</p>
           </DetailCard>
         )}
-        <TextOrRichCard title="Logo Usage Guidelines" value={b.logoUsageGuidelines} />
-        {hasContent(b.correctIncorrectUsage) && (
-          <DetailCard title="Correct &amp; Incorrect Logo Usage">
+        {renderTextCard('Logo Usage Guidelines', b.logoUsageGuidelines, 'lguide')}
+        {hasCorrectIncorrect && (
+          <DetailCard key="ci-usage" title="Correct &amp; Incorrect Logo Usage">
             <RichContent value={b.correctIncorrectUsage.notes} />
-            <div className="wd-before-after-grid" style={{ marginTop: '1rem' }}>
-              {hasContent(b.correctIncorrectUsage.correct) && (
-                <div className="wd-ba-box wd-ba-after">
-                  <span className="wd-stat-label">CORRECT USAGE</span>
-                  <ImageItemGrid items={b.correctIncorrectUsage.correct} standalone={false} columns={1} altPrefix="Correct Logo Usage" />
-                </div>
-              )}
-              {hasContent(b.correctIncorrectUsage.incorrect) && (
-                <div className="wd-ba-box wd-ba-before">
-                  <span className="wd-stat-label">INCORRECT USAGE</span>
-                  <ImageItemGrid items={b.correctIncorrectUsage.incorrect} standalone={false} columns={1} altPrefix="Incorrect Logo Usage" />
-                </div>
-              )}
-            </div>
+            {(correctImgs.length > 0 || incorrectImgs.length > 0) && (
+              <div className="wd-before-after-grid" style={{ marginTop: '1rem' }}>
+                {correctImgs.length > 0 && (
+                  <div className="wd-ba-box wd-ba-after">
+                    <span className="wd-stat-label">CORRECT USAGE</span>
+                    <ImageItemGrid items={correctImgs} standalone={false} columns={1} altPrefix="Correct Logo Usage" />
+                  </div>
+                )}
+                {incorrectImgs.length > 0 && (
+                  <div className="wd-ba-box wd-ba-before">
+                    <span className="wd-stat-label">INCORRECT USAGE</span>
+                    <ImageItemGrid items={incorrectImgs} standalone={false} columns={1} altPrefix="Incorrect Logo Usage" />
+                  </div>
+                )}
+              </div>
+            )}
           </DetailCard>
         )}
       </DetailSection>
@@ -192,11 +221,11 @@ const BrandingShowcase = ({ project }) => {
         title={<>Colors, Codes<br />&amp; Rationale.</>}
         style={{ marginTop: '4rem' }}
       >
-        <ColorSwatchGrid colors={b.primaryColors} title="Primary Colors" />
-        <ColorSwatchGrid colors={b.secondaryColors} title="Secondary Colors" />
-        <ColorSwatchGrid colors={b.accentColors} title="Accent Colors" />
-        <TextOrRichCard title="Color Usage Guidelines" value={b.colorUsageGuidelines} />
-        <TextOrRichCard title="Color Selection Rationale" value={b.colorSelectionRationale} />
+        {renderColorSwatches(b.primaryColors, 'Primary Colors', 'pcol')}
+        {renderColorSwatches(b.secondaryColors, 'Secondary Colors', 'scol')}
+        {renderColorSwatches(b.accentColors, 'Accent Colors', 'acol')}
+        {renderTextCard('Color Usage Guidelines', b.colorUsageGuidelines, 'cguide')}
+        {renderTextCard('Color Selection Rationale', b.colorSelectionRationale, 'crat2')}
       </DetailSection>
 
       {/* 6. Typography */}
@@ -205,17 +234,17 @@ const BrandingShowcase = ({ project }) => {
         title={<>Typefaces, Hierarchy<br />&amp; Guidelines.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TypographyShowcase items={[b.primaryTypeface, b.secondaryTypeface, b.supportingTypeface]} />
-        {hasContent(b.typographicHierarchy) && (
-          <DetailCard title="Typographic Hierarchy">
+        {renderTypography([b.primaryTypeface, b.secondaryTypeface, b.supportingTypeface])}
+        {hasHierarchy && (
+          <DetailCard key="hier" title="Typographic Hierarchy">
             <RichContent value={b.typographicHierarchy.description} />
             {b.typographicHierarchy.image && (
               <ImageItemGrid items={[b.typographicHierarchy.image]} standalone={false} columns={1} altPrefix="Typographic Hierarchy" />
             )}
           </DetailCard>
         )}
-        <TextOrRichCard title="Typography Usage Guidelines" value={b.typographyUsageGuidelines} />
-        <TextOrRichCard title="Typography Selection Rationale" value={b.typographySelectionRationale} />
+        {renderTextCard('Typography Usage Guidelines', b.typographyUsageGuidelines, 'tguide')}
+        {renderTextCard('Typography Selection Rationale', b.typographySelectionRationale, 'trat')}
       </DetailSection>
 
       {/* 7. Visual Identity Elements */}
@@ -225,32 +254,28 @@ const BrandingShowcase = ({ project }) => {
       <RichMediaSection label="ICONOGRAPHY" title="Brand Icons." block={b.iconography} defaultCardTitle="Iconography" altPrefix="Brand Iconography" />
       <RichMediaSection label="PHOTOGRAPHY DIRECTION" title="Visual Mood &amp; Framing." block={b.photographyDirection} defaultCardTitle="Photography Direction" altPrefix="Photography Sample" />
       <RichMediaSection label="ILLUSTRATION STYLE" title="Custom Illustrations." block={b.illustrationStyle} defaultCardTitle="Illustration Style" altPrefix="Illustration" />
-      {hasContent(b.visualConsistencyGuidelines) && (
-        <DetailSection label="VISUAL CONSISTENCY" title="Maintaining Brand Cohesion." style={{ marginTop: '4rem' }}>
-          <TextOrRichCard title="Visual Consistency Guidelines" value={b.visualConsistencyGuidelines} />
-        </DetailSection>
-      )}
+      <DetailSection label="VISUAL CONSISTENCY" title="Maintaining Brand Cohesion." style={{ marginTop: '4rem' }}>
+        {renderTextCard('Visual Consistency Guidelines', b.visualConsistencyGuidelines, 'vc')}
+      </DetailSection>
 
       {/* 8. Brand Applications */}
-      {hasContent(b.brandApplications) && (
-        <DetailSection
-          label="BRAND APPLICATIONS"
-          title={<>Identity in the<br />Real World.</>}
-          style={{ marginTop: '4rem' }}
-        >
-          {b.brandApplications.map((app, idx) => (
-            <DetailCard key={app._key || idx} title={app.applicationName}>
-              {app.applicationType && (
-                <span className="wd-tag" style={{ display: 'inline-block', marginBottom: '1rem' }}>
-                  {app.applicationType}
-                </span>
-              )}
-              {app.description && <p className="wd-card-text">{app.description}</p>}
-              <ImageItemGrid items={app.images} standalone={false} altPrefix={app.applicationName} />
-            </DetailCard>
-          ))}
-        </DetailSection>
-      )}
+      <DetailSection
+        label="BRAND APPLICATIONS"
+        title={<>Identity in the<br />Real World.</>}
+        style={{ marginTop: '4rem' }}
+      >
+        {validApplications.map((app, idx) => (
+          <DetailCard key={app._key || idx} title={app.applicationName}>
+            {app.applicationType && (
+              <span className="wd-tag" style={{ display: 'inline-block', marginBottom: '1rem' }}>
+                {app.applicationType}
+              </span>
+            )}
+            {app.description && <p className="wd-card-text">{app.description}</p>}
+            <ImageItemGrid items={app.images} standalone={false} altPrefix={app.applicationName} />
+          </DetailCard>
+        ))}
+      </DetailSection>
 
       {/* 9. Brand Guidelines & Outcome */}
       <DetailSection
@@ -258,9 +283,9 @@ const BrandingShowcase = ({ project }) => {
         title={<>Brand Book, Deliverables<br />&amp; Impact.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Complete Brand Guidelines / Brand Book" value={b.brandGuidelinesSummary} />
+        {renderTextCard('Complete Brand Guidelines / Brand Book', b.brandGuidelinesSummary, 'bbook')}
         {(guidelinesPdfUrl || b.brandGuidelinesUrl) && (
-          <DetailCard title="Brand Guidelines Download &amp; Link">
+          <DetailCard key="bpdf" title="Brand Guidelines Download &amp; Link">
             <div className="wd-links-row">
               {guidelinesPdfUrl && (
                 <a href={guidelinesPdfUrl} target="_blank" rel="noreferrer" className="wd-external-link-btn">
@@ -277,14 +302,10 @@ const BrandingShowcase = ({ project }) => {
             </div>
           </DetailCard>
         )}
-        {hasContent(b.finalBrandIdentity?.description) && (
-          <DetailCard title="Final Brand Identity">
-            <RichContent value={b.finalBrandIdentity.description} />
-          </DetailCard>
-        )}
-        <DeliverablesList items={b.finalDeliverables || project.deliverables} />
-        <TextOrRichCard title="Brand Outcome" value={b.brandOutcome || project.result} />
-        <TextOrRichCard title="Results and Impact" value={b.resultsAndImpact} />
+        {renderTextCard('Final Brand Identity', b.finalBrandIdentity?.description, 'fbi')}
+        {renderDeliverables(b.finalDeliverables || project.deliverables, 'Final Deliverables', 'bdeliv')}
+        {renderTextCard('Brand Outcome', b.brandOutcome || project.result, 'bout')}
+        {renderTextCard('Results and Impact', b.resultsAndImpact, 'bimp')}
       </DetailSection>
 
       <ImageItemGrid items={b.finalBrandIdentity?.images} altPrefix="Final Brand Identity" />
@@ -293,4 +314,3 @@ const BrandingShowcase = ({ project }) => {
 };
 
 export default BrandingShowcase;
-

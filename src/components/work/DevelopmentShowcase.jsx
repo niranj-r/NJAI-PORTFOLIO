@@ -6,34 +6,38 @@ import {
   RichContent,
   DetailSection,
   DetailCard,
-  TextOrRichCard,
+  renderTextCard,
+  renderDeliverables,
+  renderVideoBlock,
   ImageItemGrid,
   MetricsRow,
-  DeliverablesList,
-  VideoBlock,
 } from './WorkSharedBlocks';
 
 const normalizeLegacyTechStack = (techStack) => {
   if (!techStack) return [];
   if (Array.isArray(techStack)) {
-    return techStack.map((item) => ({
-      name: item.name,
-      category: item.category,
-      icon: item.icon,
-      description: item.description,
-      items: item.items || item.technologies,
-    }));
+    return techStack
+      .filter((item) => item && (item.name || item.items?.length > 0 || item.technologies?.length > 0))
+      .map((item) => ({
+        _key: item._key,
+        name: item.name,
+        category: item.category,
+        icon: item.icon,
+        description: item.description,
+        items: item.items || item.technologies,
+      }));
   }
-  return Object.keys(techStack).map((cat) => ({
-    category: cat,
-    items: techStack[cat] || [],
-  }));
+  return Object.keys(techStack)
+    .filter((cat) => Array.isArray(techStack[cat]) && techStack[cat].length > 0)
+    .map((cat) => ({
+      category: cat,
+      items: techStack[cat],
+    }));
 };
 
 const DevelopmentShowcase = ({ project }) => {
   const dev = project.developmentDetails || {};
 
-  // Support both structured developmentDetails and legacy flat fields (e.g., works.json)
   const problemStatement = dev.problemStatement || project.challenge;
   const clientRequirements = dev.clientRequirements || project.userRequirements;
   const targetUsers = dev.targetUsers;
@@ -47,7 +51,9 @@ const DevelopmentShowcase = ({ project }) => {
   const devProcess = dev.developmentProcess || project.developmentProcess;
   const architecture = dev.systemArchitecture || project.architecture;
   const keyFeatures = dev.keyFeatures || project.features;
-  const challengesAndSolutions = dev.challengesAndSolutions;
+  const challengesAndSolutions = (dev.challengesAndSolutions || []).filter(
+    (item) => item && (item.challenge || item.solution || item.result)
+  );
 
   const testingAndQa = dev.testingAndQa;
   const performanceOptimisation = dev.performanceOptimisation;
@@ -66,6 +72,10 @@ const DevelopmentShowcase = ({ project }) => {
   const normalizedTech = normalizeLegacyTechStack(techStack);
   const isLegacyGroupedTech = normalizedTech.length > 0 && Array.isArray(normalizedTech[0]?.items);
 
+  const validFeatures = Array.isArray(keyFeatures)
+    ? keyFeatures.filter((f) => (typeof f === 'string' ? f.trim().length > 0 : f && (f.title || f.description)))
+    : [];
+
   return (
     <>
       <DetailSection
@@ -73,12 +83,12 @@ const DevelopmentShowcase = ({ project }) => {
         title={<>Understanding Scope<br />&amp; User Needs.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Problem Statement" value={problemStatement} />
-        <TextOrRichCard title="Client / User Requirements" value={clientRequirements} />
-        <TextOrRichCard title="Target Users" value={targetUsers} />
-        <TextOrRichCard title="Project Scope &amp; Goals" value={projectScope} />
-        <TextOrRichCard title="Functional Requirements" value={functionalReqs} />
-        <TextOrRichCard title="Non-Functional Requirements" value={nonFunctionalReqs} />
+        {renderTextCard('Problem Statement', problemStatement, 'prob')}
+        {renderTextCard('Client / User Requirements', clientRequirements, 'req')}
+        {renderTextCard('Target Users', targetUsers, 'users')}
+        {renderTextCard('Project Scope & Goals', projectScope, 'scope')}
+        {renderTextCard('Functional Requirements', functionalReqs, 'func')}
+        {renderTextCard('Non-Functional Requirements', nonFunctionalReqs, 'nonfunc')}
       </DetailSection>
 
       <DetailSection
@@ -86,14 +96,14 @@ const DevelopmentShowcase = ({ project }) => {
         title={<>Architecture, Stack<br />&amp; Engineering.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Proposed Solution" value={proposedSolution} />
+        {renderTextCard('Proposed Solution', proposedSolution, 'sol')}
         {hasContent(methodology) && (
-          <DetailCard title="Development Methodology">
+          <DetailCard key="method" title="Development Methodology">
             <p className="wd-card-text">{methodology}</p>
           </DetailCard>
         )}
         {hasContent(devProcess) && (
-          <DetailCard title="Development Process">
+          <DetailCard key="proc" title="Development Process">
             {Array.isArray(devProcess) && typeof devProcess[0] === 'string' ? (
               <div className="wd-tags-list">
                 {devProcess.map((step, i) => (
@@ -106,13 +116,13 @@ const DevelopmentShowcase = ({ project }) => {
           </DetailCard>
         )}
         {hasContent(architecture) && (
-          <DetailCard title="System Architecture">
+          <DetailCard key="arch" title="System Architecture">
             {typeof architecture === 'string' || Array.isArray(architecture) ? (
               <RichContent value={architecture} />
             ) : (
               <>
                 <RichContent value={architecture.description} />
-                {architecture.diagram?.image && (
+                {getImageUrl(architecture.diagram) && (
                   <div className="wd-gallery-item" style={{ marginTop: '1.5rem' }}>
                     <img
                       src={getImageUrl(architecture.diagram)}
@@ -131,7 +141,7 @@ const DevelopmentShowcase = ({ project }) => {
         {normalizedTech.length > 0 && (
           isLegacyGroupedTech ? (
             normalizedTech.map((group, idx) => (
-              <DetailCard key={idx} title={`${group.category} Stack`}>
+              <DetailCard key={`tech-${idx}`} title={`${group.category} Stack`}>
                 <div className="wd-tags-list">
                   {group.items.map((tech, i) => (
                     <span className="wd-tag" key={i}>{tech}</span>
@@ -140,7 +150,7 @@ const DevelopmentShowcase = ({ project }) => {
               </DetailCard>
             ))
           ) : (
-            <DetailCard title="Technology Stack">
+            <DetailCard key="tech-grid" title="Technology Stack">
               <div className="wd-tech-grid">
                 {normalizedTech.map((tech, idx) => {
                   const iconUrl = getImageUrl(tech.icon);
@@ -159,28 +169,26 @@ const DevelopmentShowcase = ({ project }) => {
             </DetailCard>
           )
         )}
-        {hasContent(keyFeatures) && (
-          Array.isArray(keyFeatures) && typeof keyFeatures[0] === 'string' ? (
-            <DetailCard title="Key Features">
-              <RichContent value={keyFeatures} />
-            </DetailCard>
+        {validFeatures.length > 0 && (
+          typeof validFeatures[0] === 'string' ? (
+            renderTextCard('Key Features', validFeatures, 'feat')
           ) : (
-            <DetailCard title="Key Features">
+            <DetailCard key="feat-grid" title="Key Features">
               <div className="wd-features-grid">
-                {keyFeatures.map((feat, idx) => {
+                {validFeatures.map((feat, idx) => {
                   const iconUrl = getImageUrl(feat.icon);
                   const featImg = getImageUrl(feat.image?.image || feat.image);
                   return (
                     <div className="wd-feature-card" key={feat._key || idx}>
                       <div className="wd-feature-header">
                         {iconUrl && <img src={iconUrl} alt={feat.title} className="wd-tech-icon" />}
-                        <h4 className="wd-feature-title">{feat.title}</h4>
+                        {feat.title && <h4 className="wd-feature-title">{feat.title}</h4>}
                       </div>
                       {feat.description && <p className="wd-card-text">{feat.description}</p>}
                       {featImg && (
                         <img
                           src={featImg}
-                          alt={feat.image?.alt || feat.title}
+                          alt={feat.image?.alt || feat.title || 'Feature'}
                           className="wd-feature-image"
                         />
                       )}
@@ -191,8 +199,8 @@ const DevelopmentShowcase = ({ project }) => {
             </DetailCard>
           )
         )}
-        {hasContent(challengesAndSolutions) && (
-          <DetailCard title="Challenges &amp; Solutions">
+        {challengesAndSolutions.length > 0 && (
+          <DetailCard key="cs" title="Challenges &amp; Solutions">
             <div className="wd-stacked-list">
               {challengesAndSolutions.map((item, idx) => (
                 <div className="wd-cs-card" key={item._key || idx}>
@@ -210,8 +218,8 @@ const DevelopmentShowcase = ({ project }) => {
             </div>
           </DetailCard>
         )}
-        <TextOrRichCard title="Responsibilities" value={project.responsibilities} />
-        <TextOrRichCard title="Lessons Learned" value={project.lessonsLearned} />
+        {renderTextCard('Responsibilities', project.responsibilities, 'resp')}
+        {renderTextCard('Lessons Learned', project.lessonsLearned, 'lessons')}
       </DetailSection>
 
       <DetailSection
@@ -219,13 +227,13 @@ const DevelopmentShowcase = ({ project }) => {
         title={<>Quality, Performance<br />&amp; Deployment.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Testing &amp; Quality Assurance" value={testingAndQa} />
-        <TextOrRichCard title="Performance Optimisation" value={performanceOptimisation} />
-        <TextOrRichCard title="Security Considerations" value={securityConsiderations} />
-        <DeliverablesList items={deliverables} />
-        <VideoBlock video={demoVideo} />
+        {renderTextCard('Testing & Quality Assurance', testingAndQa, 'qa')}
+        {renderTextCard('Performance Optimisation', performanceOptimisation, 'perf')}
+        {renderTextCard('Security Considerations', securityConsiderations, 'sec')}
+        {renderDeliverables(deliverables, 'Final Deliverables', 'deliv')}
+        {renderVideoBlock(demoVideo, 'video')}
         {(liveUrl || repositoryUrl) && (
-          <DetailCard title="Project Links">
+          <DetailCard key="links" title="Project Links">
             <div className="wd-links-row">
               {liveUrl && (
                 <a href={liveUrl} target="_blank" rel="noreferrer" className="wd-external-link-btn">
@@ -251,9 +259,9 @@ const DevelopmentShowcase = ({ project }) => {
         title={<>Measurable Impact<br />&amp; Next Steps.</>}
         style={{ marginTop: '4rem' }}
       >
-        <TextOrRichCard title="Project Outcome" value={outcome} />
-        <TextOrRichCard title="Impact and Results" value={impact} />
-        <TextOrRichCard title="Future Enhancements" value={futureEnhancements} />
+        {renderTextCard('Project Outcome', outcome, 'outcome')}
+        {renderTextCard('Impact and Results', impact, 'impact')}
+        {renderTextCard('Future Enhancements', futureEnhancements, 'future')}
       </DetailSection>
 
       <MetricsRow metrics={metrics} />
@@ -262,4 +270,3 @@ const DevelopmentShowcase = ({ project }) => {
 };
 
 export default DevelopmentShowcase;
-

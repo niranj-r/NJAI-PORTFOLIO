@@ -11,9 +11,8 @@ import {
   getProjectCardImageAlt,
 } from '../utils/workHelpers';
 import {
-  hasContent,
   DetailSection,
-  TextOrRichCard,
+  renderTextCard,
   ImageItemGrid,
   TeamMembersRow,
   TestimonialBlock,
@@ -216,12 +215,10 @@ const WorkDetailPage = ({ onBack, projectTitle }) => {
 
       <div ref={detailsRef} className="wd-details-container">
         {/* Common Overview & Objectives */}
-        {(hasContent(overview) || hasContent(objectives)) && (
-          <DetailSection label="OVERVIEW" title={<>Project Overview<br />&amp; Objectives.</>}>
-            <TextOrRichCard title="Project Overview" value={overview} />
-            <TextOrRichCard title="Project Objectives" value={objectives} />
-          </DetailSection>
-        )}
+        <DetailSection label="OVERVIEW" title={<>Project Overview<br />&amp; Objectives.</>}>
+          {renderTextCard('Project Overview', overview, 'overview')}
+          {renderTextCard('Project Objectives', objectives, 'objectives')}
+        </DetailSection>
 
         <TeamMembersRow members={project.teamMembers} />
 
