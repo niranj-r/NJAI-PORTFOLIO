@@ -128,11 +128,11 @@ export default function Frame2({ theme }) {
 
       {/* Socials bottom left */}
       <div className="frame-socials">
-        <a href="#!" className="frame-icon"><i className="fab fa-linkedin"></i></a>
-        <a href="#!" className="frame-icon"><i className="fab fa-instagram"></i></a>
-        <a href="#!" className="frame-icon"><i className="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/niranj-r/" className="frame-icon"><i className="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/cre.a.tor_nj/" className="frame-icon"><i className="fab fa-instagram"></i></a>
+        <a href="https://github.com/niranj-r" className="frame-icon"><i className="fab fa-github"></i></a>
 
-        <a href="mailto:example@gmail.com" className="frame-icon frame-gmail">
+        <a href="mailto:[EMAIL_ADDRESS]" className="frame-icon frame-gmail">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 18 14"

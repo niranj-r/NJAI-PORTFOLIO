@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
-import { FiX, FiArrowUpRight } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 import '../styles/UtilityModals.css';
 
 const TermsModal = ({ isOpen, onClose }) => {
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <motion.div 
         className="utility-modal"
@@ -58,7 +71,8 @@ const TermsModal = ({ isOpen, onClose }) => {
           </button>
         </div>
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

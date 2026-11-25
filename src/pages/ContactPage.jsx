@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { FiArrowLeft, FiArrowUpRight, FiMail } from 'react-icons/fi';
-import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
-import { FaThreads } from 'react-icons/fa6';
+import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp, FaBehance } from 'react-icons/fa';
 import "../styles/ContactPage.css";
 import heroImgDark from '../assets/hero.webp';
 import heroImgLight from '../assets/hero-light.webp';
@@ -10,7 +9,7 @@ import heroImgLight from '../assets/hero-light.webp';
 const ContactPage = ({ onBack, theme }) => {
   const heroImage = theme === 'light' ? heroImgLight : heroImgDark;
   return (
-    <motion.div 
+    <motion.div
       className="contact-page"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -24,23 +23,23 @@ const ContactPage = ({ onBack, theme }) => {
 
       <div className="contact-container">
         {/* Left Side: Image */}
-        <motion.div 
+        <motion.div
           className="contact-left"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <img 
-            src={heroImage} 
-            alt="Portrait" 
-            className="contact-portrait" 
+          <img
+            src={heroImage}
+            alt="Portrait"
+            className="contact-portrait"
           />
         </motion.div>
-        
+
         {/* Right Side: Form & Socials */}
         <div className="contact-right">
-          <motion.div 
+          <motion.div
             className="contact-form-block"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +48,7 @@ const ContactPage = ({ onBack, theme }) => {
           >
             <span className="contact-label">CONTACT</span>
             <h2 className="contact-title">Let's get in touch.</h2>
-            
+
             <form className="contact-form">
               <input type="text" placeholder="NAME" className="contact-input" />
               <input type="email" placeholder="EMAIL" className="contact-input" />
@@ -57,8 +56,8 @@ const ContactPage = ({ onBack, theme }) => {
               <button type="button" className="contact-submit">SEND MESSAGE</button>
             </form>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="contact-socials-grid"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -90,9 +89,9 @@ const ContactPage = ({ onBack, theme }) => {
               <span className="social-text">WHATSAPP</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
-            <a href="https://www.threads.com/@cre.a.tor_nj" target="_blank" rel="noopener noreferrer" className="contact-social-item">
-              <FaThreads className="social-icon" />
-              <span className="social-text">THREADS</span>
+            <a href="https://www.behance.net/niranjr" target="_blank" rel="noopener noreferrer" className="contact-social-item">
+              <FaBehance className="social-icon" />
+              <span className="social-text">BEHANCE</span>
               <FiArrowUpRight className="social-arrow" />
             </a>
           </motion.div>

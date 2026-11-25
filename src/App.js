@@ -85,6 +85,14 @@ function App() {
     </>
   );
 
+  const handleFooterNav = (view) => {
+    if (view === currentView) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setCurrentView(view);
+    }
+  };
+
   const footerProps = {
     theme,
     toggleTheme,
@@ -92,7 +100,7 @@ function App() {
     handleColorChange,
     onOpenPrivacy: () => setIsPrivacyOpen(true),
     onOpenTerms: () => setIsTermsOpen(true),
-    onNavClick: (view) => setCurrentView(view)
+    onNavClick: handleFooterNav
   };
 
   if (currentView === '404') {

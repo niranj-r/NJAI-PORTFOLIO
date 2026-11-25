@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiMail } from 'react-icons/fi';
-import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp, FaBehance } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
 import "../styles/Hero.css";
 import heroImgDark from '../assets/hero.webp';
@@ -56,6 +56,7 @@ const Hero = ({ theme }) => {
             <a href="mailto:niranj.njai@gmail.com" className="social-circle"><FiMail /></a>
             <a href="https://wa.me/919567655760" target="_blank" rel="noopener noreferrer" className="social-circle"><FaWhatsapp /></a>
             <a href="https://www.threads.com/@cre.a.tor_nj" target="_blank" rel="noopener noreferrer" className="social-circle"><FaThreads /></a>
+            <a href="https://www.behance.net/niranjr" target="_blank" rel="noopener noreferrer" className="social-circle"><FaBehance /></a>
           </div>
         </div>
       </div>

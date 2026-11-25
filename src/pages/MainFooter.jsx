@@ -1,7 +1,6 @@
 import React from 'react';
 import { FiArrowUpRight, FiArrowUp, FiSun, FiMoon, FiMail } from 'react-icons/fi';
 import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
-import { FaThreads } from 'react-icons/fa6';
 import "../styles/MainFooter.css";
 
 const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpenPrivacy, onOpenTerms, onNavClick }) => {
@@ -15,7 +14,13 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
 
         {/* Logo and Socials Column */}
         <div className="footer-column logo-column">
-          <h2 className="footer-logo">niranj.</h2>
+          <h2
+            className="footer-logo"
+            onClick={() => onNavClick?.('home')}
+            style={{ cursor: 'pointer' }}
+          >
+            niranj.
+          </h2>
           <div className="footer-socials-list">
             <a href="https://www.instagram.com/cre.a.tor_nj/" target="_blank" rel="noopener noreferrer" className="social-list-item">
               <span className="social-icon-circle"><FaInstagram /></span>
@@ -45,7 +50,7 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
           <h3 className="column-title">Pages</h3>
           <ul className="footer-links">
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('home'); }}>HOME</a></li>
-            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('home'); }}>SERVICES</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('serviceDetail'); }}>SERVICES</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('about'); }}>ABOUT</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('contact'); }}>CONTACT</a></li>
           </ul>
