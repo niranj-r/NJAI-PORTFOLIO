@@ -59,6 +59,7 @@
   width: 100%;
   max-width: 500px;
   margin-bottom: 4rem;
+  z-index: 100;
 }
 
 .hero-image {
