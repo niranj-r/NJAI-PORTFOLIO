@@ -12,6 +12,7 @@ const NotFoundPage = ({ onNavClick }) => {
   const [isPointerLocked, setIsPointerLocked] = useState(false);
   const [nearCurator, setNearCurator] = useState(false);
   const [dialogueOpen, setDialogueOpen] = useState(false);
+  const [sceneReady, setSceneReady] = useState(false);
   const [isMobileControls, setIsMobileControls] = useState(() => {
     if (typeof window === 'undefined') return false;
     return (
@@ -114,6 +115,7 @@ const NotFoundPage = ({ onNavClick }) => {
           activeTerminalRoom={activeTerminalRoom}
           isDialogueOpen={dialogueOpen}
           touchMoveRef={touchMoveRef}
+          onSceneReady={() => setSceneReady(true)}
           onZoneChange={setZone}
           onTerminalRoomChange={setActiveTerminalRoom}
           onPointerLockChange={setIsPointerLocked}
@@ -121,6 +123,12 @@ const NotFoundPage = ({ onNavClick }) => {
           onCuratorInteract={openDialogue}
         />
       </div>
+
+      {!sceneReady && (
+        <div className="not-found-scene-loader" role="status" aria-live="polite">
+          <span className="not-found-scene-loader-text">Entering The Lost Wing...</span>
+        </div>
+      )}
 
       {/* Subtle Center Crosshair */}
       {!dialogueOpen && <div className="not-found-crosshair" aria-hidden="true" />}

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import Frame2 from "./pages/Frame2";
 import Header from "./pages/Header";
-import AboutPage from "./pages/AboutPage";
 import Services from "./pages/Services";
 import SkillsTimeline from "./pages/SkillsTimeline";
 import SelectedWork from "./pages/SelectedWork";
@@ -9,21 +8,23 @@ import Testimonials from "./pages/Testimonials";
 import Hero from "./pages/Hero";
 import CTASection from "./pages/CTASection";
 import MainFooter from "./pages/MainFooter";
-import ServiceDetailPage from "./pages/ServiceDetailPage";
-import ContactPage from "./pages/ContactPage";
-import WorkPage from "./pages/WorkPage";
-import WorkDetailPage from "./pages/WorkDetailPage";
-import BlogPage from "./pages/BlogPage";
-import BlogDetailPage from "./pages/BlogDetailPage";
 import LoadingScreen from "./pages/LoadingScreen";
 import CookieConsent from "./components/CookieConsent";
 import PrivacyModal from "./components/PrivacyModal";
 import TermsModal from "./components/TermsModal";
 //import Chatbot from "./components/Chatbot";
-import NotFoundPage from "./pages/NotFoundPage";
-import SpecialMentions from "./pages/SpecialMentions";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
+
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ServiceDetailPage = lazy(() => import("./pages/ServiceDetailPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const WorkPage = lazy(() => import("./pages/WorkPage"));
+const WorkDetailPage = lazy(() => import("./pages/WorkDetailPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogDetailPage = lazy(() => import("./pages/BlogDetailPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const SpecialMentions = lazy(() => import("./pages/SpecialMentions"));
 
 const parseRoute = (pathname) => {
   const clean = (pathname || '/').replace(/\/+$/, '') || '/';
@@ -117,7 +118,7 @@ function App() {
 
   const [customColor, setCustomColor] = useState('#FF4D00');
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => initialRoute.view !== '404');
 
   useEffect(() => {
     // Initial theme set
@@ -134,11 +135,12 @@ function App() {
   }, [theme, customColor]);
 
   useEffect(() => {
+    if (!isLoading) return undefined;
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 1100);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isLoading]);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
@@ -178,6 +180,10 @@ function App() {
     onNavClick: handleFooterNav
   };
 
+  const routeFallback = (
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-primary, #1C1C1C)' }} />
+  );
+
   if (currentView === 'serviceDetail') {
     return (
       <>
@@ -186,7 +192,9 @@ function App() {
           {!isLoading && (
             <div key="content">
               <Header onNavClick={(view) => navigateTo(view)} />
-              <ServiceDetailPage onBack={() => navigateTo('home')} />
+              <Suspense fallback={routeFallback}>
+                <ServiceDetailPage onBack={() => navigateTo('home')} />
+              </Suspense>
               <CTASection onNavClick={(view) => navigateTo(view)} />
               <MainFooter {...footerProps} />
               {renderModals()}
@@ -206,11 +214,13 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <WorkDetailPage
-              onBack={() => navigateTo('work')}
-              onNotFound={() => navigateTo('404', '', false)}
-              projectTitle={selectedProject}
-            />
+            <Suspense fallback={routeFallback}>
+              <WorkDetailPage
+                onBack={() => navigateTo('work')}
+                onNotFound={() => navigateTo('404', '', false)}
+                projectTitle={selectedProject}
+              />
+            </Suspense>
             <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
@@ -229,7 +239,9 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <AboutPage onBack={() => navigateTo('home')} theme={theme} />
+            <Suspense fallback={routeFallback}>
+              <AboutPage onBack={() => navigateTo('home')} theme={theme} />
+            </Suspense>
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -247,7 +259,9 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <ContactPage onBack={() => navigateTo('home')} theme={theme} />
+            <Suspense fallback={routeFallback}>
+              <ContactPage onBack={() => navigateTo('home')} theme={theme} />
+            </Suspense>
             <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
@@ -266,7 +280,9 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <WorkPage onProjectClick={(title) => navigateTo('workDetail', title)} />
+            <Suspense fallback={routeFallback}>
+              <WorkPage onProjectClick={(title) => navigateTo('workDetail', title)} />
+            </Suspense>
             <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
@@ -285,7 +301,9 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <BlogPage onBlogClick={(title) => navigateTo('blogDetail', title)} />
+            <Suspense fallback={routeFallback}>
+              <BlogPage onBlogClick={(title) => navigateTo('blogDetail', title)} />
+            </Suspense>
             <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
@@ -304,11 +322,13 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <BlogDetailPage
-              onBack={() => navigateTo('blog')}
-              onNotFound={() => navigateTo('404', '', false)}
-              blogTitle={selectedBlog}
-            />
+            <Suspense fallback={routeFallback}>
+              <BlogDetailPage
+                onBack={() => navigateTo('blog')}
+                onNotFound={() => navigateTo('404', '', false)}
+                blogTitle={selectedBlog}
+              />
+            </Suspense>
             <CTASection onNavClick={(view) => navigateTo(view)} />
             <MainFooter {...footerProps} />
             {renderModals()}
@@ -327,7 +347,9 @@ function App() {
         {!isLoading && (
           <div>
             <Header onNavClick={(view) => navigateTo(view)} />
-            <SpecialMentions onNavClick={(view) => navigateTo(view)} />
+            <Suspense fallback={routeFallback}>
+              <SpecialMentions onNavClick={(view) => navigateTo(view)} />
+            </Suspense>
             <MainFooter {...footerProps} />
             {renderModals()}
           </div>
@@ -377,7 +399,9 @@ function App() {
       {!isLoading && (
         <div>
           <Header onNavClick={(view) => navigateTo(view)} />
-          <NotFoundPage theme={theme} onNavClick={(view) => navigateTo(view)} />
+          <Suspense fallback={routeFallback}>
+            <NotFoundPage theme={theme} onNavClick={(view) => navigateTo(view)} />
+          </Suspense>
           <MainFooter {...footerProps} />
           {renderModals()}
         </div>

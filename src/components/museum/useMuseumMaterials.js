@@ -14,7 +14,7 @@ const processBrutalistCanvas = (
   sourceImage,
   { makeSeamless = false, isNormalMap = false, desaturateTint = null } = {}
 ) => {
-  const quadSize = makeSeamless ? 384 : 512;
+  const quadSize = makeSeamless ? 256 : 512;
   const outSize = makeSeamless ? quadSize * 2 : quadSize;
 
   const srcW = sourceImage.naturalWidth || sourceImage.width;
@@ -65,19 +65,23 @@ const processBrutalistCanvas = (
   outCanvas.height = outSize;
   const outCtx = outCanvas.getContext('2d');
 
-  const drawQuad = (destX, destY, flipX, flipY) => {
-    const tmp = document.createElement('canvas');
-    tmp.width = quadSize;
-    tmp.height = quadSize;
-    const tCtx = tmp.getContext('2d');
+  // Top-left quadrant requires no flipping or pixel inversion
+  outCtx.drawImage(baseCanvas, 0, 0);
 
+  const tmp = document.createElement('canvas');
+  tmp.width = quadSize;
+  tmp.height = quadSize;
+  const tCtx = tmp.getContext('2d');
+
+  const drawMirroredQuad = (destX, destY, flipX, flipY) => {
+    tCtx.clearRect(0, 0, quadSize, quadSize);
     tCtx.save();
     tCtx.translate(flipX ? quadSize : 0, flipY ? quadSize : 0);
     tCtx.scale(flipX ? -1 : 1, flipY ? -1 : 1);
     tCtx.drawImage(baseCanvas, 0, 0);
     tCtx.restore();
 
-    if (isNormalMap && (flipX || flipY)) {
+    if (isNormalMap) {
       const imgData = tCtx.getImageData(0, 0, quadSize, quadSize);
       const data = imgData.data;
       for (let i = 0; i < data.length; i += 4) {
@@ -90,10 +94,9 @@ const processBrutalistCanvas = (
     outCtx.drawImage(tmp, destX, destY);
   };
 
-  drawQuad(0, 0, false, false);
-  drawQuad(quadSize, 0, true, false);
-  drawQuad(0, quadSize, false, true);
-  drawQuad(quadSize, quadSize, true, true);
+  drawMirroredQuad(quadSize, 0, true, false);
+  drawMirroredQuad(0, quadSize, false, true);
+  drawMirroredQuad(quadSize, quadSize, true, true);
 
   return outCanvas;
 };

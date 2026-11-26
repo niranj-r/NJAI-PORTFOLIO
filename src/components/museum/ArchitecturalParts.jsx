@@ -10,29 +10,34 @@ import {
   createScaledBoxGeometry,
 } from './useMuseumMaterials';
 
-/**
- * Loads an optional image/SVG as an sRGB Three.js texture, tracks its natural aspect ratio,
- * and disposes the texture cleanly on change or unmount.
- */
-const useAspectTexture = (imageUrl, label) => {
-  const [imgAspect, setImgAspect] = useState(null);
+const SHARED_TEXTURE_LOADER = new THREE.TextureLoader();
+const SHARED_TEXTURE_CACHE = new Map();
 
-  const texture = useMemo(() => {
-    setImgAspect(null);
-    if (!imageUrl) return null;
-    const loader = new THREE.TextureLoader();
-    const tex = loader.load(
+const acquireSharedTexture = (imageUrl, label, onAspect) => {
+  if (!imageUrl) return null;
+
+  let entry = SHARED_TEXTURE_CACHE.get(imageUrl);
+  if (!entry) {
+    entry = {
+      texture: null,
+      aspect: null,
+      refCount: 0,
+      listeners: new Set(),
+    };
+    entry.texture = SHARED_TEXTURE_LOADER.load(
       imageUrl,
       (loaded) => {
-        loaded.colorSpace = THREE.SRGBColorSpace;
-        loaded.minFilter = THREE.LinearMipmapLinearFilter;
-        loaded.magFilter = THREE.LinearFilter;
-        loaded.anisotropy = 4;
-        loaded.needsUpdate = true;
         const iw = loaded.image?.naturalWidth || loaded.image?.width;
         const ih = loaded.image?.naturalHeight || loaded.image?.height;
+        const isPixelArt = iw && ih && iw <= 64 && ih <= 64;
+        loaded.colorSpace = THREE.SRGBColorSpace;
+        loaded.minFilter = isPixelArt ? THREE.NearestFilter : THREE.LinearMipmapLinearFilter;
+        loaded.magFilter = isPixelArt ? THREE.NearestFilter : THREE.LinearFilter;
+        loaded.anisotropy = isPixelArt ? 1 : 4;
+        loaded.needsUpdate = true;
         if (iw && ih) {
-          setImgAspect(iw / ih);
+          entry.aspect = iw / ih;
+          entry.listeners.forEach((cb) => cb(entry.aspect));
         }
       },
       undefined,
@@ -40,17 +45,57 @@ const useAspectTexture = (imageUrl, label) => {
         console.warn(`Failed to load ${label} "${imageUrl}":`, err);
       }
     );
-    tex.colorSpace = THREE.SRGBColorSpace;
-    return tex;
-  }, [imageUrl, label]);
+    entry.texture.colorSpace = THREE.SRGBColorSpace;
+    SHARED_TEXTURE_CACHE.set(imageUrl, entry);
+  }
+
+  entry.refCount += 1;
+  if (entry.aspect !== null) {
+    onAspect(entry.aspect);
+  } else {
+    entry.listeners.add(onAspect);
+  }
+  return entry;
+};
+
+/**
+ * Loads an optional image/SVG once via a shared cache as an sRGB Three.js texture,
+ * tracks its natural aspect ratio, and disposes only when the last consumer unmounts.
+ */
+const useAspectTexture = (imageUrl, label) => {
+  const [state, setState] = useState({ texture: null, imgAspect: null });
 
   useEffect(() => {
-    return () => {
-      if (texture) texture.dispose();
-    };
-  }, [texture]);
+    if (!imageUrl) {
+      setState({ texture: null, imgAspect: null });
+      return undefined;
+    }
 
-  return { texture, imgAspect };
+    let cancelled = false;
+    const handleAspect = (aspect) => {
+      if (!cancelled) {
+        setState((prev) => (prev.imgAspect === aspect ? prev : { ...prev, imgAspect: aspect }));
+      }
+    };
+
+    const entry = acquireSharedTexture(imageUrl, label, handleAspect);
+    if (entry) {
+      setState({ texture: entry.texture, imgAspect: entry.aspect });
+    }
+
+    return () => {
+      cancelled = true;
+      if (!entry) return;
+      entry.listeners.delete(handleAspect);
+      entry.refCount -= 1;
+      if (entry.refCount <= 0) {
+        entry.texture.dispose();
+        SHARED_TEXTURE_CACHE.delete(imageUrl);
+      }
+    };
+  }, [imageUrl, label]);
+
+  return state;
 };
 
 /**
@@ -719,141 +764,145 @@ export const DoorwaySpotlight = ({
 };
 
 const createWallInscriptionTexture = (mode, variant = 'west') => {
+  const isRevealed = mode === 'revealed';
+  const width = isRevealed ? 1536 : 1024;
+  const height = isRevealed ? 768 : 512;
+  const scale = width / 2048;
+
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 1024;
+  canvas.width = width;
+  canvas.height = height;
   const ctx = canvas.getContext('2d');
+  ctx.scale(scale, scale);
+
+  const vw = 2048;
+  const vh = 1024;
 
   // Dark brutalist concrete slab base matching #363633 / #1C1C1C
   ctx.fillStyle = '#2B2B28';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, vw, vh);
 
-  // Subtle concrete weathering speckles
-  for (let i = 0; i < 4500; i += 1) {
-    const rx = (i * 1973) % canvas.width;
-    const ry = (i * 3517) % canvas.height;
+  // Subtle concrete weathering speckles (lighter loop count for fast mount)
+  const speckleCount = isRevealed ? 1800 : 900;
+  for (let i = 0; i < speckleCount; i += 1) {
+    const rx = (i * 1973) % vw;
+    const ry = (i * 3517) % vh;
     ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.06)';
-    ctx.fillRect(rx, ry, 4, 4);
+    ctx.fillRect(rx, ry, 5, 5);
   }
 
   // Carved architectural border
   ctx.strokeStyle = '#474742';
   ctx.lineWidth = 8;
-  ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+  ctx.strokeRect(40, 40, vw - 80, vh - 80);
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
-  if (mode === 'revealed') {
+  if (isRevealed) {
     if (variant === 'north') {
-      // Variant 2 (North Gallery Wing): Split crimson monolith & double border
       ctx.fillStyle = 'rgba(120, 34, 28, 0.28)';
-      ctx.fillRect(canvas.width / 2 - 420, 76, 840, canvas.height - 152);
+      ctx.fillRect(vw / 2 - 420, 76, 840, vh - 152);
 
       ctx.strokeStyle = '#6A2A24';
       ctx.lineWidth = 3;
-      ctx.strokeRect(76, 76, canvas.width - 152, canvas.height - 152);
+      ctx.strokeRect(76, 76, vw - 152, vh - 152);
 
       ctx.fillStyle = '#141312';
       ctx.font = '700 340px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText('404', canvas.width / 2 + 6, 326);
+      ctx.fillText('404', vw / 2 + 6, 326);
       ctx.fillStyle = '#D2C6B0';
-      ctx.fillText('404', canvas.width / 2, 318);
+      ctx.fillText('404', vw / 2, 318);
 
       ctx.fillStyle = '#C4B9A5';
       ctx.font = '500 58px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText('P A G E   N O T   F O U N D', canvas.width / 2, 558);
+      ctx.fillText('P A G E   N O T   F O U N D', vw / 2, 558);
 
       ctx.strokeStyle = '#9E3D34';
       ctx.lineWidth = 4;
       ctx.beginPath();
-      ctx.moveTo(canvas.width / 2 - 360, 646);
-      ctx.lineTo(canvas.width / 2 + 360, 646);
+      ctx.moveTo(vw / 2 - 360, 646);
+      ctx.lineTo(vw / 2 + 360, 646);
       ctx.stroke();
 
       ctx.fillStyle = '#A89F90';
       ctx.font = 'italic 400 44px Georgia, "Times New Roman", serif';
-      ctx.fillText('Gallery End  —  A different path. The same destination.', canvas.width / 2, 742);
+      ctx.fillText('Gallery End  —  A different path. The same destination.', vw / 2, 742);
     } else if (variant === 'east') {
-      // Variant 3 (East Winding Passage): Corner targeting brackets & offset red datum
       ctx.strokeStyle = '#8F3831';
       ctx.lineWidth = 6;
       const pad = 96;
       const arm = 110;
-      // Top-left & Top-right brackets
       ctx.beginPath();
       ctx.moveTo(pad, pad + arm);
       ctx.lineTo(pad, pad);
       ctx.lineTo(pad + arm, pad);
-      ctx.moveTo(canvas.width - pad - arm, pad);
-      ctx.lineTo(canvas.width - pad, pad);
-      ctx.lineTo(canvas.width - pad, pad + arm);
-      // Bottom-left & Bottom-right brackets
-      ctx.moveTo(pad, canvas.height - pad - arm);
-      ctx.lineTo(pad, canvas.height - pad);
-      ctx.lineTo(pad + arm, canvas.height - pad);
-      ctx.moveTo(canvas.width - pad - arm, canvas.height - pad);
-      ctx.lineTo(canvas.width - pad, canvas.height - pad);
-      ctx.lineTo(canvas.width - pad, canvas.height - pad - arm);
+      ctx.moveTo(vw - pad - arm, pad);
+      ctx.lineTo(vw - pad, pad);
+      ctx.lineTo(vw - pad, pad + arm);
+      ctx.moveTo(pad, vh - pad - arm);
+      ctx.lineTo(pad, vh - pad);
+      ctx.lineTo(pad + arm, vh - pad);
+      ctx.moveTo(vw - pad - arm, vh - pad);
+      ctx.lineTo(vw - pad, vh - pad);
+      ctx.lineTo(vw - pad, vh - pad - arm);
       ctx.stroke();
 
       ctx.fillStyle = '#9E332A';
       ctx.font = '700 350px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText('404', canvas.width / 2 + 10, 314);
+      ctx.fillText('404', vw / 2 + 10, 314);
       ctx.fillStyle = '#C4B9A5';
-      ctx.fillText('404', canvas.width / 2, 305);
+      ctx.fillText('404', vw / 2, 305);
 
       ctx.fillStyle = '#B8AD99';
       ctx.font = '500 62px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText('P A G E   N O T   F O U N D', canvas.width / 2, 560);
+      ctx.fillText('P A G E   N O T   F O U N D', vw / 2, 560);
 
       ctx.fillStyle = '#9E9689';
       ctx.font = 'italic 400 44px Georgia, "Times New Roman", serif';
-      ctx.fillText('Passage Terminus  —  A different path. The same destination.', canvas.width / 2, 735);
+      ctx.fillText('Passage Terminus  —  A different path. The same destination.', vw / 2, 735);
     } else {
-      // Variant 1 (West Corridor): Architectural recessed bars & classic 404 plaque
       ctx.fillStyle = '#8F3831';
-      ctx.fillRect(140, 140, 22, canvas.height - 280);
-      ctx.fillRect(canvas.width - 162, 140, 22, canvas.height - 280);
+      ctx.fillRect(140, 140, 22, vh - 280);
+      ctx.fillRect(vw - 162, 140, 22, vh - 280);
 
       ctx.fillStyle = '#151514';
       ctx.font = '700 350px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText('404', canvas.width / 2 + 5, 312);
+      ctx.fillText('404', vw / 2 + 5, 312);
 
       ctx.fillStyle = '#C4B9A5';
-      ctx.fillText('404', canvas.width / 2, 305);
+      ctx.fillText('404', vw / 2, 305);
 
       ctx.fillStyle = '#B8AD99';
       ctx.font = '500 64px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      ctx.fillText('P A G E   N O T   F O U N D', canvas.width / 2, 555);
+      ctx.fillText('P A G E   N O T   F O U N D', vw / 2, 555);
 
       ctx.strokeStyle = '#8F3831';
       ctx.lineWidth = 4;
       ctx.beginPath();
-      ctx.moveTo(canvas.width / 2 - 320, 645);
-      ctx.lineTo(canvas.width / 2 + 320, 645);
+      ctx.moveTo(vw / 2 - 320, 645);
+      ctx.lineTo(vw / 2 + 320, 645);
       ctx.stroke();
 
       ctx.fillStyle = '#9E9689';
       ctx.font = 'italic 400 46px Georgia, "Times New Roman", serif';
-      ctx.fillText('West Wing  —  A different path. The same destination.', canvas.width / 2, 745);
+      ctx.fillText('West Wing  —  A different path. The same destination.', vw / 2, 745);
     }
   } else if (mode === 'hidden') {
-    // Pre-arrival architectural wall inscription (no 404 revealed yet)
     ctx.fillStyle = '#7C7A73';
     ctx.font = '500 54px "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-    ctx.fillText('T H E   L O S T   W I N G', canvas.width / 2, 460);
+    ctx.fillText('T H E   L O S T   W I N G', vw / 2, 460);
 
     ctx.strokeStyle = '#4E4D48';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2 - 220, 525);
-    ctx.lineTo(canvas.width / 2 + 220, 525);
+    ctx.moveTo(vw / 2 - 220, 525);
+    ctx.lineTo(vw / 2 + 220, 525);
     ctx.stroke();
 
     ctx.fillStyle = '#6D6B64';
     ctx.font = 'italic 400 40px Georgia, "Times New Roman", serif';
-    ctx.fillText('Follow the passage to its end.', canvas.width / 2, 595);
+    ctx.fillText('Follow the passage to its end.', vw / 2, 595);
   }
 
   const texture = new THREE.CanvasTexture(canvas);
@@ -862,6 +911,10 @@ const createWallInscriptionTexture = (mode, variant = 'west') => {
   texture.needsUpdate = true;
   return texture;
 };
+
+let sharedHiddenWallTex = null;
+let sharedBlankWallTex = null;
+let sharedWallTexRefs = 0;
 
 export const WallInscription = ({
   roomId = 'west',
@@ -874,19 +927,39 @@ export const WallInscription = ({
   imageUrl = null,
   revealed = false,
 }) => {
-  const hiddenTexture = useMemo(() => createWallInscriptionTexture('hidden', roomId), [roomId]);
-  const blankTexture = useMemo(() => createWallInscriptionTexture('blank', roomId), [roomId]);
-  const revealedTexture = useMemo(() => createWallInscriptionTexture('revealed', roomId), [roomId]);
   const { texture: customTexture, imgAspect } = useAspectTexture(imageUrl, 'ending wall image');
   const lightRef = useRef(null);
 
+  const sharedTextures = useMemo(() => {
+    if (!sharedHiddenWallTex) sharedHiddenWallTex = createWallInscriptionTexture('hidden');
+    if (!sharedBlankWallTex) sharedBlankWallTex = createWallInscriptionTexture('blank');
+    return { hiddenTexture: sharedHiddenWallTex, blankTexture: sharedBlankWallTex };
+  }, []);
+
+  // Lazily build the per-room revealed canvas only when the player reaches it without a custom image
+  const revealedTexture = useMemo(() => {
+    if (!revealed || imageUrl) return null;
+    return createWallInscriptionTexture('revealed', roomId);
+  }, [revealed, imageUrl, roomId]);
+
+  useEffect(() => {
+    sharedWallTexRefs += 1;
+    return () => {
+      sharedWallTexRefs -= 1;
+      if (sharedWallTexRefs <= 0) {
+        sharedHiddenWallTex?.dispose();
+        sharedBlankWallTex?.dispose();
+        sharedHiddenWallTex = null;
+        sharedBlankWallTex = null;
+      }
+    };
+  }, []);
+
   useEffect(() => {
     return () => {
-      hiddenTexture.dispose();
-      blankTexture.dispose();
-      revealedTexture.dispose();
+      if (revealedTexture) revealedTexture.dispose();
     };
-  }, [hiddenTexture, blankTexture, revealedTexture]);
+  }, [revealedTexture]);
 
   // Smooth cinematic reveal spotlight when entering the terminal room
   useFrame((_, delta) => {
@@ -902,10 +975,10 @@ export const WallInscription = ({
   const [overlayW, overlayH] = fitAspectDimensions(w - 0.36, h - 0.36, imgAspect);
 
   const baseMap = !revealed
-    ? hiddenTexture
+    ? sharedTextures.hiddenTexture
     : customTexture
-      ? blankTexture
-      : revealedTexture;
+      ? sharedTextures.blankTexture
+      : revealedTexture || sharedTextures.blankTexture;
 
   return (
     <group position={[x, y, z]} rotation={[0, rotY, 0]}>

@@ -191,6 +191,7 @@ const MuseumScene = ({
   activeTerminalRoom,
   isDialogueOpen = false,
   touchMoveRef = null,
+  onSceneReady,
   onZoneChange,
   onTerminalRoomChange,
   onPointerLockChange,
@@ -198,14 +199,15 @@ const MuseumScene = ({
   onCuratorInteract,
 }) => (
   <Canvas
-    shadows="soft"
-    dpr={[1, 1.5]}
+    shadows
+    dpr={[1, 1.25]}
     camera={{
       position: [0, PLAYER_EYE_HEIGHT, 3.0],
       fov: 65,
       near: 0.1,
       far: 90,
     }}
+    onCreated={() => onSceneReady?.()}
   >
     <MuseumWorld
       activeTerminalRoom={activeTerminalRoom}

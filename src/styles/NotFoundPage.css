@@ -21,6 +21,29 @@
   touch-action: none;
 }
 
+.not-found-scene-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #140F0E;
+  pointer-events: none;
+}
+
+.not-found-scene-loader-text {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #C4B9A5;
+  padding: 10px 20px;
+  border: 1px solid rgba(120, 51, 46, 0.55);
+  border-radius: 4px;
+  background-color: rgba(24, 18, 18, 0.86);
+}
+
 .not-found-canvas-wrapper:active {
   cursor: grabbing;
 }
