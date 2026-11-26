@@ -112,11 +112,12 @@
 }
 
 .modal-card h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
   font-size: 1.1rem;
   margin: 0 0 15px 0;
   font-weight: 500;
   color: var(--brand-primary);
-  text-transform: uppercase;
   letter-spacing: 1px;
 }
 
