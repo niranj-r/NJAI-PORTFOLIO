@@ -1,61 +1,111 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
+import { motion } from 'framer-motion';
 import { FiArrowLeft } from 'react-icons/fi';
-import MuseumScene from '../components/museum/MuseumScene';
-import CuratorDialogue from '../components/museum/CuratorDialogue';
+import heroDark from '../assets/404hero.webp';
+import heroLight from '../assets/404heroLight.webp';
+import heroDarkMobile from '../assets/404heroMobile.webp';
+import heroLightMobile from '../assets/404heroLightMobile.webp';
 import '../styles/NotFoundPage.css';
 
-const JOYSTICK_MAX_RADIUS = 38;
+const MuseumScene = lazy(() => import('../components/museum/MuseumScene'));
+const CuratorDialogue = lazy(() => import('../components/museum/CuratorDialogue'));
 
-const NotFoundPage = ({ onNavClick }) => {
+const checkIsLaptopInteractive = () => {
+  if (typeof window === 'undefined') return true;
+  const wideEnough = window.innerWidth >= 1024;
+  const hasFinePointer = window.matchMedia
+    ? window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    : true;
+  return wideEnough && hasFinePointer;
+};
+
+const StockNotFound = ({ theme, onNavClick }) => {
+  const heroImgDesktop = theme === 'light' ? heroLight : heroDark;
+  const heroImgMobile = theme === 'light' ? heroLightMobile : heroDarkMobile;
+
+  return (
+    <motion.div
+      className="stock-not-found-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Background Image Anchored to Right/Bottom */}
+      <div className="stock-not-found-hero-bg">
+        <picture>
+          <source media="(max-width: 992px)" srcSet={heroImgMobile} />
+          <motion.img
+            src={heroImgDesktop}
+            alt="404 Graphic"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          />
+        </picture>
+      </div>
+
+      {/* Foreground Content */}
+      <div className="stock-not-found-content">
+        <h1 className="stock-not-found-404">404</h1>
+        <h2 className="stock-not-found-title">PAGE NOT FOUND</h2>
+        <p className="stock-not-found-subtitle">
+          Looks like you&apos;ve taken a wrong turn.
+          <br />
+          Let&apos;s get you back on track.
+        </p>
+
+        <button
+          type="button"
+          className="stock-not-found-btn-outline"
+          onClick={() => onNavClick('home')}
+        >
+          <span className="btn-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+          </span>
+          <span className="btn-text">Go Home</span>
+        </button>
+      </div>
+    </motion.div>
+  );
+};
+
+const NotFoundPage = ({ theme, onNavClick }) => {
+  const [isLaptop, setIsLaptop] = useState(checkIsLaptopInteractive);
   const [, setZone] = useState('ENTRANCE HALL');
   const [activeTerminalRoom, setActiveTerminalRoom] = useState(null);
   const [isPointerLocked, setIsPointerLocked] = useState(false);
   const [nearCurator, setNearCurator] = useState(false);
   const [dialogueOpen, setDialogueOpen] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
-  const [isMobileControls, setIsMobileControls] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return (
-      window.innerWidth <= 900 ||
-      window.matchMedia?.('(pointer: coarse)').matches ||
-      navigator.maxTouchPoints > 0
-    );
-  });
-  const [knobOffset, setKnobOffset] = useState({ x: 0, y: 0 });
-
-  const touchMoveRef = useRef({ forward: 0, strafe: 0 });
-  const joystickRef = useRef(null);
-  const joystickPointerIdRef = useRef(null);
 
   useEffect(() => {
-    const updateDeviceControls = () => {
-      const mobile =
-        window.innerWidth <= 900 ||
-        window.matchMedia?.('(pointer: coarse)').matches ||
-        navigator.maxTouchPoints > 0;
-      setIsMobileControls(mobile);
+    const handleResize = () => {
+      const nextIsLaptop = checkIsLaptopInteractive();
+      setIsLaptop(nextIsLaptop);
+      if (!nextIsLaptop) {
+        setSceneReady(false);
+        setDialogueOpen(false);
+        setNearCurator(false);
+      }
     };
-    window.addEventListener('resize', updateDeviceControls);
-    return () => window.removeEventListener('resize', updateDeviceControls);
-  }, []);
-
-  const resetJoystick = useCallback(() => {
-    joystickPointerIdRef.current = null;
-    touchMoveRef.current.forward = 0;
-    touchMoveRef.current.strafe = 0;
-    setKnobOffset({ x: 0, y: 0 });
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const openDialogue = useCallback(() => {
-    resetJoystick();
     setDialogueOpen(true);
-  }, [resetJoystick]);
+  }, []);
 
   const closeDialogue = useCallback(() => {
     setDialogueOpen(false);
   }, []);
 
   useEffect(() => {
+    if (!isLaptop) return undefined;
     const handleKeyDown = (e) => {
       if (e.code === 'KeyE' && nearCurator && !dialogueOpen) {
         e.preventDefault();
@@ -64,64 +114,27 @@ const NotFoundPage = ({ onNavClick }) => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nearCurator, dialogueOpen, openDialogue]);
+  }, [isLaptop, nearCurator, dialogueOpen, openDialogue]);
 
-  const updateJoystickFromClient = (clientX, clientY) => {
-    if (!joystickRef.current) return;
-    const rect = joystickRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    let dx = clientX - centerX;
-    let dy = clientY - centerY;
-    const dist = Math.hypot(dx, dy);
-
-    if (dist > JOYSTICK_MAX_RADIUS) {
-      dx = (dx / dist) * JOYSTICK_MAX_RADIUS;
-      dy = (dy / dist) * JOYSTICK_MAX_RADIUS;
-    }
-
-    setKnobOffset({ x: dx, y: dy });
-    const normX = dx / JOYSTICK_MAX_RADIUS;
-    const normY = -dy / JOYSTICK_MAX_RADIUS;
-
-    touchMoveRef.current.strafe = Math.abs(normX) < 0.12 ? 0 : normX;
-    touchMoveRef.current.forward = Math.abs(normY) < 0.12 ? 0 : normY;
-  };
-
-  const handleJoystickPointerDown = (e) => {
-    e.stopPropagation();
-    if (joystickPointerIdRef.current !== null) return;
-    joystickPointerIdRef.current = e.pointerId;
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-    updateJoystickFromClient(e.clientX, e.clientY);
-  };
-
-  const handleJoystickPointerMove = (e) => {
-    if (joystickPointerIdRef.current !== e.pointerId) return;
-    e.stopPropagation();
-    updateJoystickFromClient(e.clientX, e.clientY);
-  };
-
-  const handleJoystickPointerUp = (e) => {
-    if (joystickPointerIdRef.current !== e.pointerId) return;
-    e.stopPropagation();
-    resetJoystick();
-  };
+  if (!isLaptop) {
+    return <StockNotFound theme={theme} onNavClick={onNavClick} />;
+  }
 
   return (
     <div className="not-found-container">
       <div className="not-found-canvas-wrapper">
-        <MuseumScene
-          activeTerminalRoom={activeTerminalRoom}
-          isDialogueOpen={dialogueOpen}
-          touchMoveRef={touchMoveRef}
-          onSceneReady={() => setSceneReady(true)}
-          onZoneChange={setZone}
-          onTerminalRoomChange={setActiveTerminalRoom}
-          onPointerLockChange={setIsPointerLocked}
-          onCuratorNearChange={setNearCurator}
-          onCuratorInteract={openDialogue}
-        />
+        <Suspense fallback={null}>
+          <MuseumScene
+            activeTerminalRoom={activeTerminalRoom}
+            isDialogueOpen={dialogueOpen}
+            onSceneReady={() => setSceneReady(true)}
+            onZoneChange={setZone}
+            onTerminalRoomChange={setActiveTerminalRoom}
+            onPointerLockChange={setIsPointerLocked}
+            onCuratorNearChange={setNearCurator}
+            onCuratorInteract={openDialogue}
+          />
+        </Suspense>
       </div>
 
       {!sceneReady && (
@@ -137,16 +150,14 @@ const NotFoundPage = ({ onNavClick }) => {
       <div className="not-found-top-hud">
         <span className="not-found-hint">
           {dialogueOpen
-            ? 'Speaking with The Curator'
-            : isMobileControls
-              ? 'Left Stick to Walk • Drag Screen to Look'
-              : isPointerLocked
-                ? 'WASD / Arrows to Walk • Mouse to Look • ESC to Release Cursor'
-                : 'Click or Drag Canvas to Look • WASD / Arrows to Walk'}
+            ? 'Speaking with The Curator • ESC to Resume'
+            : isPointerLocked
+              ? 'WASD / Arrows to Walk • Mouse to Look • ESC to Release Cursor'
+              : 'Click or Drag Canvas to Look • WASD / Arrows to Walk'}
         </span>
       </div>
 
-      {/* Proximity Interaction Prompt (Desktop E + Mobile Tap) */}
+      {/* Proximity Interaction Prompt */}
       {nearCurator && !dialogueOpen && (
         <div className="curator-prompt-wrap">
           <button
@@ -154,38 +165,19 @@ const NotFoundPage = ({ onNavClick }) => {
             className="curator-prompt-btn"
             onClick={openDialogue}
           >
-            {isMobileControls ? 'Tap to interact' : 'Press E to interact'}
+            Press E to interact
           </button>
-        </div>
-      )}
-
-      {/* Mobile Virtual Joystick */}
-      {!dialogueOpen && (
-        <div
-          ref={joystickRef}
-          className={`not-found-touch-joystick${isMobileControls ? ' is-visible' : ''}`}
-          aria-label="Virtual movement joystick"
-          onPointerDown={handleJoystickPointerDown}
-          onPointerMove={handleJoystickPointerMove}
-          onPointerUp={handleJoystickPointerUp}
-          onPointerCancel={handleJoystickPointerUp}
-        >
-          <div className="touch-joystick-ring">
-            <div
-              className="touch-joystick-knob"
-              style={{ transform: `translate(${knobOffset.x}px, ${knobOffset.y}px)` }}
-            />
-          </div>
-          <span className="touch-joystick-label">MOVE</span>
         </div>
       )}
 
       {/* Branching Dialogue Interface */}
       {dialogueOpen && (
-        <CuratorDialogue
-          onClose={closeDialogue}
-          onExitToHome={() => onNavClick('home')}
-        />
+        <Suspense fallback={null}>
+          <CuratorDialogue
+            onClose={closeDialogue}
+            onExitToHome={() => onNavClick('home')}
+          />
+        </Suspense>
       )}
 
       {/* Bottom Return Button */}

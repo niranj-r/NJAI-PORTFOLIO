@@ -20,7 +20,6 @@ import TheCurator from './TheCurator';
 const MuseumWorld = ({
   activeTerminalRoom,
   isDialogueOpen,
-  touchMoveRef,
   onZoneChange,
   onTerminalRoomChange,
   onPointerLockChange,
@@ -178,7 +177,6 @@ const MuseumWorld = ({
         colliders={layout.colliders}
         curatorPosRef={curatorPosRef}
         isPaused={isDialogueOpen}
-        touchMoveRef={touchMoveRef}
         onZoneChange={onZoneChange}
         onTerminalRoomChange={onTerminalRoomChange}
         onPointerLockChange={onPointerLockChange}
@@ -190,7 +188,6 @@ const MuseumWorld = ({
 const MuseumScene = ({
   activeTerminalRoom,
   isDialogueOpen = false,
-  touchMoveRef = null,
   onSceneReady,
   onZoneChange,
   onTerminalRoomChange,
@@ -212,7 +209,6 @@ const MuseumScene = ({
     <MuseumWorld
       activeTerminalRoom={activeTerminalRoom}
       isDialogueOpen={isDialogueOpen}
-      touchMoveRef={touchMoveRef}
       onZoneChange={onZoneChange}
       onTerminalRoomChange={onTerminalRoomChange}
       onPointerLockChange={onPointerLockChange}

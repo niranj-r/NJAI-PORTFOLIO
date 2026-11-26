@@ -33,7 +33,6 @@ const PlayerController = ({
   colliders,
   curatorPosRef = null,
   isPaused = false,
-  touchMoveRef = null,
   onZoneChange,
   onTerminalRoomChange,
   onPointerLockChange,
@@ -197,14 +196,10 @@ const PlayerController = ({
     camera.rotation.x = pitchRef.current;
 
     const keys = keysRef.current;
-    const touchMove = touchMoveRef?.current;
-    const keyForward = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0);
-    const keyStrafe = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
-    const forwardInput = keyForward + (touchMove?.forward || 0);
-    const strafeInput = keyStrafe + (touchMove?.strafe || 0);
+    const forwardInput = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0);
+    const strafeInput = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
 
     if (forwardInput !== 0 || strafeInput !== 0) {
-      const inputMagnitude = Math.min(1, Math.hypot(forwardInput, strafeInput));
       forwardVec.current.set(-Math.sin(yawRef.current), 0, -Math.cos(yawRef.current)).normalize();
       rightVec.current.set(Math.cos(yawRef.current), 0, -Math.sin(yawRef.current)).normalize();
 
@@ -213,7 +208,7 @@ const PlayerController = ({
         .addScaledVector(forwardVec.current, forwardInput)
         .addScaledVector(rightVec.current, strafeInput)
         .normalize()
-        .multiplyScalar(MOVE_SPEED * inputMagnitude * delta);
+        .multiplyScalar(MOVE_SPEED * delta);
 
       // Axis-separated sliding collision resolution (walls + live Curator)
       const nextX = camera.position.x + moveVec.current.x;

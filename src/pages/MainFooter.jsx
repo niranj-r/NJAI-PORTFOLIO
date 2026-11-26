@@ -54,8 +54,8 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('about'); }}>ABOUT</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('contact'); }}>CONTACT</a></li>
           </ul>
-          <button 
-            className="footer-btn" 
+          <button
+            className="footer-btn"
             onClick={() => window.open("https://sradhyarenish.urflow.in", "_blank", "noopener,noreferrer")}
           >
             CoDEVELOPER <FiArrowUpRight className="footer-btn-icon" />
@@ -64,7 +64,7 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
 
         {/* CMS Column */}
         <div className="footer-column links-column">
-          <h3 className="column-title">CMS</h3>
+          <h3 className="column-title">Explore</h3>
           <ul className="footer-links">
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('work'); }}>WORK</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('blog'); }}>BLOG</a></li>
