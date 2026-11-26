@@ -1,125 +1,110 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FiArrowLeft, FiSend, FiX, FiMessageSquare, FiUpload } from 'react-icons/fi';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 import MuseumScene from '../components/museum/MuseumScene';
-import { loadMuseumKnowledge, askMuseumNpc } from '../components/museum/museumRag';
+import CuratorDialogue from '../components/museum/CuratorDialogue';
 import '../styles/NotFoundPage.css';
 
-const QUICK_PROMPTS = [
-  'What works have you built?',
-  'Tell me about your blogs',
-  'What are your skills & services?',
-  'How can I contact Niranj?',
-];
+const JOYSTICK_MAX_RADIUS = 38;
 
 const NotFoundPage = ({ onNavClick }) => {
   const [, setZone] = useState('ENTRANCE HALL');
   const [activeTerminalRoom, setActiveTerminalRoom] = useState(null);
   const [isPointerLocked, setIsPointerLocked] = useState(false);
-  const [isNearNpc, setIsNearNpc] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [knowledge, setKnowledge] = useState(null);
-  const [customNpcSkinUrl, setCustomNpcSkinUrl] = useState(null);
-  const [customNpcGlbUrl, setCustomNpcGlbUrl] = useState(null);
-  const [uploadedAssetName, setUploadedAssetName] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      role: 'npc',
-      text: "Hi! I'm Niranj's assistant in The Lost Wing. Ask me anything about my works, blogs, skills, services, or contact details.",
-    },
-  ]);
-  const [input, setInput] = useState('');
-  const [isReplying, setIsReplying] = useState(false);
-  const inputRef = useRef(null);
-  const fileInputRef = useRef(null);
-  const messagesEndRef = useRef(null);
-  const blobUrlsRef = useRef([]);
+  const [nearCurator, setNearCurator] = useState(false);
+  const [dialogueOpen, setDialogueOpen] = useState(false);
+  const [isMobileControls, setIsMobileControls] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return (
+      window.innerWidth <= 900 ||
+      window.matchMedia?.('(pointer: coarse)').matches ||
+      navigator.maxTouchPoints > 0
+    );
+  });
+  const [knobOffset, setKnobOffset] = useState({ x: 0, y: 0 });
+
+  const touchMoveRef = useRef({ forward: 0, strafe: 0 });
+  const joystickRef = useRef(null);
+  const joystickPointerIdRef = useRef(null);
 
   useEffect(() => {
-    let active = true;
-    loadMuseumKnowledge().then((data) => {
-      if (active) setKnowledge(data);
-    });
-    return () => {
-      active = false;
+    const updateDeviceControls = () => {
+      const mobile =
+        window.innerWidth <= 900 ||
+        window.matchMedia?.('(pointer: coarse)').matches ||
+        navigator.maxTouchPoints > 0;
+      setIsMobileControls(mobile);
     };
+    window.addEventListener('resize', updateDeviceControls);
+    return () => window.removeEventListener('resize', updateDeviceControls);
   }, []);
 
-  useEffect(() => {
-    const urls = blobUrlsRef.current;
-    return () => {
-      urls.forEach((url) => URL.revokeObjectURL(url));
-    };
+  const resetJoystick = useCallback(() => {
+    joystickPointerIdRef.current = null;
+    touchMoveRef.current.forward = 0;
+    touchMoveRef.current.strafe = 0;
+    setKnobOffset({ x: 0, y: 0 });
+  }, []);
+
+  const openDialogue = useCallback(() => {
+    resetJoystick();
+    setDialogueOpen(true);
+  }, [resetJoystick]);
+
+  const closeDialogue = useCallback(() => {
+    setDialogueOpen(false);
   }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.code === 'KeyE' && isNearNpc && !isChatOpen) {
+      if (e.code === 'KeyE' && nearCurator && !dialogueOpen) {
         e.preventDefault();
-        setIsChatOpen(true);
-      } else if (e.code === 'Escape' && isChatOpen) {
-        e.preventDefault();
-        setIsChatOpen(false);
+        openDialogue();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isNearNpc, isChatOpen]);
+  }, [nearCurator, dialogueOpen, openDialogue]);
 
-  useEffect(() => {
-    if (isChatOpen) {
-      setTimeout(() => inputRef.current?.focus(), 60);
+  const updateJoystickFromClient = (clientX, clientY) => {
+    if (!joystickRef.current) return;
+    const rect = joystickRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    let dx = clientX - centerX;
+    let dy = clientY - centerY;
+    const dist = Math.hypot(dx, dy);
+
+    if (dist > JOYSTICK_MAX_RADIUS) {
+      dx = (dx / dist) * JOYSTICK_MAX_RADIUS;
+      dy = (dy / dist) * JOYSTICK_MAX_RADIUS;
     }
-  }, [isChatOpen]);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isReplying]);
+    setKnobOffset({ x: dx, y: dy });
+    const normX = dx / JOYSTICK_MAX_RADIUS;
+    const normY = -dy / JOYSTICK_MAX_RADIUS;
 
-  const handleNpcAssetUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const lower = file.name.toLowerCase();
-    const objectUrl = URL.createObjectURL(file);
-    blobUrlsRef.current.push(objectUrl);
-
-    if (lower.endsWith('.glb') || lower.endsWith('.gltf')) {
-      setCustomNpcGlbUrl(objectUrl);
-      setCustomNpcSkinUrl(null);
-      setUploadedAssetName(file.name);
-    } else if (lower.endsWith('.png') || lower.endsWith('.webp') || lower.endsWith('.jpg')) {
-      setCustomNpcSkinUrl(objectUrl);
-      setCustomNpcGlbUrl(null);
-      setUploadedAssetName(file.name);
-    }
-    e.target.value = '';
+    touchMoveRef.current.strafe = Math.abs(normX) < 0.12 ? 0 : normX;
+    touchMoveRef.current.forward = Math.abs(normY) < 0.12 ? 0 : normY;
   };
 
-  const sendQuestion = async (rawText) => {
-    const query = rawText.trim();
-    if (!query || isReplying) return;
-
-    const nextHistory = [...messages, { role: 'user', text: query }];
-    setMessages(nextHistory);
-    setInput('');
-    setIsReplying(true);
-
-    try {
-      const kb = knowledge || (await loadMuseumKnowledge());
-      if (!knowledge) setKnowledge(kb);
-      const reply = await askMuseumNpc({
-        knowledge: kb,
-        message: query,
-        history: nextHistory,
-      });
-      setMessages((prev) => [...prev, { role: 'npc', text: reply }]);
-    } finally {
-      setIsReplying(false);
-    }
+  const handleJoystickPointerDown = (e) => {
+    e.stopPropagation();
+    if (joystickPointerIdRef.current !== null) return;
+    joystickPointerIdRef.current = e.pointerId;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    updateJoystickFromClient(e.clientX, e.clientY);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendQuestion(input);
+  const handleJoystickPointerMove = (e) => {
+    if (joystickPointerIdRef.current !== e.pointerId) return;
+    e.stopPropagation();
+    updateJoystickFromClient(e.clientX, e.clientY);
+  };
+
+  const handleJoystickPointerUp = (e) => {
+    if (joystickPointerIdRef.current !== e.pointerId) return;
+    e.stopPropagation();
+    resetJoystick();
   };
 
   return (
@@ -127,148 +112,87 @@ const NotFoundPage = ({ onNavClick }) => {
       <div className="not-found-canvas-wrapper">
         <MuseumScene
           activeTerminalRoom={activeTerminalRoom}
-          isChatOpen={isChatOpen}
-          isNearNpc={isNearNpc}
-          isNpcTalking={isChatOpen || isReplying}
-          customNpcSkinUrl={customNpcSkinUrl}
-          customNpcGlbUrl={customNpcGlbUrl}
+          isDialogueOpen={dialogueOpen}
+          touchMoveRef={touchMoveRef}
           onZoneChange={setZone}
           onTerminalRoomChange={setActiveTerminalRoom}
           onPointerLockChange={setIsPointerLocked}
-          onNearNpcChange={setIsNearNpc}
-          onInteractNpc={() => setIsChatOpen(true)}
+          onCuratorNearChange={setNearCurator}
+          onCuratorInteract={openDialogue}
         />
       </div>
 
-      {/* Hidden File Input for .GLB / .PNG Character Upload */}
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".glb,.gltf,.png"
-        onChange={handleNpcAssetUpload}
-        style={{ display: 'none' }}
-      />
-
       {/* Subtle Center Crosshair */}
-      <div className="not-found-crosshair" aria-hidden="true" />
+      {!dialogueOpen && <div className="not-found-crosshair" aria-hidden="true" />}
 
       {/* Top HUD */}
       <div className="not-found-top-hud">
         <span className="not-found-hint">
-          {isChatOpen
-            ? 'Dialogue Active • Type your question or press ESC to Resume Walking'
-            : isPointerLocked
-              ? 'WASD / Arrows to Walk • Mouse to Look • ESC to Release Cursor'
-              : 'Click or Drag Canvas to Look • WASD / Arrows to Walk • Talk to the Guide'}
+          {dialogueOpen
+            ? 'Speaking with The Curator'
+            : isMobileControls
+              ? 'Left Stick to Walk • Drag Screen to Look'
+              : isPointerLocked
+                ? 'WASD / Arrows to Walk • Mouse to Look • ESC to Release Cursor'
+                : 'Click or Drag Canvas to Look • WASD / Arrows to Walk'}
         </span>
       </div>
 
-      {/* In-Game Proximity Prompt */}
-      {isNearNpc && !isChatOpen && (
-        <div className="npc-interact-prompt-wrap">
+      {/* Proximity Interaction Prompt (Desktop E + Mobile Tap) */}
+      {nearCurator && !dialogueOpen && (
+        <div className="curator-prompt-wrap">
           <button
             type="button"
-            className="npc-interact-prompt"
-            onClick={() => setIsChatOpen(true)}
+            className="curator-prompt-btn"
+            onClick={openDialogue}
           >
-            <FiMessageSquare size={15} />
-            <span>Chat with Niranj</span>
+            {isMobileControls ? 'Tap to interact' : 'Press E to interact'}
           </button>
         </div>
       )}
 
-      {/* Website-Styled Chatbot Dialogue Screen */}
-      {isChatOpen && (
-        <div className="npc-dialogue-backdrop">
-          <div className="npc-dialogue-panel" role="dialog" aria-label="Chat with Niranj">
-            <div className="npc-dialogue-header">
-              <div className="npc-dialogue-title-group">
-                <div className="npc-avatar">N</div>
-                <div>
-                  <h3 className="npc-dialogue-name">Chat with Niranj</h3>
-                  <span className="npc-dialogue-meta">
-                    <span className="npc-online-dot" />
-                    {knowledge
-                      ? `Online • ${knowledge.counts.works} Works • ${knowledge.counts.blogs} Blogs`
-                      : 'Syncing...'}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="npc-dialogue-messages">
-              {messages.map((msg, idx) => (
-                <div
-                  key={`npc-msg-${idx}`}
-                  className={`npc-msg-row ${msg.role === 'user' ? 'user' : 'model'}`}
-                >
-                  {msg.role !== 'user' && <div className="npc-avatar-small">N</div>}
-                  <div className={`npc-msg ${msg.role === 'user' ? 'user' : 'model'}`}>
-                    {msg.text}
-                  </div>
-                </div>
-              ))}
-              {isReplying && (
-                <div className="npc-msg-row model">
-                  <div className="npc-avatar-small">N</div>
-                  <div className="npc-msg model typing">
-                    <span className="npc-typing-dot" />
-                    <span className="npc-typing-dot" />
-                    <span className="npc-typing-dot" />
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            <div className="npc-quick-chips">
-              {QUICK_PROMPTS.map((prompt) => (
-                <button
-                  key={prompt}
-                  type="button"
-                  className="npc-chip"
-                  disabled={isReplying}
-                  onClick={() => sendQuestion(prompt)}
-                >
-                  {prompt}
-                </button>
-              ))}
-            </div>
-
-            <form className="npc-dialogue-form" onSubmit={handleSubmit}>
-              <input
-                ref={inputRef}
-                type="text"
-                className="npc-dialogue-input"
-                placeholder="Ask me anything..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={isReplying}
-              />
-              <button
-                type="submit"
-                className="npc-dialogue-send"
-                disabled={!input.trim() || isReplying}
-                aria-label="Send message"
-              >
-                <FiSend size={17} />
-              </button>
-            </form>
+      {/* Mobile Virtual Joystick */}
+      {!dialogueOpen && (
+        <div
+          ref={joystickRef}
+          className={`not-found-touch-joystick${isMobileControls ? ' is-visible' : ''}`}
+          aria-label="Virtual movement joystick"
+          onPointerDown={handleJoystickPointerDown}
+          onPointerMove={handleJoystickPointerMove}
+          onPointerUp={handleJoystickPointerUp}
+          onPointerCancel={handleJoystickPointerUp}
+        >
+          <div className="touch-joystick-ring">
+            <div
+              className="touch-joystick-knob"
+              style={{ transform: `translate(${knobOffset.x}px, ${knobOffset.y}px)` }}
+            />
           </div>
+          <span className="touch-joystick-label">MOVE</span>
         </div>
       )}
 
+      {/* Branching Dialogue Interface */}
+      {dialogueOpen && (
+        <CuratorDialogue
+          onClose={closeDialogue}
+          onExitToHome={() => onNavClick('home')}
+        />
+      )}
+
       {/* Bottom Return Button */}
-      <div className="not-found-overlay">
-        <button
-          type="button"
-          className="not-found-btn-outline"
-          onClick={() => onNavClick('home')}
-        >
-          <FiArrowLeft className="btn-icon-left" />
-          <span>Return to Homepage</span>
-        </button>
-      </div>
+      {!dialogueOpen && (
+        <div className="not-found-overlay">
+          <button
+            type="button"
+            className="not-found-btn-outline"
+            onClick={() => onNavClick('home')}
+          >
+            <FiArrowLeft className="btn-icon-left" />
+            <span>Return to Homepage</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

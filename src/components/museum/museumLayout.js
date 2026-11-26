@@ -1,4 +1,4 @@
-import { FRAME_IMAGES, ENDING_WALL_IMAGES, TABLE_TEXTURES, NPC_SKIN_TEXTURE, NPC_MODEL_GLB } from './frameImages';
+import { FRAME_IMAGES, ENDING_WALL_IMAGES, TABLE_TEXTURES } from './frameImages';
 
 export const WALL_HEIGHT = 4.6;
 export const WALL_THICKNESS = 0.4;
@@ -6,6 +6,26 @@ export const DOOR_WIDTH = 3.0;
 export const DOOR_HEIGHT = 3.4;
 export const PLAYER_EYE_HEIGHT = 1.7;
 export const PLAYER_RADIUS = 0.45;
+export const CURATOR_POSITION = { x: 2.2, z: -2.0 };
+export const CURATOR_RADIUS = 0.36;
+export const CURATOR_INTERACT_RADIUS = 2.0;
+
+/**
+ * Shared circle-vs-AABB collision check used by both the player and The Curator.
+ */
+export const collidesWithWalls = (x, z, radius, colliders) => {
+  for (let i = 0; i < colliders.length; i += 1) {
+    const box = colliders[i];
+    const closestX = Math.max(box.minX, Math.min(x, box.maxX));
+    const closestZ = Math.max(box.minZ, Math.min(z, box.maxZ));
+    const dx = x - closestX;
+    const dz = z - closestZ;
+    if (dx * dx + dz * dz < radius * radius) {
+      return true;
+    }
+  }
+  return false;
+};
 
 const addWall = (walls, colliders, { x, y = WALL_HEIGHT / 2, z, w, h = WALL_HEIGHT, d, addCollider = true }) => {
   walls.push({ x, y, z, w, h, d });
@@ -372,16 +392,6 @@ export const buildMuseumLayout = () => {
     imageUrl: ENDING_WALL_IMAGES.east,
   });
 
-  // Entrance Guide NPC (Minecraft-skinned or custom GLB interactive RAG guide)
-  const npc = {
-    x: 2.6,
-    z: -1.6,
-    rotY: -0.45,
-    skinUrl: NPC_SKIN_TEXTURE,
-    glbUrl: NPC_MODEL_GLB,
-  };
-  colliders.push({ minX: 2.15, maxX: 3.05, minZ: -2.05, maxZ: -1.15 });
-
   return {
     slabs,
     walls,
@@ -395,7 +405,6 @@ export const buildMuseumLayout = () => {
     conduits,
     doorwaySpots,
     lights,
-    npc,
   };
 };
 

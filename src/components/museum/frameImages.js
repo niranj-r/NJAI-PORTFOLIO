@@ -23,7 +23,7 @@ import img12 from '../../assets/logos/voidzero.svg';
 import img13 from '../../assets/logos/ohcure.svg';
 import img14 from '../../assets/logos/vedha.svg';
 import side from '../../assets/table/side.png';
-import char from '../../assets/character.glb';
+
 
 export const FRAME_IMAGES = {
   // Entrance Hall (South Wall)
@@ -69,18 +69,3 @@ export const TABLE_TEXTURES = {
   top: null,
   side: side,
 };
-
-/**
- * Optional Minecraft player skin PNG (standard 64x64 or 64x32 skin texture).
- * Download any Minecraft skin PNG, place it in `src/assets/` or `public/nowhere/`,
- * and assign it here (e.g. `import npcSkin from '../../assets/my-skin.png'` or `'/nowhere/skin.png'`).
- * Leave as `null` to use the built-in dark museum curator Minecraft skin.
- */
-export const NPC_SKIN_TEXTURE = null;
-
-/**
- * Optional 3D `.glb` / `.gltf` character model (e.g. a Minecraft model exported from Blockbench/Blender).
- * Place the file in `public/nowhere/character.glb` and set `'/nowhere/character.glb'`
- * (or import from `src/assets/`). Overrides `NPC_SKIN_TEXTURE` when set.
- */
-export const NPC_MODEL_GLB = null;

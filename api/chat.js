@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message, history, ragContext } = req.body;
+    const { message, history } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
@@ -36,7 +36,6 @@ If the user asks something completely unrelated to tech, your portfolio, or soft
 Here is your complete portfolio knowledge base to use to answer questions:
 
 ${contextData}
-${ragContext ? `\nLive Sanity Works, Blogs & Website Context:\n${ragContext}` : ''}
       `;
     } catch (e) {
       console.warn("Could not read portfolio-context.md, proceeding with default system instruction.");
