@@ -7,7 +7,7 @@ import aboutImg from "../assets/frame30.webp";
 import nameImg from "../assets/name.webp";
 import { FaInstagram, FaLinkedinIn, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { FaThreads } from 'react-icons/fa6';
-import { FiMail } from 'react-icons/fi';
+import { FiMail, FiArrowDown } from 'react-icons/fi';
 
 export default function AboutPage({ theme }) {
   const heroImg = theme === 'light' ? heroImgLight : heroImgDark;
@@ -49,14 +49,15 @@ export default function AboutPage({ theme }) {
             Generation of Web Experiences.
           </p>
           <button
+            type="button"
             className="about-scroll-btn"
             onClick={() => {
               document
                 .getElementById("about-bio")
-                .scrollIntoView({ behavior: "smooth" });
+                ?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            <span className="about-scroll-circle">↓</span>
+            <span className="about-scroll-circle"><FiArrowDown /></span>
             <span className="about-scroll-text">ABOUT ME</span>
           </button>
         </div>

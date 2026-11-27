@@ -80,25 +80,27 @@
   border: none;
   color: var(--text-primary);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
   margin-top: 1.8rem;
 }
 
 .about-scroll-circle {
-  border: 2px solid var(--border-light);
+  border: none;
+  background-color: var(--bg-accent);
+  color: var(--brand-primary);
   width: 45px;
   height: 45px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 1.5rem;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
 .about-scroll-btn:hover .about-scroll-circle {
-  border-color: var(--brand-primary);
-  color: var(--brand-primary);
+  background-color: #ff4d00;
+  color: white;
 }
 
 .about-scroll-text {
