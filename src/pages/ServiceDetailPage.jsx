@@ -5,10 +5,27 @@ import imgDesignExperience from '../assets/Services/DESIGN&EXPERIENCE.webp';
 import imgDevelopment from '../assets/Services/DEVELOPMENT.webp';
 import imgBrandIdentity from '../assets/Services/BRANDING.webp';
 
-const ServiceDetailPage = ({ onBack }) => {
+const ServiceDetailPage = ({ onBack, targetSection = null }) => {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (!targetSection) {
+      window.scrollTo(0, 0);
+      return undefined;
+    }
+    const timer = setTimeout(() => {
+      const el = document.getElementById(targetSection);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [targetSection]);
+
+  const scrollToSections = () => {
+    const el = document.getElementById('sd-sections-container');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <div className="service-detail-page">
@@ -26,10 +43,14 @@ const ServiceDetailPage = ({ onBack }) => {
         <p className="sd-hero-subtitle">
           Designing brands. Building products. <br />Creating digital experiences that connect, engage, and endure.
         </p>
-        <div className="sd-hero-scroll">
-          <div className="scroll-icon-circle"><FiArrowDown /></div>
+        <button
+          type="button"
+          className="sd-hero-scroll"
+          onClick={scrollToSections}
+        >
+          <span className="scroll-icon-circle"><FiArrowDown /></span>
           <span className="scroll-text">MY SERVICES</span>
-        </div>
+        </button>
         <div className="sd-hero-image-wrapper">
           <img
             src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=1200"
@@ -60,10 +81,10 @@ const ServiceDetailPage = ({ onBack }) => {
       </div>
 
       {/* Details Sections */}
-      <div className="sd-sections-container">
+      <div id="sd-sections-container" className="sd-sections-container">
 
         {/* Section 1 */}
-        <div className="sd-section-block">
+        <div id="service-design" className="sd-section-block">
           <div className="sd-section-header">
             <span className="sd-section-category">DESIGN & EXPERIENCE</span>
             <h2 className="sd-section-title">Designing Experiences That<br />People Remember</h2>
@@ -92,7 +113,7 @@ const ServiceDetailPage = ({ onBack }) => {
         </div>
 
         {/* Section 2 */}
-        <div className="sd-section-block">
+        <div id="service-development" className="sd-section-block">
           <div className="sd-section-header">
             <span className="sd-section-category">DEVELOPMENT</span>
             <h2 className="sd-section-title">Building Fast, Scalable<br />Digital Products</h2>
@@ -121,7 +142,7 @@ const ServiceDetailPage = ({ onBack }) => {
         </div>
 
         {/* Section 3 */}
-        <div className="sd-section-block">
+        <div id="service-branding" className="sd-section-block">
           <div className="sd-section-header">
             <span className="sd-section-category">BRAND IDENTITY</span>
             <h2 className="sd-section-title">Building Brands That Leave an<br />Impression</h2>

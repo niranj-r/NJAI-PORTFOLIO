@@ -93,12 +93,11 @@
 .wp-filter-btn {
   background-color: var(--bg-accent);
   color: var(--text-secondary);
-  border: 1px solid var(--bg-accent2);
+  border: none;
   padding: 0.65rem 1.4rem;
   border-radius: 999px;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
 }

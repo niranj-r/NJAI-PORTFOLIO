@@ -84,12 +84,14 @@ function App() {
   const [currentView, setCurrentView] = useState(initialRoute.view);
   const [selectedProject, setSelectedProject] = useState(initialRoute.project || '');
   const [selectedBlog, setSelectedBlog] = useState(initialRoute.blog || '');
+  const [selectedServiceSection, setSelectedServiceSection] = useState(null);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
 
-  const navigateTo = (view, slug = '', pushUrl = true) => {
+  const navigateTo = (view, slug = '', pushUrl = true, serviceSection = null) => {
     if (view === 'workDetail' && slug) setSelectedProject(slug);
     if (view === 'blogDetail' && slug) setSelectedBlog(slug);
+    setSelectedServiceSection(view === 'serviceDetail' ? serviceSection : null);
 
     if (view === currentView && !slug) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -197,7 +199,10 @@ function App() {
             <div key="content">
               <Header onNavClick={(view) => navigateTo(view)} />
               <Suspense fallback={routeFallback}>
-                <ServiceDetailPage onBack={() => navigateTo('home')} />
+                <ServiceDetailPage
+                  onBack={() => navigateTo('home')}
+                  targetSection={selectedServiceSection}
+                />
               </Suspense>
               <CTASection onNavClick={(view) => navigateTo(view)} />
               <MainFooter {...footerProps} />
@@ -399,7 +404,11 @@ function App() {
                 <span>UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜UI/UX DESIGNER🞜🞜🞜FRONT-END DEVELOPER🞜🞜🞜GRAPHIC DESIGNER🞜🞜🞜UI/UX DEVELOPER🞜🞜🞜CREATIVE TECHNOLOGIST🞜🞜🞜</span>
               </div>
             </div>
-            <Services onServiceClick={() => navigateTo('serviceDetail')} />
+            <Services
+              onServiceClick={(sectionId) =>
+                navigateTo('serviceDetail', '', true, typeof sectionId === 'string' ? sectionId : null)
+              }
+            />
             <SkillsTimeline />
             <SelectedWork
               onNavClick={(view) => navigateTo(view)}

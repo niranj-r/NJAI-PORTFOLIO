@@ -164,11 +164,21 @@
 }
 
 .service-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 15px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
   cursor: pointer;
   width: fit-content;
+}
+
+.service-button:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 6px;
+  border-radius: 999px;
 }
 
 .icon-circle {

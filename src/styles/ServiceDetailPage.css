@@ -65,10 +65,21 @@
 }
 
 .sd-hero-scroll {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 4rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sd-hero-scroll:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 6px;
+  border-radius: 999px;
 }
 
 .scroll-icon-circle {
@@ -81,6 +92,12 @@
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.sd-hero-scroll:hover .scroll-icon-circle {
+  background-color: #ff4d00;
+  color: #ffffff;
 }
 
 .scroll-text {
@@ -143,6 +160,7 @@
   align-items: center;
   gap: 4rem;
   padding: 0 2rem;
+  scroll-margin-top: 6rem;
 }
 
 .sd-section-block {
@@ -153,6 +171,7 @@
   flex-direction: column;
   padding: 5rem 4rem;
   border-radius: 12px;
+  scroll-margin-top: 6rem;
 }
 
 .sd-section-header {
