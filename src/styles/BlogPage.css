@@ -140,11 +140,6 @@
   transition: all 0.3s ease;
 }
 
-.blog-card:hover .blog-category {
-  border-color: var(--bg-accent5);
-  color: var(--bg-accent5);
-}
-
 @media (max-width: 1024px) {
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);

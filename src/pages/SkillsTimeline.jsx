@@ -82,6 +82,15 @@ const skillsData = [
 ];
 
 const SkillsTimeline = () => {
+
+
+  const scrollToTimeline = () => {
+    const el = document.getElementById('timeline-wrapper');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="skills-timeline-container">
       {/* Header Section */}
@@ -93,13 +102,17 @@ const SkillsTimeline = () => {
         <p className="subtitle">
           A curated collection of the core skills that drive thoughtful design, modern development, and innovative digital experiences.
         </p>
-        <div className="scroll-arrow">
+        <button
+          type="button"
+          className="scroll-arrow"
+          onClick={scrollToTimeline}
+        >
           <FiArrowDown />
-        </div>
+        </button>
       </div>
 
       {/* Timeline Section */}
-      <div className="timeline-wrapper">
+      <div id="timeline-wrapper" className="timeline-wrapper">
         <div className="timeline-line"></div>
 
         {skillsData.map((item, index) => (

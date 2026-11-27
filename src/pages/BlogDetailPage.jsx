@@ -72,6 +72,13 @@ const BlogDetailPage = ({ onBack, onNotFound, blogTitle }) => {
     return <div style={{ color: '#fff', padding: '5rem', textAlign: 'center' }}>Blog not found.</div>;
   }
 
+  const scrollToTimeline = () => {
+    const el = document.getElementById('roles-timeline-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="blog-detail-page">
       <div className="bd-header-controls">
@@ -85,10 +92,16 @@ const BlogDetailPage = ({ onBack, onNotFound, blogTitle }) => {
         <h1 className="bd-hero-title">{blog.title}</h1>
         <p className="bd-hero-subtitle">{blog.subheading || ''}</p>
 
-        <div className="bd-scroll-btn">
-          <div className="bd-scroll-circle"><FiArrowDown /></div>
+        <button
+          type="button"
+          className="bd-scroll-btn"
+          onClick={scrollToTimeline}
+        >
+          <span className="bd-scroll-circle">
+            <FiArrowDown />
+          </span>
           <span>READ MORE</span>
-        </div>
+        </button>
 
         <div className="bd-stats-row">
           <div className="bd-stat-box">
@@ -105,7 +118,7 @@ const BlogDetailPage = ({ onBack, onNotFound, blogTitle }) => {
           </div>
         </div>
 
-        <div className="bd-hero-image-wrapper">
+        <div id="roles-timeline-section" className="bd-hero-image-wrapper">
           {blog.image && (
             <img
               src={getImageUrl(blog.image)}

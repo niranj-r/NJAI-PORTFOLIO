@@ -104,13 +104,12 @@
 }
 
 .wp-filter-btn:hover {
-  border-color: var(--brand-primary);
+  transform: translateY(-4px);
   color: var(--text-primary);
 }
 
 .wp-filter-btn.active {
   background-color: var(--brand-primary);
-  border-color: var(--brand-primary);
   color: #fff;
 }
 

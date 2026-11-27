@@ -23,12 +23,6 @@ const CATEGORY_FILTERS = [
   { id: 'design', label: 'Design' }
 ];
 
-const DESIGN_TYPE_FILTERS = [
-  { id: 'all', label: 'All Design' },
-  { id: 'ui-ux', label: 'UI / UX Design' },
-  { id: 'branding', label: 'Branding' }
-];
-
 const WorkPage = ({ onProjectClick }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -93,21 +87,6 @@ const WorkPage = ({ onProjectClick }) => {
               </button>
             ))}
           </div>
-
-          {activeCategory === 'design' && (
-            <div className="wp-filter-group wp-subfilter-group">
-              {DESIGN_TYPE_FILTERS.map((type) => (
-                <button
-                  key={type.id}
-                  type="button"
-                  className={`wp-filter-btn wp-subfilter-btn ${activeDesignType === type.id ? 'active' : ''}`}
-                  onClick={() => setActiveDesignType(type.id)}
-                >
-                  {type.label}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 

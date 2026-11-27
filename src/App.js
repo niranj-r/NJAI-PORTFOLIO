@@ -25,6 +25,7 @@ const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogDetailPage = lazy(() => import("./pages/BlogDetailPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const SpecialMentions = lazy(() => import("./pages/SpecialMentions"));
+const RolesPage = lazy(() => import("./pages/RolesPage"));
 
 const parseRoute = (pathname) => {
   const clean = (pathname || '/').replace(/\/+$/, '') || '/';
@@ -45,6 +46,7 @@ const parseRoute = (pathname) => {
     return { view: '404' };
   }
   if (clean === '/special-mentions') return { view: 'specialMentions' };
+  if (clean === '/roles' || clean === '/journey') return { view: 'roles' };
   return { view: '404' };
 };
 
@@ -68,6 +70,8 @@ const getPathForView = (view, slug = '') => {
       return `/blog/${encodeURIComponent(slug)}`;
     case 'specialMentions':
       return '/special-mentions';
+    case 'roles':
+      return '/roles';
     case '404':
       return '/404';
     default:
@@ -358,6 +362,27 @@ function App() {
     );
   }
 
+  if (currentView === 'roles') {
+    return (
+      <>
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen key="loading" theme={theme} />}
+        </AnimatePresence>
+        {!isLoading && (
+          <div>
+            <Header onNavClick={(view) => navigateTo(view)} />
+            <Suspense fallback={routeFallback}>
+              <RolesPage />
+            </Suspense>
+            <CTASection onNavClick={(view) => navigateTo(view)} />
+            <MainFooter {...footerProps} />
+            {renderModals()}
+          </div>
+        )}
+      </>
+    );
+  }
+
   if (currentView === 'home') {
     return (
       <>
@@ -380,6 +405,7 @@ function App() {
               onNavClick={(view) => navigateTo(view)}
               onProjectClick={(title) => navigateTo('workDetail', title)}
             />
+            <RolesPage />
             <Testimonials />
             <Hero theme={theme} />
             <CTASection onNavClick={(view) => navigateTo(view)} />

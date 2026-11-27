@@ -25,17 +25,17 @@ export default function Header({ onNavClick }) {
   return (
     <header className={`header-container ${isScrolled ? 'scrolled' : ''}`}>
       <nav className={`header-nav ${mobileMenuOpen ? 'mobile-open' : ''}`}>
-        
+
         {/* Brand / Logo (Left) */}
         <div className="header-brand">
-          <a 
+          <a
             href="#home"
             className="brand-logo"
             onClick={(e) => handleLinkClick(e, 'home')}
           >
             <img src={logo} alt="Logo" />
           </a>
-          <button 
+          <button
             className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -49,7 +49,7 @@ export default function Header({ onNavClick }) {
         {/* Navigation Menu (Center) */}
         <ul className={`header-menu ${mobileMenuOpen ? 'open' : ''}`}>
           <li>
-            <a 
+            <a
               href="#services"
               onClick={(e) => handleLinkClick(e, 'serviceDetail')}
             >
@@ -57,7 +57,7 @@ export default function Header({ onNavClick }) {
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="#work"
               onClick={(e) => handleLinkClick(e, 'work')}
             >
@@ -65,15 +65,15 @@ export default function Header({ onNavClick }) {
             </a>
           </li>
           <li>
-            <a 
-              href="#about" 
+            <a
+              href="#about"
               onClick={(e) => handleLinkClick(e, 'about')}
             >
               ABOUT
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="#blog"
               onClick={(e) => handleLinkClick(e, 'blog')}
             >
@@ -84,7 +84,7 @@ export default function Header({ onNavClick }) {
 
         {/* CTA (Right) */}
         <div className={`header-cta ${mobileMenuOpen ? 'open' : ''}`}>
-          <a 
+          <a
             href="#contact"
             className="lets-talk-btn"
             onClick={(e) => handleLinkClick(e, 'contact')}

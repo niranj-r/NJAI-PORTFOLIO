@@ -78,16 +78,27 @@
 }
 
 .bd-scroll-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 4rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
   cursor: pointer;
+}
+
+.bd-scroll-btn:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 6px;
+  border-radius: 999px;
 }
 
 .bd-scroll-circle {
   width: 32px;
   height: 32px;
+  border: none;
   border-radius: 50%;
   background-color: var(--bg-accent);
   color: var(--brand-primary);
@@ -95,6 +106,12 @@
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.bd-scroll-btn:hover .bd-scroll-circle {
+  background-color: #ff4d00;
+  color: #ffffff;
 }
 
 .bd-scroll-btn span {

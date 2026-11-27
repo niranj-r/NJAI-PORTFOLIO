@@ -52,6 +52,7 @@ const MainFooter = ({ theme, toggleTheme, customColor, handleColorChange, onOpen
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('home'); }}>HOME</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('serviceDetail'); }}>SERVICES</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('about'); }}>ABOUT</a></li>
+            <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('roles'); }}>ROLES</a></li>
             <li><a href="#!" onClick={(e) => { e.preventDefault(); onNavClick?.('contact'); }}>CONTACT</a></li>
           </ul>
           <button
