@@ -40,7 +40,7 @@
 }
 
 .sm-serif {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
 }
 
 .sm-script {
@@ -84,7 +84,7 @@
 }
 
 .sm-title-italic {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-style: italic;
   font-weight: 400;
   /* offset slightly like the image */
@@ -267,7 +267,7 @@
   top: -30px;
   left: -20px;
   font-size: 10rem;
-  font-family: 'Times New Roman', serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   color: #E65526;
   opacity: 0.08;
   line-height: 1;
@@ -333,7 +333,7 @@
 .sm-intermission::before,
 .sm-intermission::after {
   content: '“';
-  font-family: 'Times New Roman', serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
 }
 
 .sm-intermission::after {
@@ -360,7 +360,7 @@
   font-size: 3rem;
   font-weight: 300;
   color: var(--brand-primary);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-style: italic;
   letter-spacing: 0;
   margin: 0;
@@ -507,7 +507,7 @@
 }
 
 .sm-final-quote .sm-orange {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-style: italic;
   font-weight: 400;
 }

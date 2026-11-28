@@ -190,7 +190,7 @@
   line-height: 1.8;
   font-weight: 300;
   margin: 0 0 2rem 0;
-  font-family: 'Satoshi Variable', sans-serif;
+  font-family: 'Satoshi Variable', 'Satoshi', sans-serif;
   text-align: justify;
 }
 
@@ -329,7 +329,7 @@
 }
 
 .bd-related-title em {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-style: italic;
 }
 

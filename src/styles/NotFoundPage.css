@@ -323,7 +323,7 @@
 }
 
 .stock-not-found-404 {
-  font-family: 'Times New Roman', serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-size: clamp(8rem, 15vw, 16rem);
   font-style: italic;
   font-weight: 200;

@@ -31,7 +31,7 @@
 }
 
 .marquee-text {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-size: 14vw;
   /* scales with viewport */
   font-weight: 300;
@@ -96,7 +96,7 @@
 }
 
 .hero-content-left h2 em {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-style: italic;
   font-weight: 300;
 }

@@ -30,7 +30,7 @@
 
 .loading-marquee-text {
   font-size: clamp(8rem, 15vw, 12rem);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', 'EB Garamond', Times, serif;
   font-style: italic;
   font-weight: 400;
   color: var(--brand-primary);
@@ -39,8 +39,13 @@
 }
 
 @keyframes loadingMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .loading-image-wrapper {
