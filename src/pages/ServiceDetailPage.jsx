@@ -21,7 +21,7 @@ const ServiceDetailPage = ({ onBack, targetSection = null }) => {
   }, [targetSection]);
 
   const scrollToSections = () => {
-    const el = document.getElementById('sd-sections-container');
+    const el = document.getElementById('sd-stats-row');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -61,7 +61,7 @@ const ServiceDetailPage = ({ onBack, targetSection = null }) => {
       </div>
 
       {/* Stats Row */}
-      <div className="sd-stats-row">
+      <div id="sd-stats-row" className="sd-stats-row">
         <div className="sd-stat">
           <p>PROJECTS</p>
           <h2>30+</h2>

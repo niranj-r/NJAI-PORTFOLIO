@@ -83,8 +83,8 @@ const BlogDetailPage = ({ onBack, onNotFound, blogTitle }) => {
     <div className="blog-detail-page">
       <div className="bd-header-controls">
         <div className="bd-back-button" onClick={onBack}>
-          {/*<span className="icon-circle"><FiArrowLeft /></span>
-          <span className="button-text">BACK TO BLOG</span>*/}
+          <span className="icon-circle"><FiArrowLeft /></span>
+          <span className="button-text">BACK TO BLOG</span>
         </div>
       </div>
 

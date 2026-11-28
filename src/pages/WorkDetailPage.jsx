@@ -117,10 +117,10 @@ const WorkDetailPage = ({ onBack, onNotFound, projectTitle }) => {
   return (
     <div className={`work-detail-page ${workType !== 'development' ? 'work-detail-page--design' : ''}`}>
       <div className="wd-header-controls">
-        <div className="wd-back-button" onClick={onBack}>
+        <button type="button" className="wd-back-button" onClick={onBack}>
           <span className="icon-circle"><FiArrowLeft /></span>
           <span className="button-text">BACK TO WORK</span>
-        </div>
+        </button>
       </div>
 
       <div className="wd-hero">
@@ -199,18 +199,14 @@ const WorkDetailPage = ({ onBack, onNotFound, projectTitle }) => {
           )}
         </div>
 
-        <div
+        <button
+          type="button"
           className="wd-scroll-btn"
           onClick={handleScrollToDetails}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') handleScrollToDetails();
-          }}
         >
-          <div className="wd-scroll-circle"><FiArrowDown /></div>
+          <span className="wd-scroll-circle"><FiArrowDown /></span>
           <span>MORE DETAILS</span>
-        </div>
+        </button>
 
         {coverImage && (
           <div className="wd-hero-image-wrapper">

@@ -24,14 +24,14 @@ const Services = ({ onServiceClick }) => {
   return (
     <div className="services-container" id="services">
       {/* Logos Section */}
-      <div className="logos-marquee-container">
-        <motion.div
-          className="logos-section marquee-track-logos"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 0.8 }}
-        >
+      <motion.div
+        className="logos-marquee-container"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 'some' }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="logos-section marquee-track-logos">
           {[...Array(2)].map((_, i) => (
             <React.Fragment key={i}>
               <div className="logo-item"><img src={logo1} alt="CodeInfinity" /></div>
@@ -47,8 +47,8 @@ const Services = ({ onServiceClick }) => {
               <div className="logo-item"><img src={logo11} alt="theSixCustoms" /></div>
             </React.Fragment>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
       {/* Services Cards */}
       <motion.div

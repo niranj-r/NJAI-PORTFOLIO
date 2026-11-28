@@ -375,7 +375,7 @@
   }
 
   .lets-talk-btn {
-    width: 100%;
+    width: 90%;
     text-align: center;
   }
 
@@ -397,8 +397,14 @@
   }
 
   .header-container.scrolled .header-nav {
-    margin: 2rem 2rem;
+    margin: 0.25rem 0;
     width: 100%;
-    height: fit-content;
+    gap: 0;
+    padding: 0.9rem 1.25rem;
+    height: auto;
+  }
+
+  .header-container.scrolled .header-menu {
+    gap: 0;
   }
 }

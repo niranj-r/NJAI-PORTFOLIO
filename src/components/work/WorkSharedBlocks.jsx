@@ -113,8 +113,11 @@ export const ImageItemGrid = ({ items, altPrefix = 'Showcase', columns = 2, stan
   const validItems = items.filter((item) => Boolean(getImageUrl(item?.image || item)));
   if (validItems.length === 0) return null;
 
+  const columnClass =
+    columns === 3 ? 'wd-gallery-grid--3' : columns === 1 ? 'wd-gallery-grid--1' : '';
+
   const grid = (
-    <div className={`wd-gallery-grid ${columns === 3 ? 'wd-gallery-grid--3' : ''}`}>
+    <div className={`wd-gallery-grid ${columnClass}`}>
       {validItems.map((item, idx) => {
         const imgSource = item?.image || item;
         const caption = item?.caption || item?.label;
